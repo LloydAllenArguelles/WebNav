@@ -1,0 +1,68 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,500,700");
+
+	.yellowline {
+		position: fixed;
+		top: 0;
+		width: 100%;
+		height: 3px;
+		background-color: #D5A106;
+		z-index: 9999999;
+	  }
+
+	  .icon-container {
+		height: 100%; /* Set the height to inherit the header's height */
+		display: flex;
+		align-items: center; /* Align the icon vertically within the container */
+	  }
+	
+	  .icon-container img {  
+		max-width: 50px; /* Scales down if needed */
+		height: auto;
+	  }
+
+	#header {
+		background: rgb(74, 74, 74);
+		color: rgba(255, 255, 255, 0.75);
+		cursor: default;
+		height: 3.25em;
+		left: 0;
+		line-height: 3.25em;
+		position: fixed;
+		text-align: right;
+		top: 0;
+		width: 100%;
+		z-index: 9000;
+	}
+	
+	#header > h1 {
+		color: #fff;
+		display: inline-block;
+		height: inherit;
+		left: 1.75em;
+		line-height: inherit;
+		margin: 0;
+		padding: 0;
+		position: absolute;
+		top: 0;
+	}
+		#header > h1 a {
+			font-size: 1.25em;
+			font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+		}
+
+		#header a {
+			-moz-transition: color 0.2s ease-in-out;
+			-webkit-transition: color 0.2s ease-in-out;
+			-ms-transition: color 0.2s ease-in-out;
+			transition: color 0.2s ease-in-out;
+			color: #fff;
+			display: inline-block;
+			margin-right: 1.25em;
+			text-decoration: none;
+		}
+
+			#header a[href="#nav"] {
+				text-decoration: none;
+				-webkit-tap-highlight-color: transparent;
+			}
