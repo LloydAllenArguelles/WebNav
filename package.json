@@ -10,6 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.19.2"
+    "bowser": "^2.11.0",
+    "express": "^4.19.2",
+    "marzipano": "^0.10.2",
+    "screenfull": "^6.0.2"
   }
 }
