@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e6f0ff; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.top-ribbon {
+    width: 100%;
+    background-color: #007bff;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ribbon-button-container {
+    padding: 10px;
+    background-color: #0056b3;
+    border-radius: 25px; 
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.ribbon-button-container:hover {
+    background-color: #004494;
+    transform: scale(1.05); 
+}
+
+.ribbon-button {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 20px;
+}
+
+.home-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 20px; 
+}
+
+.center-button-container {
+    display: flex;
+    gap: 20px;
+}
+
+.home-button {
+    padding: 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 25px; 
+    font-size: 18px;
+    transition: background-color 0.3s, transform 0.3s;
+    text-align: center;
+    width: 150px; 
+}
+
+.home-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); 
+}
