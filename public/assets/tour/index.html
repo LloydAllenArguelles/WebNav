@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Navigation</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+<style> @-ms-viewport { width: device-width; } </style>
+<link rel="stylesheet" href="vendor/reset.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="multiple-scenes view-control-buttons">
+
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="#" class="circle" onclick="toggleSidebar()"></a>
+    </div>
+    <div class="navbar-center">
+        <a href="#">SOMETHING APP</a>
+    </div>
+    <div class="navbar-right"></div>
+</nav>
+<div id="sidebar-left" class="sidebar-left">
+    <button onclick="toggleNotification()">Toggle Notification</button>
+    <div id="notification" class="notification">Notification is OFF</div>
+    <button onclick="toggleStatus()">Toggle Status</button>
+    <div id="status" class="status">Status: Offline</div>
+    <button>Settings</button>
+    <button>About</button>
+</div>
+<div id="sidebar-right" class="sidebar-right">
+    <a href="#" class="tab top-tab">Schedule</a>
+    <hr>
+    <a href="#" class="tab">Events</a>
+    <hr>
+    <a href="#" class="tab">Forums</a>
+    <hr>
+    <a href="assets/tour/index.html" class="tab bottom-tab">Tour</a>
+</div>
+
+<div id="pano"></div>
+
+<div id="sceneList">
+  <ul class="scenes">
+    
+      <a href="javascript:void(0)" class="scene" data-id="0-p1">
+        <li class="text">p1</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="1-p2">
+        <li class="text">p2</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="2-p3">
+        <li class="text">p3</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="3-p4">
+        <li class="text">p4</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="4-p5">
+        <li class="text">p5</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="5-p6">
+        <li class="text">p6</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="6-p7">
+        <li class="text">p7</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="7-p8">
+        <li class="text">p8</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="8-p9">
+        <li class="text">p9</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="9-p10">
+        <li class="text">p10</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="10-p11">
+        <li class="text">p11</li>
+      </a>
+    
+  </ul>
+</div>
+
+<a href="../../index.html" id="titleBar">
+<div>
+  <h1 class="sceneName"></h1>
+</div>
+</a>
+
+<a href="javascript:void(0)" id="autorotateToggle">
+  <img class="icon off" src="img/play.png">
+  <img class="icon on" src="img/pause.png">
+</a>
+
+<a href="javascript:void(0)" id="fullscreenToggle">
+  <img class="icon off" src="img/fullscreen.png">
+  <img class="icon on" src="img/windowed.png">
+</a>
+
+<a href="javascript:void(0)" id="sceneListToggle">
+  <img class="icon off" src="img/expand.png">
+  <img class="icon on" src="img/collapse.png">
+</a>
+
+<a href="javascript:void(0)" id="viewUp" class="viewControlButton viewControlButton-1">
+  <img class="icon" src="img/up.png">
+</a>
+<a href="javascript:void(0)" id="viewDown" class="viewControlButton viewControlButton-2">
+  <img class="icon" src="img/down.png">
+</a>
+<a href="javascript:void(0)" id="viewLeft" class="viewControlButton viewControlButton-3">
+  <img class="icon" src="img/left.png">
+</a>
+<a href="javascript:void(0)" id="viewRight" class="viewControlButton viewControlButton-4">
+  <img class="icon" src="img/right.png">
+</a>
+<a href="javascript:void(0)" id="viewIn" class="viewControlButton viewControlButton-5">
+  <img class="icon" src="img/plus.png">
+</a>
+<a href="javascript:void(0)" id="viewOut" class="viewControlButton viewControlButton-6">
+  <img class="icon" src="img/minus.png">
+</a>
+
+<script src="vendor/screenfull.min.js" ></script>
+<script src="vendor/bowser.min.js" ></script>
+<script src="vendor/marzipano.js" ></script>
+
+<script src="data.js"></script>
+<script src="index.js"></script>
+
+</body>
+</html>
