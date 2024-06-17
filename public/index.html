@@ -3,40 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Node.js Webpage</title>
+    <title>PLM Navigation App - Login</title>
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="navbar-left">
-            <a href="#" class="circle" onclick="toggleSidebar()"></a>
-        </div>
-        <div class="navbar-center">
-            <a href="#">SOMETHING APP</a>
-        </div>
-        <div class="navbar-right"></div>
-    </nav>
-    <div id="sidebar-left" class="sidebar-left">
-        <button onclick="toggleNotification()">Toggle Notification</button>
-        <div id="notification" class="notification">Notification is OFF</div>
-        <button onclick="toggleStatus()">Toggle Status</button>
-        <div id="status" class="status">Status: Offline</div>
-        <button>Settings</button>
-        <button>About</button>
+    <div class="login-container">
+        <h1>PLM Navigation App</h1>
+        <form id="loginForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit">Login</button>
+        </form>
     </div>
-    <div id="sidebar-right" class="sidebar-right">
-        <a href="#" class="tab top-tab">Schedule</a>
-        <hr>
-        <a href="#" class="tab">Events</a>
-        <hr>
-        <a href="#" class="tab">Forums</a>
-        <hr>
-        <a href="assets/tour/index.html" class="tab bottom-tab">Tour</a>
-    </div>
-    <div class="content">
-        <h1>Welcome to my Node.js webpage!</h1>
-        <p>This is a simple webpage served using Node.js and Express.</p>
-    </div>
-    <script src="assets/script.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            window.location.href = 'home.html';
+        });
+    </script>
 </body>
 </html>
+
