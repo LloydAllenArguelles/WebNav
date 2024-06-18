@@ -921,6 +921,7 @@ body.view-control-buttons .viewControlButton {
   box-shadow: -2px 0 5px rgba(0,0,0,0.1);
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
+  z-index: 9999;
 }
 
 .sidebar-right .tab {
