@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLM Navigation App - Forum</title>
+    <link rel="stylesheet" href="forum.css"> <!-- if ayaw gumana lagay muna sa public yung css idk din y ayaw gumana pag nasa assets e  -->
+</head>
+<body>
+    <div class="top-ribbon">
+        <div class="ribbon-button-container">
+            <a href="home.html" class="ribbon-button">HOME</a>
+        </div>
+        <div class="ribbon-button-container">
+            <a href="ai.html" class="ribbon-button">AI</a>
+        </div>
+        <div class="ribbon-button-container">
+            <a href="forum.html" class="ribbon-button">FORUM</a>
+        </div>
+        <div class="ribbon-button-container">
+            <a href="events.html" class="ribbon-button">EVENTS</a>
+        </div>
+        <div class="ribbon-button-container">
+            <a href="you.html" class="ribbon-button">YOU</a>
+        </div>
+    </div>
+    <div class="forum-container">
+        <h1>Forum</h1>
+        <div class="chat-box" id="chat-box">
+        </div>-
+        <div class="input-container">
+            <textarea id="message-input" placeholder="Type your message here..."></textarea>
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <script>
+        function sendMessage() {
+            const messageInput = document.getElementById('message-input');
+            const chatBox = document.getElementById('chat-box');
+            
+            if (messageInput.value.trim() !== "") {
+                const messageElement = document.createElement('div');
+                messageElement.className = 'chat-message';
+                messageElement.innerText = messageInput.value;
+                chatBox.appendChild(messageElement);
+                messageInput.value = '';
+                chatBox.scrollTop = chatBox.scrollHeight; // Scroll
+            }
+        }
+    </script>
+</body>
+</html>
