@@ -7,7 +7,7 @@
                     "STUDENTS"
                     
                 ],
-                "MatchedWikiEntityName": "studyante at teachers yey",
+                "MatchedWikiEntityName": "Student and Teachers",
                 "NormalizedAliases": [
                     "FACULTY",
                     "STUDENTS"
@@ -25,7 +25,7 @@
                     "Title": "Tennis"
                 }
             ],
-            "Question": "sino gagamit neto?",
+            "Question": "Who will use the system?",
             "QuestionId": "tc_1250",
             "QuestionPartOfVerifiedEval": false,
             "QuestionSource": "http://www.triviacountry.com/",
@@ -34,20 +34,21 @@
         {
             "Answer": {
                 "Aliases": [
-                    "Baby Buggy",
-                    "Baby buggy"
+                    "Gusaling Villegas",
+                    "Gusaling Ejercito Estrada",
+                    "Gusaling Corazon Aquino"
                 ],
                 "HumanAnswers": [
-                    "lightweight baby buggy with a collapsible support assembly"
+                    "Gusaling Villegas", "Gusaling Ejercito Estrada", "Gusaling Corazon Aquino"
                 ],
-                "MatchedWikiEntityName": "Baby Buggy",
+                "MatchedWikiEntityName": "Gusaling Villegas", 
                 "NormalizedAliases": [
-                    "baby buggy"
+                    "Gusaling Villegas, Gusaling Ejercito Estrada, Gusaling Corazon Aquino"
                 ],
-                "NormalizedMatchedWikiEntityName": "baby buggy",
-                "NormalizedValue": "baby buggy",
+                "NormalizedMatchedWikiEntityName": "Gusaling Villegas, Gusaling Ejercito Estrada, Gusaling Corazon Aquino",
+                "NormalizedValue": "Gusaling Villegas, Gusaling Ejercito Estrada, Gusaling Corazon Aquino",
                 "Type": "WikipediaEntity",
-                "Value": "Baby Buggy"
+                "Value": "Gusaling Villegas, Gusaling Ejercito Estrada, Gusaling Corazon Aquino"
             },
             "EntityPages": [
                 {
@@ -58,7 +59,7 @@
                     "Title": "Owen Finlay Maclaren"
                 }
             ],
-            "Question": "In the late 60s Owen Finlay MacLaren pioneered what useful item for parents of small chldren?",
+            "Question": "What buildings are included in the system?",
             "QuestionId": "tc_1348",
             "QuestionPartOfVerifiedEval": true,
             "QuestionSource": "http://www.triviacountry.com/",
@@ -67,27 +68,24 @@
         {
             "Answer": {
                 "Aliases": [
-                    "Iwerks, Ub",
-                    "Ub Iwerks",
-                    "Ub Iwerks Studio",
-                    "Celebrity Productions",
-                    "Ubbe Ert Iwwerks"
+                    "Yes",
+                    "You're right",
+                    "Exactly"
                 ],
                 "HumanAnswers": [
-                    "Ub Iwerks"
+                    "Yes"
                 ],
-                "MatchedWikiEntityName": "Ub Iwerks",
+                "MatchedWikiEntityName": "Yes",
                 "NormalizedAliases": [
-                    "celebrity productions",
-                    "iwerks ub",
-                    "ub iwerks",
-                    "ubbe ert iwwerks",
-                    "ub iwerks studio"
+                    "Yes",
+                    "You're right",
+                    "Exactly"
+                
                 ],
-                "NormalizedMatchedWikiEntityName": "ub iwerks",
-                "NormalizedValue": "ub iwerks",
-                "Type": "WikipediaEntity",
-                "Value": "Ub Iwerks"
+                "NormalizedMatchedWikiEntityName": "Yes",
+                "NormalizedValue": "Yes",
+                "Type": "Yes",
+                "Value": "Yes"
             },
             "EntityPages": [
                 {
@@ -103,7 +101,7 @@
                     "Title": "The Walt Disney Company"
                 }
             ],
-            "Question": "Who first drew Mickey Mouse when ?Disney first supplied the voice?",
+            "Question": "Can you cancel room reservation?",
             "QuestionId": "tc_2090",
             "QuestionPartOfVerifiedEval": true,
             "QuestionSource": "http://www.triviacountry.com/",
@@ -112,102 +110,21 @@
         {
             "Answer": {
                 "Aliases": [
-                    "ISO 3166-1:CH",
-                    "Svissland",
-                    "Etymology of Switzerland",
-                    "Confederation Helvetia",
-                    "Swizerland",
-                    "Confederatio Helvetica",
-                    "Environmental Integrity Group",
-                    "Confoederatio Helvetica",
-                    "Svizra",
-                    "SWITZERLAND",
-                    "Confédération suisse",
-                    "SwissEnergy",
-                    "Schweitz",
-                    "Švýcarsko",
-                    "Die Schweiz",
-                    "Schwitzerland",
-                    "Confederation suisse",
-                    "Der Schweiz",
-                    "Swiss Confederated States",
-                    "Suiza",
-                    "Switz",
-                    "Switzeland",
-                    "Schweiz",
-                    "Confederation Helvetica",
-                    "Switserland",
-                    "Suisse",
-                    "Schweizerische Eidgenossenschaft",
-                    "Switzerland information",
-                    "Confederaziun Svizra",
-                    "Switzer land",
-                    "Switzerland",
-                    "Land of the Switzers",
-                    "Swiss confederation",
-                    "Confœderatio Helvetica",
-                    "Swiss",
-                    "Confederation Suisse",
-                    "Confederation of Helvatia",
-                    "Land of the Swiss",
-                    "Confederaziun svizra",
-                    "Svizzera",
-                    "Swissland",
-                    "Swizterland",
-                    "Confédération Suisse",
-                    "Confederazione Svizzera",
-                    "Swiss Confederation"
+                    "1. From the entrance (GEE), go straightforward until you"
+                  
                 ],
                 "HumanAnswers": [
-                    "Switzerland"
+                    "Use the buttons to travel the buildings you want to check"
                 ],
-                "MatchedWikiEntityName": "Switzerland",
+                "MatchedWikiEntityName": "Use the buttons to travel the buildings you want to check",
                 "NormalizedAliases": [
-                    "der schweiz",
-                    "switzeland",
-                    "confederation helvetia",
-                    "confederatio helvetica",
-                    "swissland",
-                    "switzerland information",
-                    "confederation suisse",
-                    "switserland",
-                    "confédération suisse",
-                    "swizterland",
-                    "confederation of helvatia",
-                    "swizerland",
-                    "svizzera",
-                    "confederation helvetica",
-                    "land of switzers",
-                    "suiza",
-                    "confederaziun svizra",
-                    "schweiz",
-                    "etymology of switzerland",
-                    "die schweiz",
-                    "suisse",
-                    "confederazione svizzera",
-                    "swiss",
-                    "svizra",
-                    "switzerland",
-                    "schweitz",
-                    "swiss confederation",
-                    "switz",
-                    "svissland",
-                    "schwitzerland",
-                    "environmental integrity group",
-                    "land of swiss",
-                    "schweizerische eidgenossenschaft",
-                    "swissenergy",
-                    "confœderatio helvetica",
-                    "confoederatio helvetica",
-                    "switzer land",
-                    "švýcarsko",
-                    "swiss confederated states",
-                    "iso 3166 1 ch"
+                    "Use the buttons to travel the buildings you want to check"
+                    
                 ],
-                "NormalizedMatchedWikiEntityName": "switzerland",
-                "NormalizedValue": "switzerland",
+                "NormalizedMatchedWikiEntityName": "Use the buttons to travel the buildings you want to check",
+                "NormalizedValue": "Use the buttons to travel the buildings you want to check",
                 "Type": "WikipediaEntity",
-                "Value": "Switzerland"
+                "Value": "Use the buttons to travel the buildings you want to check"
             },
             "EntityPages": [
                 {
@@ -224,7 +141,7 @@
                     "originalUrl": "http://wikipedia.qwika.com/de2en/Otto_von_Habsburg"
                 }
             ],
-            "Question": "In which country is the castle that gives the Habsburg dynasty its name?",
+            "Question": "How to navigate the rooms?",
             "QuestionId": "tc_2580",
             "QuestionPartOfVerifiedEval": true,
             "QuestionSource": "http://www.triviacountry.com/",
@@ -233,62 +150,19 @@
         {
             "Answer": {
                 "Aliases": [
-                    "Receptors, lh",
-                    "LH surge",
-                    "Leutenizing hormone",
-                    "Ovulation prediction kit",
-                    "Luteinizing",
-                    "Pee stick",
-                    "Interstitial-cell stimulating hormone",
-                    "Lh kit",
-                    "ATCvet code QG03GA07",
-                    "Lutropin alfa",
-                    "Lutropin",
-                    "Lutenizing Hormone",
-                    "Luteinizing hormone",
-                    "Lh test",
-                    "Luteinising hormone",
-                    "Luveris",
-                    "Leutinizing hormone",
-                    "Interstitial cell stimulating hormone",
-                    "Lutenising Hormone",
-                    "Lutenizing hormone",
-                    "Ovulation predictor kit",
-                    "ATC code G03GA07",
-                    "Luteinizing Hormone",
-                    "Luteinising Hormone",
-                    "Interstitial Cell Stimulating Hormone"
+                    "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas."
                 ],
                 "HumanAnswers": [
-                    "luteinizing hormone (LH) and follicle-stimulating hormone (FSH)"
+                    "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas."
                 ],
-                "MatchedWikiEntityName": "Luteinizing hormone",
+                "MatchedWikiEntityName": "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas.",
                 "NormalizedAliases": [
-                    "receptors lh",
-                    "leutenizing hormone",
-                    "lutropin alfa",
-                    "lutropin",
-                    "lh kit",
-                    "ovulation predictor kit",
-                    "lutenising hormone",
-                    "atcvet code qg03ga07",
-                    "pee stick",
-                    "ovulation prediction kit",
-                    "luteinizing",
-                    "interstitial cell stimulating hormone",
-                    "lutenizing hormone",
-                    "leutinizing hormone",
-                    "atc code g03ga07",
-                    "lh surge",
-                    "lh test",
-                    "luteinizing hormone",
-                    "luteinising hormone",
-                    "luveris"
+                    "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas."
                 ],
-                "NormalizedMatchedWikiEntityName": "luteinizing hormone",
-                "NormalizedValue": "luteinizing hormone",
+                "NormalizedMatchedWikiEntityName": "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas.",
+                "NormalizedValue": "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas.",
                 "Type": "WikipediaEntity",
-                "Value": "Luteinizing hormone"
+                "Value": "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas."
             },
             "EntityPages": [
                 {
@@ -305,7 +179,7 @@
                     "Title": "Ovulation"
                 }
             ],
-            "Question": "Which hormone helps control ovulation?",
+            "Question": "Where to find the Gusaling Villegas when entering the campus?",
             "QuestionId": "tc_2957",
             "QuestionPartOfVerifiedEval": true,
             "QuestionSource": "http://www.triviacountry.com/",
@@ -314,54 +188,20 @@
         {
             "Answer": {
                 "Aliases": [
-                    "Age of the Milky Way",
-                    "Milky Way (band of light)",
-                    "Our galaxy",
-                    "Milky way",
-                    "🌌",
-                    "Speed of the Milky Way through Space",
-                    "Milkyway",
-                    "Milky way galaxy",
-                    "Via Lactea",
-                    "Galaxia Kuklos",
-                    "Lactea",
-                    "Milky way Galaxy",
-                    "The Milky Way",
-                    "The Spiral Arms of the Milky Way",
-                    "This galaxy",
-                    "Milky Way Galaxy",
-                    "Milky Way",
-                    "Local Galaxy",
-                    "Milky Way (astronomy)",
-                    "Milky Way galaxy",
-                    "The local galaxy",
-                    "Milky Way (galaxy)"
+                    "The entrance of the campus is at Gusaling Ejercito Estrada. So when you enter, you are already in that Building."
+                    
                 ],
                 "HumanAnswers": [
-                    "the galaxy that contains our solar system"
+                    "The entrance of the campus is at Gusaling Ejercito Estrada. So when you enter, you are already in that Building."
                 ],
-                "MatchedWikiEntityName": "Milky Way",
+                "MatchedWikiEntityName": "The entrance of the campus is at Gusaling Ejercito Estrada. So when you enter, you are already in that Building.",
                 "NormalizedAliases": [
-                    "speed of milky way through space",
-                    "local galaxy",
-                    "milky way galaxy",
-                    "milky way astronomy",
-                    "milky way",
-                    "🌌",
-                    "our galaxy",
-                    "milky way band of light",
-                    "this galaxy",
-                    "age of milky way",
-                    "milkyway",
-                    "via lactea",
-                    "lactea",
-                    "spiral arms of milky way",
-                    "galaxia kuklos"
+                    "The entrance of the campus is at Gusaling Ejercito Estrada. So when you enter, you are already in that Building."
                 ],
-                "NormalizedMatchedWikiEntityName": "milky way",
-                "NormalizedValue": "local galaxy",
+                "NormalizedMatchedWikiEntityName": "The entrance of the campus is at Gusaling Ejercito Estrada. So when you enter, you are already in that Building.",
+                "NormalizedValue": "The entrance of the campus is at Gusaling Ejercito Estrada. So when you enter, you are already in that Building.",
                 "Type": "WikipediaEntity",
-                "Value": "The local galaxy"
+                "Value": "The entrance of the campus is at Gusaling Ejercito Estrada. So when you enter, you are already in that Building."
             },
             "EntityPages": [
                 {
@@ -372,7 +212,7 @@
                     "Title": "Milky Way"
                 }
             ],
-            "Question": "What is the Milky Way?",
+            "Question": "Where to find the Gusaling Ejercito Estrada when entering the campus?",
             "QuestionId": "tc_3130",
             "QuestionPartOfVerifiedEval": true,
             "QuestionSource": "http://www.triviacountry.com/",
@@ -381,53 +221,17 @@
         {
             "Answer": {
                 "Aliases": [
-                    "Denali North Peak",
-                    "Mount McKinley",
-                    "Mount McKinley North Peak",
-                    "Mt McKinley (Denali)",
-                    "Churchill peaks",
-                    "Mount McKinley South Buttress",
-                    "Highest mountain in North America",
-                    "Большая Гора",
-                    "Mount Mckinley",
-                    "Mt. Denali",
-                    "Mount mckinley",
-                    "Mt McKinley",
-                    "Mount McKinely",
-                    "Mount McKinley East Buttress",
-                    "Mt. McKinley",
-                    "Mt. mckinley",
-                    "Mount Denali",
-                    "Denali East Buttress",
-                    "Mount McKinley (Alaska)",
-                    "Denali",
-                    "Denali South Buttress",
-                    "Mt mckinley"
+                    "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom."
                 ],
-                "MatchedWikiEntityName": "Denali",
+                "MatchedWikiEntityName": "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom.",
                 "NormalizedAliases": [
-                    "denali south buttress",
-                    "большая гора",
-                    "mount mckinley south buttress",
-                    "mount mckinley alaska",
-                    "denali",
-                    "mt denali",
-                    "mount mckinely",
-                    "mount mckinley",
-                    "denali north peak",
-                    "highest mountain in north america",
-                    "mount mckinley east buttress",
-                    "mt mckinley denali",
-                    "mount mckinley north peak",
-                    "churchill peaks",
-                    "mount denali",
-                    "mt mckinley",
-                    "denali east buttress"
+                    "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom."
+                    
                 ],
-                "NormalizedMatchedWikiEntityName": "denali",
-                "NormalizedValue": "mount mckinley",
+                "NormalizedMatchedWikiEntityName": "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom.",
+                "NormalizedValue": "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom.",
                 "Type": "WikipediaEntity",
-                "Value": "Mount McKinley"
+                "Value": "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom."
             },
             "EntityPages": [
                 {
@@ -436,7 +240,7 @@
                     "Title": "Alaska"
                 }
             ],
-            "Question": "What is the most popular natural attraction in Alaska?",
+            "Question": "Where to find the Gusaling Corazon Aquino when entering the campus?",
             "QuestionId": "qz_186",
             "QuestionPartOfVerifiedEval": false,
             "QuestionSource": "https://www.quiz-zone.co.uk/",
