@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         status: "Regular"
     };
 
-    // temporary lang yung nasa html, once may db na ito yung mga kukunin to get those infos sa user
+    // temporary details lang yung nasa html, will update once meron na tayong db
     document.getElementById('display-name').innerText = `Name: ${userProfile.name}`;
     document.getElementById('display-student-number').innerText = `Student Number: ${userProfile.studentNumber}`;
     document.getElementById('display-program').innerText = `Program: ${userProfile.program}`;
