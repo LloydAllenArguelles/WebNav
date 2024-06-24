@@ -188,20 +188,20 @@
         {
             "Answer": {
                 "Aliases": [
-                    "The entrance of the campus is at Gusaling Ejercito Estrada. So when you enter, you are already in that Building."
+                    "The entrance inside the campus is at Gusaling Ejercito Estrada. And the building where the entrance is located is called Gusaling Ejercito Estrada."
                     
                 ],
                 "HumanAnswers": [
-                    "The entrance of the campus is at Gusaling Ejercito Estrada. So when you enter, you are already in that Building."
+                    "The entrance inside the campus is at Gusaling Ejercito Estrada. And the building where the entrance is located is called Gusaling Ejercito Estrada."
                 ],
-                "MatchedWikiEntityName": "The entrance of the campus is at Gusaling Ejercito Estrada. So when you enter, you are already in that Building.",
+                "MatchedWikiEntityName": "The entrance inside the campus is at Gusaling Ejercito Estrada. And the building where the entrance is located is called Gusaling Ejercito Estrada.",
                 "NormalizedAliases": [
-                    "The entrance of the campus is at Gusaling Ejercito Estrada. So when you enter, you are already in that Building."
+                    "The entrance inside the campus is at Gusaling Ejercito Estrada. And the building where the entrance is located is called Gusaling Ejercito Estrada."
                 ],
-                "NormalizedMatchedWikiEntityName": "The entrance of the campus is at Gusaling Ejercito Estrada. So when you enter, you are already in that Building.",
-                "NormalizedValue": "The entrance of the campus is at Gusaling Ejercito Estrada. So when you enter, you are already in that Building.",
+                "NormalizedMatchedWikiEntityName": "The entrance inside the campus is at Gusaling Ejercito Estrada. And the building where the entrance is located is called Gusaling Ejercito Estrada.",
+                "NormalizedValue": "The entrance inside the campus is at Gusaling Ejercito Estrada. And the building where the entrance is located is called Gusaling Ejercito Estrada.",
                 "Type": "WikipediaEntity",
-                "Value": "The entrance of the campus is at Gusaling Ejercito Estrada. So when you enter, you are already in that Building."
+                "Value": "The entrance inside the campus is at Gusaling Ejercito Estrada. And the building where the entrance is located is called Gusaling Ejercito Estrada."
             },
             "EntityPages": [
                 {
@@ -221,17 +221,17 @@
         {
             "Answer": {
                 "Aliases": [
-                    "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom."
+                    "From the entrance, go straight until you reach the UAC. Then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom."
                 ],
-                "MatchedWikiEntityName": "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom.",
+                "MatchedWikiEntityName": "From the entrance, go straight until you reach the UAC. Then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom.",
                 "NormalizedAliases": [
-                    "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom."
+                    "From the entrance, go straight until you reach the UAC. Then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom."
                     
                 ],
-                "NormalizedMatchedWikiEntityName": "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom.",
-                "NormalizedValue": "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom.",
+                "NormalizedMatchedWikiEntityName": "From the entrance, go straight until you reach the UAC. Then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom.",
+                "NormalizedValue": "From the entrance, go straight until you reach the UAC. Then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom.",
                 "Type": "WikipediaEntity",
-                "Value": "From the entrance, go straight until you reach the UAC. then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom."
+                "Value": "From the entrance, go straight until you reach the UAC. Then forward again to reach Gusaling Villegas. After reaching the Gusaling Villegas, there's a hallway there to reach the Gusaling Corazon Aquino. The landmark of the hallway is the restroom."
             },
             "EntityPages": [
                 {
@@ -249,113 +249,23 @@
         {
             "Answer": {
                 "Aliases": [
-                    "Chi-Beria",
-                    "Sayre language academy",
-                    "Chicago",
-                    "Chicago, Illinois",
-                    "Hog Butcher for the World",
-                    "Land of smelly onions",
-                    "Ariel Community Academy",
-                    "The weather in Chicago",
-                    "Chicago, Illinois, U.S.A.",
-                    "Chicago, Illionis",
-                    "Near North Montessori",
-                    "Religion in Chicago",
-                    "Chicago Finance Committee",
-                    "The Paris of America",
-                    "The city of Chicago",
-                    "City of Chicago",
-                    "List of sister cities of Chicago",
-                    "UN/LOCODE:USCHI",
-                    "Chicago theatre scene",
-                    "Chicago, WI",
-                    "The City of Broad Shoulders",
-                    "City of Broad Shoulders",
-                    "Sister Cities of Chicago",
-                    "Chicago il",
-                    "Chicago, Illinois, USA",
-                    "Performing arts in Chicago",
-                    "Chicago Transportation Committee",
-                    "Chicago, Wisconsin",
-                    "City of chicago",
-                    "Chicago theater scene",
-                    "Chicago, Il",
-                    "Chicago, IL.",
-                    "Chicago, Ill.",
-                    "City of Chicago, Illinois",
-                    "Chi town",
-                    "Chicago, United States",
-                    "Chicago (Ill.)",
-                    "Transport in Chicago",
-                    "Chicago, Illinois, United States",
-                    "Chicago (IL)",
-                    "USCHI",
-                    "Chichago",
-                    "Chcago",
-                    "Chicago, Illinois, U.S.",
-                    "Sister Cities Chicago",
-                    "Chicago, USA",
-                    "Chi City",
-                    "Chicago, IL",
-                    "Chi-Town",
-                    "Chicago theatre",
-                    "Paris of America",
-                    "Chicago, Illinois, US",
-                    "Chicago Illinois",
-                    "The city of Chicago, Illinois",
-                    "Sister cities of Chicago"
+                    "From the entrance, go straight until you reach the University Activity Center. After you passed by the University Activity Center. To access the cafeteria, go to the left."
+                
+                    
                 ],
                 "HumanAnswers": [
-                    "Chicago"
+                    "From the entrance, go straight until you reach the University Activity Center. After you passed by the University Activity Center. To access the cafeteria, go to the left."
                 ],
-                "MatchedWikiEntityName": "Chicago",
+                "MatchedWikiEntityName": "CFrom the entrance, go straight until you reach the University Activity Center. After you passed by the University Activity Center. To access the cafeteria, go to the left.",
                 "NormalizedAliases": [
-                    "sayre language academy",
-                    "chicago transportation committee",
-                    "chicago illinois u s",
-                    "sister cities of chicago",
-                    "sister cities chicago",
-                    "transport in chicago",
-                    "chicago illinois",
-                    "chicago illinois usa",
-                    "chi town",
-                    "hog butcher for world",
-                    "religion in chicago",
-                    "chicago",
-                    "chicago wi",
-                    "near north montessori",
-                    "un locode uschi",
-                    "city of broad shoulders",
-                    "chicago theatre",
-                    "chicago usa",
-                    "uschi",
-                    "chicago il",
-                    "city of chicago",
-                    "chicago finance committee",
-                    "list of sister cities of chicago",
-                    "chi beria",
-                    "weather in chicago",
-                    "chicago wisconsin",
-                    "land of smelly onions",
-                    "ariel community academy",
-                    "chicago theater scene",
-                    "chicago united states",
-                    "paris of america",
-                    "chicago illionis",
-                    "chicago illinois united states",
-                    "chcago",
-                    "chi city",
-                    "chicago illinois us",
-                    "performing arts in chicago",
-                    "chicago theatre scene",
-                    "chichago",
-                    "chicago ill",
-                    "city of chicago illinois"
+                    "From the entrance, go straight until you reach the University Activity Center. After you passed by the University Activity Center. To access the cafeteria, go to the left."
+                    
+                   
                 ],
-                "NormalizedMatchedWikiEntityName": "chicago",
-                "NormalizedValue": "chicago",
+                "NormalizedMatchedWikiEntityName": "From the entrance, go straight until you reach the University Activity Center. After you passed by the University Activity Center. To access the cafeteria, go to the left.",
+                "NormalizedValue": "From the entrance, go straight until you reach the University Activity Center. After you passed by the University Activity Center. To access the cafeteria, go to the left.",
                 "Type": "WikipediaEntity",
-                "Value": "Chicago"
+                "Value": "From the entrance, go straight until you reach the University Activity Center. After you passed by the University Activity Center. To access the cafeteria, go to the left."
             },
             "EntityPages": [
                 {
@@ -366,7 +276,7 @@
                     "Title": "O'Hare International Airport"
                 }
             ],
-            "Question": "In which city would you find O'Hare International Airport?",
+            "Question": "Can you show me the quickest route to the cafeteria from my current location?",
             "QuestionId": "qz_603",
             "QuestionPartOfVerifiedEval": true,
             "QuestionSource": "https://www.quiz-zone.co.uk/",
@@ -375,65 +285,22 @@
         {
             "Answer": {
                 "Aliases": [
-                    "Huey, Dewey and Louie",
-                    "Huey, Louie and Dewey",
-                    "Huey , Dewey and Louie",
-                    "Huey, Dewey & Louie",
-                    "Huey Duck",
-                    "Huey, Duey and Louie",
-                    "Louie Duck",
-                    "Donald Duck's nephews",
-                    "Phooey Duck",
-                    "Ripp, Rapp og Þorfinnur",
-                    "Huey, Dewey, and Louie",
-                    "Huey dewey and louie",
-                    "Huey Dewey and Louie",
-                    "Dewey Duck",
-                    "Ripp, Rapp og Rupp",
-                    "Huey, Dewey, & Louie",
-                    "Huey, Duey, and Louie",
-                    "Huey, duey, and louie",
-                    "Louis Duck",
-                    "Huey, Dewey and Louie filmography",
-                    "Huey, Dewey, and Louie Duck",
-                    "Huey, Duey, and Louis",
-                    "Ripp, Rapp og THorfinnur",
-                    "Huey, Dewey",
-                    "Huebert Duck",
-                    "Deuteronomy Duck",
-                    "Huey dewie and louie",
-                    "Huey, Dewey and Louie Duck"
+                    "In the events tab."
+                    
                 ],
                 "HumanAnswers": [
-                    "Huey, Dewey, and Louie"
+                    "In the events tab."
                 ],
-                "MatchedWikiEntityName": "Huey, Dewey, and Louie",
+                "MatchedWikiEntityName": "In the events tab.",
                 "NormalizedAliases": [
-                    "huey duey and louis",
-                    "huey dewey and louie",
-                    "ripp rapp og thorfinnur",
-                    "huey dewey",
-                    "huebert duck",
-                    "donald duck s nephews",
-                    "louie duck",
-                    "huey dewey and louie filmography",
-                    "huey duck",
-                    "louis duck",
-                    "huey dewey and louie duck",
-                    "huey louie and dewey",
-                    "dewey duck",
-                    "ripp rapp og þorfinnur",
-                    "phooey duck",
-                    "deuteronomy duck",
-                    "huey dewie and louie",
-                    "huey duey and louie",
-                    "ripp rapp og rupp",
-                    "huey dewey louie"
+                    "In the events tab."
+                    
+                    
                 ],
-                "NormalizedMatchedWikiEntityName": "huey dewey and louie",
-                "NormalizedValue": "huey dewey and louie",
+                "NormalizedMatchedWikiEntityName": "In the events tab.",
+                "NormalizedValue": "In the events tab.",
                 "Type": "WikipediaEntity",
-                "Value": "Huey, Dewey and Louie"
+                "Value": "In the events tab."
             },
             "EntityPages": [
                 {
@@ -464,7 +331,7 @@
                     "originalUrl": "https://simple.wikipedia.org/wiki/Duck_family_(Disney)"
                 }
             ],
-            "Question": "What are the names of Donald Duck's three nephews?",
+            "Question": "Where to see the events happening in the buildings?",
             "QuestionId": "qz_611",
             "QuestionPartOfVerifiedEval": true,
             "QuestionSource": "https://www.quiz-zone.co.uk/",
@@ -473,19 +340,19 @@
         {
             "Answer": {
                 "Aliases": [
-                    "3",
-                    "three"
+                    "16",
+                    "sixteen"
                 ],
                 "Multiplier": "",
                 "NormalizedAliases": [
-                    "three",
-                    "3"
+                    "sixteen",
+                    "16"
                 ],
-                "NormalizedValue": "3",
-                "Number": "3",
+                "NormalizedValue": "16",
+                "Number": "16",
                 "Type": "Numerical",
                 "Unit": "",
-                "Value": "3"
+                "Value": "16"
             },
             "EntityPages": [
                 {
@@ -494,7 +361,7 @@
                     "Title": "Scottish Football League"
                 }
             ],
-            "Question": "How many scottish football league teams names end in United?",
+            "Question": "How many rooms are available at Gusaling Villegas?",
             "QuestionId": "qz_881",
             "QuestionPartOfVerifiedEval": false,
             "QuestionSource": "https://www.quiz-zone.co.uk/",
@@ -503,22 +370,22 @@
         {
             "Answer": {
                 "Aliases": [
-                    "692",
-                    "six hundred and ninety-two"
+                    "9",
+                    "nine"
                 ],
                 "HumanAnswers": [
-                    "692"
+                    "9"
                 ],
                 "Multiplier": "",
                 "NormalizedAliases": [
-                    "692",
-                    "six hundred and ninety two"
+                    "9",
+                    "nine"
                 ],
-                "NormalizedValue": "692",
-                "Number": "692",
+                "NormalizedValue": "9",
+                "Number": "9",
                 "Type": "Numerical",
                 "Unit": "",
-                "Value": "692"
+                "Value": "9"
             },
             "EntityPages": [
                 {
@@ -529,7 +396,7 @@
                     "Title": "Prisoner (TV series)"
                 }
             ],
-            "Question": "How many episodes of Prisoner: Cell Block H were made?",
+            "Question": "How many rooms are available at Gusaling Ejercito Estrada?",
             "QuestionId": "qz_1032",
             "QuestionPartOfVerifiedEval": true,
             "QuestionSource": "https://www.quiz-zone.co.uk/",
@@ -538,31 +405,21 @@
         {
             "Answer": {
                 "Aliases": [
-                    "Ritchie S. Valens",
-                    "Ritchie Valenzuela",
-                    "Richie Valens",
-                    "Valens, Ritchie",
-                    "Ritchie Valens",
-                    "Richie Valenzuela",
-                    "Richard Steven Valenzuela"
+                    "For information on upcoming events, check the events tab."
                 ],
                 "HumanAnswers": [
-                    "Ritchie Valens"
+                    "For information on upcoming events, check the events tab."
                 ],
-                "MatchedWikiEntityName": "Ritchie Valens",
+                "MatchedWikiEntityName": "For information on upcoming events, check the events tab.",
                 "NormalizedAliases": [
-                    "richard steven valenzuela",
-                    "richie valenzuela",
-                    "ritchie valens",
-                    "ritchie valenzuela",
-                    "richie valens",
-                    "ritchie s valens",
-                    "valens ritchie"
+                    "For information on upcoming events, check the events tab."
+                    
+                    
                 ],
-                "NormalizedMatchedWikiEntityName": "ritchie valens",
-                "NormalizedValue": "richie valens",
+                "NormalizedMatchedWikiEntityName": "For information on upcoming events, check the events tab.",
+                "NormalizedValue": "For information on upcoming events, check the events tab.",
                 "Type": "WikipediaEntity",
-                "Value": "Richie Valens"
+                "Value": "For information on upcoming events, check the events tab."
             },
             "EntityPages": [
                 {
@@ -583,7 +440,7 @@
                     "Title": "The Day the Music Died"
                 }
             ],
-            "Question": "Buddy Holly and the Big Bopper were two of the three musicians who died in a plane crash in February 1959. Who was the other one?",
+            "Question": "Are there any events happening soon?",
             "QuestionId": "qz_1918",
             "QuestionPartOfVerifiedEval": true,
             "QuestionSource": "https://www.quiz-zone.co.uk/",
@@ -592,28 +449,28 @@
         {
             "Answer": {
                 "Aliases": [
-                    "Fort Boyard (disambiguation)",
-                    "Fort Boyard"
+                    "Yes. In the 360 tab, you can use the 360 viewmap."
+                    
                 ],
                 "HumanAnswers": [
-                    "Fort Boyard"
+                    "Yes. In the 360 tab, you can use the 360 viewmap."
                 ],
-                "MatchedWikiEntityName": "Fort Boyard",
+                "MatchedWikiEntityName": "Yes. In the 360 tab, you can use the 360 viewmap.",
                 "NormalizedAliases": [
-                    "fort boyard disambiguation",
-                    "fort boyard"
+                    "Yes. In the 360 tab, you can use the 360 viewmap. disambiguation",
+                    "Yes. In the 360 tab, you can use the 360 viewmap."
                 ],
-                "NormalizedMatchedWikiEntityName": "fort boyard",
-                "NormalizedValue": "fort boyard",
+                "NormalizedMatchedWikiEntityName": "Yes. In the 360 tab, you can use the 360 viewmap.",
+                "NormalizedValue": "Yes. In the 360 tab, you can use the 360 viewmap.",
                 "Type": "WikipediaEntity",
-                "Value": "Fort Boyard"
+                "Value": "Yes. In the 360 tab, you can use the 360 viewmap."
             },
             "EntityPages": [
                 {
                     "DocPartOfVerifiedEval": true,
                     "DocSource": "TagMe",
                     "Filename": "Leslie_Grantham.txt",
-                    "HumanAnswer": "Fort Boyard",
+                    "HumanAnswer": "Yes. In the 360 tab, you can use the 360 viewmap.",
                     "Title": "Leslie Grantham"
                 },
                 {
@@ -622,7 +479,7 @@
                     "Title": "Melinda Messenger"
                 }
             ],
-            "Question": "Name the game show, presented by Leslie Grantham and Melinda Messenger, where contestants were set physical and mental challenges?",
+            "Question": "Is there a map of the building available?",
             "QuestionId": "qz_2135",
             "QuestionPartOfVerifiedEval": true,
             "QuestionSource": "https://www.quiz-zone.co.uk/",
@@ -631,33 +488,33 @@
         {
             "Answer": {
                 "Aliases": [
-                    "Castor (disambiguation)",
-                    "Castor",
-                    "CASTOR"
+                    "From the entrance, go forward. Before entering Gusaling Ejercito Estrada, you will see the nearest restroom.",
+                    "From the entrance, go forward. Before entering Gusaling Ejercito Estrada, you will see the nearest restroom.",
+                    "From the entrance, go forward. Before entering Gusaling Ejercito Estrada, you will see the nearest restroom."
                 ],
                 "HumanAnswers": [
-                    "Castor"
+                    "From the entrance, go forward. Before entering Gusaling Ejercito Estrada, you will see the nearest restroom."
                 ],
-                "MatchedWikiEntityName": "Castor",
+                "MatchedWikiEntityName": "From the entrance, go forward. Before entering Gusaling Ejercito Estrada, you will see the nearest restroom.",
                 "NormalizedAliases": [
-                    "castor disambiguation",
-                    "castor"
+                    "From the entrance, go forward. Before entering Gusaling Ejercito Estrada, you will see the nearest restroom.",
+                    "From the entrance, go forward. Before entering Gusaling Ejercito Estrada, you will see the nearest restroom."
                 ],
-                "NormalizedMatchedWikiEntityName": "castor",
-                "NormalizedValue": "castor",
+                "NormalizedMatchedWikiEntityName": "From the entrance, go forward. Before entering Gusaling Ejercito Estrada, you will see the nearest restroom.",
+                "NormalizedValue": "From the entrance, go forward. Before entering Gusaling Ejercito Estrada, you will see the nearest restroom.",
                 "Type": "WikipediaEntity",
-                "Value": "Castor"
+                "Value": "From the entrance, go forward. Before entering Gusaling Ejercito Estrada, you will see the nearest restroom."
             },
             "EntityPages": [
                 {
                     "DocPartOfVerifiedEval": true,
                     "DocSource": "TagMe",
-                    "Filename": "Castor_and_Pollux.txt",
-                    "HumanAnswer": "Castor",
-                    "Title": "Castor and Pollux"
+                    "Filename": "From the entrance, go forward. Before entering Gusaling Ejercito Estrada, you will see the nearest restroom.",
+                    "HumanAnswer": "From the entrance, go forward. Before entering Gusaling Ejercito Estrada, you will see the nearest restroom.",
+                    "Title": "From the entrance, go forward. Before entering Gusaling Ejercito Estrada, you will see the nearest restroom."
                 }
             ],
-            "Question": "In Greek mythology who was the twin of Polydeuces?",
+            "Question": "Can you give me directions to the nearest restroom?",
             "QuestionId": "qz_2430",
             "QuestionPartOfVerifiedEval": true,
             "QuestionSource": "https://www.quiz-zone.co.uk/",
@@ -666,46 +523,32 @@
         {
             "Answer": {
                 "Aliases": [
-                    "Penguin (comics)",
-                    "The Penguin (comics)",
-                    "Oswald Chesterfield Cobblepot",
-                    "Actors to portray the Penguin",
-                    "Cobblepot",
-                    "Oswald Cobblepot",
-                    "The penguin",
-                    "The Penguin",
-                    "Penguin (Oswald Chesterfield Cobblepot)",
-                    "Penguin (character)"
+                    "In the schedule tab."
+                    
                 ],
                 "HumanAnswers": [
-                    "The Penguin"
+                    "In the schedule tab."
                 ],
-                "MatchedWikiEntityName": "Penguin (comics)",
+                "MatchedWikiEntityName": "In the schedule tab.",
                 "NormalizedAliases": [
-                    "actors to portray penguin",
-                    "penguin comics",
-                    "oswald cobblepot",
-                    "oswald chesterfield cobblepot",
-                    "penguin oswald chesterfield cobblepot",
-                    "cobblepot",
-                    "penguin",
-                    "penguin character"
+                    "In the schedule tab."
+                    
                 ],
-                "NormalizedMatchedWikiEntityName": "penguin comics",
-                "NormalizedValue": "penguin",
+                "NormalizedMatchedWikiEntityName": "In the schedule tab.",
+                "NormalizedValue": "In the schedule tab.",
                 "Type": "WikipediaEntity",
-                "Value": "The Penguin"
+                "Value": "In the schedule tab."
             },
             "EntityPages": [
                 {
                     "DocPartOfVerifiedEval": true,
                     "DocSource": "TagMe",
                     "Filename": "Penguin_(comics).txt",
-                    "HumanAnswer": "The Penguin",
+                    "HumanAnswer": "In the schedule tab.",
                     "Title": "Penguin (comics)"
                 }
             ],
-            "Question": "By what name is comic book villain Oswald Chesterfield Cobblepot better known?",
+            "Question": "How can I book a room for tomorrow for example?",
             "QuestionId": "qz_2564",
             "QuestionPartOfVerifiedEval": true,
             "QuestionSource": "https://www.quiz-zone.co.uk/",
