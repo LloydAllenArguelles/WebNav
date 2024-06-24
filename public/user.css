@@ -35,12 +35,19 @@ body {
     background-color: #0056b3;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
 .user-container {
     background-color: #ffffff;
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    text-align: right;
+    text-align: left;
     margin-top: 10px;
     display: flex;
     flex-direction: column;
@@ -59,31 +66,31 @@ body {
 #user-profile {
     display: flex;
     flex-direction: column;
-    align-items: right;
+    align-items: center;
     gap: 10px;
     margin-top: 10px;
 }
 
 #user-profile p {
-    margin: 5px 0;
-    font-size: 15px;
+    margin-left: 30px;
     color: #333;
+    font-weight: 500;
 }
 
 .profile {
     width: 100%;
-    height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .card {
-    width: 300px;
     background: #fff;
-    border-radius: 15px;
-    text-align: center;
-    color: #333;
+    display: flex;
+    align-items: center;
+    padding: 50px;
+    width: 900px;
+    border-radius: 10px;
 }
 
 .card img {
