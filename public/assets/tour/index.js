@@ -100,6 +100,12 @@
       scene.hotspotContainer().createHotspot(element, { yaw: hotspot.yaw, pitch: hotspot.pitch });
     });
 
+    // Create page hotspots.
+    data.pageHotspots.forEach(function(hotspot) {
+      var element = createPageHotspotElement(hotspot);
+      scene.hotspotContainer().createHotspot(element, { yaw: hotspot.yaw, pitch: hotspot.pitch });
+    });
+
     return {
       data: data,
       scene: scene,
@@ -356,6 +362,46 @@
 
     return wrapper;
   }
+
+  function createPageHotspotElement(hotspot) {
+    // Create wrapper element to hold icon and tooltip.
+    var wrapper = document.createElement('div');
+    wrapper.classList.add('hotspot');
+    wrapper.classList.add('link-hotspot');
+  
+    // Create image element.
+    var icon = document.createElement('img');
+    icon.src = 'img/link.png';
+    icon.classList.add('link-hotspot-icon');
+  
+    // Set rotation transform.
+    var transformProperties = [ '-ms-transform', '-webkit-transform', 'transform' ];
+    for (var i = 0; i < transformProperties.length; i++) {
+      var property = transformProperties[i];
+      icon.style[property] = 'rotate(' + hotspot.rotation + 'rad)';
+    }
+  
+    // Add click event handler.
+    wrapper.addEventListener('click', function() {
+      window.location.href = hotspot.page;
+    });
+  
+    // Prevent touch and scroll events from reaching the parent element.
+    // This prevents the view control logic from interfering with the hotspot.
+    stopTouchAndScrollEventPropagation(wrapper);
+  
+    // Create tooltip element.
+    var tooltip = document.createElement('div');
+    tooltip.classList.add('hotspot-tooltip');
+    tooltip.classList.add('page-hotspot-tooltip');
+    tooltip.innerHTML = hotspot.page;
+  
+    wrapper.appendChild(icon);
+    wrapper.appendChild(tooltip);
+  
+    return wrapper;
+  }
+
 
   // Prevent touch and scroll events from reaching the parent element.
   function stopTouchAndScrollEventPropagation(element, eventList) {

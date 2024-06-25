@@ -38,7 +38,15 @@ var APP_DATA = {
           "target": "12-gv-3f-left-stairs"
         }
       ],
-      "infoHotspots": []
+      "infoHotspots": [],
+      "pageHotspots":[
+        {
+          "yaw": -5.9951221951200857,
+          "pitch": 0.1988204571748149,
+          "rotation": 0,
+          "page": "tour.html"
+        }
+      ]
     },
     {
       "id": "1-gv-2f-com-lab-1",
@@ -91,7 +99,8 @@ var APP_DATA = {
           "title": "GV 2F Com Lab 1",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "2-gv-2f-com-lab-2",
@@ -144,7 +153,8 @@ var APP_DATA = {
           "title": "GV 2F Com Lab 2",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "3-gv-2f-center-stairs",
@@ -190,7 +200,8 @@ var APP_DATA = {
           "target": "15-gv-3f-center-stairs"
         }
       ],
-      "infoHotspots": []
+      "infoHotspots": [],
+      "pageHotspots": []
     },
     {
       "id": "4-gv-2f-rm-209",
@@ -243,7 +254,8 @@ var APP_DATA = {
           "title": "GV 2F RM 209",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "5-gv-2f-rm-208",
@@ -296,7 +308,8 @@ var APP_DATA = {
           "title": "GV 2F RM 208",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "6-gv-2f-rm-207",
@@ -349,7 +362,8 @@ var APP_DATA = {
           "title": "GM 2F RM 207",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "7-gv-2f-rm-206",
@@ -402,7 +416,8 @@ var APP_DATA = {
           "title": "GV 2F RM 206",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "8-gv-2f-restroom",
@@ -449,7 +464,8 @@ var APP_DATA = {
           "title": "GV 2F Restroom",
           "text": "wat"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "9-gv-2f-rm-205",
@@ -520,7 +536,8 @@ var APP_DATA = {
           "title": "GV 2F RM 205",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "10-gv-2f-rm-204",
@@ -573,7 +590,8 @@ var APP_DATA = {
           "title": "GV 2F RM 204",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "11-gv-2f-rightmost-room",
@@ -614,7 +632,8 @@ var APP_DATA = {
           "title": "&nbsp;GV 2F ????",
           "text": "????"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "12-gv-3f-left-stairs",
@@ -654,7 +673,8 @@ var APP_DATA = {
           "target": "13-gv-3f-accenture"
         }
       ],
-      "infoHotspots": []
+      "infoHotspots": [],
+      "pageHotspots":[]
     },
     {
       "id": "13-gv-3f-accenture",
@@ -707,7 +727,8 @@ var APP_DATA = {
           "title": "GV 3F Accenture",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "14-gv-3f-rm-310",
@@ -760,7 +781,8 @@ var APP_DATA = {
           "title": "GV 3F RM 310",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "15-gv-3f-center-stairs",
@@ -800,7 +822,8 @@ var APP_DATA = {
           "target": "16-gv-3f-rm-309"
         }
       ],
-      "infoHotspots": []
+      "infoHotspots": [],
+      "pageHotspots":[]
     },
     {
       "id": "16-gv-3f-rm-309",
@@ -853,7 +876,8 @@ var APP_DATA = {
           "title": "GV 3F RM 309",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "17-gv-3f-rm-308",
@@ -906,7 +930,8 @@ var APP_DATA = {
           "title": "GV 3F RM 308",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "18-gv-3f-rm-307",
@@ -959,7 +984,8 @@ var APP_DATA = {
           "title": "GV 3F RM 307",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "19-gv-3f-rm-306",
@@ -1012,7 +1038,8 @@ var APP_DATA = {
           "title": "GV 3F RM 306",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "20-gv-3f-rm-305restroom",
@@ -1052,7 +1079,8 @@ var APP_DATA = {
           "target": "21-gv-3f-rm-304cet"
         }
       ],
-      "infoHotspots": []
+      "infoHotspots": [],
+      "pageHotspots":[]
     },
     {
       "id": "21-gv-3f-rm-304cet",
@@ -1111,7 +1139,8 @@ var APP_DATA = {
           "title": "GV 3F CET",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "22-gca-1f-center-stairs",
@@ -1151,7 +1180,8 @@ var APP_DATA = {
           "target": "23-gca-2f-center-stairs"
         }
       ],
-      "infoHotspots": []
+      "infoHotspots": [],
+      "pageHotspots":[]
     },
     {
       "id": "23-gca-2f-center-stairs",
@@ -1191,7 +1221,8 @@ var APP_DATA = {
           "target": "24-gca-2f-avr2a"
         }
       ],
-      "infoHotspots": []
+      "infoHotspots": [],
+      "pageHotspots":[]
     },
     {
       "id": "24-gca-2f-avr2a",
@@ -1238,7 +1269,8 @@ var APP_DATA = {
           "title": "GCA 2F AVR2A",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "25-gca-2f-avr2b",
@@ -1272,7 +1304,8 @@ var APP_DATA = {
           "title": "GCA 2F AVR2B",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "26-gee-2f-ogps",
@@ -1319,7 +1352,8 @@ var APP_DATA = {
           "title": "GEE 2F OGPS",
           "text": "Schedule:<div><br></div><div>Office of Graduate and Professional Studies</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "27-gee-2f-rm-206",
@@ -1372,7 +1406,8 @@ var APP_DATA = {
           "title": "GEE 2F ???",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "28-gee-2f-rm-205",
@@ -1425,7 +1460,8 @@ var APP_DATA = {
           "title": "GEE 2F RM 205",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "29-gee-2f-rm-204",
@@ -1478,7 +1514,8 @@ var APP_DATA = {
           "title": "GEE 2F RM 204",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "30-gee-2f-center-stairs",
@@ -1530,7 +1567,8 @@ var APP_DATA = {
           "target": "31-gee-2f-avr"
         }
       ],
-      "infoHotspots": []
+      "infoHotspots": [],
+      "pageHotspots":[]
     },
     {
       "id": "31-gee-2f-avr",
@@ -1583,7 +1621,8 @@ var APP_DATA = {
           "title": "GEE 2F AVR",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "32-gee-2f-rm-203",
@@ -1636,7 +1675,8 @@ var APP_DATA = {
           "title": "GEE 2F RM 203",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "33-gee-2f-rm-202",
@@ -1689,7 +1729,8 @@ var APP_DATA = {
           "title": "GEE 2F RM 202",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "34-gee-2f-rm-201",
@@ -1742,7 +1783,8 @@ var APP_DATA = {
           "title": "GEE 2F RM 201",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "35-gee-2f-right-stairs",
@@ -1789,7 +1831,8 @@ var APP_DATA = {
           "title": "GEE 2F Restroom",
           "text": "wat"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "36-gee-3f-rm-309",
@@ -1836,7 +1879,8 @@ var APP_DATA = {
           "title": "GEE 3F RM 309",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "37-gee-3f-commission-on-audit",
@@ -1889,7 +1933,8 @@ var APP_DATA = {
           "title": "GEE 3F COA",
           "text": "Commission on Audit"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "38-gee-3f-rm-307",
@@ -1942,7 +1987,8 @@ var APP_DATA = {
           "title": "GEE 3F RM 307",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "39-gee-3f-rm-306",
@@ -2001,7 +2047,8 @@ var APP_DATA = {
           "title": "GEE 3F RM 306",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "40-gee-3f-rm-305",
@@ -2060,7 +2107,8 @@ var APP_DATA = {
           "title": "GEE 3F RM 305",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "41-gee-3f-rm-304",
@@ -2113,7 +2161,8 @@ var APP_DATA = {
           "title": "GEE 3F RM 304",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "42-gee-3f-rm-301",
@@ -2166,7 +2215,8 @@ var APP_DATA = {
           "title": "GEE 3F RM 301",
           "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         }
-      ]
+      ],
+      "pageHotspots":[]
     },
     {
       "id": "43-gee-3f-right-stairs",
@@ -2213,7 +2263,8 @@ var APP_DATA = {
           "title": "GEE 3F Restroom",
           "text": "wat"
         }
-      ]
+      ],
+      "pageHotspots":[]
     }
   ],
   "name": "Project Title",
