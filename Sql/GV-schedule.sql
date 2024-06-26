@@ -1,5 +1,11 @@
--- MySQL dump 10.13  Distrib 8.0.36, for macos14 (x86_64)
---
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+-- AT THE MOMENT ONLY 16 ROOMS OF GUSALING VILLEGAS (GV) HAS COMPLETE MONDAY-SATURDAY SCHEDULES, STARTING 7AM - 9PM
+
+-------------------------------------------------------------------------------------------------------------------
+-- MySQL dump 10.13  Distrib 8.0.36
 -- Host: localhost    Database: schedule
 -- ------------------------------------------------------
 -- Server version	8.4.0
@@ -115,5 +121,3 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2024-06-25 23:17:05
