@@ -9,7 +9,7 @@
 <body>
     <div class="login-container">
         <h1>PLM Navigation App</h1>
-        <form id="loginForm">
+        <form id="loginForm" action="includes/formhandler.inc.php" method="POST">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required>
             
@@ -19,12 +19,5 @@
             <button type="submit">Login</button>
         </form>
     </div>
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            window.location.href = 'home.html';
-        });
-    </script>
 </body>
 </html>
-
