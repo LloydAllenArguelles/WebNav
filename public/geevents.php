@@ -3,7 +3,7 @@ ob_start();
 
 require_once 'includes/dbh.inc.php';
 
-$building_name = 'Gusaling Ejercito';
+$building_name = 'Gusaling Ejercito Estrada';
 $sql = "SELECT * FROM schedules INNER JOIN rooms ON schedules.room_id = rooms.room_id WHERE rooms.building = :building ORDER BY schedules.start_time";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([':building' => $building_name]);
@@ -38,7 +38,7 @@ ob_clean();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLM Navigation App - Gusaling Villegas</title>
+    <title>PLM Navigation App - Gusaling Ejercito Estrada</title>
     <link rel="stylesheet" href="gvevents.css">
     <link rel="stylesheet" href="assets/chatbot.css">
     <style>
@@ -137,7 +137,7 @@ ob_clean();
     <div class="building-schedule-container">
         <?php
         if (!empty($organized_schedules)) {
-            echo "<h2>Gusaling Villegas Schedule</h2>";
+            echo "<h2>Gusaling Ejercito Schedule</h2>";
             echo "<div class=\"events-table\">";
             echo "<table class=\"schedule-table\">";
             echo "<thead>";
@@ -171,7 +171,7 @@ ob_clean();
             echo "</table>";
             echo "</div>";
         } else {
-            echo "<p>No schedules found for Gusaling Villegas.</p>";
+            echo "<p>No schedules found for Gusaling Ejercito Estrada.</p>";
         }
         ?>
     </div>
