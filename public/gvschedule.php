@@ -22,31 +22,31 @@
             <a href="events.html" class="ribbon-button">EVENTS</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="user.html" class="ribbon-button">USER</a>
+            <a href="user.php" class="ribbon-button">USER</a>
         </div>
     </div>
 
     <div class="room-dropdown">
-    <form method="POST">
-        <label for="room">Select Room:</label>
-        <select name="room" id="room">
-            <?php
-            require_once 'includes/dbh.inc.php';
+        <form method="POST">
+            <label for="room">Select Room:</label>
+            <select name="room" id="room">
+                <?php
+                require_once 'includes/dbh.inc.php';
 
-            $building_name = 'Gusaling Villegas';
+                $building_name = 'Gusaling Villegas';
 
-            $sql = "SELECT room_id, room_number FROM rooms WHERE building = :building";
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([':building' => $building_name]);
-            $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $sql = "SELECT room_id, room_number FROM rooms WHERE building = :building";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([':building' => $building_name]);
+                $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            foreach ($rooms as $room) {
-                echo "<option value=\"{$room['room_id']}\">{$room['room_number']}</option>";
-            }
-            ?>
-        </select>
-        <button type="submit">Show Schedule</button>
-    </form>
+                foreach ($rooms as $room) {
+                    echo "<option value=\"{$room['room_id']}\">{$room['room_number']}</option>";
+                }
+                ?>
+            </select>
+            <button type="submit">Show Schedule</button>
+        </form>
     </div>
 
     <div class="building-schedule-container">
@@ -61,7 +61,7 @@
 
             echo "<h2>Gusaling Villegas Schedule - Room {$room_id}</h2>";
             echo "<table class=\"schedule-table\">";
-            echo "<thead><tr><th>Day</th><th>Start Time</th><th>End Time</th><th>Status</th><th>Subject</th></tr></thead>";
+            echo "<thead><tr><th>Day</th><th>Start Time</th><th>End Time</th><th>Status</th><th>Subject</th><th>Action</th></tr></thead>";
             echo "<tbody>";
             foreach ($schedules as $schedule) {
                 echo "<tr>";
@@ -70,9 +70,32 @@
                 echo "<td>{$schedule['end_time']}</td>";
                 echo "<td>{$schedule['status']}</td>";
                 echo "<td>{$schedule['subject']}</td>";
+                
+                if ($schedule['status'] == 'available') {
+                    echo "<td>";
+                    echo "<form method=\"POST\">";
+                    echo "<input type=\"hidden\" name=\"schedule_id\" value=\"{$schedule['schedule_id']}\">";
+                    echo "<button type=\"submit\" name=\"occupy_schedule\">Occupy</button>";
+                    echo "</form>";
+                    echo "</td>";
+                } else {
+                    echo "<td>-</td>";
+                }
+                
                 echo "</tr>";
             }
             echo "</tbody></table>";
+        }
+
+        if (isset($_POST['occupy_schedule'])) {
+            $schedule_id = $_POST['schedule_id'];
+            $user_id = 1; 
+
+            $sql_update = "UPDATE schedules SET status = 'occupied', user_id = :user_id WHERE schedule_id = :schedule_id";
+            $stmt_update = $pdo->prepare($sql_update);
+            $stmt_update->execute([':user_id' => $user_id, ':schedule_id' => $schedule_id]);
+
+            echo "<script>alert('Schedule occupied successfully!');</script>";
         }
         ?>
     </div>
@@ -80,4 +103,3 @@
     <!-- JavaScript functions and closing tags -->
 </body>
 </html>
-

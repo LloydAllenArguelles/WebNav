@@ -22,7 +22,7 @@
             <a href="events.html" class="ribbon-button">EVENTS</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="user.html" class="ribbon-button">USER</a>
+            <a href="user.php" class="ribbon-button">USER</a>
         </div>
     </div>
 
@@ -70,9 +70,32 @@
                 echo "<td>{$schedule['end_time']}</td>";
                 echo "<td>{$schedule['status']}</td>";
                 echo "<td>{$schedule['subject']}</td>";
+                
+                if ($schedule['status'] == 'available') {
+                    echo "<td>";
+                    echo "<form method=\"POST\">";
+                    echo "<input type=\"hidden\" name=\"schedule_id\" value=\"{$schedule['schedule_id']}\">";
+                    echo "<button type=\"submit\" name=\"occupy_schedule\">Occupy</button>";
+                    echo "</form>";
+                    echo "</td>";
+                } else {
+                    echo "<td>-</td>";
+                }
+                
                 echo "</tr>";
             }
             echo "</tbody></table>";
+        }
+
+        if (isset($_POST['occupy_schedule'])) {
+            $schedule_id = $_POST['schedule_id'];
+            $user_id = 1; 
+
+            $sql_update = "UPDATE schedules SET status = 'occupied', user_id = :user_id WHERE schedule_id = :schedule_id";
+            $stmt_update = $pdo->prepare($sql_update);
+            $stmt_update->execute([':user_id' => $user_id, ':schedule_id' => $schedule_id]);
+
+            echo "<script>alert('Schedule occupied successfully!');</script>";
         }
         ?>
     </div>
