@@ -60,8 +60,10 @@ try {
         <h1>User Profile</h1>
         <div class="profile">
             <div class="card">
-                <img src="assets/front/pic.jpg" id="profile-pic" alt="Profile Picture">
-                <label for="input-file">Update Image</label>
+                <div>
+                    <img src="assets/front/pic.jpg" id="profile-pic" alt="Profile Picture">
+                    <label for="input-file">Update Image</label>
+                </div>
                 <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
                 <div id="user-profile">
                     <p id="display-name">Name: <?php echo htmlspecialchars($user['username']); ?></p>
