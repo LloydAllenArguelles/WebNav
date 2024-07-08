@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 06, 2024 at 02:03 PM
+-- Generation Time: Jul 08, 2024 at 06:25 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -42,7 +42,13 @@ CREATE TABLE `chat_history` (
 
 INSERT INTO `chat_history` (`id`, `room_id`, `user_id`, `username`, `message`, `timestamp`) VALUES
 (1, NULL, NULL, NULL, 'test 01', '2024-07-01 16:10:16'),
-(2, NULL, NULL, NULL, 'Test 11', '2024-07-06 02:34:42');
+(2, NULL, NULL, NULL, 'Test 11', '2024-07-06 02:34:42'),
+(3, NULL, NULL, NULL, 'test 18', '2024-07-06 12:08:50'),
+(6, NULL, 1, 'Juan', 'try', '2024-07-08 15:47:16'),
+(7, NULL, 1, 'Juan', 'behold', '2024-07-08 15:49:26'),
+(8, NULL, 1, 'Juan', 'godzilla', '2024-07-08 15:50:36'),
+(9, 13, 1, 'Juan', 'whahaha I have the key', '2024-07-08 16:04:37'),
+(10, 13, NULL, NULL, 'ChatHistory!', '2024-07-08 16:12:27');
 
 -- --------------------------------------------------------
 
@@ -2388,7 +2394,9 @@ ALTER TABLE `chat_history`
 -- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
-  ADD PRIMARY KEY (`room_id`);
+  ADD PRIMARY KEY (`room_id`),
+  ADD UNIQUE KEY `room_number_unique` (`room_number`),
+  ADD UNIQUE KEY `idx_room_number` (`room_number`);
 
 --
 -- Indexes for table `schedules`
@@ -2413,7 +2421,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `chat_history`
 --
 ALTER TABLE `chat_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `rooms`
