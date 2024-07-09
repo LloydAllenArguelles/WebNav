@@ -104,6 +104,20 @@ ob_clean();
             background-color: #e6f0ff;
         }
 
+        .back-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
         @media screen and (max-width: 768px) {
             .ribbon-button {
                 font-size: 12px;
@@ -175,6 +189,8 @@ ob_clean();
         }
         ?>
     </div>
+
+    <a href="events.html" class="back-button">Back</a>
 
     <!-- JavaScript functions and closing tags -->
 </body>
