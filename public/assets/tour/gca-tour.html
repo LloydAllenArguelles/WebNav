@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Navigation</title>
+<meta charset="utf-8">
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
+<style> @-ms-viewport { width: device-width; } </style>
+<link rel="stylesheet" href="vendor/reset.min.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../home.css">
+<link rel="stylesheet" href="../chatbot.css">
+
+</head>
+
+<body class="multiple-scenes view-control-buttons">
+  <div style="position: absolute; width: 100%; height: 100%;">
+  <div class="top-ribbon" style="position:absolute; height:10%;">
+    <div class="ribbon-button-container">
+      <a href="gv-tour.html" class="ribbon-button">360 VIEW</a>
+    </div>
+    <div class="ribbon-button-container">
+      <a href="../../forum.html" class="ribbon-button">FORUM</a>
+    </div>
+    <div class="ribbon-button-container">
+      <a href="../../schedule.html" class="ribbon-button">SCHEDULE</a>
+    </div>
+    <div class="ribbon-button-container">
+      <a href="../../events.html" class="ribbon-button">EVENTS</a>
+    </div>
+    <div class="ribbon-button-container">
+      <a href="../../user.html" class="ribbon-button">USER</a>
+    </div>
+  </div>
+<div style="position: relative; top: 5%; width: 100%; height: 95%;">
+  
+<div id="pano"></div>
+
+<div id="sceneList">
+  <ul class="scenes">
+    
+      <a href="javascript:void(0)" class="scene" data-id="44-gv-3f-left-stairs">
+        <li class="text">GV 3F Left Stairs</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="45-gv-4f-left-stairs">
+        <li class="text">GV 4F Left Stairs</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="46-gv-4f-com-lab-3--4">
+        <li class="text">GV 4F Com Lab 3 &amp; 4</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="47-gv-5f-drawing-room">
+        <li class="text">GV 5F Drawing Room</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="48-gca-outside">
+        <li class="text">GCA Outside</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="49-gca-2f-avr2b">
+        <li class="text">GCA 2F AVR2B</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="50-gca-2f-avr1b">
+        <li class="text">GCA 2F AVR1B</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="51-gca-2f-avr1a">
+        <li class="text">GCA 2F AVR1A</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="52-gca-3f-rm-305">
+        <li class="text">GCA 3F RM 305</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="53-gca-3f-rm-304">
+        <li class="text">GCA 3F RM 304</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="54-gca-3f-rm-303">
+        <li class="text">GCA 3F RM 303</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="55-gca-3f-rm-302">
+        <li class="text">GCA 3F RM 302</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="56-gca-3f-rm-301b">
+        <li class="text">GCA 3F RM 301B</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="57-gca-3f-rm-301a">
+        <li class="text">GCA 3F RM 301A</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="58-gv-1f-icto">
+        <li class="text">GV 1F ICTO</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="59-gv-1f-nstp">
+        <li class="text">GV 1F NSTP</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="60-gv-1f-ogts">
+        <li class="text">GV 1F OGTS</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="61-gv-1f-office">
+        <li class="text">GV 1F Office</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="62-gee-1f-college-of-law">
+        <li class="text">GEE 1F College of Law</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="63-gee-1f-accounting-office">
+        <li class="text">GEE 1F Accounting Office</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="64-gee-1f-office-of-treasurer">
+        <li class="text">GEE 1F Office of Treasurer</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="65-gee-1f-center-stairs">
+        <li class="text">GEE 1F Center Stairs</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="66-gee-1f-right-stairs">
+        <li class="text">GEE 1F Right Stairs</li>
+      </a>
+    
+  </ul>
+</div>
+
+<a href="../../index.html" id="titleBar">
+  <div>
+    <h1 class="sceneName"></h1>
+  </div>
+</a>
+
+<a href="javascript:void(0)" id="autorotateToggle">
+  <img class="icon off" src="img/play.png">
+  <img class="icon on" src="img/pause.png">
+</a>
+
+<a href="javascript:void(0)" id="fullscreenToggle">
+  <img class="icon off" src="img/fullscreen.png">
+  <img class="icon on" src="img/windowed.png">
+</a>
+
+<a href="javascript:void(0)" id="sceneListToggle">
+  <img class="icon off" src="img/expand.png">
+  <img class="icon on" src="img/collapse.png">
+</a>
+
+<a href="javascript:void(0)" id="viewUp" class="viewControlButton viewControlButton-1">
+  <img class="icon" src="img/up.png">
+</a>
+<a href="javascript:void(0)" id="viewDown" class="viewControlButton viewControlButton-2">
+  <img class="icon" src="img/down.png">
+</a>
+<a href="javascript:void(0)" id="viewLeft" class="viewControlButton viewControlButton-3">
+  <img class="icon" src="img/left.png">
+</a>
+<a href="javascript:void(0)" id="viewRight" class="viewControlButton viewControlButton-4">
+  <img class="icon" src="img/right.png">
+</a>
+<a href="javascript:void(0)" id="viewIn" class="viewControlButton viewControlButton-5">
+  <img class="icon" src="img/plus.png">
+</a>
+<a href="javascript:void(0)" id="viewOut" class="viewControlButton viewControlButton-6">
+  <img class="icon" src="img/minus.png">
+</a>
+</div>
+</div>
+
+
+<!-- Chatbot Part Start -->
+  <!-- Button -->
+  <div class="cb-button" onclick="showModal()">
+    <img src="../img/chatbot_img.png" alt="Chatbot">
+</div>
+<!-- Overlay -->
+<div class="cb-overlay" id="cb-overlay" onclick="hideModal()"></div>
+<!-- Modal -->
+<div class="cb-modal" id="cb-modal">
+    <span class="cb-close-button" onclick="hideModal()">x</span>
+    <textarea rows="10" cols="30" placeholder="Type here..."></textarea>
+</div>
+<script src="../chatbot.js"></script>
+<!-- Chatbot Part End -->
+  
+<script src="vendor/screenfull.min.js" ></script>
+<script src="vendor/bowser.min.js" ></script>
+<script src="vendor/marzipano.js" ></script>
+
+<script src="gca-data.js"></script>
+<script src="index.js"></script>
+
+</body>
+</html>
