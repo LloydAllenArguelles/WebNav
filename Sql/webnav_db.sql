@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 08, 2024 at 06:25 PM
+-- Generation Time: Jul 10, 2024 at 05:48 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -48,7 +48,8 @@ INSERT INTO `chat_history` (`id`, `room_id`, `user_id`, `username`, `message`, `
 (7, NULL, 1, 'Juan', 'behold', '2024-07-08 15:49:26'),
 (8, NULL, 1, 'Juan', 'godzilla', '2024-07-08 15:50:36'),
 (9, 13, 1, 'Juan', 'whahaha I have the key', '2024-07-08 16:04:37'),
-(10, 13, NULL, NULL, 'ChatHistory!', '2024-07-08 16:12:27');
+(11, 13, 2, 'Pedro', 'Can I use the room 301', '2024-07-10 03:02:27'),
+(12, 13, 3, 'Maria', 'Sure what time? Hindi namin gagamitin on our schedule every monday.', '2024-07-10 03:44:13');
 
 -- --------------------------------------------------------
 
@@ -2366,16 +2367,19 @@ CREATE TABLE `users` (
   `student_num` int(11) DEFAULT NULL,
   `program` varchar(50) DEFAULT NULL,
   `year_level` varchar(10) DEFAULT NULL,
-  `student_status` varchar(25) DEFAULT NULL
+  `student_status` varchar(25) DEFAULT NULL,
+  `status` varchar(25) DEFAULT NULL,
+  `department` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `email`, `password_hash`, `student_num`, `program`, `year_level`, `student_status`) VALUES
-(1, 'Juan', 'jfdelacruz2021@plm.edu.ph', 'hashed_password_1', 202101099, 'BS IT', '4th', 'Regular'),
-(2, 'Pedro', 'prdelacruz2021@plm.edu.ph', 'hashed_password_2', 202101091, 'BS IT', '4th', 'Regular');
+INSERT INTO `users` (`user_id`, `username`, `email`, `password_hash`, `student_num`, `program`, `year_level`, `student_status`, `status`, `department`) VALUES
+(1, 'Juan', 'jfdelacruz2021@plm.edu.ph', 'hashed_password_1', 202101099, 'BS IT', '4th', 'Regular', NULL, NULL),
+(2, 'Pedro', 'prdelacruz2021@plm.edu.ph', 'hashed_password_2', 202101091, 'BS IT', '4th', 'Regular', NULL, NULL),
+(3, 'Maria', 'mddelacruz@plm.edu.ph', 'hashed_password_3', NULL, NULL, NULL, NULL, 'active', 'CET');
 
 --
 -- Indexes for dumped tables
@@ -2421,7 +2425,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `chat_history`
 --
 ALTER TABLE `chat_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `rooms`
@@ -2439,7 +2443,7 @@ ALTER TABLE `schedules`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
