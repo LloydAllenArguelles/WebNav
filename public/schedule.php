@@ -25,10 +25,10 @@ require_once 'includes/dbh.inc.php';
             <a href="assets/tour/gv-tour.html" class="ribbon-button">360 VIEW</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="forum.html" class="ribbon-button">FORUM</a>
+            <a href="forum.php" class="ribbon-button">FORUM</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="schedule.html" class="ribbon-button">SCHEDULE</a>
+            <a href="schedule.php" class="ribbon-button">SCHEDULE</a>
         </div>
         <div class="ribbon-button-container">
             <a href="events.html" class="ribbon-button">EVENTS</a>        </div>
@@ -38,6 +38,7 @@ require_once 'includes/dbh.inc.php';
     </div>
 
     <div class="building-schedule-container">
+    <a href="professor_availability.php" class="schedule-button">Professor Availability</a>
         <h1>Building Schedules</h1>
         <div class="building-schedule-table">
             <a href="gvschedule.php" class="schedule-button">Gusaling Villegas</a>
