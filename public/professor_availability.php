@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Display all PHP errors
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -13,7 +12,6 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once 'includes/dbh.inc.php';
 
-// Check if the database connection is successful
 if (!$pdo) {
     echo "Failed to connect to database.";
     exit();
@@ -22,14 +20,12 @@ if (!$pdo) {
 $selectedDepartment = isset($_GET['department']) ? $_GET['department'] : '';
 
 try {
-    // Fetch departments
     $stmt = $pdo->prepare("SELECT DISTINCT department FROM users WHERE role = 'professor'");
     $stmt->execute();
     $departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     $professors = [];
     if ($selectedDepartment) {
-        // Fetch professors based on the selected department
         $stmt = $pdo->prepare("
             SELECT u.username, pa.availability
             FROM professor_availability pa

@@ -35,18 +35,14 @@
         <a href="home.html" class="back-button">Back to Home</a>
     </div>
 <!-- Chatbot Part Start -->
-    <!-- Button -->
-    <div class="cb-button" onclick="showModal()">
-        <img src="assets/img/chatbot_img.png" alt="Chatbot">
-    </div>
-    <!-- Overlay -->
-    <div class="cb-overlay" id="cb-overlay" onclick="hideModal()"></div>
-    <!-- Modal -->
-    <div class="cb-modal" id="cb-modal">
-        <span class="cb-close-button" onclick="hideModal()">x</span>
-        <textarea rows="10" cols="30" placeholder="Type here..."></textarea>
-    </div>
-    <script src="assets/chatbot.js"></script>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+      chat-icon="https:&#x2F;&#x2F;assets.stickpng.com&#x2F;images&#x2F;580b57fbd9996e24bc43be12.png"
+      intent="WELCOME"
+      chat-title="Chatbot"
+      agent-id="060d64ba-b3ff-4be9-87c6-88c97d332f18"
+      language-code="en"
+    ></df-messenger>
     <!-- Chatbot Part End -->
 
     <script>
