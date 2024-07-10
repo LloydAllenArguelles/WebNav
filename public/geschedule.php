@@ -59,6 +59,7 @@
         }
 
         $user_id = $_SESSION['user_id'];
+        $user_role = $_SESSION['role']; 
 
         if (isset($_POST['room'])) {
             $room_id = $_POST['room'];
@@ -81,16 +82,20 @@
                 echo "<td>{$schedule['subject']}</td>";
 
                 echo "<td>";
-                if ($schedule['status'] == 'available') {
-                    echo "<form method=\"POST\">";
-                    echo "<input type=\"hidden\" name=\"schedule_id\" value=\"{$schedule['schedule_id']}\">";
-                    echo "<button type=\"submit\" name=\"occupy_schedule\">Occupy</button>";
-                    echo "</form>";
-                } elseif ($schedule['status'] == 'occupied' && $schedule['user_id'] == $user_id) {
-                    echo "<form method=\"POST\">";
-                    echo "<input type=\"hidden\" name=\"schedule_id\" value=\"{$schedule['schedule_id']}\">";
-                    echo "<button type=\"submit\" name=\"unoccupy_schedule\">Unoccupy</button>";
-                    echo "</form>";
+                if ($user_role == 'professor') { 
+                    if ($schedule['status'] == 'available') {
+                        echo "<form method=\"POST\">";
+                        echo "<input type=\"hidden\" name=\"schedule_id\" value=\"{$schedule['schedule_id']}\">";
+                        echo "<button type=\"submit\" name=\"occupy_schedule\">Occupy</button>";
+                        echo "</form>";
+                    } elseif ($schedule['status'] == 'occupied' && $schedule['user_id'] == $user_id) {
+                        echo "<form method=\"POST\">";
+                        echo "<input type=\"hidden\" name=\"schedule_id\" value=\"{$schedule['schedule_id']}\">";
+                        echo "<button type=\"submit\" name=\"unoccupy_schedule\">Unoccupy</button>";
+                        echo "</form>";
+                    } else {
+                        echo "-";
+                    }
                 } else {
                     echo "-";
                 }
@@ -102,45 +107,53 @@
         }
 
         if (isset($_POST['occupy_schedule'])) {
-            $schedule_id = $_POST['schedule_id'];
+            if ($user_role == 'professor') {
+                $schedule_id = $_POST['schedule_id'];
 
-            $sql_check_available = "SELECT * FROM schedules WHERE schedule_id = :schedule_id AND status = 'available'";
-            $stmt_check_available = $pdo->prepare($sql_check_available);
-            $stmt_check_available->execute([':schedule_id' => $schedule_id]);
-            $schedule = $stmt_check_available->fetch(PDO::FETCH_ASSOC);
+                $sql_check_available = "SELECT * FROM schedules WHERE schedule_id = :schedule_id AND status = 'available'";
+                $stmt_check_available = $pdo->prepare($sql_check_available);
+                $stmt_check_available->execute([':schedule_id' => $schedule_id]);
+                $schedule = $stmt_check_available->fetch(PDO::FETCH_ASSOC);
 
-            if ($schedule) {
-                $sql_update = "UPDATE schedules SET status = 'occupied', user_id = :user_id WHERE schedule_id = :schedule_id";
-                $stmt_update = $pdo->prepare($sql_update);
-                $stmt_update->execute([':user_id' => $user_id, ':schedule_id' => $schedule_id]);
+                if ($schedule) {
+                    $sql_update = "UPDATE schedules SET status = 'occupied', user_id = :user_id WHERE schedule_id = :schedule_id";
+                    $stmt_update = $pdo->prepare($sql_update);
+                    $stmt_update->execute([':user_id' => $user_id, ':schedule_id' => $schedule_id]);
 
-                if ($stmt_update->rowCount() > 0) {
-                    echo "<script>alert('Schedule occupied successfully!');</script>";
+                    if ($stmt_update->rowCount() > 0) {
+                        echo "<script>alert('Schedule occupied successfully!');</script>";
+                    } else {
+                        echo "<script>alert('Failed to occupy schedule!');</script>";
+                    }
                 } else {
-                    echo "<script>alert('Failed to occupy schedule!');</script>";
+                    echo "<script>alert('Schedule is already occupied or does not exist!');</script>";
                 }
             } else {
-                echo "<script>alert('Schedule is already occupied or does not exist!');</script>";
+                echo "<script>alert('You do not have permission to occupy this schedule!');</script>";
             }
         }
 
         if (isset($_POST['unoccupy_schedule'])) {
-            $schedule_id = $_POST['schedule_id'];
+            if ($user_role == 'professor') {
+                $schedule_id = $_POST['schedule_id'];
 
-            $sql_check_owner = "SELECT user_id FROM schedules WHERE schedule_id = :schedule_id";
-            $stmt_check_owner = $pdo->prepare($sql_check_owner);
-            $stmt_check_owner->execute([':schedule_id' => $schedule_id]);
-            $owner_id = $stmt_check_owner->fetchColumn();
+                $sql_check_owner = "SELECT user_id FROM schedules WHERE schedule_id = :schedule_id";
+                $stmt_check_owner = $pdo->prepare($sql_check_owner);
+                $stmt_check_owner->execute([':schedule_id' => $schedule_id]);
+                $owner_id = $stmt_check_owner->fetchColumn();
 
-            if ($owner_id == $user_id) {
-                $sql_update = "UPDATE schedules SET status = 'available', user_id = NULL WHERE schedule_id = :schedule_id";
-                $stmt_update = $pdo->prepare($sql_update);
-                $stmt_update->execute([':schedule_id' => $schedule_id]);
+                if ($owner_id == $user_id) {
+                    $sql_update = "UPDATE schedules SET status = 'available', user_id = NULL WHERE schedule_id = :schedule_id";
+                    $stmt_update = $pdo->prepare($sql_update);
+                    $stmt_update->execute([':schedule_id' => $schedule_id]);
 
-                if ($stmt_update->rowCount() > 0) {
-                    echo "<script>alert('Schedule unoccupied successfully!');</script>";
+                    if ($stmt_update->rowCount() > 0) {
+                        echo "<script>alert('Schedule unoccupied successfully!');</script>";
+                    } else {
+                        echo "<script>alert('Failed to unoccupy schedule!');</script>";
+                    }
                 } else {
-                    echo "<script>alert('Failed to unoccupy schedule!');</script>";
+                    echo "<script>alert('You do not have permission to unoccupy this schedule!');</script>";
                 }
             } else {
                 echo "<script>alert('You do not have permission to unoccupy this schedule!');</script>";
@@ -152,4 +165,5 @@
     <!-- JavaScript functions and closing tags -->
 </body>
 </html>
+
 

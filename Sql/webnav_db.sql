@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 10, 2024 at 05:48 AM
+-- Generation Time: Jul 10, 2024 at 07:47 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -2369,17 +2369,18 @@ CREATE TABLE `users` (
   `year_level` varchar(10) DEFAULT NULL,
   `student_status` varchar(25) DEFAULT NULL,
   `status` varchar(25) DEFAULT NULL,
-  `department` varchar(50) DEFAULT NULL
+  `department` varchar(50) DEFAULT NULL,
+  `role` enum('student','professor') NOT NULL DEFAULT 'student'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `email`, `password_hash`, `student_num`, `program`, `year_level`, `student_status`, `status`, `department`) VALUES
-(1, 'Juan', 'jfdelacruz2021@plm.edu.ph', 'hashed_password_1', 202101099, 'BS IT', '4th', 'Regular', NULL, NULL),
-(2, 'Pedro', 'prdelacruz2021@plm.edu.ph', 'hashed_password_2', 202101091, 'BS IT', '4th', 'Regular', NULL, NULL),
-(3, 'Maria', 'mddelacruz@plm.edu.ph', 'hashed_password_3', NULL, NULL, NULL, NULL, 'active', 'CET');
+INSERT INTO `users` (`user_id`, `username`, `email`, `password_hash`, `student_num`, `program`, `year_level`, `student_status`, `status`, `department`, `role`) VALUES
+(1, 'Juan', 'jfdelacruz2021@plm.edu.ph', 'hashed_password_1', 202101099, 'BS IT', '4th', 'Regular', NULL, NULL, 'student'),
+(2, 'Pedro', 'prdelacruz2021@plm.edu.ph', 'hashed_password_2', 202101091, 'BS IT', '4th', 'Regular', NULL, NULL, 'student'),
+(3, 'Maria', 'mddelacruz@plm.edu.ph', 'hashed_password_3', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor');
 
 --
 -- Indexes for dumped tables

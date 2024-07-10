@@ -1,5 +1,4 @@
 <?php
-
 session_start(); 
 
 require 'includes/dbh.inc.php'; 
@@ -63,6 +62,9 @@ try {
         <div class="ribbon-button-container">
             <a href="user.php" class="ribbon-button">USER</a>
         </div>
+        <div class="ribbon-button-container">
+            <a href="includes/logout.php" class="ribbon-button">LOGOUT</a>
+        </div>
     </div>
     
     <div class="user-container">
@@ -120,3 +122,4 @@ try {
     </script>
 </body>
 </html>
+

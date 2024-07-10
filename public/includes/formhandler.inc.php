@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($password == $user['password_hash']) { 
             $_SESSION['user_id'] = $user['user_id']; 
             $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role']; 
             header("Location: ../home.html");
             exit();
         } else {
