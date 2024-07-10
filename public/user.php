@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+session_start(); 
 
 require 'includes/dbh.inc.php'; 
 
@@ -12,7 +12,7 @@ if (isset($_SESSION['user_id'])) {
 }
 
 try {
-    $stmt = $pdo->prepare("SELECT username, student_num, program, year_level, student_status FROM users WHERE user_id = :user_id");
+    $stmt = $pdo->prepare("SELECT username, email, department, student_num, program, year_level, student_status, status FROM users WHERE user_id = :user_id");
     $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
     $stmt->execute();
     
@@ -21,10 +21,13 @@ try {
     if (!$user) {
         $user = [
             'username' => 'Unknown',
+            'email' => 'N/A',
+            'department' => 'N/A',
             'student_num' => 'N/A',
             'program' => 'N/A',
             'year_level' => 'N/A',
-            'student_status' => 'N/A'
+            'student_status' => 'N/A',
+            'status' => 'N/A'
         ];
     }
 
@@ -72,11 +75,22 @@ try {
                 </div>
                 <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
                 <div id="user-profile">
-                    <p id="display-name">Name: <?php echo htmlspecialchars($user['username']); ?></p>
-                    <p id="display-student-number">Student Number: <?php echo htmlspecialchars($user['student_num']); ?></p>
-                    <p id="display-program">Program: <?php echo htmlspecialchars($user['program']); ?></p>
-                    <p id="display-year-level">Year Level: <?php echo htmlspecialchars($user['year_level']); ?></p>
-                    <p id="display-status">Status: <?php echo htmlspecialchars($user['student_status']); ?></p>
+                    <?php
+                    if (empty($user['student_num'])) {
+                        echo "
+                            <p id='display-name'>Name: " . htmlspecialchars($user['username']) . "</p>
+                            <p id='display-email'>Email: " . htmlspecialchars($user['email']) . "</p>
+                            <p id='display-department'>Department: " . htmlspecialchars($user['department']) . "</p>
+                            <p id='display-status'>Status: " . htmlspecialchars($user['status']) . "</p>";
+                    } else {
+                        echo "
+                            <p id='display-name'>Name: " . htmlspecialchars($user['username']) . "</p>
+                            <p id='display-student-number'>Student Number: " . htmlspecialchars($user['student_num']) . "</p>
+                            <p id='display-program'>Program: " . htmlspecialchars($user['program']) . "</p>
+                            <p id='display-year-level'>Year Level: " . htmlspecialchars($user['year_level']) . "</p>
+                            <p id='display-status'>Status: " . htmlspecialchars($user['student_status']) . "</p>";
+                    }
+                    ?>
                 </div>
             </div>
         </div>
