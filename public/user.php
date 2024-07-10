@@ -48,7 +48,7 @@ try {
 <body>
     <div class="top-ribbon">
         <div class="ribbon-button-container">
-            <a href="assets/tour/tour.html" class="ribbon-button">360 VIEW</a>
+            <a href="assets/tour/gv-tour.html" class="ribbon-button">360 VIEW</a>
         </div>
         <div class="ribbon-button-container">
             <a href="forum.php" class="ribbon-button">FORUM</a>
