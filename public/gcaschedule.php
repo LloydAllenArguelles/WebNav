@@ -13,10 +13,10 @@
             <a href="assets/tour/tour.html" class="ribbon-button">360 VIEW</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="forum.html" class="ribbon-button">FORUM</a>
+            <a href="forum.php" class="ribbon-button">FORUM</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="schedule.html" class="ribbon-button">SCHEDULE</a>
+            <a href="schedule.php" class="ribbon-button">SCHEDULE</a>
         </div>
         <div class="ribbon-button-container">
             <a href="events.html" class="ribbon-button">EVENTS</a>
@@ -53,13 +53,11 @@
         <?php
         session_start();
 
-        // Redirect to login page if user is not logged in
         if (!isset($_SESSION['user_id'])) {
             header("Location: login.php");
             exit();
         }
 
-        // Set user id and role from session
         $user_id = $_SESSION['user_id'];
         $user_role = $_SESSION['role'];
 

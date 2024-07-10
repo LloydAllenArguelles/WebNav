@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.html"); 
+    exit();
+}
+
+require_once 'includes/dbh.inc.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +26,7 @@
             <a href="forum.php" class="ribbon-button">FORUM</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="schedule.html" class="ribbon-button">SCHEDULE</a>
+            <a href="schedule.php" class="ribbon-button">SCHEDULE</a>
         </div>
         <div class="ribbon-button-container">
             <a href="events.html" class="ribbon-button">EVENTS</a>
@@ -32,8 +43,6 @@
             <label for="room">Select Room:</label>
             <select name="room" id="room">
                 <?php
-                require_once 'includes/dbh.inc.php';
-
                 $sql = "SELECT room_id, room_number FROM rooms";
                 $stmt = $pdo->query($sql);
                 $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -71,7 +80,7 @@
                     if (xhr.readyState === XMLHttpRequest.DONE) {
                         if (xhr.status === 200) {
                             console.log('Message saved successfully');
-                            fetchChatHistory(); // Update chat history after sending message
+                            fetchChatHistory(); 
                         } else {
                             console.error('Failed to save message');
                         }
@@ -111,4 +120,3 @@
     </script>
 </body>
 </html>
-

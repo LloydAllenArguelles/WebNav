@@ -1,11 +1,23 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.html"); 
+    exit();
+}
+
+require_once 'includes/dbh.inc.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PLM Navigation App - Events</title>
-    <link rel="stylesheet" href="assets/events.css">
+    <title>PLM Navigation App - SCHEDULE</title>
+    <link rel="stylesheet" href="schedule.css"> <!-- if ayaw gumana lagay muna sa public yung css idk din y ayaw gumana pag nasa assets e  -->
     <link rel="stylesheet" href="assets/chatbot.css">
+
 </head>
 <body>
     <div class="top-ribbon">
@@ -13,10 +25,10 @@
             <a href="assets/tour/gv-tour.html" class="ribbon-button">360 VIEW</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="forum.php" class="ribbon-button">FORUM</a>
+            <a href="forum.html" class="ribbon-button">FORUM</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="schedule.php" class="ribbon-button">SCHEDULE</a>
+            <a href="schedule.html" class="ribbon-button">SCHEDULE</a>
         </div>
         <div class="ribbon-button-container">
             <a href="events.html" class="ribbon-button">EVENTS</a>        </div>
@@ -24,16 +36,17 @@
             <a href="user.php" class="ribbon-button">USER</a>
         </div>
     </div>
-    
-    <div class="events-container">
-        <h1>Events Locations</h1>
-        <div class="events-table">
-            <a href="gvevents.php" class="event-button">Gusaling Villegas</a>
-            <a href="geevents.php" class="event-button">Gusaling Ejercito</a>
-            <a href="gcaevents.php" class="event-button">Gusaling Aquino</a>
+
+    <div class="building-schedule-container">
+        <h1>Building Schedules</h1>
+        <div class="building-schedule-table">
+            <a href="gvschedule.php" class="schedule-button">Gusaling Villegas</a>
+            <a href="geschedule.php" class="schedule-button">Gusaling Ejercito</a>
+            <a href="gcaschedule.php" class="schedule-button">Gusaling Aquino</a>
         </div>
-        <a href="home.hmtl" class="back-button">Back to Home</a>
+        <a href="home.html" class="back-button">Back to Home</a>
     </div>
+
 <!-- Chatbot Part Start -->
     <!-- Button -->
     <div class="cb-button" onclick="showModal()">
@@ -55,6 +68,6 @@
             // wala logic pa
         }
     </script>
-    
+
 </body>
 </html>

@@ -135,10 +135,10 @@ ob_clean();
             <a href="assets/tour/tour.html" class="ribbon-button">360 VIEW</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="forum.html" class="ribbon-button">FORUM</a>
+            <a href="forum.php" class="ribbon-button">FORUM</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="schedule.html" class="ribbon-button">SCHEDULE</a>
+            <a href="schedule.php" class="ribbon-button">SCHEDULE</a>
         </div>
         <div class="ribbon-button-container">
             <a href="events.html" class="ribbon-button">EVENTS</a>
