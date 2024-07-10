@@ -1,9 +1,15 @@
 <?php
-// user.php
 
-require 'includes/dbh.inc.php'; // Include the database connection
+session_start();
 
-$userId = 1; // Replace with dynamic user ID as needed
+require 'includes/dbh.inc.php'; 
+
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+} else {
+    echo "User not logged in.";
+    exit;
+}
 
 try {
     $stmt = $pdo->prepare("SELECT username, student_num, program, year_level, student_status FROM users WHERE user_id = :user_id");
@@ -100,4 +106,3 @@ try {
     </script>
 </body>
 </html>
-
