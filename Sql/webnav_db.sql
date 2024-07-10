@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 10, 2024 at 07:47 AM
+-- Generation Time: Jul 10, 2024 at 03:03 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -50,6 +50,25 @@ INSERT INTO `chat_history` (`id`, `room_id`, `user_id`, `username`, `message`, `
 (9, 13, 1, 'Juan', 'whahaha I have the key', '2024-07-08 16:04:37'),
 (11, 13, 2, 'Pedro', 'Can I use the room 301', '2024-07-10 03:02:27'),
 (12, 13, 3, 'Maria', 'Sure what time? Hindi namin gagamitin on our schedule every monday.', '2024-07-10 03:44:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `professor_availability`
+--
+
+CREATE TABLE `professor_availability` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `availability` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `professor_availability`
+--
+
+INSERT INTO `professor_availability` (`id`, `user_id`, `availability`) VALUES
+(1, 3, 'Monday 9am-11am, Wednesday 1pm-3pm, Friday 10am-12pm');
 
 -- --------------------------------------------------------
 
@@ -2396,6 +2415,13 @@ ALTER TABLE `chat_history`
   ADD KEY `username` (`username`);
 
 --
+-- Indexes for table `professor_availability`
+--
+ALTER TABLE `professor_availability`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `rooms`
 --
 ALTER TABLE `rooms`
@@ -2429,6 +2455,12 @@ ALTER TABLE `chat_history`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `professor_availability`
+--
+ALTER TABLE `professor_availability`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
@@ -2456,6 +2488,12 @@ ALTER TABLE `users`
 ALTER TABLE `chat_history`
   ADD CONSTRAINT `chat_history_ibfk_1` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`),
   ADD CONSTRAINT `chat_history_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `professor_availability`
+--
+ALTER TABLE `professor_availability`
+  ADD CONSTRAINT `professor_availability_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `schedules`
