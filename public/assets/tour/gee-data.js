@@ -1,6 +1,54 @@
 var APP_DATA = {
   "scenes": [
     {
+      "id": "62-gee-1f-college-of-law",
+      "name": "GEE 1F College of Law",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        }
+      ],
+      "faceSize": 896,
+      "initialViewParameters": {
+        "yaw": 2.0645430348987697,
+        "pitch": 0.1448193038912251,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": -2.943020593318698,
+          "pitch": 0.2860733884820412,
+          "rotation": 0,
+          "target": "63-gee-1f-accounting-office"
+        }
+      ],
+      "infoHotspots": [
+        {
+          "yaw": 2.2315272502721726,
+          "pitch": -0.0561706028839275,
+          "title": "GEE 1F School of Law",
+          "text": "-"
+        }
+      ],
+      "pageHotspots":[
+        {
+          "yaw": 0.07991988756612223,
+          "pitch": 0.45227985423759165,
+          "rotation": 0,
+          "page": "gv-tour.html"
+        }]
+    },
+    {
       "id": "30-gee-2f-center-stairs",
       "name": "GEE 2F Center Stairs",
       "levels": [
@@ -42,17 +90,17 @@ var APP_DATA = {
           "pitch": 0.33378752030714764,
           "rotation": 0,
           "target": "31-gee-2f-avr"
-        }
-      ],
-      "infoHotspots": [],
-      "pageHotspots":[
+        },
         {
           "yaw": 1.6577186829559718,
           "pitch": 0.22804355290238476,
           "rotation": 0,
-          "page": "gv-tour.html"
-        }]
-    },
+          "target": "65-gee-1f-center-stairs"
+        }
+      ],
+      "infoHotspots": [],
+      "pageHotspots":[]
+    }, 
     {
       "id": "26-gee-2f-ogps",
       "name": "GEE 2F OGPS",
@@ -352,7 +400,7 @@ var APP_DATA = {
           "yaw": 0.03598102297152472,
           "pitch": 0.3162789045137444,
           "rotation": 0,
-          "target": "32-gee-2f-rm-203"
+          "target": "33-gee-2f-rm-202"
         }
       ],
       "infoHotspots": [
@@ -400,7 +448,7 @@ var APP_DATA = {
           "yaw": -3.030792519170422,
           "pitch": 0.4103867409294484,
           "rotation": 0,
-          "target": "33-gee-2f-rm-202"
+          "target": "32-gee-2f-rm-203"
         },
         {
           "yaw": -0.05105329447529883,
@@ -515,6 +563,12 @@ var APP_DATA = {
           "pitch": 0.14725126572492542,
           "rotation": 0,
           "target": "43-gee-3f-right-stairs"
+        },
+        {
+          "yaw": 1.888736671456506,
+          "pitch": 0.41725126572492542,
+          "rotation": 0,
+          "target": "66-gee-1f-right-stairs"
         }
       ],
       "infoHotspots": [
@@ -955,6 +1009,197 @@ var APP_DATA = {
           "pitch": 0.006644579658139804,
           "title": "GEE 3F Restroom",
           "text": "wat"
+        }
+      ],
+      "pageHotspots":[]
+    },
+    {
+      "id": "63-gee-1f-accounting-office",
+      "name": "GEE 1F Accounting Office",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        }
+      ],
+      "faceSize": 896,
+      "initialViewParameters": {
+        "yaw": 1.310154061322077,
+        "pitch": 0.027262544679212297,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": 0.015752559476407413,
+          "pitch": 0.35381785558758594,
+          "rotation": 0,
+          "target": "62-gee-1f-college-of-law"
+        },
+        {
+          "yaw": -3.1109650240385704,
+          "pitch": 0.3992630866628488,
+          "rotation": 0,
+          "target": "64-gee-1f-office-of-treasurer"
+        }
+      ],
+      "infoHotspots": [
+        {
+          "yaw": 1.562136358677222,
+          "pitch": 0.04488987659592247,
+          "title": "Accounting Office",
+          "text": "-"
+        }
+      ],
+      "pageHotspots":[]
+    },
+    {
+      "id": "64-gee-1f-office-of-treasurer",
+      "name": "GEE 1F Office of Treasurer",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        }
+      ],
+      "faceSize": 896,
+      "initialViewParameters": {
+        "yaw": 1.7019430907964663,
+        "pitch": 0.08703620808098123,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": -0.02581696121470145,
+          "pitch": 0.3479703943581871,
+          "rotation": 0,
+          "target": "63-gee-1f-accounting-office"
+        },
+        {
+          "yaw": 3.0928065939695415,
+          "pitch": 0.3309968721960814,
+          "rotation": 0,
+          "target": "65-gee-1f-center-stairs"
+        }
+      ],
+      "infoHotspots": [
+        {
+          "yaw": 1.792754518689562,
+          "pitch": -0.0761458140536675,
+          "title": "Office of the Treasurer",
+          "text": "-"
+        }
+      ],
+      "pageHotspots":[]
+    },
+    {
+      "id": "65-gee-1f-center-stairs",
+      "name": "GEE 1F Center Stairs",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        }
+      ],
+      "faceSize": 896,
+      "initialViewParameters": {
+        "yaw": 1.340828888957212,
+        "pitch": -0.019221377403690454,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": 0.040583057042402615,
+          "pitch": 0.4059918141674146,
+          "rotation": 0,
+          "target": "64-gee-1f-office-of-treasurer"
+        },
+        {
+          "yaw": -3.113845901121934,
+          "pitch": 0.1522392104708583,
+          "rotation": 0,
+          "target":"66-gee-1f-right-stairs"
+        },
+        {
+          "yaw": 1.3386926302555349,
+          "pitch": 0.12487451003315542,
+          "rotation": 0,
+          "target": "30-gee-2f-center-stairs"
+        }
+      ],
+      "infoHotspots": [],
+      "pageHotspots":[]
+    },
+    {
+      "id":"66-gee-1f-right-stairs",
+      "name": "GEE 1F Right Stairs",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        }
+      ],
+      "faceSize": 896,
+      "initialViewParameters": {
+        "yaw": 2.4758176092442916,
+        "pitch": 0.12471506961432688,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": 0.038386481556587526,
+          "pitch": 0.24311221697464092,
+          "rotation": 0,
+          "target": "65-gee-1f-center-stairs"
+        },
+        {
+          "yaw": 2.6268297939060252,
+          "pitch": 0.1916374157935934,
+          "rotation": 0,
+          "target":"35-gee-2f-right-stairs"
+        }
+      ],
+      "infoHotspots": [
+        {
+          "yaw": 2.3062394204775796,
+          "pitch": -0.03695437474193497,
+          "title": "???",
+          "text": "-"
         }
       ],
       "pageHotspots":[]
