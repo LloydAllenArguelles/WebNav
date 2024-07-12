@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 10, 2024 at 03:03 PM
+-- Generation Time: Jul 12, 2024 at 12:43 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -50,6 +50,61 @@ INSERT INTO `chat_history` (`id`, `room_id`, `user_id`, `username`, `message`, `
 (9, 13, 1, 'Juan', 'whahaha I have the key', '2024-07-08 16:04:37'),
 (11, 13, 2, 'Pedro', 'Can I use the room 301', '2024-07-10 03:02:27'),
 (12, 13, 3, 'Maria', 'Sure what time? Hindi namin gagamitin on our schedule every monday.', '2024-07-10 03:44:13');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `event_id` int(11) NOT NULL,
+  `event_name` varchar(255) NOT NULL,
+  `time` time NOT NULL,
+  `day` varchar(20) NOT NULL,
+  `room_number` varchar(10) NOT NULL,
+  `room_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`event_id`, `event_name`, `time`, `day`, `room_number`, `room_id`) VALUES
+(1, 'Seminar on AI', '09:00:00', 'Monday', 'GV 204', 1),
+(2, 'Workshop on Data Science', '14:00:00', 'Tuesday', 'GV 205', 2),
+(3, 'Conference on Robotics', '11:00:00', 'Wednesday', 'GV 206', 3),
+(4, 'Panel Discussion on IoT', '10:30:00', 'Thursday', 'GV 207', 4),
+(5, 'Hackathon Event', '13:00:00', 'Friday', 'GV 208', 5),
+(6, 'Career Fair', '10:00:00', 'Monday', 'GV 209', 6),
+(7, 'Seminar on Machine Learning', '15:30:00', 'Tuesday', 'GV 304', 7),
+(8, 'Workshop on Cloud Computing', '09:30:00', 'Wednesday', 'GV 305', 8),
+(9, 'Panel Discussion on Blockchain', '12:00:00', 'Thursday', 'GV 306', 9),
+(10, 'Startup Pitch Event', '14:30:00', 'Friday', 'GV 307', 10),
+(11, 'Seminar on Cybersecurity', '11:30:00', 'Monday', 'GCA 201', 13),
+(12, 'Workshop on Ethical Hacking', '13:45:00', 'Tuesday', 'GCA 202', 14),
+(13, 'Conference on Digital Marketing', '10:00:00', 'Wednesday', 'GCA 203', 15),
+(14, 'Panel Discussion on Social Media', '09:15:00', 'Thursday', 'GCA 204', 16),
+(15, 'Hackathon Event', '14:00:00', 'Friday', 'GCA 301', 17),
+(16, 'Career Fair', '11:30:00', 'Monday', 'GCA 302', 18),
+(17, 'Seminar on AI', '12:45:00', 'Tuesday', 'GCA 303', 19),
+(18, 'Workshop on Data Science', '10:30:00', 'Wednesday', 'GCA 304', 20),
+(19, 'Panel Discussion on IoT', '13:15:00', 'Thursday', 'GCA 305', 21),
+(20, 'Hackathon Event', '11:00:00', 'Friday', 'GCA 306', 22),
+(21, 'Career Fair', '14:30:00', 'Monday', 'GCA 307', 23),
+(22, 'Seminar on Blockchain', '09:45:00', 'Tuesday', 'GCA 308', 24),
+(23, 'Workshop on Cloud Computing', '12:00:00', 'Wednesday', 'GCA 309', 25),
+(24, 'Panel Discussion on AI', '15:00:00', 'Thursday', 'GEE 201', 26),
+(25, 'Hackathon Event', '11:30:00', 'Friday', 'GEE 202', 27),
+(26, 'Career Fair', '14:00:00', 'Monday', 'GEE 203', 28),
+(27, 'Seminar on Data Science', '10:15:00', 'Tuesday', 'GEE 204', 29),
+(28, 'Workshop on Machine Learning', '13:30:00', 'Wednesday', 'GEE 205', 30),
+(29, 'Panel Discussion on Robotics', '12:00:00', 'Thursday', 'GEE 301', 31),
+(30, 'Hackathon Event', '15:45:00', 'Friday', 'GEE 302', 32),
+(31, 'Career Fair', '09:30:00', 'Monday', 'GEE 303', 33),
+(32, 'Seminar on AI Ethics', '11:45:00', 'Tuesday', 'GEE 304', 34),
+(33, 'Workshop on Blockchain', '14:15:00', 'Wednesday', 'GEE 305', 35),
+(34, 'Panel Discussion on Cloud Computing', '10:30:00', 'Thursday', 'GEE 306', 36);
 
 -- --------------------------------------------------------
 
@@ -2389,17 +2444,47 @@ CREATE TABLE `users` (
   `student_status` varchar(25) DEFAULT NULL,
   `status` varchar(25) DEFAULT NULL,
   `department` varchar(50) DEFAULT NULL,
-  `role` enum('student','professor') NOT NULL DEFAULT 'student'
+  `role` enum('student','professor') NOT NULL DEFAULT 'student',
+  `profile_image` varchar(255) DEFAULT 'default_profile.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `email`, `password_hash`, `student_num`, `program`, `year_level`, `student_status`, `status`, `department`, `role`) VALUES
-(1, 'Juan', 'jfdelacruz2021@plm.edu.ph', 'hashed_password_1', 202101099, 'BS IT', '4th', 'Regular', NULL, NULL, 'student'),
-(2, 'Pedro', 'prdelacruz2021@plm.edu.ph', 'hashed_password_2', 202101091, 'BS IT', '4th', 'Regular', NULL, NULL, 'student'),
-(3, 'Maria', 'mddelacruz@plm.edu.ph', 'hashed_password_3', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor');
+INSERT INTO `users` (`user_id`, `username`, `email`, `password_hash`, `student_num`, `program`, `year_level`, `student_status`, `status`, `department`, `role`, `profile_image`) VALUES
+(1, 'Juan', 'jfdelacruz2021@plm.edu.ph', 'hashed_password_1', 202101099, 'BS IT', '4th', 'Regular', NULL, NULL, 'student', 'default_profile.jpg'),
+(2, 'Pedro', 'prdelacruz2021@plm.edu.ph', 'hashed_password_2', 202101091, 'BS IT', '4th', 'Regular', NULL, NULL, 'student', 'default_profile.jpg'),
+(3, 'Maria', 'mddelacruz@plm.edu.ph', 'hashed_password_3', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'default_profile.jpg'),
+(4, 'John', 'jsmith@plm.edu.ph', 'hashed_password_4', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'default_profile.jpg'),
+(5, 'Michael', 'mgomez@plm.edu.ph', 'hashed_password_5', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'default_profile.jpg'),
+(6, 'Peter', 'psantos@plm.edu.ph', 'hashed_password_6', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'default_profile.jpg'),
+(7, 'Robert', 'rreyes@plm.edu.ph', 'hashed_password_7', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'default_profile.jpg'),
+(8, 'Richard', 'rgonzales@plm.edu.ph', 'hashed_password_8', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'default_profile.jpg'),
+(9, 'Matthew', 'mfernandez@plm.edu.ph', 'hashed_password_9', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'default_profile.jpg'),
+(10, 'James', 'jtorres@plm.edu.ph', 'hashed_password_10', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'default_profile.jpg'),
+(11, 'Luke', 'lramirez@plm.edu.ph', 'hashed_password_11', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'default_profile.jpg'),
+(12, 'Ryan', 'rrivera@plm.edu.ph', 'hashed_password_12', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'default_profile.jpg'),
+(13, 'David', 'ddelacruz@plm.edu.ph', 'hashed_password_13', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'default_profile.jpg'),
+(14, 'Daniel', 'dsantiago@plm.edu.ph', 'hashed_password_14', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'default_profile.jpg'),
+(15, 'Edward', 'emorales@plm.edu.ph', 'hashed_password_15', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'default_profile.jpg'),
+(16, 'Samuel', 'sfernandez@plm.edu.ph', 'hashed_password_16', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'default_profile.jpg'),
+(17, 'Andrew', 'acastro@plm.edu.ph', 'hashed_password_17', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'default_profile.jpg'),
+(18, 'Benjamin', 'blopez@plm.edu.ph', 'hashed_password_18', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'default_profile.jpg'),
+(19, 'Gabriel', 'gmedina@plm.edu.ph', 'hashed_password_19', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'default_profile.jpg'),
+(20, 'Henry', 'hherrera@plm.edu.ph', 'hashed_password_20', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'default_profile.jpg'),
+(21, 'Isaac', 'iisrael@plm.edu.ph', 'hashed_password_21', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'default_profile.jpg'),
+(22, 'Joseo', 'jsantos@plm.edu.ph', 'hashed_password_22', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'default_profile.jpg'),
+(23, 'Kevin', 'kcruz@plm.edu.ph', 'hashed_password_23', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'default_profile.jpg'),
+(24, 'Lawrence', 'lreyes@plm.edu.ph', 'hashed_password_24', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'default_profile.jpg'),
+(25, 'Micho', 'mgonzales@plm.edu.ph', 'hashed_password_25', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'default_profile.jpg'),
+(26, 'Nathan', 'ntorres@plm.edu.ph', 'hashed_password_26', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'default_profile.jpg'),
+(27, 'Oliver', 'ocastro@plm.edu.ph', 'hashed_password_27', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'default_profile.jpg'),
+(28, 'Jarn', 'jsalongga@plm.edu.ph', 'hashed_password_28', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'default_profile.jpg'),
+(29, 'Quentin', 'qdelacruz@plm.edu.ph', 'hashed_password_29', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'default_profile.jpg'),
+(30, 'Raymond', 'rsantiago@plm.edu.ph', 'hashed_password_30', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'default_profile.jpg'),
+(31, 'Simon', 'ssimon@plm.edu.ph', 'hashed_password_31', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'default_profile.jpg'),
+(32, 'Thomas', 'tthomas@plm.edu.ph', 'hashed_password_32', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'default_profile.jpg');
 
 --
 -- Indexes for dumped tables
@@ -2413,6 +2498,13 @@ ALTER TABLE `chat_history`
   ADD KEY `room_id` (`room_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `username` (`username`);
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`event_id`),
+  ADD KEY `room_id` (`room_id`);
 
 --
 -- Indexes for table `professor_availability`
@@ -2455,6 +2547,12 @@ ALTER TABLE `chat_history`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
 -- AUTO_INCREMENT for table `professor_availability`
 --
 ALTER TABLE `professor_availability`
@@ -2476,7 +2574,7 @@ ALTER TABLE `schedules`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Constraints for dumped tables
@@ -2488,6 +2586,12 @@ ALTER TABLE `users`
 ALTER TABLE `chat_history`
   ADD CONSTRAINT `chat_history_ibfk_1` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`),
   ADD CONSTRAINT `chat_history_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `events`
+--
+ALTER TABLE `events`
+  ADD CONSTRAINT `events_ibfk_1` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`);
 
 --
 -- Constraints for table `professor_availability`
