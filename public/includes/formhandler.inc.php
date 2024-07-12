@@ -27,15 +27,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: ../home.html");
             exit();
         } else {
-            header("Location: ../index.html");
+            $error = "Invalid username or password";
+            header("Location: ../index.php?error=" . urlencode($error) . "&username=" . urlencode($username));
             exit();
         }
     } else {
-        header("Location: ../index.html");
+        $error = "Invalid username or password";
+        header("Location: ../index.php?error=" . urlencode($error) . "&username=" . urlencode($username));
         exit();
     }
 } else {
-    header("Location: ../index.html");
+    header("Location: ../index.php");
     exit();
 }
 ?>
