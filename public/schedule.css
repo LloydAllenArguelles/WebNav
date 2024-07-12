@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #e6f0ff; 
+    background-color: #e6f0ff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,7 +26,7 @@ body {
     background-color: #007bff;
     color: white;
     text-decoration: none;
-    border-radius: 20px; 
+    border-radius: 20px;
     font-size: 16px;
     transition: background-color 0.3s, color 0.3s;
 }
@@ -37,7 +37,7 @@ body {
 
 .building-schedule-container {
     background-color: #ffffff;
-    padding: 20px 40px;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -45,8 +45,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100%;
     width: 80%;
 }
 
@@ -57,36 +55,36 @@ body {
     font-weight: 300;
 }
 
-.building-schedule-table {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 20px;
+.professor-availability-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
 }
 
-.schedule-button {
-    padding: 15px 30px;
+.professor-availability-table th,
+.professor-availability-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.professor-availability-table th {
     background-color: #007bff;
     color: white;
-    text-decoration: none;
-    border-radius: 8px; 
-    font-size: 18px;
-    transition: background-color 0.3s, transform 0.3s;
-    text-align: center;
 }
 
-.schedule-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05); 
+.professor-availability-table td {
+    background-color: #f9f9f9;
 }
 
 .back-button {
+    display: inline-block;
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
     text-decoration: none;
-    border-radius: 5px;
-    font-size: 16px;
+    border-radius: 20px;
+    margin-top: 20px;
     transition: background-color 0.3s;
 }
 

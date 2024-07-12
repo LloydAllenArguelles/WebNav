@@ -49,6 +49,22 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - Professor Availability</title>
     <link rel="stylesheet" href="schedule.css">
+    <style>
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
     <div class="top-ribbon">
@@ -87,14 +103,24 @@ try {
         <?php if ($selectedDepartment): ?>
             <div class="professor-availability-table">
                 <?php if (!empty($professors)): ?>
-                    <?php foreach ($professors as $professor): ?>
-                        <div class="professor">
-                            <h2><?php echo htmlspecialchars($professor['username']); ?></h2>
-                            <p>Available: <?php echo htmlspecialchars($professor['availability']); ?></p>
-                        </div>
-                    <?php endforeach; ?>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Professor</th>
+                                <th>Availability</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($professors as $professor): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($professor['username']); ?></td>
+                                    <td><?php echo htmlspecialchars($professor['availability']); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 <?php else: ?>
-                    <p>No professor availability data to display.</p>
+                    <p>No professor availability data to display for the selected department.</p>
                 <?php endif; ?>
             </div>
         <?php endif; ?>
@@ -103,3 +129,4 @@ try {
     </div>
 </body>
 </html>
+
