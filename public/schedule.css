@@ -91,3 +91,14 @@ body {
 .back-button:hover {
     background-color: #0056b3;
 }
+
+.button {
+    padding: 15px 30px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px; 
+    font-size: 18px;
+    transition: background-color 0.3s, transform 0.3s;
+    text-align: center;
+}

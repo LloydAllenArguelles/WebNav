@@ -38,12 +38,12 @@ require_once 'includes/dbh.inc.php';
     </div>
 
     <div class="building-schedule-container">
-    <a href="professor_availability.php" class="schedule-button">Professor Availability</a>
+    <a href="professor_availability.php" class="schedule-button button">Professor Availability</a>
         <h1>Building Schedules</h1>
         <div class="building-schedule-table">
-            <a href="gvschedule.php" class="schedule-button">Gusaling Villegas</a>
-            <a href="geschedule.php" class="schedule-button">Gusaling Ejercito</a>
-            <a href="gcaschedule.php" class="schedule-button">Gusaling Aquino</a>
+            <a href="gvschedule.php" class="schedule-button button">Gusaling Villegas</a>
+            <a href="geschedule.php" class="schedule-button button">Gusaling Ejercito</a>
+            <a href="gcaschedule.php" class="schedule-button button">Gusaling Aquino</a>
         </div>
         <a href="home.html" class="back-button">Back to Home</a>
     </div>

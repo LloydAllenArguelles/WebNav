@@ -47,8 +47,8 @@ a, a:hover, a:active, a:visited {
 #titleBar {
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: 25%;
+  right: 25%;
   height: 40px;
   text-align: center;
 }
@@ -765,7 +765,7 @@ body.single-scene #sceneList, body.single-scene #sceneListToggle {
 .viewControlButton {
   display: none;
   position: absolute;
-  bottom: 0;
+  bottom: 40px;
   left: 50%;
   width: 40px;
   height: 40px;
