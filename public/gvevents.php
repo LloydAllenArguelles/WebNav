@@ -4,32 +4,14 @@ ob_start();
 require_once 'includes/dbh.inc.php';
 
 $building_name = 'Gusaling Villegas';
-$sql = "SELECT * FROM schedules INNER JOIN rooms ON schedules.room_id = rooms.room_id WHERE rooms.building = :building ORDER BY schedules.start_time";
+$sql = "SELECT e.event_name, e.time, e.day, r.room_number 
+        FROM events e
+        INNER JOIN rooms r ON e.room_id = r.room_id
+        WHERE r.building = :building
+        ORDER BY e.day, e.time";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([':building' => $building_name]);
-$schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$organized_schedules = [];
-
-foreach ($schedules as $schedule) {
-    $time_slot = "{$schedule['start_time']} - {$schedule['end_time']}";
-    $day_of_week = $schedule['day_of_week'];
-    $subject = $schedule['subject'];
-
-    if (!isset($organized_schedules[$time_slot])) {
-        $organized_schedules[$time_slot] = [
-            'Monday' => '-',
-            'Tuesday' => '-',
-            'Wednesday' => '-',
-            'Thursday' => '-',
-            'Friday' => '-',
-            'Saturday' => '-',
-            'Sunday' => '-'
-        ];
-    }
-
-    $organized_schedules[$time_slot][$day_of_week] = $subject;
-}
+$events = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ob_clean();
 ?>
@@ -42,66 +24,49 @@ ob_clean();
     <link rel="stylesheet" href="gvevents.css">
     <link rel="stylesheet" href="assets/chatbot.css">
     <style>
-        .top-ribbon {
-            background-color: #007bff;
-            width: 100%;
-            padding: 10px 0;
-            display: flex;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .ribbon-button-container {
-            margin: 0 5px;
-            flex: 1 0 0; 
-        }
-
-        .ribbon-button {
-            padding: 10px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 14px;
-            display: block;
-            text-align: center;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .ribbon-button:hover {
-            background-color: #0056b3;
+        body {
+            background-color: #f8f9fa; 
         }
 
         .building-schedule-container {
-            background-color: #ffffff;
-            padding: 20px 10px;
+            background-color: #ffffff; 
+            padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
             text-align: center;
-            margin-top: 20px;
-            width: 95%;
-            overflow-x: auto;
         }
 
-        .schedule-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+        .building-title {
+            margin-top: 0;
+            color: #000000; 
         }
 
-        .schedule-table th, .schedule-table td {
+        .schedule-card {
             border: 1px solid #007bff;
-            padding: 10px;
+            border-radius: 8px;
+            padding: 10px; 
+            width: 250px; 
             text-align: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; 
+            display: inline-block; 
+            margin-right: 15px; 
+            vertical-align: top; 
         }
 
-        .schedule-table th {
-            background-color: #0056b3;
-            color: white;
+        .event-name {
+            background-color: #007bff; 
+            color: #ffffff; 
+            padding: 8px;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 10px; 
         }
 
-        .schedule-table td {
+        .event-details {
             background-color: #e6f0ff;
+            padding: 10px;
+            border-radius: 0 0 8px 8px;
         }
 
         .back-button {
@@ -112,6 +77,8 @@ ob_clean();
             border-radius: 5px;
             font-size: 16px;
             transition: background-color 0.3s;
+            display: inline-block; 
+            margin-top: 20px; 
         }
 
         .back-button:hover {
@@ -119,18 +86,16 @@ ob_clean();
         }
 
         @media screen and (max-width: 768px) {
-            .ribbon-button {
-                font-size: 12px;
-            }
-
-            .building-schedule-container {
-                padding: 20px 5px;
+            .schedule-card {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Your existing top ribbon navigation -->
     <div class="top-ribbon">
+        <!-- Other buttons -->
         <div class="ribbon-button-container">
             <a href="assets/tour/gv-tour.html" class="ribbon-button">360 VIEW</a>
         </div>
@@ -149,47 +114,26 @@ ob_clean();
     </div>
 
     <div class="building-schedule-container">
+        <h2 class="building-title">Gusaling Villegas Scheduled Events</h2>
         <?php
-        if (!empty($organized_schedules)) {
-            echo "<h2>Gusaling Villegas Schedule</h2>";
-            echo "<div class=\"events-table\">";
-            echo "<table class=\"schedule-table\">";
-            echo "<thead>";
-            echo "<tr>";
-            echo "<th>Time</th>";
-            echo "<th>Monday</th>";
-            echo "<th>Tuesday</th>";
-            echo "<th>Wednesday</th>";
-            echo "<th>Thursday</th>";
-            echo "<th>Friday</th>";
-            echo "<th>Saturday</th>";
-            echo "<th>Sunday</th>";
-            echo "</tr>";
-            echo "</thead>";
-            echo "<tbody>";
-
-            foreach ($organized_schedules as $time_slot => $schedule) {
-                echo "<tr>";
-                echo "<td>{$time_slot}</td>";
-                echo "<td>{$schedule['Monday']}</td>";
-                echo "<td>{$schedule['Tuesday']}</td>";
-                echo "<td>{$schedule['Wednesday']}</td>";
-                echo "<td>{$schedule['Thursday']}</td>";
-                echo "<td>{$schedule['Friday']}</td>";
-                echo "<td>{$schedule['Saturday']}</td>";
-                echo "<td>{$schedule['Sunday']}</td>";
-                echo "</tr>";
+        if (!empty($events)) {
+            foreach ($events as $event) {
+                echo "<div class=\"schedule-card\">";
+                echo "<div class=\"event-name\">{$event['event_name']}</div>";
+                echo "<div class=\"event-details\">";
+                echo "<p><strong>Time:</strong> {$event['time']}</p>";
+                echo "<p><strong>Day:</strong> {$event['day']}</p>";
+                echo "<p><strong>Room:</strong> {$event['room_number']}</p>";
+                echo "</div>"; 
+                echo "</div>";
             }
-
-            echo "</tbody>";
-            echo "</table>";
-            echo "</div>";
         } else {
-            echo "<p>No schedules found for Gusaling Villegas.</p>";
+            echo "<p>No events found for Gusaling Villegas.</p>";
         }
         ?>
     </div>
 
+    <!-- Back button to navigate back to events page -->
     <a href="events.html" class="back-button">Back</a>
 
     <!-- JavaScript functions and closing tags -->
