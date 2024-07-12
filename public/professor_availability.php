@@ -48,23 +48,52 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - Professor Availability</title>
-    <link rel="stylesheet" href="schedule.css">
     <style>
         
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            margin-bottom: 10px;
+            border-radius: 8px; 
+            overflow: hidden; 
         }
         th, td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 12px; 
             text-align: left;
+            font-size: 16px;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center; 
+            border-top-left-radius: 8px; 
+            border-top-right-radius: 8px; 
+        }
+        tr:nth-child(even) {
+            background-color: #EFF5FF;
+        }
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        
+        .back-button {
+            display: block;
+            margin-top: 20px; 
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
         }
     </style>
+    <link rel="stylesheet" href="schedule.css"> 
 </head>
 <body>
     <div class="top-ribbon">
@@ -129,4 +158,3 @@ try {
     </div>
 </body>
 </html>
-

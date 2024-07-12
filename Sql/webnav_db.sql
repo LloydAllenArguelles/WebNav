@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 12, 2024 at 12:43 PM
+-- Generation Time: Jul 12, 2024 at 01:05 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -123,7 +123,36 @@ CREATE TABLE `professor_availability` (
 --
 
 INSERT INTO `professor_availability` (`id`, `user_id`, `availability`) VALUES
-(1, 3, 'Monday 9am-11am, Wednesday 1pm-3pm, Friday 10am-12pm');
+(1, 3, 'Monday 9am-11am, Wednesday 1pm-3pm, Friday 10am-12pm'),
+(2, 4, 'Tuesday 2pm-4pm, Thursday 10am-12pm, Saturday 11am-1pm'),
+(3, 5, 'Monday 8am-10am, Wednesday 2pm-4pm, Friday 9am-11am'),
+(4, 6, 'Tuesday 1pm-3pm, Thursday 11am-1pm, Saturday 10am-12pm'),
+(5, 7, 'Monday 11am-1pm, Wednesday 3pm-5pm, Friday 8am-10am'),
+(6, 8, 'Tuesday 9am-11am, Thursday 2pm-4pm, Saturday 1pm-3pm'),
+(7, 9, 'Monday 3pm-5pm, Wednesday 10am-12pm, Friday 1pm-3pm'),
+(8, 10, 'Tuesday 11am-1pm, Thursday 8am-10am, Saturday 3pm-5pm'),
+(9, 11, 'Monday 2pm-4pm, Wednesday 11am-1pm, Friday 2pm-4pm'),
+(10, 12, 'Tuesday 3pm-5pm, Thursday 1pm-3pm, Saturday 9am-11am'),
+(11, 13, 'Monday 10am-12pm, Wednesday 4pm-6pm, Friday 11am-1pm'),
+(12, 14, 'Tuesday 8am-10am, Thursday 3pm-5pm, Saturday 4pm-6pm'),
+(13, 15, 'Monday 4pm-6pm, Wednesday 8am-10am, Friday 4pm-6pm'),
+(14, 16, 'Tuesday 4pm-6pm, Thursday 4pm-6pm, Saturday 8am-10am'),
+(15, 17, 'Monday 5pm-7pm, Wednesday 5pm-7pm, Friday 5pm-7pm'),
+(16, 18, 'Tuesday 5pm-7pm, Thursday 5pm-7pm, Saturday 5pm-7pm'),
+(17, 19, 'Monday 6pm-8pm, Wednesday 6pm-8pm, Friday 6pm-8pm'),
+(18, 20, 'Tuesday 6pm-8pm, Thursday 6pm-8pm, Saturday 6pm-8pm'),
+(19, 21, 'Monday 9am-11am, Wednesday 1pm-3pm, Friday 10am-12pm'),
+(20, 22, 'Tuesday 10am-12pm, Thursday 9am-11am, Saturday 2pm-4pm'),
+(21, 23, 'Monday 1pm-3pm, Wednesday 9am-11am, Friday 3pm-5pm'),
+(62, 24, 'Tuesday 2pm-4pm, Thursday 10am-12pm, Saturday 11am-1pm'),
+(63, 25, 'Monday 8am-10am, Wednesday 2pm-4pm, Friday 9am-11am'),
+(64, 26, 'Tuesday 1pm-3pm, Thursday 11am-1pm, Saturday 10am-12pm'),
+(65, 27, 'Monday 11am-1pm, Wednesday 3pm-5pm, Friday 8am-10am'),
+(66, 28, 'Tuesday 9am-11am, Thursday 2pm-4pm, Saturday 1pm-3pm'),
+(67, 29, 'Monday 3pm-5pm, Wednesday 10am-12pm, Friday 1pm-3pm'),
+(68, 30, 'Tuesday 11am-1pm, Thursday 8am-10am, Saturday 3pm-5pm'),
+(69, 31, 'Monday 2pm-4pm, Wednesday 11am-1pm, Friday 2pm-4pm'),
+(70, 32, 'Tuesday 3pm-5pm, Thursday 1pm-3pm, Saturday 9am-11am');
 
 -- --------------------------------------------------------
 
@@ -2556,7 +2585,7 @@ ALTER TABLE `events`
 -- AUTO_INCREMENT for table `professor_availability`
 --
 ALTER TABLE `professor_availability`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `rooms`
