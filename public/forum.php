@@ -52,7 +52,6 @@ require_once 'includes/dbh.inc.php';
                 }
                 ?>
             </select>
-            <button type="button" onclick="fetchChatHistory()">Show Chat History</button>
         </form>
 
         <div class="chat-box" id="chat-box">
@@ -66,13 +65,13 @@ require_once 'includes/dbh.inc.php';
 
     <!-- JavaScript Functions -->
     <script>
+        document.getElementById('room').addEventListener('change', fetchChatHistory);
+
         function sendMessage() {
             const messageInput = document.getElementById('message-input').value.trim();
             const selectedRoom = document.getElementById('room').value;
 
             if (messageInput !== "") {
-                displayMessage('send', messageInput);
-
                 const xhr = new XMLHttpRequest();
                 xhr.open('POST', 'includes/save_message.php', true);
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -88,15 +87,6 @@ require_once 'includes/dbh.inc.php';
                 };
                 xhr.send('message=' + encodeURIComponent(messageInput) + '&room=' + encodeURIComponent(selectedRoom));
             }
-        }
-
-        function displayMessage(type, message) {
-            const chatBox = document.getElementById('chat-box');
-            const messageElement = document.createElement('div');
-            messageElement.className = 'chat-message ' + type;
-            messageElement.innerText = message;
-            chatBox.appendChild(messageElement);
-            chatBox.scrollTop = chatBox.scrollHeight;
         }
 
         function fetchChatHistory() {
@@ -117,6 +107,8 @@ require_once 'includes/dbh.inc.php';
             };
             xhr.send('room=' + encodeURIComponent(selectedRoom));
         }
+
+        window.onload = fetchChatHistory; // Fetch chat history on page load for the default room
     </script>
 </body>
 </html>
