@@ -6,7 +6,80 @@ require 'includes/dbh.inc.php';
 if (isset($_SESSION['user_id'])) {
     $userId = $_SESSION['user_id'];
 } else {
-    echo "User not logged in.";
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PLM Navigation App - User</title>
+        <link rel="stylesheet" href="user.css">
+        <link rel="stylesheet" href="assets/chatbot.css">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                background-color: #f4f4f4;
+            }
+
+            .message-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                max-width: 600px;
+                background-color: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+
+            .no-account-message {
+                font-size: 1.2em;
+                color: #333;
+            }
+
+            .no-account-buttons {
+                display: flex;
+                gap: 20px;
+                margin-top: 20px;
+            }
+
+            .button {
+                padding: 10px 20px;
+                background-color: #007BFF;
+                color: white;
+                text-decoration: none;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .button:hover {
+                background-color: #0056b3;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="message-container">
+            <p class="no-account-message">User not logged in.</p>
+            <div class="no-account-buttons">
+                <a href="index.php" class="button">Log In</a>
+                <a href="home.html" class="button">Back</a>
+            </div>
+        </div>
+    </body>
+    </html>
+    <?php
     exit;
 }
 
@@ -35,7 +108,6 @@ try {
     exit;
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -121,4 +193,3 @@ try {
     </script>
 </body>
 </html>
-
