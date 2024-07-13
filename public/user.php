@@ -1,7 +1,7 @@
 <?php
-session_start(); 
+session_start();
 
-require 'includes/dbh.inc.php'; 
+require 'includes/dbh.inc.php';
 
 if (isset($_SESSION['user_id'])) {
     $userId = $_SESSION['user_id'];
@@ -83,8 +83,46 @@ if (isset($_SESSION['user_id'])) {
     exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profile_image'])) {
+    $fileTmpPath = $_FILES['profile_image']['tmp_name'];
+    $fileName = $_FILES['profile_image']['name'];
+    $fileSize = $_FILES['profile_image']['size'];
+    $fileType = $_FILES['profile_image']['type'];
+    $fileNameCmps = explode(".", $fileName);
+    $fileExtension = strtolower(end($fileNameCmps));
+
+    $allowedfileExtensions = array('jpg', 'jpeg', 'png');
+    if (in_array($fileExtension, $allowedfileExtensions)) {
+        $uploadFileDir = './uploads/profile_pictures/';
+        $newFileName = $userId . '.' . $fileExtension;
+        $dest_path = $uploadFileDir . $newFileName;
+
+        if (!is_dir($uploadFileDir)) {
+            mkdir($uploadFileDir, 0777, true);
+        }
+
+        if (move_uploaded_file($fileTmpPath, $dest_path)) {
+            try {
+                $stmt = $pdo->prepare("UPDATE users SET profile_image = :profile_image WHERE user_id = :user_id");
+                $stmt->bindParam(':profile_image', $dest_path, PDO::PARAM_STR);
+                $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+                $stmt->execute();
+
+                header("Location: user.php");
+                exit;
+            } catch (PDOException $e) {
+                echo "Error updating profile image: " . $e->getMessage();
+            }
+        } else {
+            echo "There was an error moving the uploaded file.";
+        }
+    } else {
+        echo "Upload failed. Allowed file types: " . implode(',', $allowedfileExtensions);
+    }
+}
+
 try {
-    $stmt = $pdo->prepare("SELECT username, email, department, student_num, program, year_level, student_status, status FROM users WHERE user_id = :user_id");
+    $stmt = $pdo->prepare("SELECT username, email, department, student_num, program, year_level, student_status, status, role, profile_image FROM users WHERE user_id = :user_id");
     $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
     $stmt->execute();
     
@@ -99,12 +137,15 @@ try {
             'program' => 'N/A',
             'year_level' => 'N/A',
             'student_status' => 'N/A',
-            'status' => 'N/A'
+            'status' => 'N/A',
+            'profile_image' => 'assets/front/pic.jpg'
         ];
+    } else if (empty($user['profile_image'])) {
+        $user['profile_image'] = 'assets/front/pic.jpg';
     }
 
 } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    echo "Error fetching user details: " . $e->getMessage();
     exit;
 }
 ?>
@@ -116,6 +157,92 @@ try {
     <title>PLM Navigation App - User</title>
     <link rel="stylesheet" href="user.css">
     <link rel="stylesheet" href="assets/chatbot.css">
+    <style>
+
+        .user-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            margin-bottom: 20px;
+        }
+
+        .card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .button-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .file-input {
+            position: relative;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+
+        .button, .upload-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover, .upload-button:hover {
+            background-color: #0056b3;
+        }
+
+        .upload-button {
+            background-color: white;
+            color: #007BFF;
+            border: 2px solid #007BFF;
+        }
+
+        .upload-button:hover {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <div class="top-ribbon">
@@ -143,53 +270,38 @@ try {
         <h1>User Profile</h1>
         <div class="profile">
             <div class="card">
-                <div>
-                    <img src="assets/front/pic.jpg" id="profile-pic" alt="Profile Picture">
-                    <label for="input-file">Update Image</label>
-                </div>
-                <input type="file" accept="image/jpeg, image/png, image/jpg" id="input-file">
+                <img src="<?php echo htmlspecialchars($user['profile_image']); ?>" alt="Profile Picture">
                 <div id="user-profile">
                     <?php
                     if (empty($user['student_num'])) {
                         echo "
-                            <p id='display-name'>Name: " . htmlspecialchars($user['username']) . "</p>
-                            <p id='display-email'>Email: " . htmlspecialchars($user['email']) . "</p>
-                            <p id='display-department'>Department: " . htmlspecialchars($user['department']) . "</p>
-                            <p id='display-status'>Status: " . htmlspecialchars($user['status']) . "</p>";
+                            <p id='display-name'>Name: {$user['username']}</p>
+                            <p id='display-name'>Department: {$user['department']}</p>
+                            <p id='display-name'>Position: {$user['role']}</p>
+                            <p id='display-name'>Status: {$user['status']}</p>
+                        ";
                     } else {
                         echo "
-                            <p id='display-name'>Name: " . htmlspecialchars($user['username']) . "</p>
-                            <p id='display-student-number'>Student Number: " . htmlspecialchars($user['student_num']) . "</p>
-                            <p id='display-program'>Program: " . htmlspecialchars($user['program']) . "</p>
-                            <p id='display-year-level'>Year Level: " . htmlspecialchars($user['year_level']) . "</p>
-                            <p id='display-status'>Status: " . htmlspecialchars($user['student_status']) . "</p>";
+                            <p id='display-name'>Name: {$user['username']}</p>
+                            <p id='display-name'>ID Number: {$user['student_num']}</p>
+                            <p id='display-name'>Program: {$user['program']}</p>
+                            <p id='display-name'>Year Level: {$user['year_level']}</p>
+                            <p id='display-name'>Status: {$user['student_status']}</p>
+                        ";
                     }
                     ?>
+                </div>
+                <div class="button-container">
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
+                        <div class="file-input">
+                            <label for="input-file" class="button">Choose Image</label>
+                            <input type="file" name="profile_image" id="input-file">
+                        </div>
+                        <button type="submit" class="upload-button">Upload</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Chatbot Part Start -->
-    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-    <df-messenger
-      chat-icon="https:&#x2F;&#x2F;assets.stickpng.com&#x2F;images&#x2F;580b57fbd9996e24bc43be12.png"
-      intent="WELCOME"
-      chat-title="Chatbot"
-      agent-id="060d64ba-b3ff-4be9-87c6-88c97d332f18"
-      language-code="en"
-    ></df-messenger>
-    <!-- Chatbot Part End -->
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let profilePic = document.getElementById("profile-pic");
-            let inputfile = document.getElementById("input-file");
-
-            inputfile.onchange = function(){
-                profilePic.src = URL.createObjectURL(inputfile.files[0]);
-            };
-        });
-    </script>
 </body>
 </html>
