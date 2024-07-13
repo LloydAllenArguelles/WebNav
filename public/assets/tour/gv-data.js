@@ -890,6 +890,12 @@ var APP_DATA = {
           "target": "14-gv-3f-rm-310"
         },
         {
+          "yaw": -0.2118961838442851,
+          "pitch": 0.4581103002709408,
+          "rotation": 0,
+          "target": "3-gv-2f-center-stairs"
+        },
+        {
           "yaw": 1.6406488871157734,
           "pitch": 0.43059232538869097,
           "rotation": 0,

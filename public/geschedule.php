@@ -9,8 +9,13 @@
 </head>
 <body>
     <div class="top-ribbon">
-        <div class="ribbon-button-container">
-            <a href="assets/tour/gee-tour.html" class="ribbon-button">360 VIEW</a>
+        <div class="ribbon-button-container dropdown">
+            <span class="ribbon-button ribbon-trigger">360 VIEW</span>
+            <div class="dropdown-content">
+                <a href="assets/tour/gv-tour.html">GV</a>
+                <a href="assets/tour/gca-tour.html">GCA</a>
+                <a href="assets/tour/gee-tour.html">GEE</a>
+            </div>
         </div>
         <div class="ribbon-button-container">
             <a href="forum.php" class="ribbon-button">FORUM</a>

@@ -55,7 +55,8 @@ a, a:hover, a:active, a:visited {
 
 .mobile #titleBar {
   height: 50px;
-  right: 50px;
+  right: 20%;
+  left: 20%;
 }
 
 #titleBar .sceneName {
@@ -64,11 +65,10 @@ a, a:hover, a:active, a:visited {
   line-height: 30px;
   padding: 5px;
   background-color: rgb(58,68,84);
-  background-color: rgba(58,68,84,0.8);
+  background-color: rgba(0,123,255, 0.8);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
   -moz-user-select: text;
   -webkit-user-select: text;
   -ms-user-select: text;
@@ -83,7 +83,7 @@ a, a:hover, a:active, a:visited {
   display: none;
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   width: 40px;
   height: 40px;
   padding: 5px;
@@ -103,7 +103,7 @@ body.fullscreen-enabled #fullscreenToggle {
 #fullscreenToggle .icon {
   position: absolute;
   top: 5px;
-  right: 5px;
+  left: 5px;
   width: 30px;
   height: 30px;
 }
@@ -133,7 +133,7 @@ body.fullscreen-enabled #fullscreenToggle {
   display: block;
   position: absolute;
   top: 0;
-  right: 0;
+  left: 40px;
   width: 40px;
   height: 40px;
   padding: 5px;
@@ -186,8 +186,8 @@ body.fullscreen-enabled.mobile #autorotateToggle {
 
 #sceneListToggle {
   position: absolute;
-  top: 0;
-  left: 0;
+  bottom: 0;
+  left: calc(50% - 25%);
   width: 40px;
   height: 40px;
   padding: 5px;
