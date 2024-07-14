@@ -212,6 +212,14 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   display: none;
 }
 
+.mobile #targetListToggle img {
+  left: 15%;
+}
+
+.mobile #sceneListToggle, .mobile #targetListToggle {
+  left: 15%;
+}
+
 #sceneListToggle, #targetListToggle img{
   position: absolute;
   bottom: 40px;
@@ -227,13 +235,6 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   bottom: 0px;
 }
 
-.mobile #targetListToggle img {
-  bottom: 0px;
-}
-
-.mobile #sceneListToggle, .mobile #targetListToggle {
-  left: 15%;
-}
 
 #sceneListToggle .text, .mobile #targetListToggle .text {
   position: absolute;
@@ -276,8 +277,6 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   overflow-x: hidden;
   overflow-y: auto;
   margin-left: 0;
-  -webkit-transition: margin-bottom 0.5s ease-in-out;
-  transition: margin-bottom 0.5s ease-in-out;
 }
 
 #targetList {
@@ -289,8 +288,6 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   overflow-x: hidden;
   overflow-y: auto;
   margin-left: 0;
-  -webkit-transition: margin-bottom 0.5s ease-in-out;
-  transition: margin-bottom 0.5s ease-in-out;
 }
 
 .mobile #sceneList, .mobile #targetList {

@@ -234,16 +234,6 @@
     targetListToggleElement.classList.add('enabled');
   }
 
-  function showTargetList() {
-    targetListElement.classList.add('enabled');
-    targetListToggleElement.classList.add('enabled');
-  }
-
-  function hideTargetList() {
-    targetListElement.classList.remove('enabled');
-    targetListToggleElement.classList.remove('enabled');
-  }
-
   function toggleTargetList() {
     targetListElement.classList.toggle('enabled');
     targetListToggleElement.classList.toggle('enabled');
