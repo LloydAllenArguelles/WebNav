@@ -16,7 +16,6 @@ require_once 'includes/dbh.inc.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - SCHEDULE</title>
     <link rel="stylesheet" href="schedule.css"> <!-- if ayaw gumana lagay muna sa public yung css idk din y ayaw gumana pag nasa assets e  -->
-    <link rel="stylesheet" href="assets/chatbot.css">
 
 </head>
 <body>

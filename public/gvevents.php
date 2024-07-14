@@ -22,7 +22,6 @@ ob_clean();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - Gusaling Villegas</title>
     <link rel="stylesheet" href="gvevents.css">
-    <link rel="stylesheet" href="assets/chatbot.css">
     <style>
         body {
             background-color: #f8f9fa; 

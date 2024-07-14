@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - Gusaling Villegas</title>
     <link rel="stylesheet" href="gvschedule.css">
-    <link rel="stylesheet" href="assets/chatbot.css">
 </head>
 <body>
     <div class="top-ribbon">

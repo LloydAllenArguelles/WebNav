@@ -14,7 +14,6 @@ if (isset($_SESSION['user_id'])) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>PLM Navigation App - User</title>
         <link rel="stylesheet" href="user.css">
-        <link rel="stylesheet" href="assets/chatbot.css">
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -156,7 +155,6 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - User</title>
     <link rel="stylesheet" href="user.css">
-    <link rel="stylesheet" href="assets/chatbot.css">
     <style>
 
         .user-container {
