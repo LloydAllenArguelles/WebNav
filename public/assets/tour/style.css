@@ -46,16 +46,17 @@ a, a:hover, a:active, a:visited {
 
 #titleBar {
   position: absolute;
-  bottom: 0;
-  left: 25%;
+  bottom: 40px;
+  left: 35%;
   right: 25%;
   height: 40px;
   text-align: center;
+  border-left: 2px solid white;
 }
 
 .mobile #titleBar {
-  right: 20%;
-  left: 20%;
+  right: 0;
+  left: 15%;
 }
 
 #titleBar .sceneName {
@@ -74,8 +75,35 @@ a, a:hover, a:active, a:visited {
   user-select: text;
 }
 
-.mobile #titleBar .sceneName {
-  line-height: 40px;
+#targetBar{
+  position: absolute;
+  bottom: 0;
+  left: 35%;
+  right: 25%;
+  height: 40px;
+  text-align: center;
+  border-left: 2px solid white;
+}
+
+.mobile #targetBar {
+  right: 0;
+  left: 15%;
+}
+
+#targetBar .sceneName {
+  width: 100%;
+  height: 100%;
+  line-height: 30px;
+  padding: 5px;
+  background-color: rgb(58,68,84);
+  background-color: rgba(0,123,255, 0.8);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 #fullscreenToggle {
@@ -143,6 +171,7 @@ body.fullscreen-enabled #fullscreenToggle {
 .mobile #autorotateToggle {
   width: 50px;
   height: 50px;
+  left: 50px;
 }
 
 /* If there is a fullscreen button, autorotate must placed a bit to the left */
@@ -183,10 +212,10 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   display: none;
 }
 
-#sceneListToggle {
+#sceneListToggle, #targetListToggle img{
   position: absolute;
-  top: 0;
-  left: 80px;
+  bottom: 40px;
+  left: 35%;
   width: 40px;
   height: 40px;
   padding: 5px;
@@ -194,12 +223,19 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   background-color: rgba(103,115,131,0.8);
 }
 
-.mobile #sceneListToggle {
-  width: 50px;
-  height: 50px;
+#targetListToggle img {
+  bottom: 0px;
 }
 
-#sceneListToggle .text {
+.mobile #targetListToggle img {
+  bottom: 0px;
+}
+
+.mobile #sceneListToggle, .mobile #targetListToggle img{
+  left: 15%;
+}
+
+#sceneListToggle .text, .mobile #targetListToggle .text {
   position: absolute;
   top: 5px;
   left: 15px;
@@ -207,7 +243,7 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   line-height: 30px;
 }
 
-#sceneListToggle .icon {
+#sceneListToggle .icon, #targetlistToggle .icon {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -215,80 +251,88 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   height: 30px;
 }
 
-.mobile #sceneListToggle .icon {
-  top: 10px;
-  right: 10px;
-}
-
-#sceneListToggle .icon.on {
+#sceneListToggle .icon.on, #targetListToggle .icon.on {
   display: none;
 }
 
-#sceneListToggle .icon.off {
+#sceneListToggle .icon.off, #targetListToggle .icon.off {
   display: block;
 }
 
-#sceneListToggle.enabled .icon.on {
+#sceneListToggle.enabled .icon.on, #targetListToggle.enabled .icon.on {
   display: block;
 }
 
-#sceneListToggle.enabled .icon.off {
+#sceneListToggle.enabled .icon.off, #targetListToggle.enabled .icon.off {
   display: none;
 }
 
 #sceneList {
   position: absolute;
-  top: 0;
-  left: -220px;
-  padding-top: 40px;
-  width: 220px;
-  max-height: 100%;
+  bottom: 80px;
+  left: 35%;
+  right: 25%;
+  max-height: 80%;
   overflow-x: hidden;
   overflow-y: auto;
   margin-left: 0;
-  -webkit-transition: margin-left 0.5s ease-in-out;
-  transition: margin-left 0.5s ease-in-out;
+  -webkit-transition: margin-bottom 0.5s ease-in-out;
+  transition: margin-bottom 0.5s ease-in-out;
 }
 
-.mobile #sceneList {
-  padding-top: 50px;
+#targetList {
+  position: absolute;
+  bottom: 80px;
+  left: 35%;
+  right: 25%;
+  max-height: 80%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin-left: 0;
+  -webkit-transition: margin-bottom 0.5s ease-in-out;
+  transition: margin-bottom 0.5s ease-in-out;
 }
 
-#sceneList .scenes {
+.mobile #sceneList, .mobile #targetList {
+  right: 0;
+  left: 15%;
+}
+
+#sceneList .scenes, #targetList .targets {
   width: 100%;
   background-color: rgb(58,68,84);
   background-color: rgba(58,68,84,0.8);
 }
 
-.mobile #sceneList {
-  width: 100%;
+.mobile #sceneList, .mobile #targetList {
   height: 100%;
-  left: -100%;
+  background-color: rgb(58,68,84);
+  background-color: rgba(58,68,84,0.8);
 }
 
-.mobile #sceneList.enabled {
-  margin-left: 100%;
+.mobile #sceneList.enabled, .mobile #targetList.enabled {
+  margin-bottom: -2200px;
 }
 
-.mobile #sceneList .scenes {
+.mobile #sceneList .scenes, .mobile #targetList .targets {
   height: 100%;
 }
 
-#sceneList.enabled {
-  margin-left: 220px;
+#sceneList.enabled, #targetList.enabled {
+  margin-bottom: -2200px;
 }
 
-#sceneList .scene {
+#sceneList .scene, #targetList .target {
   display: block;
   width: 100%;
   height: 30px;
 }
 
-.mobile #sceneList .scene {
+.mobile #sceneList .scene, .mobile #targetList .target {
   height: 40px;
 }
 
-#sceneList .scene .text {
+#sceneList .scene .text, #targetList .target .text {
   width: 100%;
   height: 100%;
   padding: 0 15px;
@@ -298,16 +342,16 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   white-space: nowrap;
 }
 
-.mobile #sceneList .scene .text {
+.mobile #sceneList .scene .text, .mobile #targetList .target .text {
   line-height: 40px;
 }
 
-.no-touch #sceneList .scene:hover {
+.no-touch #sceneList .scene:hover, .no-touch #targetList .target:hover {
   background-color: rgb(103,115,131);
   background-color: rgba(103,115,131,0.8);
 }
 
-#sceneList .scene.current {
+#sceneList .scene.current, #targetList .target.current {
   background-color: rgb(103,115,131);
   background-color: rgba(103,115,131,0.8);
 }
@@ -810,4 +854,33 @@ body.view-control-buttons .viewControlButton {
 }
 .viewControlButton-6 {
   margin-left: 105px;
+}
+
+.fromto {
+  position: absolute;
+  left: 25%;
+  right: 65%;
+  height: 40px;
+  text-align: center;
+}
+
+.mobile .fromto {
+  right: 85%;
+  left: 0;
+}
+
+.fromto h1 {
+  width: 100%;
+  height: 100%;
+  line-height: 30px;
+  padding: 5px;
+  background-color: rgb(58,68,84);
+  background-color: rgba(0,123,255, 0.8);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  -moz-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
