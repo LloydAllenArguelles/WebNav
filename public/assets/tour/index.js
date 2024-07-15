@@ -31,7 +31,11 @@
   var targetListToggleElement = document.querySelector('#targetListToggle');
   var autorotateToggleElement = document.querySelector('#autorotateToggle');
   var fullscreenToggleElement = document.querySelector('#fullscreenToggle');
-
+  const targets = document.querySelectorAll('a.target');
+  const targetNameElement = document.querySelector('.targetName');
+  let currentTarget = null;
+  let currentScene = null;
+  
   // Detect desktop or mobile mode.
   if (window.matchMedia) {
     var setMode = function() {
@@ -155,6 +159,21 @@
   if (!document.body.classList.contains('mobile')) {
     showSceneList();
   }
+  
+  const updateTargetName = (target) => {
+    const targetText = target.querySelector('.text').textContent;
+    targetNameElement.textContent = targetText;
+    currentTarget = target.getAttribute('data-id');
+    console.log(currentTarget)
+  };
+
+  // Handle target selection
+  var targetListElement = document.querySelector('#targetList');
+  targetListElement.addEventListener('click', function(event) {
+    if (event.target && event.target.matches('a.target')) {
+      updateTargetText(event.target.innerText);
+    }
+  });
 
   // Set handler for scene switch.
   scenes.forEach(function(scene) {
@@ -165,6 +184,13 @@
       if (document.body.classList.contains('mobile')) {
         hideSceneList();
       }
+    });
+  });
+
+  // Add event listeners to each target
+  targets.forEach(target => {
+    target.addEventListener('click', () => {
+      updateTargetName(target);
     });
   });
 
@@ -200,6 +226,7 @@
     startAutorotate();
     updateSceneName(scene);
     updateSceneList(scene);
+    console.log(scene.data.id);
   }
 
   function updateSceneName(scene) {
@@ -270,6 +297,8 @@
     var wrapper = document.createElement('div');
     wrapper.classList.add('hotspot');
     wrapper.classList.add('link-hotspot');
+    wrapper.setAttribute('data-target', hotspot.target);
+    wrapper.classList.add('visited');
 
     // Create image element.
     var icon = document.createElement('img');
@@ -285,6 +314,18 @@
 
     // Add click event handler.
     wrapper.addEventListener('click', function() {
+      wrapper.classList.add('visited');
+      var nextScene = findSceneById(hotspot.target);
+  
+      // Find the corresponding hotspot in the next scene.
+      nextScene.data.linkHotspots.forEach(function(nextHotspot) {
+        if (nextHotspot.target === hotspot.target) {
+          var nextWrapper = document.querySelector(`.hotspot[data-target="${nextHotspot.target}"]`);
+          if (nextWrapper) {
+            nextWrapper.classList.add('visited');
+          }
+        }
+      });
       switchScene(findSceneById(hotspot.target));
     });
 
@@ -382,6 +423,7 @@
     var wrapper = document.createElement('div');
     wrapper.classList.add('hotspot');
     wrapper.classList.add('link-hotspot');
+    wrapper.classList.add('visited');
   
     // Create image element.
     var icon = document.createElement('img');
@@ -444,8 +486,10 @@
     }
     return null;
   }
+  
 
   // Display the initial scene.
   switchScene(scenes[0]);
 
 })();
+

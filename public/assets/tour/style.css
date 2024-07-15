@@ -881,3 +881,7 @@ body.view-control-buttons .viewControlButton {
   -ms-user-select: text;
   user-select: text;
 }
+
+.visited {
+  border:red solid 5px;
+}
