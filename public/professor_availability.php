@@ -27,7 +27,7 @@ try {
     $professors = [];
     if ($selectedDepartment) {
         $stmt = $pdo->prepare("
-            SELECT u.username, pa.availability
+            SELECT u.full_name, pa.availability
             FROM professor_availability pa
             JOIN users u ON pa.user_id = u.user_id
             WHERE u.role = 'professor' AND u.department = :department
@@ -49,7 +49,6 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - Professor Availability</title>
     <style>
-        
         table {
             width: 100%;
             border-collapse: collapse;
@@ -147,7 +146,7 @@ try {
                         <tbody>
                             <?php foreach ($professors as $professor): ?>
                                 <tr>
-                                    <td><?php echo htmlspecialchars($professor['username']); ?></td>
+                                    <td><?php echo htmlspecialchars($professor['full_name']); ?></td>
                                     <td><?php echo htmlspecialchars($professor['availability']); ?></td>
                                 </tr>
                             <?php endforeach; ?>

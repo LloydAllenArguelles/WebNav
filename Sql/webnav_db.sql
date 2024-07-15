@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 13, 2024 at 08:25 AM
+-- Generation Time: Jul 15, 2024 at 05:46 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,15 +41,9 @@ CREATE TABLE `chat_history` (
 --
 
 INSERT INTO `chat_history` (`id`, `room_id`, `user_id`, `username`, `message`, `timestamp`) VALUES
-(1, NULL, NULL, NULL, 'test 01', '2024-07-01 16:10:16'),
-(2, NULL, NULL, NULL, 'Test 11', '2024-07-06 02:34:42'),
-(3, NULL, NULL, NULL, 'test 18', '2024-07-06 12:08:50'),
-(6, NULL, 1, 'Juan', 'try', '2024-07-08 15:47:16'),
-(7, NULL, 1, 'Juan', 'behold', '2024-07-08 15:49:26'),
-(8, NULL, 1, 'Juan', 'godzilla', '2024-07-08 15:50:36'),
 (9, 13, 1, 'Juan', 'whahaha I have the key', '2024-07-08 16:04:37'),
 (11, 13, 2, 'Pedro', 'Can I use the room 301', '2024-07-10 03:02:27'),
-(12, 13, 3, 'Maria', 'Sure what time? Hindi namin gagamitin on our schedule every monday.', '2024-07-10 03:44:13');
+(14, 13, 3, 'Maria', 'Sure what time? Hindi namin gagamitin on our schedule every monday.', '2024-07-15 15:33:14');
 
 -- --------------------------------------------------------
 
@@ -2465,6 +2459,7 @@ INSERT INTO `schedules` (`schedule_id`, `room_id`, `day_of_week`, `start_time`, 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
+  `full_name` varchar(100) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `password_hash` varchar(255) NOT NULL,
   `student_num` int(11) DEFAULT NULL,
@@ -2481,39 +2476,39 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `email`, `password_hash`, `student_num`, `program`, `year_level`, `student_status`, `status`, `department`, `role`, `profile_image`) VALUES
-(1, 'Juan', 'jfdelacruz2021@plm.edu.ph', 'hashed_password_1', 202101099, 'BS IT', '4th', 'Regular', NULL, NULL, 'student', 'assets/front/pic.jpg'),
-(2, 'Pedro', 'prdelacruz2021@plm.edu.ph', 'hashed_password_2', 202101091, 'BS IT', '4th', 'Regular', NULL, NULL, 'student', 'assets/front/pic.jpg'),
-(3, 'Maria', 'mddelacruz@plm.edu.ph', 'hashed_password_3', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', './uploads/profile_pictures/3.jpg'),
-(4, 'John', 'jsmith@plm.edu.ph', 'hashed_password_4', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
-(5, 'Michael', 'mgomez@plm.edu.ph', 'hashed_password_5', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
-(6, 'Peter', 'psantos@plm.edu.ph', 'hashed_password_6', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
-(7, 'Robert', 'rreyes@plm.edu.ph', 'hashed_password_7', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
-(8, 'Richard', 'rgonzales@plm.edu.ph', 'hashed_password_8', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
-(9, 'Matthew', 'mfernandez@plm.edu.ph', 'hashed_password_9', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
-(10, 'James', 'jtorres@plm.edu.ph', 'hashed_password_10', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
-(11, 'Luke', 'lramirez@plm.edu.ph', 'hashed_password_11', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
-(12, 'Ryan', 'rrivera@plm.edu.ph', 'hashed_password_12', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
-(13, 'David', 'ddelacruz@plm.edu.ph', 'hashed_password_13', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
-(14, 'Daniel', 'dsantiago@plm.edu.ph', 'hashed_password_14', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
-(15, 'Edward', 'emorales@plm.edu.ph', 'hashed_password_15', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
-(16, 'Samuel', 'sfernandez@plm.edu.ph', 'hashed_password_16', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
-(17, 'Andrew', 'acastro@plm.edu.ph', 'hashed_password_17', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
-(18, 'Benjamin', 'blopez@plm.edu.ph', 'hashed_password_18', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
-(19, 'Gabriel', 'gmedina@plm.edu.ph', 'hashed_password_19', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
-(20, 'Henry', 'hherrera@plm.edu.ph', 'hashed_password_20', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
-(21, 'Isaac', 'iisrael@plm.edu.ph', 'hashed_password_21', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
-(22, 'Joseo', 'jsantos@plm.edu.ph', 'hashed_password_22', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
-(23, 'Kevin', 'kcruz@plm.edu.ph', 'hashed_password_23', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
-(24, 'Lawrence', 'lreyes@plm.edu.ph', 'hashed_password_24', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
-(25, 'Micho', 'mgonzales@plm.edu.ph', 'hashed_password_25', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
-(26, 'Nathan', 'ntorres@plm.edu.ph', 'hashed_password_26', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
-(27, 'Oliver', 'ocastro@plm.edu.ph', 'hashed_password_27', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
-(28, 'Jarn', 'jsalongga@plm.edu.ph', 'hashed_password_28', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
-(29, 'Quentin', 'qdelacruz@plm.edu.ph', 'hashed_password_29', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
-(30, 'Raymond', 'rsantiago@plm.edu.ph', 'hashed_password_30', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
-(31, 'Simon', 'ssimon@plm.edu.ph', 'hashed_password_31', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
-(32, 'Thomas', 'tthomas@plm.edu.ph', 'hashed_password_32', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg');
+INSERT INTO `users` (`user_id`, `username`, `full_name`, `email`, `password_hash`, `student_num`, `program`, `year_level`, `student_status`, `status`, `department`, `role`, `profile_image`) VALUES
+(1, 'Juan', 'Juan dela Cruz', 'jfdelacruz2021@plm.edu.ph', 'hashed_password_1', 202101099, 'BS IT', '4th', 'Regular', NULL, NULL, 'student', 'assets/front/pic.jpg'),
+(2, 'Pedro', 'Pedro dela Cruz', 'prdelacruz2021@plm.edu.ph', 'hashed_password_2', 202101091, 'BS IT', '4th', 'Regular', NULL, NULL, 'student', 'assets/front/pic.jpg'),
+(3, 'Maria', 'Maria dela Cruz', 'mddelacruz@plm.edu.ph', 'hashed_password_3', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', './uploads/profile_pictures/3.jpg'),
+(4, 'John', 'John Smith', 'jsmith@plm.edu.ph', 'hashed_password_4', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
+(5, 'Michael', 'Michael Gomez', 'mgomez@plm.edu.ph', 'hashed_password_5', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
+(6, 'Peter', 'Peter Santos', 'psantos@plm.edu.ph', 'hashed_password_6', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
+(7, 'Robert', 'Robert Reyes', 'rreyes@plm.edu.ph', 'hashed_password_7', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
+(8, 'Richard', 'Richard Gonzales', 'rgonzales@plm.edu.ph', 'hashed_password_8', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
+(9, 'Matthew', 'Matthew Fernandez', 'mfernandez@plm.edu.ph', 'hashed_password_9', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
+(10, 'James', 'James Torres', 'jtorres@plm.edu.ph', 'hashed_password_10', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
+(11, 'Luke', 'Luke Ramirez', 'lramirez@plm.edu.ph', 'hashed_password_11', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
+(12, 'Ryan', 'Ryan Rivera', 'rrivera@plm.edu.ph', 'hashed_password_12', NULL, NULL, NULL, NULL, 'active', 'CET', 'professor', 'assets/front/pic.jpg'),
+(13, 'David', 'David dela Cruz', 'ddelacruz@plm.edu.ph', 'hashed_password_13', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
+(14, 'Daniel', 'Daniel Santiago', 'dsantiago@plm.edu.ph', 'hashed_password_14', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
+(15, 'Edward', 'Edward Morales', 'emorales@plm.edu.ph', 'hashed_password_15', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
+(16, 'Samuel', 'Samuel Fernandez', 'sfernandez@plm.edu.ph', 'hashed_password_16', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
+(17, 'Andrew', 'Andrew Castro', 'acastro@plm.edu.ph', 'hashed_password_17', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
+(18, 'Benjamin', 'Benjamin Lopez', 'blopez@plm.edu.ph', 'hashed_password_18', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
+(19, 'Gabriel', 'Gabriel Medina', 'gmedina@plm.edu.ph', 'hashed_password_19', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
+(20, 'Henry', 'Henry Herrera', 'hherrera@plm.edu.ph', 'hashed_password_20', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
+(21, 'Isaac', 'Isaac Israel', 'iisrael@plm.edu.ph', 'hashed_password_21', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
+(22, 'Joseo', 'Joseo Santos', 'jsantos@plm.edu.ph', 'hashed_password_22', NULL, NULL, NULL, NULL, 'active', 'CAE', 'professor', 'assets/front/pic.jpg'),
+(23, 'Kevin', 'Kevin Cruz', 'kcruz@plm.edu.ph', 'hashed_password_23', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
+(24, 'Lawrence', 'Lawrence Reyes', 'lreyes@plm.edu.ph', 'hashed_password_24', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
+(25, 'Micho', 'Micho Gonzales', 'mgonzales@plm.edu.ph', 'hashed_password_25', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
+(26, 'Nathan', 'Nathan Torres', 'ntorres@plm.edu.ph', 'hashed_password_26', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
+(27, 'Oliver', 'Oliver Castro', 'ocastro@plm.edu.ph', 'hashed_password_27', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
+(28, 'Jarn', 'Jarn Salongga', 'jsalongga@plm.edu.ph', 'hashed_password_28', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
+(29, 'Quentin', 'Quentin dela Cruz', 'qdelacruz@plm.edu.ph', 'hashed_password_29', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
+(30, 'Raymond', 'Raymond Santiago', 'rsantiago@plm.edu.ph', 'hashed_password_30', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
+(31, 'Simon', 'Simon Simon', 'ssimon@plm.edu.ph', 'hashed_password_31', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg'),
+(32, 'Thomas', 'Thomas Thomas', 'tthomas@plm.edu.ph', 'hashed_password_32', NULL, NULL, NULL, NULL, 'active', 'CPT', 'professor', 'assets/front/pic.jpg');
 
 --
 -- Indexes for dumped tables
@@ -2573,7 +2568,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `chat_history`
 --
 ALTER TABLE `chat_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `events`
