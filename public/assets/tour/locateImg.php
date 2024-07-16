@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json'); // Ensure the response is JSON
-$directory = 'panoramas/';
+$directory = 'tiles/panoramas/';
 $images = glob($directory . '*.{jpg,jpeg,png,gif}', GLOB_BRACE);
 
 if ($images === false) {

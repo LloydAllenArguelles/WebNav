@@ -58,12 +58,16 @@ async function main() {
   const matchedImage = document.getElementById('matched-image');
   const imageName = document.getElementById('image-name');
   const detectButton = document.getElementById('detect-button');
+  const locateNameElement = document.querySelector('#locateBar .locateName');
+  
+  console.log("Initializing!");
 
   video.addEventListener('play', async () => {
     while (true) {
       const cameraFrame = tf.tidy(() => {
         return tf.browser.fromPixels(video).toFloat().expandDims(0);
       });
+      console.log("Taken!");
 
       let minDistance = Infinity;
       let bestMatch = null;
@@ -73,14 +77,14 @@ async function main() {
         if (distance < minDistance) {
           minDistance = distance;
           bestMatch = path;
-        }
+        } 
       }
 
       if (bestMatch) {
         matchedImage.src = bestMatch;
         imageName.textContent = `Matched: ${bestMatch}`;
         resultDiv.style.display = 'block';
-      }
+      } 
 
       tf.dispose(cameraFrame);
       await tf.nextFrame();
@@ -100,6 +104,7 @@ async function main() {
       if (distance < minDistance) {
         minDistance = distance;
         bestMatch = path;
+        console.log("Fail!")
       }
     }
 
@@ -107,6 +112,8 @@ async function main() {
       matchedImage.src = bestMatch;
       imageName.textContent = `Matched: ${bestMatch}`;
       resultDiv.style.display = 'block';
+      locateNameElement.textContent = `Matched: ${bestMatch}`; // Update the locateName element
+      console.log("Success!")
     }
 
     tf.dispose(cameraFrame);

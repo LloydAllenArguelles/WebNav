@@ -11,7 +11,7 @@
 
 </head>
 
-<body class="multiple-scenes">
+<body>
   <div style="position: absolute; width: 100%; height: 100%;">
   <div class="top-ribbon">
     <div class="ribbon-button-container dropdown">
@@ -47,64 +47,12 @@
   <img id="matched-image" src="" alt="Matched Image">
 </div>
 
-<div id="titleBar">
+<div id="locateBar">
   <div>
-    <h1 class="sceneName">BLANK</h1>
+    <h1 class="locateName">BLANK</h1>
   </div>
 </div>
 
-<div id="targetBar">
-  <div>
-    <h1 class="targetName">Press the button on the left.</h1>
-  </div>
-</div>
-
-<div class="fromto" style="bottom:40px">
-  <h1>Current: </h1>
-</div>
-
-<div class="fromto" style="bottom:0">
-  <h1>Go to: </h1>
-</div>
-
-<a href="javascript:void(0)" id="autorotateToggle">
-  <img class="icon off" src="img/play.png">
-  <img class="icon on" src="img/pause.png">
-</a>
-
-<a href="javascript:void(0)" id="fullscreenToggle">
-  <img class="icon off" src="img/fullscreen.png">
-  <img class="icon on" src="img/windowed.png">
-</a>
-
-<a href="javascript:void(0)" id="sceneListToggle">
-  <img class="icon off" src="img/up.png">
-  <img class="icon on" src="img/down.png">
-</a>
-
-<a href="javascript:void(0)" id="targetListToggle">
-  <img class="icon off" src="img/up.png">
-  <img class="icon on" src="img/down.png">
-</a>
-
-<a href="javascript:void(0)" id="viewUp" class="viewControlButton viewControlButton-1">
-  <img class="icon" src="img/up.png">
-</a>
-<a href="javascript:void(0)" id="viewDown" class="viewControlButton viewControlButton-2">
-  <img class="icon" src="img/down.png">
-</a>
-<a href="javascript:void(0)" id="viewLeft" class="viewControlButton viewControlButton-3">
-  <img class="icon" src="img/left.png">
-</a>
-<a href="javascript:void(0)" id="viewRight" class="viewControlButton viewControlButton-4">
-  <img class="icon" src="img/right.png">
-</a>
-<a href="javascript:void(0)" id="viewIn" class="viewControlButton viewControlButton-5">
-  <img class="icon" src="img/plus.png">
-</a>
-<a href="javascript:void(0)" id="viewOut" class="viewControlButton viewControlButton-6">
-  <img class="icon" src="img/minus.png">
-</a>
 </div>
 <div style="position: relative; width: 100%; height: 100%; background-color: #007bff;"></div>
 </div>
@@ -127,8 +75,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
 
 <script defer src="locator.js"></script>
-<script src="gee-data.js"></script>
-<script src="index.js"></script>
 
 </body>
 </html>
