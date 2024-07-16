@@ -90,6 +90,11 @@ body {
     align-self: flex-start;
 }
 
+.professor {
+    background-color: violet;
+    color: white; 
+}
+
 .input-container {
     display: flex;
     width: 100%;
