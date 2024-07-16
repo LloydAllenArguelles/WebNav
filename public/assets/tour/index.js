@@ -179,23 +179,33 @@
     }
   
     console.log('Shortest path:', path);
+
+    
   
     // Remove 'visited' class from previously visited path
     previousPath.forEach(sceneId => {
       const sceneElement = document.querySelector(`#sceneList .scene[data-id="${sceneId}"]`);
-      if (sceneElement) {
-        sceneElement.classList.remove('visited');
-      }
+    });
+
+    document.querySelectorAll('.pathing').forEach(element => {
+      element.classList.remove('pathing');
     });
   
-    // Switch to the scenes along the new path and add 'visited' class
+    // Switch to the scenes along the new path and add 'visited' class    
     path.forEach(sceneId => {
-      const sceneElement = document.querySelector(`#sceneList .scene[data-id="${sceneId}"]`);
-      if (sceneElement) {
-        sceneElement.classList.add('visited');
-        console.log("WOAH: " + sceneId);
-        console.log("sceneElement"+sceneElement);
-      }
+        const sceneElement = document.querySelector(`#sceneList .scene[data-id="${sceneId}"]`);
+        if (sceneElement) {
+
+            // Find elements within #pano with the class "hotspot link-hotspot"
+            const hotspotElements = document.querySelectorAll('#pano .hotspot.link-hotspot');
+
+            // Apply 'visited' class to matching elements
+            hotspotElements.forEach(element => {
+                if (element.getAttribute('data-target') === sceneId) {
+                    element.classList.add('pathing');
+                }
+            });
+        }
     });
   
     // Update the previously visited path
@@ -351,10 +361,8 @@
 
     // Add click event handler.
     wrapper.addEventListener('click', function() {
-      wrapper.classList.add('visited');
       var nextScene = findSceneById(hotspot.target);
       console.log("THIS IS WORK");
-  
   
       // Find the corresponding hotspot in the next scene.
       nextScene.data.linkHotspots.forEach(function(nextHotspot) {
@@ -365,6 +373,7 @@
           }
         }
       });
+
       switchScene(findSceneById(hotspot.target));
     });
 

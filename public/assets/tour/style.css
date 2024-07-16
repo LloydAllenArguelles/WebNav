@@ -295,15 +295,21 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   left: 15%;
 }
 
-#sceneList .scenes, #targetList .targets {
+#sceneList .scenes {
   width: 100%;
   background-color: rgb(58,68,84);
   background-color: rgba(58,68,84,0.8);
 }
 
+#targetList .targets {
+  width: 100%;
+  background-color: rgb(50, 104, 82);
+  background-color: rgba(50, 104, 82, 0.8);
+}
+
 .mobile #sceneList, .mobile #targetList {
   height: 100%;
-  background-color: rgb(58,68,84);
+  background-color: rgb(86, 92, 102);
   background-color: rgba(58,68,84,0.8);
 }
 
@@ -882,6 +888,12 @@ body.view-control-buttons .viewControlButton {
   user-select: text;
 }
 
+.pathing {
+  border:rgb(24, 249, 24) solid 5px;
+  border-radius:50%
+}
+
 .visited {
   border:red solid 5px;
+  border-radius:50%
 }
