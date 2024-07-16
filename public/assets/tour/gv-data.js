@@ -31,14 +31,12 @@ var APP_DATA = {
           "pitch": 0.34343586268595594,
           "rotation": 0,
           "target": "60-gv-1f-ogts",
-          "distance": 1
         },        
         {
           "yaw": 1.979967238994687,
           "pitch": -0.24343586268595594,
           "rotation": 0,
           "target": "9-gv-2f-rm-205",
-          "distance": 1
         }
       ],
       "infoHotspots": [
@@ -55,14 +53,14 @@ var APP_DATA = {
           "pitch": 0.2509860368950285,
           "rotation": 0,
           "page": "gee-tour.html",
-          "distance": 1
+          "pageText": "Gusaling Ejercito Estrada"
         },
         {
           "yaw": 3.179967238994687,
           "pitch": 0.04343586268595594,
           "rotation": 0,
           "page": "gca-tour.html",
-          "distance": 1
+          "pageText": "Gusaling Corazon Aquino"
         }
       ]
     },
@@ -121,7 +119,7 @@ var APP_DATA = {
           "yaw": -1.2388209975730682,
           "pitch": -0.02187855652536186,
           "title": "GV 2F RM 205",
-          "text": "Schedule:<div><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
+          "text": "Schedule:<div class><br></div><div>THIS IS THIS&nbsp;</div><div>THAT IS THAT</div>"
         },
         {
           "yaw": 1.1731229576900493,

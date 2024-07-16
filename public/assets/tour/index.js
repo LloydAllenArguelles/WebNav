@@ -495,7 +495,8 @@
     // Create tooltip element.
     var tooltip = document.createElement('div');
     tooltip.classList.add('hotspot-tooltip');
-    tooltip.classList.add('page-hotspot-tooltip');
+    tooltip.classList.add('link-hotspot-tooltip');
+    tooltip.innerHTML = hotspot.pageText;
   
     wrapper.appendChild(icon);
     wrapper.appendChild(tooltip);
