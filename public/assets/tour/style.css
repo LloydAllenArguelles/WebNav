@@ -903,3 +903,52 @@ body.view-control-buttons .viewControlButton {
   border:red solid 5px;
   border-radius:50%
 }
+
+#result {
+  position: absolute;
+  border: 5px solid blue;
+  display: none;
+  margin-top: 20px;
+  text-align: center;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+
+}
+#result img {
+  width: 200px;
+  height: 200px;;
+}
+
+#camera{
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+
+#detect-button {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 1000;
+  height: 80px;
+  width: 80px;
+  padding:-50px;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+#detect-button.hover {
+  background-color: #293472;
+}
+
+#detect-button img {
+  width: 90px;
+  height: 90px;
+}
