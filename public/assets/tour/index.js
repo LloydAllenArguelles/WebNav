@@ -16,6 +16,7 @@
 'use strict';
 
 (function() {
+  
   var Marzipano = window.Marzipano;
   var bowser = window.bowser;
   var screenfull = window.screenfull;
@@ -33,7 +34,7 @@
   var fullscreenToggleElement = document.querySelector('#fullscreenToggle');
   const targets = document.querySelectorAll('a.target');
   const targetNameElement = document.querySelector('.targetName');
-  let currentTarget = null;
+  let currentTarget = "61-gv-1f-office";
   let currentScene = null;
   
   // Detect desktop or mobile mode.
@@ -159,12 +160,46 @@
   if (!document.body.classList.contains('mobile')) {
     showSceneList();
   }
-  
+
+  let previousPath = [];
+
   const updateTargetName = (target) => {
     const targetText = target.querySelector('.text').textContent;
     targetNameElement.textContent = targetText;
     currentTarget = target.getAttribute('data-id');
-    console.log(currentTarget)
+    console.log(currentTarget);
+  
+    const { distances, prevNodes } = dijkstra(graph, currentScene);
+    const path = [];
+    let node = currentTarget;
+  
+    while (node) {
+      path.unshift(node);
+      node = prevNodes[node];
+    }
+  
+    console.log('Shortest path:', path);
+  
+    // Remove 'visited' class from previously visited path
+    previousPath.forEach(sceneId => {
+      const sceneElement = document.querySelector(`#sceneList .scene[data-id="${sceneId}"]`);
+      if (sceneElement) {
+        sceneElement.classList.remove('visited');
+      }
+    });
+  
+    // Switch to the scenes along the new path and add 'visited' class
+    path.forEach(sceneId => {
+      const sceneElement = document.querySelector(`#sceneList .scene[data-id="${sceneId}"]`);
+      if (sceneElement) {
+        sceneElement.classList.add('visited');
+        console.log("WOAH: " + sceneId);
+        console.log("sceneElement"+sceneElement);
+      }
+    });
+  
+    // Update the previously visited path
+    previousPath = path;
   };
 
   // Handle target selection
@@ -227,6 +262,7 @@
     updateSceneName(scene);
     updateSceneList(scene);
     console.log(scene.data.id);
+    currentScene = scene.data.id;
   }
 
   function updateSceneName(scene) {
@@ -259,6 +295,8 @@
     sceneListToggleElement.classList.toggle('enabled');
     targetListElement.classList.add('enabled');
     targetListToggleElement.classList.add('enabled');
+    console.log(currentTarget);
+    console.log(currentScene);
   }
 
   function toggleTargetList() {
@@ -298,7 +336,6 @@
     wrapper.classList.add('hotspot');
     wrapper.classList.add('link-hotspot');
     wrapper.setAttribute('data-target', hotspot.target);
-    wrapper.classList.add('visited');
 
     // Create image element.
     var icon = document.createElement('img');
@@ -316,6 +353,8 @@
     wrapper.addEventListener('click', function() {
       wrapper.classList.add('visited');
       var nextScene = findSceneById(hotspot.target);
+      console.log("THIS IS WORK");
+  
   
       // Find the corresponding hotspot in the next scene.
       nextScene.data.linkHotspots.forEach(function(nextHotspot) {
@@ -485,11 +524,126 @@
       }
     }
     return null;
+  }  
+  function buildGraph(data) {
+    const graph = {};
+  
+    data.scenes.forEach(scene => {
+      graph[scene.id] = [];
+  
+      scene.linkHotspots.forEach(hotspot => {
+        graph[scene.id].push({ target: hotspot.target, cost: 1 }); // Assuming cost is 1 for each link
+      });
+    });
+  
+    return graph;
   }
   
-
+  const graph = buildGraph(APP_DATA);
+  function dijkstra(graph, startNode) {
+    const distances = {};
+    const prevNodes = {};
+    const pq = new PriorityQueue((a, b) => distances[a] < distances[b]);
+  
+    Object.keys(graph).forEach(node => {
+      distances[node] = Infinity;
+      prevNodes[node] = null;
+    });
+  
+    distances[startNode] = 0;
+    pq.enqueue(startNode);
+  
+    while (!pq.isEmpty()) {
+      const currentNode = pq.dequeue();
+      const currentDist = distances[currentNode];
+  
+      graph[currentNode].forEach(neighbor => {
+        const distance = currentDist + neighbor.cost;
+  
+        if (distance < distances[neighbor.target]) {
+          distances[neighbor.target] = distance;
+          prevNodes[neighbor.target] = currentNode;
+          pq.enqueue(neighbor.target);
+        }
+      });
+    }
+  
+    return { distances, prevNodes };
+  }
+  
+  class PriorityQueue {
+    constructor(comparator = (a, b) => a > b) {
+      this._heap = [];
+      this._comparator = comparator;
+    }
+  
+    size() {
+      return this._heap.length;
+    }
+  
+    isEmpty() {
+      return this.size() === 0;
+    }
+  
+    peek() {
+      return this._heap[0];
+    }
+  
+    enqueue(value) {
+      this._heap.push(value);
+      this._siftUp();
+    }
+  
+    dequeue() {
+      const poppedValue = this.peek();
+      const bottom = this.size() - 1;
+      if (bottom > 0) {
+        this._swap(0, bottom);
+      }
+      this._heap.pop();
+      this._siftDown();
+      return poppedValue;
+    }
+  
+    _siftUp() {
+      let node = this.size() - 1;
+      while (node > 0 && this._comparator(this._heap[node], this._heap[this._parent(node)])) {
+        this._swap(node, this._parent(node));
+        node = this._parent(node);
+      }
+    }
+  
+    _siftDown() {
+      let node = 0;
+      while (
+        (this._left(node) < this.size() && this._comparator(this._heap[this._left(node)], this._heap[node])) ||
+        (this._right(node) < this.size() && this._comparator(this._heap[this._right(node)], this._heap[node]))
+      ) {
+        let maxChild = (this._right(node) < this.size() && this._comparator(this._heap[this._right(node)], this._heap[this._left(node)])) ?
+          this._right(node) : this._left(node);
+        this._swap(node, maxChild);
+        node = maxChild;
+      }
+    }
+  
+    _parent(i) {
+      return ((i + 1) >> 1) - 1;
+    }
+  
+    _left(i) {
+      return (i << 1) + 1;
+    }
+  
+    _right(i) {
+      return (i + 1) << 1;
+    }
+  
+    _swap(i, j) {
+      [this._heap[i], this._heap[j]] = [this._heap[j], this._heap[i]];
+    }
+  }
+  
   // Display the initial scene.
   switchScene(scenes[0]);
-
 })();
 

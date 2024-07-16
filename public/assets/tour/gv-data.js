@@ -30,13 +30,15 @@ var APP_DATA = {
           "yaw": 3.079967238994687,
           "pitch": 0.34343586268595594,
           "rotation": 0,
-          "target": "60-gv-1f-ogts"
+          "target": "60-gv-1f-ogts",
+          "distance": 1
         },        
         {
           "yaw": 1.979967238994687,
           "pitch": -0.24343586268595594,
           "rotation": 0,
-          "target": "9-gv-2f-rm-205"
+          "target": "9-gv-2f-rm-205",
+          "distance": 1
         }
       ],
       "infoHotspots": [
@@ -52,13 +54,15 @@ var APP_DATA = {
           "yaw": -0.061004001613394365,
           "pitch": 0.2509860368950285,
           "rotation": 0,
-          "page": "gee-tour.html"
+          "page": "gee-tour.html",
+          "distance": 1
         },
         {
           "yaw": 3.179967238994687,
           "pitch": 0.04343586268595594,
           "rotation": 0,
-          "page": "gca-tour.html"
+          "page": "gca-tour.html",
+          "distance": 1
         }
       ]
     },
