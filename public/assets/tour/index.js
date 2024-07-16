@@ -160,14 +160,24 @@
   if (!document.body.classList.contains('mobile')) {
     showSceneList();
   }
-
+  
   let previousPath = [];
 
   const updateTargetName = (target) => {
     const targetText = target.querySelector('.text').textContent;
     targetNameElement.textContent = targetText;
     currentTarget = target.getAttribute('data-id');
-    console.log(currentTarget);
+    
+    document.querySelectorAll('.link-hotspot').forEach(element => {
+      element.classList.remove('pathing');
+      element.classList.remove('visited');
+    });
+
+    // Remove 'current' class from previously selected target
+    document.querySelectorAll('.target').forEach(t => t.classList.remove('current'));
+  
+    // Add 'current' class to the currently selected target
+    target.classList.add('current');
   
     const { distances, prevNodes } = dijkstra(graph, currentScene);
     const path = [];
@@ -179,16 +189,10 @@
     }
   
     console.log('Shortest path:', path);
-
-    
   
     // Remove 'visited' class from previously visited path
     previousPath.forEach(sceneId => {
       const sceneElement = document.querySelector(`#sceneList .scene[data-id="${sceneId}"]`);
-    });
-
-    document.querySelectorAll('.pathing').forEach(element => {
-      element.classList.remove('pathing');
     });
   
     // Switch to the scenes along the new path and add 'visited' class    
@@ -199,7 +203,7 @@
             // Find elements within #pano with the class "hotspot link-hotspot"
             const hotspotElements = document.querySelectorAll('#pano .hotspot.link-hotspot');
 
-            // Apply 'visited' class to matching elements
+            // Apply 'pathing' class to matching elements
             hotspotElements.forEach(element => {
                 if (element.getAttribute('data-target') === sceneId) {
                     element.classList.add('pathing');
@@ -305,8 +309,6 @@
     sceneListToggleElement.classList.toggle('enabled');
     targetListElement.classList.add('enabled');
     targetListToggleElement.classList.add('enabled');
-    console.log(currentTarget);
-    console.log(currentScene);
   }
 
   function toggleTargetList() {
@@ -358,24 +360,24 @@
       var property = transformProperties[i];
       icon.style[property] = 'rotate(' + hotspot.rotation + 'rad)';
     }
-
     // Add click event handler.
     wrapper.addEventListener('click', function() {
-      var nextScene = findSceneById(hotspot.target);
-      console.log("THIS IS WORK");
+      wrapper.classList.add('visited');
   
-      // Find the corresponding hotspot in the next scene.
-      nextScene.data.linkHotspots.forEach(function(nextHotspot) {
-        if (nextHotspot.target === hotspot.target) {
-          var nextWrapper = document.querySelector(`.hotspot[data-target="${nextHotspot.target}"]`);
-          if (nextWrapper) {
-            nextWrapper.classList.add('visited');
-          }
-        }
-      });
-
+      // Find the previous scene's hotspot element
+      const previousSceneId = currentScene;
       switchScene(findSceneById(hotspot.target));
+      const hotspotElements = document.querySelectorAll(`#pano .hotspot.link-hotspot[data-target="${previousSceneId}"]`);
+
+      hotspotElements.forEach(element => {
+        if (element.getAttribute('data-target') === previousSceneId) {
+            element.classList.remove('pathing');
+            element.classList.add('visited');
+        }
     });
+    });
+
+    
 
     // Prevent touch and scroll events from reaching the parent element.
     // This prevents the view control logic from interfering with the hotspot.
@@ -471,7 +473,6 @@
     var wrapper = document.createElement('div');
     wrapper.classList.add('hotspot');
     wrapper.classList.add('link-hotspot');
-    wrapper.classList.add('visited');
   
     // Create image element.
     var icon = document.createElement('img');
