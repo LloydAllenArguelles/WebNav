@@ -277,6 +277,7 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   overflow-x: hidden;
   overflow-y: auto;
   margin-left: 0;
+  margin-bottom: -2200px;
 }
 
 #targetList {
@@ -288,6 +289,7 @@ body.fullscreen-enabled.mobile #autorotateToggle {
   overflow-x: hidden;
   overflow-y: auto;
   margin-left: 0;
+  margin-bottom: -2200px;
 }
 
 .mobile #sceneList, .mobile #targetList {
@@ -308,13 +310,12 @@ body.fullscreen-enabled.mobile #autorotateToggle {
 }
 
 .mobile #sceneList, .mobile #targetList {
-  height: 100%;
   background-color: rgb(86, 92, 102);
   background-color: rgba(58,68,84,0.8);
 }
 
 .mobile #sceneList.enabled, .mobile #targetList.enabled {
-  margin-bottom: -2200px;
+  margin-bottom: 0px;
 }
 
 .mobile #sceneList .scenes, .mobile #targetList .targets {
@@ -322,7 +323,7 @@ body.fullscreen-enabled.mobile #autorotateToggle {
 }
 
 #sceneList.enabled, #targetList.enabled {
-  margin-bottom: -2200px;
+  margin-bottom: 0px;
 }
 
 #sceneList .scene, #targetList .target {

@@ -25,6 +25,7 @@
   // Grab elements from DOM.
   var panoElement = document.querySelector('#pano');
   var sceneNameElement = document.querySelector('#titleBar .sceneName');
+  var targetNameElement = document.querySelector('#targetBar .targetName');
   var sceneListElement = document.querySelector('#sceneList');
   var targetListElement = document.querySelector('#targetList');
   var sceneElements = document.querySelectorAll('#sceneList .scene');
@@ -33,7 +34,6 @@
   var autorotateToggleElement = document.querySelector('#autorotateToggle');
   var fullscreenToggleElement = document.querySelector('#fullscreenToggle');
   const targets = document.querySelectorAll('a.target');
-  const targetNameElement = document.querySelector('.targetName');
   let currentTarget = "61-gv-1f-office";
   let currentScene = null;
   
@@ -156,11 +156,6 @@
   // Set handler for target list toggle.
   targetListToggleElement.addEventListener('click', toggleTargetList);
 
-  // Start with the scene list open on desktop.
-  if (!document.body.classList.contains('mobile')) {
-    showSceneList();
-  }
-  
   let previousPath = [];
 
   const updateTargetName = (target) => {
@@ -307,15 +302,19 @@
   function toggleSceneList() {
     sceneListElement.classList.toggle('enabled');
     sceneListToggleElement.classList.toggle('enabled');
-    targetListElement.classList.add('enabled');
-    targetListToggleElement.classList.add('enabled');
+    if(targetListElement.classList.contains('enabled')) {
+      targetListElement.classList.remove('enabled');
+      targetListToggleElement.classList.remove('enabled');
+    }
   }
 
   function toggleTargetList() {
     targetListElement.classList.toggle('enabled');
     targetListToggleElement.classList.toggle('enabled');
-    sceneListElement.classList.add('enabled');
-    sceneListToggleElement.classList.add('enabled');
+    if(sceneListElement.classList.contains('enabled')) {
+      sceneListElement.classList.remove('enabled');
+      sceneListToggleElement.classList.remove('enabled');
+    }
   }
 
   function startAutorotate() {
@@ -376,8 +375,6 @@
         }
     });
     });
-
-    
 
     // Prevent touch and scroll events from reaching the parent element.
     // This prevents the view control logic from interfering with the hotspot.
@@ -506,7 +503,6 @@
     return wrapper;
   }
 
-
   // Prevent touch and scroll events from reaching the parent element.
   function stopTouchAndScrollEventPropagation(element, eventList) {
     var eventList = [ 'touchstart', 'touchmove', 'touchend', 'touchcancel',
@@ -543,6 +539,7 @@
   
       scene.linkHotspots.forEach(hotspot => {
         graph[scene.id].push({ target: hotspot.target, cost: 1 }); // Assuming cost is 1 for each link
+        graph[scene.id].push({ target: hotspot.page, cost: 1 }); // Assuming cost is 1 for each link
       });
     });
   

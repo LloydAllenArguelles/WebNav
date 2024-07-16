@@ -80,7 +80,7 @@ var APP_DATA = {
           "yaw": -0.035065305221559484,
           "pitch": 0.188910623799309,
           "rotation": 0,
-          "target": "49-gca-2f-avr2b"
+          "target": "50-gca-2f-avr1b"
         }
       ],
       "infoHotspots": [

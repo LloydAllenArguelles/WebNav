@@ -232,7 +232,7 @@ var APP_DATA = {
           "yaw": 0.02494505946268788,
           "pitch": 0.37488260370978566,
           "rotation": 0,
-          "target": "28-gee-2f-rm-205"
+          "target": "26-gee-2f-ogps"
         },
         {
           "yaw": -3.02134324536903,
