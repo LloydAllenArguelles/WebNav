@@ -26,7 +26,7 @@ body {
     background-color: #007bff;
     color: white;
     text-decoration: none;
-    border-radius: 20px; 
+    border-radius: 20px;
     font-size: 16px;
     transition: background-color 0.3s, color 0.3s;
 }
@@ -35,61 +35,63 @@ body {
     background-color: #0056b3;
 }
 
-.ribbon-button {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    padding: 10px 20px;
-}
-
-.ribbon-button a img {
-    background-color: #007bff;
-    padding: 0px;
-    height:20px;
-    width:20px;
-}
-
-.home-bg {
-    height: 100vh;
-    width: 100%;
-    background: url(front/plm.jpg) no-repeat center center/cover;
-    background-attachment: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.home-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    margin-top:50%;
-}
-
-.center-button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
-
-.home-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 25px; 
-    font-size: 18px;
-    transition: 0.3s;
+.settings-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 150px; 
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
 }
 
-.home-button:hover {
+.settings-container h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+    font-weight: 300;
+}
+
+.settings-table {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.settings-button {
+    padding: 15px 30px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: background-color 0.3s, transform 0.3s;
+    text-align: center;
+    margin: 10px;  /* Updated margin for better spacing */
+}
+
+.settings-button:hover {
     background-color: #0056b3;
-    transition: 0.3s;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
 }
 
 .dropdown {
@@ -102,9 +104,8 @@ body {
     position: absolute;
     background-color: #f9f9f9;
     min-width: 100px;
-
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    top:25px;
+    top: 25px;
     z-index: 1;
 }
 
@@ -125,4 +126,16 @@ body {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+@media (max-width: 768px) {
+    .building-settings-table {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .settings-button {
+        width: 80%; /* Ensures buttons do not span full width */
+        margin: 5px 0; /* Additional spacing between buttons */
+    }
 }
