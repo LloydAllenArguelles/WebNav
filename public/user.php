@@ -41,6 +41,12 @@ if (isset($_SESSION['user_id'])) {
                 text-align: center;
             }
 
+            .mobile .message-container {
+                left:0;
+                right:0;
+                height: 70%;
+            }
+
             .no-account-message {
                 font-size: 1.2em;
                 color: #333;
@@ -76,6 +82,8 @@ if (isset($_SESSION['user_id'])) {
                 <a href="home.html" class="button">Back</a>
             </div>
         </div>
+    
+        <script src="assets/js/mobile.js"></script>
     </body>
     </html>
     <?php
@@ -187,6 +195,10 @@ try {
             max-width: 600px;
             margin-bottom: 20px;
         }
+        
+        .mobile .user-container, .mobile .card {
+            width: 100%;
+        }
 
         .card img {
             width: 150px;
@@ -278,10 +290,26 @@ try {
                     <?php
                     if (empty($user['student_num'])) {
                         echo "
-                            <p id='display-name'>Name: {$user['username']}</p>
-                            <p id='display-name'>Department: {$user['department']}</p>
-                            <p id='display-name'>Position: {$user['role']}</p>
-                            <p id='display-name'>Status: {$user['status']}</p>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>Name</th>
+                                        <td>{$user['username']}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Department</th>
+                                        <td>{$user['department']}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Position</th>
+                                        <td>{$user['role']}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Status</th>
+                                        <td>{$user['status']}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         ";
                     } else {
                         echo "
@@ -306,5 +334,6 @@ try {
             </div>
         </div>
     </div>
+    <script src="assets/js/mobile.js"></script>
 </body>
 </html>
