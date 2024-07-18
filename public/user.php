@@ -290,6 +290,9 @@ try {
         <div class="ribbon-button-container">
             <a href="settings.html" class="ribbon-button">SETTINGS</a>
         </div>
+        <div class="ribbon-button-container">
+            <a href="includes/logout.php" class="ribbon-button">LOGOUT</a>
+        </div>
     </div>
     
     <div class="user-container">

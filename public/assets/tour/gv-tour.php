@@ -27,6 +27,7 @@ require_once '../../includes/dbh.inc.php';
                 <a href="gv-tour.php">GV</a>
                 <a href="gca-tour.php">GCA</a>
                 <a href="gee-tour.php">GEE</a>
+                <a href="locator.php">Where Am I?</a>
             </div>
         </div>
         <div class="ribbon-button-container dropdown">
@@ -385,6 +386,7 @@ require_once '../../includes/dbh.inc.php';
 
 <script src="gv-data.js"></script>
 <script src="index.js"></script>
+<script src="../js/buttons.js"></script>
 
 </body>
 </html>
