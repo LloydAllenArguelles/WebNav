@@ -24,8 +24,8 @@ require_once 'includes/dbh.inc.php';
             <span class="ribbon-button ribbon-trigger dropView">360 VIEW</span>
             <div class="dropdown-content dropView">
                 <a href="assets/tour/gv-tour.php">GV</a>
-                <a href="assets/tour/gca-tour.html">GCA</a>
-                <a href="assets/tour/gee-tour.html">GEE</a>
+                <a href="assets/tour/gca-tour.php">GCA</a>
+                <a href="assets/tour/gee-tour.php">GEE</a>
             </div>
         </div>
         <div class="ribbon-button-container dropdown">
