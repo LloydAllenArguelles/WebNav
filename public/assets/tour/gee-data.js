@@ -45,7 +45,7 @@ var APP_DATA = {
           "yaw": 0.07991988756612223,
           "pitch": 0.45227985423759165,
           "rotation": 0,
-          "page": "gv-tour.html",
+          "page": "gv-tour.php",
           "pageText": "Gusaling Villegas"
         }]
     },

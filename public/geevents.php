@@ -22,6 +22,7 @@ ob_clean();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - Gusaling Ejercito Estrada</title>
     <link rel="stylesheet" href="gvevents.css">
+    <link rel="stylesheet" href="assets/dropdown.css">
     <style>
         body {
             background-color: #f8f9fa; 
@@ -94,13 +95,22 @@ ob_clean();
 <body>
     <!-- Your existing top ribbon navigation -->
     <div class="top-ribbon">
-        <!-- Other buttons -->
-        <div class="ribbon-button-container dropdown">
-            <span class="ribbon-button ribbon-trigger">360 VIEW</span>
-            <div class="dropdown-content">
-                <a href="assets/tour/gv-tour.html">GV</a>
+        <div class="ribbon-button-container dropdown stay">
+            <span class="ribbon-button ribbon-trigger dropView">360 VIEW</span>
+            <div class="dropdown-content dropView">
+                <a href="assets/tour/gv-tour.php">GV</a>
                 <a href="assets/tour/gca-tour.html">GCA</a>
                 <a href="assets/tour/gee-tour.html">GEE</a>
+            </div>
+        </div>
+        <div class="ribbon-button-container dropdown">
+            <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
+            <div class="dropdown-content dropMenu">
+                <a href="forum.php">FORUM</a>
+                <a href="schedule.php">SCHEDULE</a>
+                <a href="events.html">EVENTS</a>
+                <a href="user.php">USER</a>
+                <a href="settings.html">SETTINGS</a>
             </div>
         </div>
         <div class="ribbon-button-container">
@@ -114,6 +124,9 @@ ob_clean();
         </div>
         <div class="ribbon-button-container">
             <a href="user.php" class="ribbon-button">USER</a>
+        </div>
+        <div class="ribbon-button-container">
+            <a href="settings.html" class="ribbon-button">SETTINGS</a>
         </div>
     </div>
 
@@ -141,6 +154,7 @@ ob_clean();
     <a href="events.html" class="back-button">Back</a>
 
     <!-- JavaScript functions and closing tags -->
+    <script src="assets/js/buttons.js"></script>
 
 </body>
 </html>

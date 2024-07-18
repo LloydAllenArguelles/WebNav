@@ -52,14 +52,14 @@ var APP_DATA = {
           "yaw": -0.061004001613394365,
           "pitch": 0.2509860368950285,
           "rotation": 0,
-          "page": "gee-tour.html",
+          "page": "gee-tour.php",
           "pageText": "Gusaling Ejercito Estrada"
         },
         {
           "yaw": 3.179967238994687,
           "pitch": 0.04343586268595594,
           "rotation": 0,
-          "page": "gca-tour.html",
+          "page": "gca-tour.php",
           "pageText": "Gusaling Corazon Aquino"
         }
       ]
@@ -175,14 +175,7 @@ var APP_DATA = {
         }
       ],
       "infoHotspots": [],
-      "pageHotspots":[
-        {
-          "yaw": -5.9951221951200857,
-          "pitch": 0.1988204571748149,
-          "rotation": 0,
-          "page": "gee-tour.html"
-        }
-      ]
+      "pageHotspots":[]
     },
     {
       "id": "1-gv-2f-com-lab-1",

@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+require_once '../../includes/dbh.inc.php';
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,28 +21,41 @@
 <body class="multiple-scenes">
   <div style="position: absolute; width: 100%; height: 100%;">
     <div class="top-ribbon">
-      <div class="ribbon-button-container dropdown">
-        <span class="ribbon-button ribbon-trigger">360 VIEW</span>
-        <div class="dropdown-content">
-            <a href="gv-tour.html">GV</a>
-            <a href="gca-tour.html">GCA</a>
-            <a href="gee-tour.html">GEE</a>
-            <a href="locator.php">Where am I?</a>
+        <div class="ribbon-button-container dropdown stay">
+            <span class="ribbon-button ribbon-trigger dropView">360 VIEW</span>
+            <div class="dropdown-content dropView">
+                <a href="gv-tour.php">GV</a>
+                <a href="gca-tour.php">GCA</a>
+                <a href="gee-tour.php">GEE</a>
+            </div>
         </div>
-      </div>
-      <div class="ribbon-button-container">
-          <a href="../../forum.php" class="ribbon-button">FORUM</a>
-      </div>
-      <div class="ribbon-button-container">
-          <a href="../../schedule.php" class="ribbon-button">SCHEDULE</a>
-      </div>
-      <div class="ribbon-button-container">
-          <a href="../../events.html" class="ribbon-button">EVENTS</a>
-      </div>
-      <div class="ribbon-button-container">
-          <a href="../../user.php" class="ribbon-button">USER</a>
-      </div>
+        <div class="ribbon-button-container dropdown">
+            <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
+            <div class="dropdown-content dropMenu">
+                <a href="../../forum.php">FORUM</a>
+                <a href="../../schedule.php">SCHEDULE</a>
+                <a href="../../events.html">EVENTS</a>
+                <a href="../../user.php">USER</a>
+                <a href="../../settings.html">SETTINGS</a>
+            </div>
+        </div>
+        <div class="ribbon-button-container">
+            <a href="../../forum.php" class="ribbon-button">FORUM</a>
+        </div>
+        <div class="ribbon-button-container">
+            <a href="../../schedule.php" class="ribbon-button">SCHEDULE</a>
+        </div>
+        <div class="ribbon-button-container">
+            <a href="../../events.html" class="ribbon-button">EVENTS</a>
+        </div>
+        <div class="ribbon-button-container">
+            <a href="../../user.php" class="ribbon-button">USER</a>
+        </div>
+        <div class="ribbon-button-container">
+            <a href="../../settings.html" class="ribbon-button">SETTINGS</a>
+        </div>
     </div>
+    
 <div style="position: relative; top: 0; width: 100%; height: 95%;">
   
 <div id="pano"></div>
@@ -354,11 +374,11 @@
   language-code="en"
 ></df-messenger>
 <!-- Chatbot Part End -->
-  <script>
-      var userId = "<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>";
-  </script>
-    
 
+<script>
+     var userId = "<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>";
+</script>
+    
 <script src="vendor/screenfull.min.js" ></script>
 <script src="vendor/bowser.min.js" ></script>
 <script src="vendor/marzipano.js" ></script>

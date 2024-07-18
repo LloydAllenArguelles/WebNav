@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+require_once '../../includes/dbh.inc.php';
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,9 +23,9 @@
     <div class="ribbon-button-container dropdown">
       <span class="ribbon-button ribbon-trigger">360 VIEW</span>
       <div class="dropdown-content">
-          <a href="gv-tour.html">GV</a>
-          <a href="gca-tour.html">GCA</a>
-          <a href="gee-tour.html">GEE</a>
+          <a href="gv-tour.php">GV</a>
+          <a href="gca-tour.php">GCA</a>
+          <a href="gee-tour.php">GEE</a>
           <a href="locator.php">Where am I?</a>
       </div>
     </div>
@@ -306,7 +312,10 @@
   language-code="en"
 ></df-messenger>
 <!-- Chatbot Part End -->
-    
+  
+<script>
+     var userId = "<?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : ''; ?>";
+</script>
 
 <script src="vendor/screenfull.min.js" ></script>
 <script src="vendor/bowser.min.js" ></script>

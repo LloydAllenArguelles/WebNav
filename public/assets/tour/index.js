@@ -103,8 +103,11 @@
 
     // Create info hotspots.
     data.infoHotspots.forEach(function(hotspot) {
+      if (userId) {
+        
       var element = createInfoHotspotElement(hotspot);
       scene.hotspotContainer().createHotspot(element, { yaw: hotspot.yaw, pitch: hotspot.pitch });
+    }
     });
 
     // Create page hotspots.
