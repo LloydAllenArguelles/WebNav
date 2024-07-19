@@ -15,6 +15,7 @@ require_once '../../includes/dbh.inc.php';
 <link rel="stylesheet" href="vendor/reset.min.css">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="../home.css">
+<link rel="stylesheet" href="../manual.css">
 
 </head>
 
@@ -302,6 +303,14 @@ require_once '../../includes/dbh.inc.php';
   </ul>
 </div>
 
+<div class="fromto" style="bottom:40px">
+  <h1>Current: </h1>
+</div>
+
+<div class="fromto" style="bottom:0">
+  <h1>Go to: </h1>
+</div>
+
 <div id="titleBar">
   <div>
     <h1 class="sceneName"></h1>
@@ -314,13 +323,52 @@ require_once '../../includes/dbh.inc.php';
   </div>
 </div>
 
-<div class="fromto" style="bottom:40px">
-  <h1>Current: </h1>
-</div>
+<!-- Manual Part Start -->
+<div id="userManual">
+  <div class="manual-tile-container">
+    <div class="manual-tile">
+      <img src="../img/ins-full.png">
+      <div class=>
+        <h5>FULL SCREEN BUTTON</h5>
+        <h1>Click to enter Fullscreen</h1>
+      </div>
+    </div>
+    <div class="manual-tile">
+      <img src="../img/ins-motion.png">
+      <div>
+        <h5>STOP IDLE MOTION BUTTON</h5>
+        <h1>Click to stop Idle Motion Effect</h1>
+      </div>
+    </div>
+    <div class="manual-tile">
+      <img src="../img/ins-arrowneutral.png">
+      <div>
+        <h5>DIRECTIONAL ARROW</h5>
+        <h1>Arrow towards Pointed Direction</h1>
+      </div>
+    </div>
+    <div class="manual-tile">
+      <img src="../img/ins-arrowgo.png">
+      <div>
+        <h5>NAVIGATION ARROW</h5>
+        <h1>Arrow to Destination Path</h1>
+      </div>
+    </div>
+    <div class="manual-tile">
+      <img src="../img/ins-arrowno.png">
+      <div>
+        <h5>BACK ARROW</h5>
+        <h1>Arrow to Previous Path</h1>
+      </div>
+    </div>
 
-<div class="fromto" style="bottom:0">
-  <h1>Go to: </h1>
+  </div>
+  <div class="manual-img">
+    <img src=../img/ins-truction.png>
+  </div>
 </div>
+<!-- Manual Part End -->
+
 
 <a href="javascript:void(0)" id="autorotateToggle">
   <img class="icon off" src="img/play.png">
@@ -330,6 +378,11 @@ require_once '../../includes/dbh.inc.php';
 <a href="javascript:void(0)" id="fullscreenToggle">
   <img class="icon off" src="img/fullscreen.png">
   <img class="icon on" src="img/windowed.png">
+</a>
+
+<a href="javascript:void(0)" id="legendToggle">
+  <img class="icon off" src="img/close.png">
+  <img class="icon on" src="img/legend.png">
 </a>
 
 <a href="javascript:void(0)" id="sceneListToggle">

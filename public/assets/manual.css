@@ -1,0 +1,102 @@
+
+#userManual {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Vertically center the image */
+    z-index: 100;
+    top: 5%;
+    left: 15%;
+    right: 15%;
+    bottom: 10%;
+    background-color: rgb(240, 248, 255, 0.8);
+    border: solid 3px rgb(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 15px;
+    align-items: center; /* Vertically center the image */
+    overflow: auto;
+}
+  
+.mobile #userManual {
+    top: 10%;
+    left: 0%;
+    right: 0%;
+    bottom: 15%;
+}
+
+.enabled#userManual {
+    display: none;
+  }
+
+.manual-tile-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-direction: row;
+}
+
+.mobile .manual-tile-container {
+    justify-content: center;
+    flex-direction: column;
+}
+
+.manual-img {
+    display: flex; /* Make it a flex container */
+    flex-grow: 1; /* Allow it to grow and fill remaining space */
+    align-items: last baseline; /* Vertically center the image */
+    justify-content: center; /* Horizontally center the image (optional) */
+}
+
+.mobile .manual-img {
+    align-items: center;
+}
+
+.manual-img img {
+    width: 80%; /* Set a maximum width to prevent overflow */
+    height: auto;  /* Allow the image to adjust its height */
+}
+
+.manual-tile {
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    min-width: 520px;
+}
+
+.mobile .manual-tile {
+    min-width: 100%;
+}
+
+.manual-tile img {
+    width: 45px;
+    height: auto;
+    margin-right: 15px;
+}
+
+.manual-tile div {
+    display: flex;
+    flex-direction: column;
+}
+
+.manual-tile h5{
+    font-size: 15px;
+    color:black;
+    font-weight: bold;
+}
+
+.manual-tile h1{
+    font-size: 25px;
+    color:black;
+    font-weight: bold;
+}
+
+.mobile .manual-tile h5{
+    font-size: 10px;
+}
+
+.mobile .manual-tile h1{
+    font-size: 20px;
+}

@@ -33,6 +33,8 @@
   var targetListToggleElement = document.querySelector('#targetListToggle');
   var autorotateToggleElement = document.querySelector('#autorotateToggle');
   var fullscreenToggleElement = document.querySelector('#fullscreenToggle');
+  var legendToggleElement = document.querySelector('#legendToggle');
+  var legendWindow = document.querySelector('#userManual');
   const targets = document.querySelectorAll('a.target');
   let currentTarget = "61-gv-1f-office";
   let currentScene = null;
@@ -48,7 +50,7 @@
         document.body.classList.add('desktop');
       }
     };
-    var mql = matchMedia("(max-width: 500px), (max-height: 500px)");
+    var mql = matchMedia("(max-width: 700px), (max-height: 700px)");
     setMode();
     mql.addListener(setMode);
   } else {
@@ -151,6 +153,18 @@
   } else {
     document.body.classList.add('fullscreen-disabled');
   }
+
+  // Set up legend, if enabled.
+  if (data.settings.legendButton) {
+    document.body.classList.add('legend-enabled');
+    legendToggleElement.addEventListener('click', toggleLegend);
+  }
+
+  // Set handler for legend toggle.
+  legendToggleElement.addEventListener('click', toggleLegend);
+
+  // Set handler for scene list toggle.
+  legendWindow.addEventListener('click', toggleLegend);
 
   // Set handler for scene list toggle.
   sceneListToggleElement.addEventListener('click', toggleSceneList);
@@ -339,6 +353,16 @@
     } else {
       autorotateToggleElement.classList.add('enabled');
       startAutorotate();
+    }
+  }
+
+  function toggleLegend() {
+    if (legendToggleElement.classList.contains('enabled')) {
+      legendToggleElement.classList.remove('enabled');
+      legendWindow.classList.remove('enabled');
+    } else {
+      legendToggleElement.classList.add('enabled');
+      legendWindow.classList.add('enabled');
     }
   }
 

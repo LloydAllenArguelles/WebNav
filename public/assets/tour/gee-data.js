@@ -1211,6 +1211,7 @@ var APP_DATA = {
     "mouseViewMode": "drag",
     "autorotateEnabled": true,
     "fullscreenButton": true,
+    "legendButton": true,
     "viewControlButtons": false
   }
 };

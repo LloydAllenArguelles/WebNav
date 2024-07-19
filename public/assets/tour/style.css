@@ -169,7 +169,7 @@ body.fullscreen-enabled #fullscreenToggle {
 
 .mobile #fullscreenToggle .icon {
   top: 10px;
-  right: 10px;
+  left: 10px;
 }
 
 #fullscreenToggle .icon.on {
@@ -241,6 +241,57 @@ body.fullscreen-enabled.mobile #autorotateToggle {
 }
 
 #autorotateToggle.enabled .icon.off {
+  display: none;
+}
+
+#legendToggle {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 80px;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  background-color: rgb(103,115,131);
+  background-color: rgba(103,115,131,0.8);
+}
+
+.mobile #legendToggle {
+  left: 100px;
+  width: 50px;
+  height: 50px;
+}
+
+body.legend-enabled #legendToggle {
+  display: block;
+}
+
+#legendToggle .icon {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+.mobile #legendToggle .icon {
+  top: 10px;
+  left: 10px;
+}
+
+#legendToggle .icon.on {
+  display: none;
+}
+
+#legendToggle .icon.off {
+  display: block;
+}
+
+#legendToggle.enabled .icon.on {
+  display: block;
+}
+
+#legendToggle.enabled .icon.off {
   display: none;
 }
 
