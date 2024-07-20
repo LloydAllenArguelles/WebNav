@@ -1,5 +1,4 @@
 <?php 
-// dbh.inc.php
 
 $dsn = "mysql:host=localhost;dbname=webnav_db";
 $dbusername = "root";
