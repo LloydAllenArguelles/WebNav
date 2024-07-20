@@ -233,6 +233,13 @@ require_once '../../includes/dbh.inc.php';
         <h1>Arrow to Previous Path</h1>
       </div>
     </div>
+    <div class="manual-tile ">
+      <img src="../img/ins-legend.png">
+      <div>
+        <h5>LEGEND</h5>
+        <h1>Open Legend Window</h1>
+      </div>
+    </div>
 
   </div>
   <div class="manual-img">
