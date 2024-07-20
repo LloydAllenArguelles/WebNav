@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php"); 
+    header("Location: index.php");
     exit();
 }
 
@@ -85,6 +85,12 @@ require_once 'includes/dbh.inc.php';
     <!-- JavaScript Functions -->
     <script>
         document.getElementById('room').addEventListener('change', fetchChatHistory);
+        document.getElementById('message-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
 
         function sendMessage() {
             const messageInput = document.getElementById('message-input').value.trim();
@@ -98,7 +104,8 @@ require_once 'includes/dbh.inc.php';
                     if (xhr.readyState === XMLHttpRequest.DONE) {
                         if (xhr.status === 200) {
                             console.log('Message saved successfully');
-                            fetchChatHistory(); 
+                            fetchChatHistory();
+                            document.getElementById('message-input').value = ''; // Clear the input field
                         } else {
                             console.error('Failed to save message');
                         }
@@ -119,6 +126,7 @@ require_once 'includes/dbh.inc.php';
                     if (xhr.status === 200) {
                         const chatBox = document.getElementById('chat-box');
                         chatBox.innerHTML = xhr.responseText;
+                        chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the bottom
                     } else {
                         console.error('Failed to fetch chat history');
                     }
