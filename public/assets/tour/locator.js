@@ -61,6 +61,7 @@ async function main() {
   const locateNameElement = document.querySelector('#locateBar .locateName');
   
   console.log("Initializing!");
+  locateNameElement.textContent = `Click the button above!`; // Update the locateName element
 
   video.addEventListener('play', async () => {
     while (true) {

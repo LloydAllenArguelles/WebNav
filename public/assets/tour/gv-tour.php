@@ -34,12 +34,16 @@ require_once '../../includes/dbh.inc.php';
         <div class="ribbon-button-container dropdown">
             <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
             <div class="dropdown-content dropMenu">
+                <a href="../../home.html">HOME</a>
                 <a href="../../forum.php">FORUM</a>
                 <a href="../../schedule.php">SCHEDULE</a>
                 <a href="../../events.html">EVENTS</a>
                 <a href="../../user.php">USER</a>
                 <a href="../../settings.html">SETTINGS</a>
             </div>
+        </div>
+        <div class="ribbon-button-container">
+            <a href="../../home.html" class="ribbon-button">HOME</a>
         </div>
         <div class="ribbon-button-container">
             <a href="../../forum.php" class="ribbon-button">FORUM</a>
