@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+// Redirect to login if user is not authenticated
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -8,14 +9,38 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once 'includes/dbh.inc.php';
 
-// Default selected room
+// Fetch building name dynamically based on the page
+$building_name = 'Gusaling Ejercito Estrada'; // Updated building name
+
+// Default selected room and day
 $selected_room_id = null;
+$selected_day = null;
+
+// Update selected room and day based on form submission
 if (isset($_POST['room'])) {
     $selected_room_id = $_POST['room'];
     $_SESSION['selected_room_id'] = $selected_room_id;
-} elseif (isset($_SESSION['selected_room_id'])) {
-    $selected_room_id = $_SESSION['selected_room_id'];
+} else {
+    // Auto-select first room if none is selected
+    if (empty($selected_room_id)) {
+        $sql = "SELECT room_id FROM rooms WHERE building = :building LIMIT 1";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':building' => $building_name]);
+        $room = $stmt->fetch(PDO::FETCH_ASSOC);
+        $selected_room_id = $room['room_id'] ?? null;
+    }
 }
+
+if (isset($_POST['day'])) {
+    $selected_day = $_POST['day'];
+    $_SESSION['selected_day'] = $selected_day;
+} else {
+    $selected_day = null; // Reset day filter
+}
+
+// Determine if the current user is a professor
+$is_professor = isset($_SESSION['role']) && $_SESSION['role'] === 'professor';
+
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +49,7 @@ if (isset($_POST['room'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - Gusaling Ejercito Estrada</title>
-    <link rel="stylesheet" href="geschedule.css">
+    <link rel="stylesheet" href="gvschedule.css">
     <link rel="stylesheet" href="assets/dropdown.css">
 </head>
 <body>
@@ -64,27 +89,35 @@ if (isset($_POST['room'])) {
         </div>
     </div>
 
-    <div class="room-dropdown">
-        <form method="POST" id="roomForm">
-            <label for="room">Select Room:</label>
-            <select name="room" id="room" onchange="this.form.submit()">
-                <?php
-                require_once 'includes/dbh.inc.php';
+    <div class="filters">
+        <div class="room-dropdown">
+            <form method="POST" id="filterForm">
+                <label for="room">Select Room:</label>
+                <select name="room" id="room" onchange="this.form.submit()">
+                    <?php
+                    $sql = "SELECT room_id, room_number FROM rooms WHERE building = :building";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute([':building' => $building_name]);
+                    $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                $building_name = 'Gusaling Ejercito Estrada';
+                    foreach ($rooms as $room) {
+                        $selected = $selected_room_id == $room['room_id'] ? 'selected' : '';
+                        echo "<option value=\"{$room['room_id']}\" $selected>{$room['room_number']}</option>";
+                    }
+                    ?>
+                </select>
 
-                $sql = "SELECT room_id, room_number FROM rooms WHERE building = :building";
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute([':building' => $building_name]);
-                $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                foreach ($rooms as $room) {
-                    $selected = $selected_room_id == $room['room_id'] ? 'selected' : '';
-                    echo "<option value=\"{$room['room_id']}\" $selected>{$room['room_number']}</option>";
-                }
-                ?>
-            </select>
-        </form>
+                <label for="day">Select Day:</label>
+                <select name="day" id="day" onchange="this.form.submit()">
+                    <option value="" <?php echo $selected_day === null ? 'selected' : ''; ?>>All Days</option>
+                    <option value="Monday" <?php echo $selected_day === 'Monday' ? 'selected' : ''; ?>>Monday</option>
+                    <option value="Tuesday" <?php echo $selected_day === 'Tuesday' ? 'selected' : ''; ?>>Tuesday</option>
+                    <option value="Wednesday" <?php echo $selected_day === 'Wednesday' ? 'selected' : ''; ?>>Wednesday</option>
+                    <option value="Thursday" <?php echo $selected_day === 'Thursday' ? 'selected' : ''; ?>>Thursday</option>
+                    <option value="Friday" <?php echo $selected_day === 'Friday' ? 'selected' : ''; ?>>Friday</option>
+                </select>
+            </form>
+        </div>
     </div>
 
     <div class="building-schedule-container">
@@ -98,15 +131,27 @@ if (isset($_POST['room'])) {
             $stmt->execute([':room_id' => $room_id]);
             $room_number = $stmt->fetchColumn();
 
-            echo "<h2>Gusaling Ejercito Estrada Schedule - Room {$room_number}</h2>";
+            echo "<h2>{$building_name} Schedule - Room {$room_number}</h2>";
 
+            // Fetch schedules with optional day filter
             $sql = "SELECT * FROM schedules WHERE room_id = :room_id";
+            if ($selected_day) {
+                $sql .= " AND day_of_week = :day";
+            }
             $stmt = $pdo->prepare($sql);
-            $stmt->execute([':room_id' => $room_id]);
+            $params = [':room_id' => $room_id];
+            if ($selected_day) {
+                $params[':day'] = $selected_day;
+            }
+            $stmt->execute($params);
             $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             echo "<table class=\"schedule-table\">";
-            echo "<thead><tr><th>Day</th><th>Start Time</th><th>End Time</th><th>Status</th><th>Subject</th><th>Action</th></tr></thead>";
+            echo "<thead><tr><th>Day</th><th>Start Time</th><th>End Time</th><th>Status</th><th>Subject</th>";
+            if ($is_professor) {
+                echo "<th>Action</th>";
+            }
+            echo "</tr></thead>";
             echo "<tbody>";
             foreach ($schedules as $schedule) {
                 echo "<tr>";
@@ -116,8 +161,8 @@ if (isset($_POST['room'])) {
                 echo "<td>{$schedule['status']}</td>";
                 echo "<td>{$schedule['subject']}</td>";
 
-                echo "<td>";
-                if ($_SESSION['role'] === 'professor') {
+                if ($is_professor) {
+                    echo "<td>";
                     if ($schedule['status'] == 'available') {
                         echo "<form method=\"POST\">";
                         echo "<input type=\"hidden\" name=\"schedule_id\" value=\"{$schedule['schedule_id']}\">";
@@ -131,10 +176,8 @@ if (isset($_POST['room'])) {
                     } else {
                         echo "-";
                     }
-                } else {
-                    echo "-";
+                    echo "</td>";
                 }
-                echo "</td>";
 
                 echo "</tr>";
             }
@@ -142,7 +185,7 @@ if (isset($_POST['room'])) {
         }
 
         if (isset($_POST['occupy_schedule'])) {
-            if ($_SESSION['role'] === 'professor') {
+            if ($is_professor) {
                 $schedule_id = $_POST['schedule_id'];
 
                 $sql_check_available = "SELECT * FROM schedules WHERE schedule_id = :schedule_id AND status = 'available'";
@@ -169,7 +212,7 @@ if (isset($_POST['room'])) {
         }
 
         if (isset($_POST['unoccupy_schedule'])) {
-            if ($_SESSION['role'] === 'professor') {
+            if ($is_professor) {
                 $schedule_id = $_POST['schedule_id'];
 
                 $sql_check_owner = "SELECT user_id FROM schedules WHERE schedule_id = :schedule_id";
