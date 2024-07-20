@@ -91,6 +91,20 @@ try {
         .back-button:hover {
             background-color: #0056b3;
         }
+        .edit-button {
+            display: block;
+            margin-top: 10px; 
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .edit-button:hover {
+            background-color: #218838;
+        }
     </style>
     <link rel="stylesheet" href="schedule.css"> 
     <link rel="stylesheet" href="assets/dropdown.css">
@@ -173,6 +187,9 @@ try {
         <?php endif; ?>
 
         <a href="schedule.php" class="back-button">Back to Schedule</a>
+        <?php if ($_SESSION['role'] === 'professor'): ?>
+            <a href="edit_schedule.php" class="edit-button">Edit Schedule</a>
+        <?php endif; ?>
     </div>
     <script src="assets/js/buttons.js"></script>
 </body>
