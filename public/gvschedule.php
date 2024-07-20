@@ -1,3 +1,23 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+require_once 'includes/dbh.inc.php';
+
+// Default selected room
+$selected_room_id = null;
+if (isset($_POST['room'])) {
+    $selected_room_id = $_POST['room'];
+    $_SESSION['selected_room_id'] = $selected_room_id;
+} elseif (isset($_SESSION['selected_room_id'])) {
+    $selected_room_id = $_SESSION['selected_room_id'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,9 +65,9 @@
     </div>
 
     <div class="room-dropdown">
-        <form method="POST">
+        <form method="POST" id="roomForm">
             <label for="room">Select Room:</label>
-            <select name="room" id="room">
+            <select name="room" id="room" onchange="this.form.submit()">
                 <?php
                 require_once 'includes/dbh.inc.php';
 
@@ -59,35 +79,32 @@
                 $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 foreach ($rooms as $room) {
-                    echo "<option value=\"{$room['room_id']}\">{$room['room_number']}</option>";
+                    $selected = $selected_room_id == $room['room_id'] ? 'selected' : '';
+                    echo "<option value=\"{$room['room_id']}\" $selected>{$room['room_number']}</option>";
                 }
                 ?>
             </select>
-            <button type="submit">Show Schedule</button>
         </form>
     </div>
 
     <div class="building-schedule-container">
         <?php
-        session_start(); 
+        if ($selected_room_id) {
+            $room_id = $selected_room_id;
 
-        if (!isset($_SESSION['user_id'])) {
-            header("Location: login.php");
-            exit();
-        }
+            // Fetch the room number
+            $sql = "SELECT room_number FROM rooms WHERE room_id = :room_id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([':room_id' => $room_id]);
+            $room_number = $stmt->fetchColumn();
 
-        $user_id = $_SESSION['user_id'];
-        $user_role = $_SESSION['role'];
-
-        if (isset($_POST['room'])) {
-            $room_id = $_POST['room'];
+            echo "<h2>Gusaling Villegas Schedule - Room {$room_number}</h2>";
 
             $sql = "SELECT * FROM schedules WHERE room_id = :room_id";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([':room_id' => $room_id]);
             $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            echo "<h2>Gusaling Villegas Schedule - Room {$room_id}</h2>";
             echo "<table class=\"schedule-table\">";
             echo "<thead><tr><th>Day</th><th>Start Time</th><th>End Time</th><th>Status</th><th>Subject</th><th>Action</th></tr></thead>";
             echo "<tbody>";
@@ -100,13 +117,13 @@
                 echo "<td>{$schedule['subject']}</td>";
 
                 echo "<td>";
-                if ($user_role === 'professor') {
+                if ($_SESSION['role'] === 'professor') {
                     if ($schedule['status'] == 'available') {
                         echo "<form method=\"POST\">";
                         echo "<input type=\"hidden\" name=\"schedule_id\" value=\"{$schedule['schedule_id']}\">";
                         echo "<button type=\"submit\" name=\"occupy_schedule\">Occupy</button>";
                         echo "</form>";
-                    } elseif ($schedule['status'] == 'occupied' && $schedule['user_id'] == $user_id) {
+                    } elseif ($schedule['status'] == 'occupied' && $schedule['user_id'] == $_SESSION['user_id']) {
                         echo "<form method=\"POST\">";
                         echo "<input type=\"hidden\" name=\"schedule_id\" value=\"{$schedule['schedule_id']}\">";
                         echo "<button type=\"submit\" name=\"unoccupy_schedule\">Unoccupy</button>";
@@ -125,7 +142,7 @@
         }
 
         if (isset($_POST['occupy_schedule'])) {
-            if ($user_role === 'professor') {
+            if ($_SESSION['role'] === 'professor') {
                 $schedule_id = $_POST['schedule_id'];
 
                 $sql_check_available = "SELECT * FROM schedules WHERE schedule_id = :schedule_id AND status = 'available'";
@@ -136,7 +153,7 @@
                 if ($schedule) {
                     $sql_update = "UPDATE schedules SET status = 'occupied', user_id = :user_id WHERE schedule_id = :schedule_id";
                     $stmt_update = $pdo->prepare($sql_update);
-                    $stmt_update->execute([':user_id' => $user_id, ':schedule_id' => $schedule_id]);
+                    $stmt_update->execute([':user_id' => $_SESSION['user_id'], ':schedule_id' => $schedule_id]);
 
                     if ($stmt_update->rowCount() > 0) {
                         echo "<script>alert('Schedule occupied successfully!');</script>";
@@ -152,7 +169,7 @@
         }
 
         if (isset($_POST['unoccupy_schedule'])) {
-            if ($user_role === 'professor') {
+            if ($_SESSION['role'] === 'professor') {
                 $schedule_id = $_POST['schedule_id'];
 
                 $sql_check_owner = "SELECT user_id FROM schedules WHERE schedule_id = :schedule_id";
@@ -160,7 +177,7 @@
                 $stmt_check_owner->execute([':schedule_id' => $schedule_id]);
                 $owner_id = $stmt_check_owner->fetchColumn();
 
-                if ($owner_id == $user_id) {
+                if ($owner_id == $_SESSION['user_id']) {
                     $sql_update = "UPDATE schedules SET status = 'available', user_id = NULL WHERE schedule_id = :schedule_id";
                     $stmt_update = $pdo->prepare($sql_update);
                     $stmt_update->execute([':schedule_id' => $schedule_id]);
@@ -180,7 +197,6 @@
         ?>
     </div>
 
-    <!-- JavaScript functions and closing tags -->
     <script src="assets/js/buttons.js"></script>
 </body>
 </html>

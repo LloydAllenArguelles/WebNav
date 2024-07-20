@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - Gusaling Corazon Aquino</title>
-    <link rel="stylesheet" href="gvschedule.css">
+    <link rel="stylesheet" href="gcaschedule.css">
     <link rel="stylesheet" href="assets/dropdown.css">
 </head>
 <body>
@@ -47,23 +47,25 @@
     <div class="room-dropdown">
         <form method="POST">
             <label for="room">Select Room:</label>
-            <select name="room" id="room">
+            <select name="room" id="room" onchange="this.form.submit()">
                 <?php
                 require_once 'includes/dbh.inc.php';
 
                 $building_name = 'Gusaling Corazon Aquino';
+                $default_room_id = 1; // Default room ID to show initially
 
+                // Fetch rooms
                 $sql = "SELECT room_id, room_number FROM rooms WHERE building = :building";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([':building' => $building_name]);
                 $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 foreach ($rooms as $room) {
-                    echo "<option value=\"{$room['room_id']}\">{$room['room_number']}</option>";
+                    $selected = $default_room_id == $room['room_id'] ? 'selected' : '';
+                    echo "<option value=\"{$room['room_id']}\" $selected>{$room['room_number']}</option>";
                 }
                 ?>
             </select>
-            <button type="submit">Show Schedule</button>
         </form>
     </div>
 
@@ -79,15 +81,22 @@
         $user_id = $_SESSION['user_id'];
         $user_role = $_SESSION['role'];
 
-        if (isset($_POST['room'])) {
-            $room_id = $_POST['room'];
+        // Default room ID
+        $room_id = isset($_POST['room']) ? $_POST['room'] : $default_room_id;
 
+        if ($room_id) {
             $sql = "SELECT * FROM schedules WHERE room_id = :room_id";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([':room_id' => $room_id]);
             $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            echo "<h2>Gusaling Corazon Aquino Schedule - Room {$room_id}</h2>";
+            // Get room number for display
+            $sql_room = "SELECT room_number FROM rooms WHERE room_id = :room_id";
+            $stmt_room = $pdo->prepare($sql_room);
+            $stmt_room->execute([':room_id' => $room_id]);
+            $room_number = $stmt_room->fetchColumn();
+
+            echo "<h2>Gusaling Corazon Aquino Schedule - Room {$room_number}</h2>";
             echo "<table class=\"schedule-table\">";
             echo "<thead><tr><th>Day</th><th>Start Time</th><th>End Time</th><th>Status</th><th>Subject</th><th>Action</th></tr></thead>";
             echo "<tbody>";
