@@ -51,6 +51,10 @@
         display: none;
     }
 
+    .ribbon-button-container.stay {
+        display: block;
+    }
+
     .ribbon-button-container.dropdown {
         display: contents;
     }

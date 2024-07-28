@@ -1,3 +1,23 @@
+<?php
+session_start();
+
+if (isset($_SESSION['user_id'])) {
+  // Define JavaScript to add the 'enabled' class
+  $script = "<script>
+              document.addEventListener('DOMContentLoaded', function() {
+                  var elements = document.querySelectorAll('.ribbon-button-container');
+                  elements.forEach(function(element) {
+                      element.classList.add('noguest');
+                  });
+              });
+            </script>";
+
+  // Output the JavaScript
+  echo $script;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +26,7 @@
     <title>PLM Navigation App - Home</title>
     <link rel="stylesheet" href="assets/home.css">
     <link rel="stylesheet" href="assets/dropdown.css">
+    <link rel="stylesheet" href="assets/hide.css">
 </head>
 <body>
     <div class="top-ribbon">
@@ -41,6 +62,9 @@
                 <a href="user.php">USER</a>
                 <a href="settings.html">SETTINGS</a>
             </div>
+        </div>
+        <div class="ribbon-button-container guest">
+            <a href="index.php" class="ribbon-button">LOGIN</a>
         </div>
     </div>
 

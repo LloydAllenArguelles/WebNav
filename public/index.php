@@ -26,7 +26,7 @@
             <button type="submit">Login</button>
         </form>
         
-        <form action="home.html">
+        <form action="home.php">
             <button type="submit">Log in as Guest</button>
         </form>
     </div>

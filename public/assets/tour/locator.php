@@ -26,7 +26,7 @@
         <div class="ribbon-button-container dropdown">
             <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
             <div class="dropdown-content dropMenu">
-                <a href="../../home.html">HOME</a>
+                <a href="../../home.php">HOME</a>
                 <a href="../../forum.php">FORUM</a>
                 <a href="../../schedule.php">SCHEDULE</a>
                 <a href="../../events.html">EVENTS</a>
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="ribbon-button-container">
-            <a href="../../home.html" class="ribbon-button">HOME</a>
+            <a href="../../home.php" class="ribbon-button">HOME</a>
         </div>
         <div class="ribbon-button-container">
             <a href="../../forum.php" class="ribbon-button">FORUM</a>

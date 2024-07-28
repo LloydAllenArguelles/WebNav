@@ -79,7 +79,7 @@ if (isset($_SESSION['user_id'])) {
             <p class="no-account-message">User not logged in.</p>
             <div class="no-account-buttons">
                 <a href="index.php" class="button">Log In</a>
-                <a href="home.html" class="button">Back</a>
+                <a href="home.php" class="button">Back</a>
             </div>
         </div>
     

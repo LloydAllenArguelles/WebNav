@@ -10,7 +10,7 @@ app.use('/node_modules', express.static(path.join(__dirname, 'node_modules')));
 
 // Route for the homepage
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'home.html'));
+  res.sendFile(path.join(__dirname, 'public', 'home.php'));
 });
 
 app.listen(PORT, () => {

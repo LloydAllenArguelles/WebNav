@@ -1,6 +1,21 @@
 <?php
 session_start();
 
+if (isset($_SESSION['user_id'])) {
+  // Define JavaScript to add the 'enabled' class
+  $script = "<script>
+              document.addEventListener('DOMContentLoaded', function() {
+                  var elements = document.querySelectorAll('.ribbon-button-container');
+                  elements.forEach(function(element) {
+                      element.classList.add('noguest');
+                  });
+              });
+            </script>";
+
+  // Output the JavaScript
+  echo $script;
+}
+
 require_once '../../includes/dbh.inc.php';
 ?>
 
@@ -15,6 +30,8 @@ require_once '../../includes/dbh.inc.php';
 <link rel="stylesheet" href="vendor/reset.min.css">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="../home.css">
+<link rel="stylesheet" href="../dropdown.css">
+<link rel="stylesheet" href="../hide.css">
 <link rel="stylesheet" href="../manual.css">
 
 </head>
@@ -28,22 +45,10 @@ require_once '../../includes/dbh.inc.php';
                 <a href="gv-tour.php">GV</a>
                 <a href="gca-tour.php">GCA</a>
                 <a href="gee-tour.php">GEE</a>
-                <a href="locator.php">Where Am I?</a>
             </div>
         </div>
-        <div class="ribbon-button-container dropdown">
-            <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
-            <div class="dropdown-content dropMenu">
-                <a href="../../home.html">HOME</a>
-                <a href="../../forum.php">FORUM</a>
-                <a href="../../schedule.php">SCHEDULE</a>
-                <a href="../../events.html">EVENTS</a>
-                <a href="../../user.php">USER</a>
-                <a href="../../settings.html">SETTINGS</a>
-            </div>
-        </div>
-        <div class="ribbon-button-container">
-            <a href="../../home.html" class="ribbon-button">HOME</a>
+        <div class="ribbon-button-container stay">
+            <a href="../../home.php" class="ribbon-button">HOME</a>
         </div>
         <div class="ribbon-button-container">
             <a href="../../forum.php" class="ribbon-button">FORUM</a>
@@ -59,6 +64,19 @@ require_once '../../includes/dbh.inc.php';
         </div>
         <div class="ribbon-button-container">
             <a href="../../settings.html" class="ribbon-button">SETTINGS</a>
+        </div>
+        <div class="ribbon-button-container dropdown">
+            <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
+            <div class="dropdown-content dropMenu">
+                <a href="../../forum.php">FORUM</a>
+                <a href="../../schedule.php">SCHEDULE</a>
+                <a href="../../events.html">EVENTS</a>
+                <a href="../../user.php">USER</a>
+                <a href="../../settings.html">SETTINGS</a>
+            </div>
+        </div>
+        <div class="ribbon-button-container guest">
+            <a href="../../index.php" class="ribbon-button">LOGIN</a>
         </div>
     </div>
     
