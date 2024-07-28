@@ -5,18 +5,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const dropdownContentMenu = document.querySelector('.dropdown-content.dropMenu');
 
     dropdownTriggerView.addEventListener('click', function() {
-        if (dropdownContentView.style.display === 'block') {
-            dropdownContentView.style.removeProperty('display');
-        } else {
-            dropdownContentView.style.display = 'block';
-        }
+        dropdownContentView.classList.toggle('show');
+        dropdownContentMenu.classList.remove('show');
     });
 
     dropdownTriggerMenu.addEventListener('click', function() {
-        if (dropdownContentMenu.style.display === 'block') {
-            dropdownContentMenu.style.removeProperty('display');
-        } else {
-            dropdownContentMenu.style.display = 'block';
-        }
+        dropdownContentMenu.classList.toggle('show');
+        dropdownContentView.classList.remove('show');
     });
 });
