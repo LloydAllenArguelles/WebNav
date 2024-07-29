@@ -283,8 +283,8 @@ require_once '../../includes/dbh.inc.php';
 </a>
 
 <a href="javascript:void(0)" id="legendToggle">
-  <img class="icon off" src="img/close.png">
-  <img class="icon on" src="img/legend.png">
+  <img class="icon off" src="img/legend.png">
+  <img class="icon on" src="img/close.png">
 </a>
 
 <a href="javascript:void(0)" id="sceneListToggle">
