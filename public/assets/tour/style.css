@@ -46,7 +46,7 @@ a, a:hover, a:active, a:visited {
 
 #titleBar {
   position: absolute;
-  bottom: 40px;
+  top: 40px;
   left: 35%;
   right: 25%;
   height: 40px;
@@ -77,7 +77,7 @@ a, a:hover, a:active, a:visited {
 
 #targetBar{
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 35%;
   right: 25%;
   height: 40px;
@@ -141,7 +141,7 @@ a, a:hover, a:active, a:visited {
 #fullscreenToggle {
   display: none;
   position: absolute;
-  top: 0;
+  bottom: 85px;
   left: 0;
   width: 40px;
   height: 40px;
@@ -151,6 +151,7 @@ a, a:hover, a:active, a:visited {
 }
 
 .mobile #fullscreenToggle {
+  bottom: 105px;
   width: 50px;
   height: 50px;
 }
@@ -191,8 +192,8 @@ body.fullscreen-enabled #fullscreenToggle {
 #autorotateToggle {
   display: block;
   position: absolute;
-  top: 0;
-  left: 40px;
+  bottom: 45px;
+  left: 0;
   width: 40px;
   height: 40px;
   padding: 5px;
@@ -201,9 +202,9 @@ body.fullscreen-enabled #fullscreenToggle {
 }
 
 .mobile #autorotateToggle {
+  bottom: 55px;
   width: 50px;
   height: 50px;
-  left: 50px;
 }
 
 /* If there is a fullscreen button, autorotate must placed a bit to the left */
@@ -247,8 +248,8 @@ body.fullscreen-enabled.mobile #autorotateToggle {
 #legendToggle {
   display: none;
   position: absolute;
-  top: 0;
-  left: 80px;
+  bottom: 5px;
+  left: 0;
   width: 40px;
   height: 40px;
   padding: 5px;
@@ -257,7 +258,6 @@ body.fullscreen-enabled.mobile #autorotateToggle {
 }
 
 .mobile #legendToggle {
-  left: 100px;
   width: 50px;
   height: 50px;
 }
@@ -305,7 +305,7 @@ body.legend-enabled #legendToggle {
 
 #sceneListToggle, #targetListToggle img{
   position: absolute;
-  bottom: 40px;
+  top: 40px;
   left: 35%;
   width: 40px;
   height: 40px;
@@ -314,8 +314,8 @@ body.legend-enabled #legendToggle {
   background-color: rgba(103,115,131,0.8);
 }
 
-#targetListToggle img {
-  bottom: 0px;
+#targetListToggle img{
+  top: 0px;
 }
 
 
@@ -353,26 +353,26 @@ body.legend-enabled #legendToggle {
 
 #sceneList {
   position: absolute;
-  bottom: 80px;
+  top: 80px;
   left: 35%;
   right: 25%;
   max-height: 80%;
   overflow-x: hidden;
   overflow-y: auto;
   margin-left: 0;
-  margin-bottom: -2200px;
+  margin-top: -2200px;
 }
 
 #targetList {
   position: absolute;
-  bottom: 80px;
+  top: 80px;
   left: 35%;
   right: 25%;
   max-height: 80%;
   overflow-x: hidden;
   overflow-y: auto;
   margin-left: 0;
-  margin-bottom: -2200px;
+  margin-top: -2200px;
 }
 
 .mobile #sceneList, .mobile #targetList {
@@ -406,7 +406,7 @@ body.legend-enabled #legendToggle {
 }
 
 #sceneList.enabled, #targetList.enabled {
-  margin-bottom: 0px;
+  margin-top: 0px;
 }
 
 #sceneList .scene, #targetList .target {

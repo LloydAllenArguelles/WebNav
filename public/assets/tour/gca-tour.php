@@ -210,11 +210,11 @@ require_once '../../includes/dbh.inc.php';
   </div>
 </div>
 
-<div class="fromto" style="bottom:40px">
+<div class="fromto" style="top:40px">
   <h1>Current: </h1>
 </div>
 
-<div class="fromto" style="bottom:0">
+<div class="fromto" style="top:0">
   <h1>Go to: </h1>
 </div>
 
@@ -288,14 +288,15 @@ require_once '../../includes/dbh.inc.php';
 </a>
 
 <a href="javascript:void(0)" id="sceneListToggle">
-  <img class="icon off" src="img/up.png">
-  <img class="icon on" src="img/down.png">
+  <img class="icon off" src="img/down.png">
+  <img class="icon on" src="img/up.png">
 </a>
 
 <a href="javascript:void(0)" id="targetListToggle">
-  <img class="icon off" src="img/up.png">
-  <img class="icon on" src="img/down.png">
+  <img class="icon off" src="img/down.png">
+  <img class="icon on" src="img/up.png">
 </a>
+
 
 <a href="javascript:void(0)" id="viewUp" class="viewControlButton viewControlButton-1">
   <img class="icon" src="img/up.png">
