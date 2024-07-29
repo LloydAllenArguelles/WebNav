@@ -1,5 +1,7 @@
 .dropdown {
     position: relative;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 .dropdown-content {
@@ -38,6 +40,8 @@
 
 .stay .ribbon-trigger {
     display: block;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 /* Media Query for screens less than or equal to 805px */
@@ -62,7 +66,7 @@
     .dropdown-content {
         box-shadow: none;
         width: 100%;
-        margin-top: 10px;
+        margin-top: 11px;
     }
 
     .dropdown-content.show {
@@ -72,8 +76,15 @@
     .dropdown-content a {
         text-align: left;
     }
+    
+    .dropdown-content {
+        border-bottom: blue 2px solid;
+        border-top: blue 2px solid;
+    }
 
     .ribbon-trigger {
         display: block;
+        padding-top: 0px;
+        padding-bottom: 0px;
     }
 }
