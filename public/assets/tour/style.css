@@ -47,7 +47,7 @@ a, a:hover, a:active, a:visited {
 #titleBar {
   position: absolute;
   top: 40px;
-  left: 15%;
+  left: 120px;
   right: 50%;
   height: 40px;
   text-align: right;
@@ -55,7 +55,7 @@ a, a:hover, a:active, a:visited {
 
 .mobile #titleBar {
   right: 0;
-  left: 15%;
+  text-align: center;
 }
 
 #titleBar .sceneName {
@@ -77,7 +77,7 @@ a, a:hover, a:active, a:visited {
 #targetBar{
   position: absolute;
   top: 0;
-  left: 15%;
+  left: 120px;
   right: 50%;
   height: 40px;
   text-align: right;
@@ -85,7 +85,7 @@ a, a:hover, a:active, a:visited {
 
 .mobile #targetBar {
   right: 0;
-  left: 15%;
+  text-align: center;
 }
 
 #targetBar .targetName {
@@ -293,18 +293,10 @@ body.legend-enabled #legendToggle {
   display: none;
 }
 
-.mobile #targetListToggle img {
-  left: 15%;
-}
-
-.mobile #sceneListToggle, .mobile #targetListToggle {
-  left: 15%;
-}
-
 #sceneListToggle, #targetListToggle img{
   position: absolute;
   top: 40px;
-  left: 15%;
+  left: 80px;
   width: 40px;
   height: 40px;
   padding: 5px;
@@ -949,14 +941,9 @@ body.view-control-buttons .viewControlButton {
 .fromto {
   position: absolute;
   left: 0%;
-  right: 85%;
+  width: 80px;
   height: 40px;
   text-align: center;
-}
-
-.mobile .fromto {
-  right: 85%;
-  left: 0;
 }
 
 .fromto h1 {
