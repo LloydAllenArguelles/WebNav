@@ -26,6 +26,7 @@
   var panoElement = document.querySelector('#pano');
   var sceneNameElement = document.querySelector('#titleBar .sceneName');
   var targetNameElement = document.querySelector('#targetBar .targetName');
+  var notifyElement = document.querySelector('#targetNotify');
   var sceneListElement = document.querySelector('#sceneList');
   var targetListElement = document.querySelector('#targetList');
   var sceneElements = document.querySelectorAll('#sceneList .scene');
@@ -240,6 +241,7 @@
     var el = document.querySelector('#sceneList .scene[data-id="' + scene.data.id + '"]');
     el.addEventListener('click', function() {
       switchScene(scene);
+      toggleNotify();
       // On mobile, hide scene list after selecting a scene.
       if (document.body.classList.contains('mobile')) {
         hideSceneList();
@@ -322,6 +324,9 @@
       targetListElement.classList.remove('enabled');
       targetListToggleElement.classList.remove('enabled');
     }
+    if (notifyElement.classList.contains('enabled')) {
+    notifyElement.classList.remove('enabled');
+    }
   }
 
   function toggleTargetList() {
@@ -330,6 +335,9 @@
     if(sceneListElement.classList.contains('enabled')) {
       sceneListElement.classList.remove('enabled');
       sceneListToggleElement.classList.remove('enabled');
+    }
+    if (notifyElement.classList.contains('enabled')) {
+    notifyElement.classList.remove('enabled');
     }
   }
 
@@ -366,6 +374,16 @@
     }
   }
 
+  function toggleNotify() {
+    if (currentScene == currentTarget){
+    notifyElement.classList.add('enabled');
+      if (sceneListElement.classList.contains('enabled')||targetListElement.classList.contains('enabled')) {
+        sceneListElement.classList.remove('enabled');
+        targetListElement.classList.remove('enabled');
+      }
+    }
+  }
+
   function createLinkHotspotElement(hotspot) {
 
     // Create wrapper element to hold icon and tooltip.
@@ -391,9 +409,10 @@
   
       // Find the previous scene's hotspot element
       const previousSceneId = currentScene;
+      notifyElement.classList.remove('enabled');
       switchScene(findSceneById(hotspot.target));
       const hotspotElements = document.querySelectorAll(`#pano .hotspot.link-hotspot[data-target="${previousSceneId}"]`);
-
+      toggleNotify();
       hotspotElements.forEach(element => {
         if (element.getAttribute('data-target') === previousSceneId) {
             element.classList.remove('pathing');
