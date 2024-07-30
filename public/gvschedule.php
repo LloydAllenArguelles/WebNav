@@ -39,7 +39,7 @@ if (isset($_POST['day'])) {
 }
 
 // Determine if the current user is a professor
-$is_professor = isset($_SESSION['role']) && $_SESSION['role'] === 'professor';
+$is_professor = isset($_SESSION['role']) && $_SESSION['role'] === 'Professor';
 
 ?>
 
@@ -49,7 +49,7 @@ $is_professor = isset($_SESSION['role']) && $_SESSION['role'] === 'professor';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - Gusaling Villegas</title>
-    <link rel="stylesheet" href="gvschedule.css">
+    <link rel="stylesheet" href="assets/schedule.css">
     <link rel="stylesheet" href="assets/dropdown.css">
 </head>
 <body>
@@ -161,7 +161,12 @@ $is_professor = isset($_SESSION['role']) && $_SESSION['role'] === 'professor';
                 echo "<td>{$schedule['day_of_week']}</td>";
                 echo "<td>{$schedule['start_time']}</td>";
                 echo "<td>{$schedule['end_time']}</td>";
-                echo "<td>{$schedule['status']}</td>";
+                if ($schedule['status'] == 'available') 
+                    {echo "<td class=\"available\">{$schedule['status']}</td>";} 
+                elseif ($schedule['status'] == 'occupied' && $schedule['user_id'] == $_SESSION['user_id']) 
+                    {echo "<td class=\"occupied-own\">{$schedule['status']} (YOU)</td>";} 
+                else 
+                    {echo "<td class=\"occupied\">{$schedule['status']}</td>";}
                 echo "<td>{$schedule['subject']}</td>";
 
                 if ($is_professor) {
