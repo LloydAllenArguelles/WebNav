@@ -293,7 +293,7 @@ body.legend-enabled #legendToggle {
   display: none;
 }
 
-#sceneListToggle, #targetListToggle img{
+#sceneListToggle, #targetListToggle {
   position: absolute;
   top: 40px;
   left: 80px;
@@ -304,7 +304,7 @@ body.legend-enabled #legendToggle {
   background-color: rgba(103,115,131,0.8);
 }
 
-#targetListToggle img{
+#targetListToggle {
   top: 0px;
 }
 
@@ -317,7 +317,7 @@ body.legend-enabled #legendToggle {
   line-height: 30px;
 }
 
-#sceneListToggle .icon, #targetlistToggle .icon {
+#sceneListToggle .icon, #targetListToggle .icon {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -344,7 +344,7 @@ body.legend-enabled #legendToggle {
 #sceneList {
   position: absolute;
   top: 80px;
-  left: 20%;
+  left: 120px;
   right: 50%;
   max-height: 80%;
   overflow-x: hidden;
@@ -356,7 +356,7 @@ body.legend-enabled #legendToggle {
 #targetList {
   position: absolute;
   top: 80px;
-  left: 20%;
+  left: 120px;
   right: 50%;
   max-height: 80%;
   overflow-x: hidden;

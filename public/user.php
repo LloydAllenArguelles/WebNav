@@ -265,15 +265,8 @@ try {
                 <a href="assets/tour/gee-tour.php">GEE</a>
             </div>
         </div>
-        <div class="ribbon-button-container dropdown">
-            <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
-            <div class="dropdown-content dropMenu">
-                <a href="forum.php">FORUM</a>
-                <a href="schedule.php">SCHEDULE</a>
-                <a href="events.html">EVENTS</a>
-                <a href="user.php">USER</a>
-                <a href="settings.html">SETTINGS</a>
-            </div>
+        <div class="ribbon-button-container stay">
+            <a href="home.php" class="ribbon-button">HOME</a>
         </div>
         <div class="ribbon-button-container">
             <a href="forum.php" class="ribbon-button">FORUM</a>
@@ -289,6 +282,16 @@ try {
         </div>
         <div class="ribbon-button-container">
             <a href="settings.html" class="ribbon-button">SETTINGS</a>
+        </div>
+        <div class="ribbon-button-container dropdown">
+            <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
+            <div class="dropdown-content dropMenu">
+                <a href="forum.php">FORUM</a>
+                <a href="schedule.php">SCHEDULE</a>
+                <a href="events.html">EVENTS</a>
+                <a href="user.php">USER</a>
+                <a href="settings.html">SETTINGS</a>
+            </div>
         </div>
         <div class="ribbon-button-container">
             <a href="includes/logout.php" class="ribbon-button">LOGOUT</a>

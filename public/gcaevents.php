@@ -93,7 +93,6 @@ ob_clean();
     </style>
 </head>
 <body>
-    <!-- Your existing top ribbon navigation -->
     <div class="top-ribbon">
         <div class="ribbon-button-container dropdown stay">
             <span class="ribbon-button ribbon-trigger dropView">360 VIEW</span>
@@ -103,15 +102,8 @@ ob_clean();
                 <a href="assets/tour/gee-tour.php">GEE</a>
             </div>
         </div>
-        <div class="ribbon-button-container dropdown">
-            <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
-            <div class="dropdown-content dropMenu">
-                <a href="forum.php">FORUM</a>
-                <a href="schedule.php">SCHEDULE</a>
-                <a href="events.html">EVENTS</a>
-                <a href="user.php">USER</a>
-                <a href="settings.html">SETTINGS</a>
-            </div>
+        <div class="ribbon-button-container stay">
+            <a href="home.php" class="ribbon-button">HOME</a>
         </div>
         <div class="ribbon-button-container">
             <a href="forum.php" class="ribbon-button">FORUM</a>
@@ -127,6 +119,16 @@ ob_clean();
         </div>
         <div class="ribbon-button-container">
             <a href="settings.html" class="ribbon-button">SETTINGS</a>
+        </div>
+        <div class="ribbon-button-container dropdown">
+            <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
+            <div class="dropdown-content dropMenu">
+                <a href="forum.php">FORUM</a>
+                <a href="schedule.php">SCHEDULE</a>
+                <a href="events.html">EVENTS</a>
+                <a href="user.php">USER</a>
+                <a href="settings.html">SETTINGS</a>
+            </div>
         </div>
     </div>
 
