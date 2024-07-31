@@ -15,7 +15,7 @@ require_once 'includes/dbh.inc.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - Forum</title>
-    <link rel="stylesheet" href="forum.css">
+    <link rel="stylesheet" href="assets/forum.css">
     <link rel="stylesheet" href="assets/dropdown.css">
 </head>
 <body>

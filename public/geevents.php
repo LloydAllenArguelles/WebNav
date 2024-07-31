@@ -21,7 +21,7 @@ ob_clean();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - Gusaling Ejercito Estrada</title>
-    <link rel="stylesheet" href="gvevents.css">
+    <link rel="stylesheet" href="assets/buildingevents.css">
     <link rel="stylesheet" href="assets/dropdown.css">
     <style>
         body {

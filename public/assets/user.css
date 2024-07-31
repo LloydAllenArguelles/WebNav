@@ -1,0 +1,231 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e6f0ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.top-ribbon {
+    background-color: #007bff;
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ribbon-button-container {
+    margin: 0 10px;
+}
+
+.ribbon-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.ribbon-button:hover {
+    background-color: #0056b3;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.user-container {
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    max-width: 500px;
+}
+
+.user-container h1 {
+    margin-bottom: 5px;
+    font-size: 25px;
+    color: #333;
+    font-weight: 300;
+}
+
+#user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#user-profile p {
+    margin-left: 30px;
+    color: #333;
+    font-weight: 500;
+}
+
+.profile {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding: 50px;
+    width: 900px;
+    border-radius: 10px;
+}
+
+.card img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    width: 100px;
+    background: #b5c9f3;
+    padding: 12px;
+    margin: 5px auto;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+input {
+    display: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    top:25px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.ribbon-trigger {
+    cursor: pointer;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#user-profile table {
+    border-collapse: collapse; /* Remove space between table cells */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    min-width: 300px;
+  }
+
+  .mobile #user-profile table {
+      width:300px;
+      border-collapse: collapse; /* Remove space between table cells */
+    }
+  
+  /* Style table headers (th) */
+  #user-profile table th {
+    background-color: #007bff;
+    color: white;
+    padding: 10px; /* Add padding for better readability */
+    text-align: left; /* Align table headers to the left */
+    width:100px;
+  }
+
+  #user-profile table tr:first-child th {
+    border-top-left-radius: 15px;
+  }
+  #user-profile table tr:last-child th {
+    border-bottom-left-radius: 15px;
+  }
+  
+  /* Style table data cells (td) */
+  #user-profile table td {
+    padding: 10px; /* Add padding for better readability */
+  }
+
+  
+
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #4CAF50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}

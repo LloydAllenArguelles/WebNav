@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id'])) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>PLM Navigation App - User</title>
-        <link rel="stylesheet" href="user.css">
+        <link rel="stylesheet" href="assets/user.css">
         <style>
             body {
                 font-family: Arial, sans-serif;
@@ -162,7 +162,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - User</title>
-    <link rel="stylesheet" href="user.css">
+    <link rel="stylesheet" href="assets/user.css">
     <link rel="stylesheet" href="assets/dropdown.css">
     <style>
 
