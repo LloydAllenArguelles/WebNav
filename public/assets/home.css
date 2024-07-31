@@ -1,80 +1,116 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #e6f0ff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #e6f0ff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }   
 
-.top-ribbon {
-    background-color: #007bff;
-    width: 100%;
-    padding: 10px 0;
-    display: flex;
-    justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+    .top-ribbon {
+        background-color: #007bff;
+        width: 100%;
+        padding: 10px 0;
+        display: flex;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-.ribbon-button-container {
-    margin: 0 10px;
-    display: block;
-}
+    .ribbon-button-container {
+        margin: 0 10px;
+        display: block;
+    }
 
-.ribbon-button {
-    padding: 0px 20px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 20px; 
-    font-size: 16px;
-    transition: background-color 0.3s, color 0.3s;
-}
+    .ribbon-button {
+        padding: 0px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 20px; 
+        font-size: 16px;
+        transition: background-color 0.3s, color 0.3s;
+    }
 
-.ribbon-button:hover {
-    background-color: #0056b3;
-}
+    .ribbon-button:hover {
+        background-color: #0056b3;
+    }
 
-.home-bg {
-    height: 100vh;
-    width: 100%;
-    background: url(front/plm.jpg) no-repeat center center/cover;
-    background-attachment: fixed;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    .home-bg {
+        height: 100vh;
+        width: 100%;
+        background: url(front/plm.jpg) no-repeat center center/cover;
+        background-attachment: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-.home-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-    margin-top:50%;
-}
+    .home-container {
+        display: flex;
+        flex-direction: column; /* Stack the text boxes vertically */
+        justify-content: center;
+        align-items: center;
+        height: auto; /* Adjust height to fit content */
+        width: 100%;
+        margin-top: 20px; /* Space between the ribbon and text boxes */
+    }
 
-.center-button-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-}
+    .center-button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
 
-.home-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 25px; 
-    font-size: 18px;
-    transition: 0.3s;
-    text-align: center;
-    width: 150px; 
-}
+    .home-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 25px; 
+        font-size: 18px;
+        transition: 0.3s;
+        text-align: center;
+        width: 150px; 
+    }
 
-.home-button:hover {
-    background-color: #0056b3;
-    transition: 0.3s;
-}
+    .home-button:hover {
+        background-color: #0056b3;
+        transition: 0.3s;
+    }
+
+    .floating-headline {
+        position: relative;
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 20px;
+        z-index: 1000;
+    }
+
+    /* New styles for the text boxes */
+    .text-box {
+        background-color: white;
+        color: black;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 80%; /* Adjust width to fit your design */
+        max-width: 400px; /* Ensure a maximum width for consistency */
+        margin: 10px 0; /* Space between text boxes */
+    }
+
+    .text-box h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .text-box p {
+        font-size: 16px;
+        margin: 0;
+    }
