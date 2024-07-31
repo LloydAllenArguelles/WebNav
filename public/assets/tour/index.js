@@ -476,10 +476,14 @@
     header.appendChild(iconWrapper);
     header.appendChild(titleWrapper);
     header.appendChild(closeWrapper);
-
+    
+    var text = document.createElement('div');
+    text.classList.add('info-hotspot-text');
+    text.innerHTML = hotspot.text;
 
     // Place header and text into wrapper element.
     wrapper.appendChild(header);
+    wrapper.appendChild(text);
 
     // Create a modal for the hotspot content to appear on mobile mode.
     var modal = document.createElement('div');
