@@ -30,7 +30,7 @@
 
     <div class="floating-headline">HEAD LINE</div>
     <div class="top-ribbon">
-        <div class="ribbon-button-container dropdown stay noguest">
+        <div class="ribbon-button-container dropdown stay">
             <span class="ribbon-button ribbon-trigger dropView">360 VIEW</span>
             <div class="dropdown-content dropView">
                 <a href="assets/tour/gv-tour.php">GV</a>
@@ -38,22 +38,22 @@
                 <a href="assets/tour/gee-tour.php">GEE</a>
             </div>
         </div>
-        <div class="ribbon-button-container noguest">
+        <div class="ribbon-button-container">
             <a href="forum.php" class="ribbon-button">FORUM</a>
         </div>
-        <div class="ribbon-button-container noguest">
+        <div class="ribbon-button-container">
             <a href="schedule.php" class="ribbon-button">SCHEDULE</a>
         </div>
-        <div class="ribbon-button-container noguest">
+        <div class="ribbon-button-container">
             <a href="events.html" class="ribbon-button">EVENTS</a>
         </div>
-        <div class="ribbon-button-container noguest">
+        <div class="ribbon-button-container">
             <a href="user.php" class="ribbon-button">USER</a>
         </div>
-        <div class="ribbon-button-container noguest">
+        <div class="ribbon-button-container">
             <a href="settings.html" class="ribbon-button">SETTINGS</a>
         </div>
-        <div class="ribbon-button-container dropdown noguest">
+        <div class="ribbon-button-container dropdown">
             <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
             <div class="dropdown-content dropMenu">
                 <a href="forum.php">FORUM</a>
@@ -63,7 +63,7 @@
                 <a href="settings.html">SETTINGS</a>
             </div>
         </div>
-        <div class="ribbon-button-container guest noguest">
+        <div class="ribbon-button-container guest">
             <a href="index.php" class="ribbon-button">LOGIN</a>
         </div>
     </div>
@@ -95,13 +95,7 @@
       language-code="en"
     ></df-messenger>
     <!-- Chatbot Part End -->
-
-    <script>
-        function navigateTo(page) {
-            alert('Navigating to ' + page);
-            // wala logic pa
-        }
-    </script>
+     
     <script src="assets/js/buttons.js"></script>
 </body>
 </html>

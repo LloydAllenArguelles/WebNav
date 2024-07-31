@@ -6,6 +6,7 @@
         align-items: center;
         height: 100vh;
         margin: 0;
+        overflow: hidden;
     }   
 
     .top-ribbon {
@@ -48,12 +49,11 @@
 
     .home-container {
         display: flex;
-        flex-direction: column; /* Stack the text boxes vertically */
+        flex-direction: row; /* Stack the text boxes vertically */
         justify-content: center;
         align-items: center;
         height: auto; /* Adjust height to fit content */
         width: 100%;
-        margin-top: 20px; /* Space between the ribbon and text boxes */
     }
 
     .center-button-container {
@@ -89,28 +89,40 @@
         text-align: center;
         padding: 10px 0;
         font-size: 20px;
-        z-index: 1000;
     }
+
 
     /* New styles for the text boxes */
     .text-box {
-        background-color: white;
+        background-color: rgb(255, 255, 255, 0.95);
         color: black;
         padding: 20px;
         border-radius: 10px;
+        border: #0056b3 2px solid;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         text-align: center;
-        width: 80%; /* Adjust width to fit your design */
-        max-width: 400px; /* Ensure a maximum width for consistency */
-        margin: 10px 0; /* Space between text boxes */
+        width: 200px; /* Ensure a maximum width for consistency */
+        margin: 15px;
     }
 
     .text-box h2 {
         font-size: 24px;
-        margin-bottom: 10px;
     }
 
     .text-box p {
         font-size: 16px;
-        margin: 0;
     }
+
+    
+/* Media Query for screens less than or equal to 805px */
+@media screen and (max-width: 805px) {
+    .text-box {
+       width: 80%;
+       margin-top: 5px;
+       max-width: unset; /* Ensure a maximum width for consistency */
+    }
+    .home-container {
+       flex-direction: column;
+    }
+
+}
