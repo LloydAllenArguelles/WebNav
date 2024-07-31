@@ -289,6 +289,10 @@ require_once '../../includes/dbh.inc.php';
   </div>
 </div>
 
+<div id="targetNotify">
+  <h1>You have reached your destination.</h1>
+</div>
+
 <div class="fromto" style="top:40px">
   <h1>Current: </h1>
 </div>

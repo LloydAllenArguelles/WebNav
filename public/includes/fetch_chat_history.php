@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room'])) {
         while ($chat = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $message_class = ($chat['user_id'] == $current_user_id) ? 'send' : 'receive';
 
-            if ($chat['role'] == 'professor') {
+            if ($chat['role'] == 'Professor') {
                 $message_class .= ' professor'; 
             }
 
