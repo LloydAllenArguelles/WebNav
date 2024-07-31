@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - SETTINGS</title>
-    <link rel="stylesheet" href="settings.css"> <!-- if ayaw gumana lagay muna sa public yung css idk din y ayaw gumana pag nasa assets e  -->
+    <link rel="stylesheet" href="settings.css">
     <link rel="stylesheet" href="assets/dropdown.css">
-
 </head>
 <body>
     <div class="top-ribbon">
@@ -48,29 +47,31 @@
         </div>
     </div>
 
-    <div class="container">
-    <h1>Privacy Policy</h1>
-        <div class="settings-table" style='flex-direction: column;'>
-            <a class="settings-button button">
+    <div class="settings-container">
+        <h1>Privacy Policy</h1>
+        <div class="settings-table">
+            <div class="settings-button button">
+                <span class="settings-icon">📜</span>
                 Republic Act No. 10173 also known as the Data Privacy Act states that any information may be disclosed to the public as long as it complies with this Act's standards as well as those of other laws that permit it, and as long as it follows the guidelines of proportionality, transparency, and legitimacy.
-            </a>
-            <a class="settings-button button">
+            </div>
+            <div class="settings-button button">
+                <span class="settings-icon">🔒</span>
                 All of the data here will all be kept private and used exclusively for study. All information gathered will be absolutely confidential and shared only with the panelists, the respondent, and the group Codedigo.
-            </a>
+            </div>
         </div>
         <a href="home.php" class="back-button">Back to Home</a>
     </div>
 
-<!-- Chatbot Part Start -->
+    <!-- Chatbot Part Start -->
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger
-      chat-icon="https:&#x2F;&#x2F;assets.stickpng.com&#x2F;images&#x2F;580b57fbd9996e24bc43be12.png"
-      intent="WELCOME"
-      chat-title="Chatbot"
-      agent-id="060d64ba-b3ff-4be9-87c6-88c97d332f18"
-      language-code="en"
+        chat-icon="https://assets.stickpng.com/images/580b57fbd9996e24bc43be12.png"
+        intent="WELCOME"
+        chat-title="Chatbot"
+        agent-id="060d64ba-b3ff-4be9-87c6-88c97d332f18"
+        language-code="en"
     ></df-messenger>
-<!-- Chatbot Part End -->
+    <!-- Chatbot Part End -->
 
     <script src="assets/js/buttons.js"></script>
 </body>
