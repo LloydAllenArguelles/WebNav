@@ -22,7 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['room'])) {
                 $message_class .= ' professor'; 
             }
 
-            echo "<div class=\"chat-message $message_class\">{$chat['username']}: {$chat['message']} ({$chat['timestamp']})</div>";
+            $sanitized_message=htmlspecialchars($chat['message']);
+
+            echo "<div class=\"chat-message $message_class\">{$chat['username']}: {$sanitized_message} ({$chat['timestamp']})</div>";
         }
     } else {
         echo "No messages found for this room.";
