@@ -1,23 +1,3 @@
-<?php
-session_start();
-
-if (isset($_SESSION['user_id'])) {
-  // Define JavaScript to add the 'enabled' class
-  $script = "<script>
-              document.addEventListener('DOMContentLoaded', function() {
-                  var elements = document.querySelectorAll('.ribbon-button-container');
-                  elements.forEach(function(element) {
-                      element.classList.add('noguest');
-                  });
-              });
-            </script>";
-
-  // Output the JavaScript
-  echo $script;
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,8 +9,28 @@ if (isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="assets/hide.css">
 </head>
 <body>
+    <?php
+    session_start();
+
+    if (isset($_SESSION['user_id'])) {
+        // Define JavaScript to add the 'enabled' class
+        $script = "<script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var elements = document.querySelectorAll('.ribbon-button-container');
+                        elements.forEach(function(element) {
+                            element.classList.add('noguest');
+                        });
+                    });
+                  </script>";
+
+        // Output the JavaScript
+        echo $script;
+    }
+    ?>
+
+    <div class="floating-headline">HEAD LINE</div>
     <div class="top-ribbon">
-        <div class="ribbon-button-container dropdown stay">
+        <div class="ribbon-button-container dropdown stay noguest">
             <span class="ribbon-button ribbon-trigger dropView">360 VIEW</span>
             <div class="dropdown-content dropView">
                 <a href="assets/tour/gv-tour.php">GV</a>
@@ -38,22 +38,22 @@ if (isset($_SESSION['user_id'])) {
                 <a href="assets/tour/gee-tour.php">GEE</a>
             </div>
         </div>
-        <div class="ribbon-button-container">
+        <div class="ribbon-button-container noguest">
             <a href="forum.php" class="ribbon-button">FORUM</a>
         </div>
-        <div class="ribbon-button-container">
+        <div class="ribbon-button-container noguest">
             <a href="schedule.php" class="ribbon-button">SCHEDULE</a>
         </div>
-        <div class="ribbon-button-container">
+        <div class="ribbon-button-container noguest">
             <a href="events.html" class="ribbon-button">EVENTS</a>
         </div>
-        <div class="ribbon-button-container">
+        <div class="ribbon-button-container noguest">
             <a href="user.php" class="ribbon-button">USER</a>
         </div>
-        <div class="ribbon-button-container">
+        <div class="ribbon-button-container noguest">
             <a href="settings.html" class="ribbon-button">SETTINGS</a>
         </div>
-        <div class="ribbon-button-container dropdown">
+        <div class="ribbon-button-container dropdown noguest">
             <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
             <div class="dropdown-content dropMenu">
                 <a href="forum.php">FORUM</a>
@@ -63,16 +63,24 @@ if (isset($_SESSION['user_id'])) {
                 <a href="settings.html">SETTINGS</a>
             </div>
         </div>
-        <div class="ribbon-button-container guest">
+        <div class="ribbon-button-container guest noguest">
             <a href="index.php" class="ribbon-button">LOGIN</a>
         </div>
     </div>
 
     <div class="home-bg">
         <div class="home-container">
-            <div class="center-button-container">
-                <a href="assets/tour/gv-tour.php" class="home-button" onclick="navigateTo('360 View')">360 VIEW</a>
-                <!--<a href="#" class="home-button" onclick="navigateTo('Schedule')">SCHEDULE</a>-->
+            <div class="text-box mission">
+                <h2>Mission</h2>
+                <p>Our mission is to deliver exceptional value through innovation and commitment.</p>
+            </div>
+            <div class="text-box vision">
+                <h2>Vision</h2>
+                <p>Our vision is to be a leader in our industry, setting the standard for quality and excellence.</p>
+            </div>
+            <div class="text-box values">
+                <h2>Values</h2>
+                <p>We value integrity, teamwork, and continuous improvement in everything we do.</p>
             </div>
         </div>
     </div>
@@ -80,7 +88,7 @@ if (isset($_SESSION['user_id'])) {
     <!-- Chatbot Part Start -->
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger
-      chat-icon="https:&#x2F;&#x2F;assets.stickpng.com&#x2F;images&#x2F;580b57fbd9996e24bc43be12.png"
+      chat-icon="https://assets.stickpng.com/images/580b57fbd9996e24bc43be12.png"
       intent="WELCOME"
       chat-title="Chatbot"
       agent-id="060d64ba-b3ff-4be9-87c6-88c97d332f18"
