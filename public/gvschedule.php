@@ -15,6 +15,7 @@ $building_name = 'Gusaling Villegas'; // Updated building name
 // Default selected room and day
 $selected_room_id = null;
 $selected_day = null;
+$selected_status = null;
 
 // Update selected room and day based on form submission
 if (isset($_POST['room'])) {
@@ -36,6 +37,13 @@ if (isset($_POST['day'])) {
     $_SESSION['selected_day'] = $selected_day;
 } else {
     $selected_day = null; // Reset day filter
+}
+
+if (isset($_POST['stat'])) {
+    $selected_status = $_POST['stat'];
+    $_SESSION['selected_status'] = $selected_status;
+} else {
+    $selected_status = null; // Reset status filter
 }
 
 // Determine if the current user is a professor
@@ -119,6 +127,14 @@ $is_professor = isset($_SESSION['role']) && $_SESSION['role'] === 'Professor';
                     <option value="Thursday" <?php echo $selected_day === 'Thursday' ? 'selected' : ''; ?>>Thursday</option>
                     <option value="Friday" <?php echo $selected_day === 'Friday' ? 'selected' : ''; ?>>Friday</option>
                 </select>
+                
+                <label for="stat">Select Status:</label>
+                <select name="stat" id="stat" onchange="this.form.submit()">
+                    <option value="" <?php echo $selected_status === null ? 'selected' : ''; ?>>Any Status</option>
+                    <option value="available" <?php echo $selected_status === 'available' ? 'selected' : ''; ?>>Available</option>
+                    <option value="occupied" <?php echo $selected_status === 'occupied' ? 'selected' : ''; ?>>Occupied</option>
+                    <option value="pending" <?php echo $selected_status === 'pending' ? 'selected' : ''; ?>>Pending</option>
+                </select>
             </form>
         </div>
     </div>
@@ -136,16 +152,21 @@ $is_professor = isset($_SESSION['role']) && $_SESSION['role'] === 'Professor';
 
             echo "<h2>{$building_name} Schedule - Room {$room_number}</h2>";
 
-            // Fetch schedules with optional day filter
+            // Fetch schedules with optional day and status filters
             $sql = "SELECT * FROM schedules WHERE room_id = :room_id";
+            $params = [':room_id' => $room_id];
+
             if ($selected_day) {
                 $sql .= " AND day_of_week = :day";
-            }
-            $stmt = $pdo->prepare($sql);
-            $params = [':room_id' => $room_id];
-            if ($selected_day) {
                 $params[':day'] = $selected_day;
             }
+
+            if ($selected_status) {
+                $sql .= " AND status = :stat";
+                $params[':stat'] = $selected_status;
+            }
+
+            $stmt = $pdo->prepare($sql);
             $stmt->execute($params);
             $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
