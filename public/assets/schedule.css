@@ -104,3 +104,7 @@ body {
 .schedule-table td.occupied-own {
     background-color: rgb(250, 234, 59);
 }
+
+.schedule-table td.pending {
+    background-color: rgb(0, 123, 255);
+}
