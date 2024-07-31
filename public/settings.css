@@ -1,6 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #e6f0ff;
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #f4f4f9;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,7 +9,7 @@ body {
 }
 
 .top-ribbon {
-    background-color: #007bff;
+    background-color: #003366;
     width: 100%;
     padding: 10px 0;
     display: flex;
@@ -23,21 +23,23 @@ body {
 
 .ribbon-button {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #003366;
     color: white;
     text-decoration: none;
     border-radius: 20px;
     font-size: 16px;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    font-weight: bold;
 }
 
 .ribbon-button:hover {
-    background-color: #0056b3;
+    background-color: #001a33;
+    transform: scale(1.1);
 }
 
 .settings-container {
     background-color: #ffffff;
-    padding: 20px;
+    padding: 30px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -46,52 +48,65 @@ body {
     flex-direction: column;
     align-items: center;
     width: 80%;
+    animation: fadeIn 1s ease-in-out;
 }
 
 .settings-container h1 {
-    margin-bottom: 20px;
-    font-size: 28px;
-    color: #333;
-    font-weight: 300;
+    margin-bottom: 30px;
+    font-size: 32px;
+    color: #003366;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .settings-table {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
 }
 
 .settings-button {
-    padding: 15px 30px;
-    background-color: #007bff;
+    padding: 20px 40px;
+    background-color: #0055cc;
     color: white;
     text-decoration: none;
     border-radius: 8px;
     font-size: 18px;
     transition: background-color 0.3s, transform 0.3s;
-    text-align: center;
-    margin: 10px;  /* Updated margin for better spacing */
+    text-align: left;
+    margin: 15px;
+    display: flex;
+    align-items: center;
 }
 
 .settings-button:hover {
-    background-color: #0056b3;
+    background-color: #003399;
+    transform: scale(1.05);
+}
+
+.settings-icon {
+    font-size: 24px;
+    margin-right: 15px;
 }
 
 .back-button {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
+    padding: 15px 30px;
+    background-color: #003366;
     color: white;
     text-decoration: none;
     border-radius: 20px;
-    transition: background-color 0.3s;
-    margin-top: 20px;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 30px;
+    font-weight: bold;
 }
 
 .back-button:hover {
-    background-color: #0056b3;
+    background-color: #001a33;
+    transform: scale(1.1);
 }
 
 .dropdown {
@@ -128,14 +143,22 @@ body {
     display: block;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
 @media (max-width: 768px) {
-    .building-settings-table {
-        flex-direction: column;
-        align-items: center;
+    .settings-container {
+        width: 90%;
     }
 
     .settings-button {
-        width: 80%; /* Ensures buttons do not span full width */
-        margin: 5px 0; /* Additional spacing between buttons */
+        width: 100%;
+        margin: 5px 0;
     }
 }
