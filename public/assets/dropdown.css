@@ -1,3 +1,32 @@
+   
+.top-ribbon {
+    background-color: #007bff;
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ribbon-button-container {
+    margin: 0 10px;
+    display: block;
+}
+
+.ribbon-button {
+    padding: 10px 10px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px; 
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.ribbon-button:hover {
+    background-color: #0056b3;
+}
+
 .dropdown {
     position: relative;
     padding-top: 0px;
@@ -39,9 +68,7 @@
 }
 
 .stay .ribbon-trigger {
-    display: block;
-    padding-top: 0px;
-    padding-bottom: 0px;
+    display: unset;
 }
 
 /* Media Query for screens less than or equal to 805px */
@@ -56,16 +83,17 @@
     }
 
     .ribbon-button-container.stay {
-        display: block;
+        display: unset;
     }
 
     .ribbon-button-container.dropdown {
-        display: contents;
+        display: unset;
     }
 
     .dropdown-content {
-        box-shadow: none;
-        width: 100%;
+        position: fixed;
+        left: 0;
+        right: 0;
         margin-top: 11px;
     }
 
@@ -83,8 +111,6 @@
     }
 
     .ribbon-trigger {
-        display: block;
-        padding-top: 0px;
-        padding-bottom: 0px;
+        display: unset;
     }
 }

@@ -4,15 +4,15 @@
 }
 
 .ribbon-button-container.noguest {
-    display: block;
+    display: unset;
 }
 
 .ribbon-button-container.stay {
-    display: block;
+    display: unset;
 }
 
 .ribbon-button-container.guest {
-    display: block;
+    display: unset;
 }
 
 .ribbon-button-container.guest.noguest {
@@ -36,11 +36,11 @@
     }
 
     .ribbon-button-container.dropdown.noguest {
-        display: contents;
+        display: unset;
     }
     
     .ribbon-button-container.stay {
-        display: contents;
+        display: unset;
     }
 
     .dropdown-content {
@@ -52,6 +52,6 @@
     }
 
     .ribbon-trigger {
-        display: block;
+        display: unset;
     }
 }

@@ -1,3 +1,25 @@
+<?php
+session_start();
+require 'includes/dbh.inc.php';
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+}
+try {
+    $stmt = $pdo->prepare("SELECT username, profile_image FROM users WHERE user_id = :user_id");
+    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$user) {
+        $user = NULL;
+    } else if (empty($user['profile_image'])) {
+        $user['profile_image'] = 'assets/front/pic.jpg';
+    }
+} catch (PDOException $e) {
+    echo "Error fetching user details: " . $e->getMessage();
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,8 +39,8 @@
                 <a href="assets/tour/gca-tour.php">GCA</a>
                 <a href="assets/tour/gee-tour.php">GEE</a>
             </div>
-        </div>
-        <div class="ribbon-button-container stay">
+        </div>        
+	<div class="ribbon-button-container">
             <a href="home.php" class="ribbon-button">HOME</a>
         </div>
         <div class="ribbon-button-container">
@@ -28,47 +50,33 @@
             <a href="schedule.php" class="ribbon-button">SCHEDULE</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="events.html" class="ribbon-button">EVENTS</a>
+            <a href="events.php" class="ribbon-button">EVENTS</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="user.php" class="ribbon-button">USER</a>
-        </div>
-        <div class="ribbon-button-container">
-            <a href="settings.html" class="ribbon-button">SETTINGS</a>
+            <a href="settings.php" class="ribbon-button">SETTINGS</a>
         </div>
         <div class="ribbon-button-container dropdown">
             <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
             <div class="dropdown-content dropMenu">
                 <a href="forum.php">FORUM</a>
                 <a href="schedule.php">SCHEDULE</a>
-                <a href="events.html">EVENTS</a>
-                <a href="user.php">USER</a>
-                <a href="settings.html">SETTINGS</a>
+                <a href="events.php">EVENTS</a>
+                <a href="settings.php">SETTINGS</a>
             </div>
+        </div>
+        <div class="ribbon-button-container">
+            <?php echo 
+            "<a href='user.php' class='ribbon-button'>USER: {$user['username']}</a>"
+            ?>
         </div>
     </div>
 
     <div class="settings-container">
-    <h1>Privacy Policy</h1>
+    <h1>Settings</h1>
         <div class="settings-table" style='flex-direction: column;'>
-            <a >
-                This page shows how to use the different functions of this web app. 
-            </a>
-            <h2>
-                360 View 
-            </h2>
-            <h2>
-                Forum 
-            </h2>
-            <h2>
-                Schedule 
-            </h2>
-            <h2>
-                Events 
-            </h2>
-            <h2>
-                User 
-            </h2>
+            <a href="privacypolicy.php" class="settings-button button">Privacy Policy</a>
+            <a href="usermanual.php" class="settings-button button">How it Works?</a>
+            <a href="includes/logout.php" class="settings-button button">LOG OUT</a>
         </div>
         <a href="home.php" class="back-button">Back to Home</a>
     </div>

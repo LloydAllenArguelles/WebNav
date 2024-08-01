@@ -31,7 +31,7 @@
                 <a href="../../schedule.php">SCHEDULE</a>
                 <a href="../../events.html">EVENTS</a>
                 <a href="../../user.php">USER</a>
-                <a href="../../settings.html">SETTINGS</a>
+                <a href="../../settings.php">SETTINGS</a>
             </div>
         </div>
         <div class="ribbon-button-container">
@@ -50,7 +50,7 @@
             <a href="../../user.php" class="ribbon-button">USER</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="../../settings.html" class="ribbon-button">SETTINGS</a>
+            <a href="../../settings.php" class="ribbon-button">SETTINGS</a>
         </div>
     </div>
 <div style="position: relative; top: 0; width: 100%; height: 95%;">

@@ -43,6 +43,24 @@ if (isset($_POST['stat'])) {
     $selected_status = $_SESSION['selected_status'];
 }
 
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+}
+try {
+    $stmt = $pdo->prepare("SELECT username, profile_image FROM users WHERE user_id = :user_id");
+    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$user) {
+        $user = NULL;
+    } else if (empty($user['profile_image'])) {
+        $user['profile_image'] = 'assets/front/pic.jpg';
+    }
+} catch (PDOException $e) {
+    echo "Error fetching user details: " . $e->getMessage();
+    exit;
+}
+
 $is_professor = isset($_SESSION['role']) && $_SESSION['role'] === 'Professor';
 $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
 
@@ -59,45 +77,46 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
 </head>
 <body>
 <header>
-        <div class="top-ribbon">
-            <div class="ribbon-button-container dropdown stay">
-                <span class="ribbon-button ribbon-trigger dropView">360 VIEW</span>
-                <div class="dropdown-content dropView">
-                    <a href="assets/tour/gv-tour.php">GV</a>
-                    <a href="assets/tour/gca-tour.php">GCA</a>
-                    <a href="assets/tour/gee-tour.php">GEE</a>
-                </div>
+    <div class="top-ribbon">
+        <div class="ribbon-button-container dropdown stay">
+            <span class="ribbon-button ribbon-trigger dropView">360 VIEW</span>
+            <div class="dropdown-content dropView">
+                <a href="assets/tour/gv-tour.php">GV</a>
+                <a href="assets/tour/gca-tour.php">GCA</a>
+                <a href="assets/tour/gee-tour.php">GEE</a>
             </div>
-            <div class="ribbon-button-container stay">
-                <a href="home.php" class="ribbon-button">HOME</a>
-            </div>
-            <div class="ribbon-button-container">
-                <a href="forum.php" class="ribbon-button">FORUM</a>
-            </div>
-            <div class="ribbon-button-container">
-                <a href="schedule.php" class="ribbon-button">SCHEDULE</a>
-            </div>
-            <div class="ribbon-button-container">
-                <a href="events.html" class="ribbon-button">EVENTS</a>
-            </div>
-            <div class="ribbon-button-container">
-                <a href="user.php" class="ribbon-button">USER</a>
-            </div>
-            <div class="ribbon-button-container">
-                <a href="settings.html" class="ribbon-button">SETTINGS</a>
-            </div>
-            <div class="ribbon-button-container dropdown">
-                <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
-                <div class="dropdown-content dropMenu">
-                    <a href="forum.php">FORUM</a>
-                    <a href="schedule.php">SCHEDULE</a>
-                    <a href="events.html">EVENTS</a>
-                    <a href="user.php">USER</a>
-                    <a href="settings.html">SETTINGS</a>
-                </div>
+        </div>        
+	<div class="ribbon-button-container">
+            <a href="home.php" class="ribbon-button">HOME</a>
+        </div>
+        <div class="ribbon-button-container">
+            <a href="forum.php" class="ribbon-button">FORUM</a>
+        </div>
+        <div class="ribbon-button-container">
+            <a href="schedule.php" class="ribbon-button">SCHEDULE</a>
+        </div>
+        <div class="ribbon-button-container">
+            <a href="events.php" class="ribbon-button">EVENTS</a>
+        </div>
+        <div class="ribbon-button-container">
+            <a href="settings.php" class="ribbon-button">SETTINGS</a>
+        </div>
+        <div class="ribbon-button-container dropdown">
+            <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
+            <div class="dropdown-content dropMenu">
+                <a href="forum.php">FORUM</a>
+                <a href="schedule.php">SCHEDULE</a>
+                <a href="events.php">EVENTS</a>
+                <a href="settings.php">SETTINGS</a>
             </div>
         </div>
-    </header>
+        <div class="ribbon-button-container">
+            <?php echo 
+            "<a href='user.php' class='ribbon-button'>USER: {$user['username']}</a>"
+            ?>
+        </div>
+    </div>
+</header>
     <div class="building-schedule-container">
         <h2><?php echo htmlspecialchars($building_name); ?> Schedule</h2>
         

@@ -3,11 +3,11 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 session_start();
+require_once 'dbh.inc.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     var_dump($_POST); 
 
-    require_once 'dbh.inc.php';
 
     $username = $_POST['username'];
     $password = $_POST['password'];

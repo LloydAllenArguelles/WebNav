@@ -264,7 +264,7 @@ try {
                 <a href="assets/tour/gca-tour.php">GCA</a>
                 <a href="assets/tour/gee-tour.php">GEE</a>
             </div>
-        </div>
+        </div>        
         <div class="ribbon-button-container stay">
             <a href="home.php" class="ribbon-button">HOME</a>
         </div>
@@ -275,26 +275,24 @@ try {
             <a href="schedule.php" class="ribbon-button">SCHEDULE</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="events.html" class="ribbon-button">EVENTS</a>
+            <a href="events.php" class="ribbon-button">EVENTS</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="user.php" class="ribbon-button">USER</a>
-        </div>
-        <div class="ribbon-button-container">
-            <a href="settings.html" class="ribbon-button">SETTINGS</a>
+            <a href="settings.php" class="ribbon-button">SETTINGS</a>
         </div>
         <div class="ribbon-button-container dropdown">
             <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
             <div class="dropdown-content dropMenu">
                 <a href="forum.php">FORUM</a>
                 <a href="schedule.php">SCHEDULE</a>
-                <a href="events.html">EVENTS</a>
-                <a href="user.php">USER</a>
-                <a href="settings.html">SETTINGS</a>
+                <a href="events.php">EVENTS</a>
+                <a href="settings.php">SETTINGS</a>
             </div>
         </div>
         <div class="ribbon-button-container">
-            <a href="includes/logout.php" class="ribbon-button">LOGOUT</a>
+            <?php echo 
+            "<a href='user.php' class='ribbon-button'>USER: {$user['username']}</a>"
+            ?>
         </div>
     </div>
     
