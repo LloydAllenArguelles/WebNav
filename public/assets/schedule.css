@@ -1,110 +1,140 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #e6f0ff; 
+    background-color: #e6f0ff;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
-}
-
-.top-ribbon {
-    background-color: #007bff;
-    width: 100%;
-    padding: 10px 0;
-    display: flex;
-    justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.ribbon-button-container {
-    margin: 0 10px;
-}
-
-.ribbon-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 20px; 
-    font-size: 16px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.ribbon-button:hover {
-    background-color: #0056b3;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .building-schedule-container {
     background-color: #ffffff;
-    padding: 20px 40px;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 80%;
-}
-
-.schedule-table {
     width: 100%;
-    border-collapse: collapse;
+    max-width: 800px;
     margin-top: 20px;
 }
 
-.schedule-table th, .schedule-table td {
-    border: 1px solid #007bff;
-    padding: 10px;
-    text-align: center;
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
-.schedule-table th {
-    background-color: #0056b3;
-    color: white;
+.filters select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
 }
 
-.schedule-table td {
-    background-color: #e6f0ff;
+.calendar {
+    margin-bottom: 20px;
+    position: relative; /* Ensure positioning context for dropdowns */
 }
 
-.schedule-table td{
-    background-color: #e6f0ff;
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 100;
 }
 
-.schedule-table {
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.back-button {
-    padding: 10px 20px;
+.calendar-header button {
     background-color: #007bff;
     color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: background-color 0.3s;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 10;
 }
 
-.back-button:hover {
-    background-color: #0056b3;
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    padding: 5px 0;
 }
 
-.schedule-table td.available {
-    background-color: rgb(0, 197, 0);
+.calendar-dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background-color: #e0e0e0;
 }
 
-.schedule-table td.occupied {
-    background-color: rgb(250, 59, 59);
+.calendar-date {
+    background-color: white;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
 }
 
-.schedule-table td.occupied-own {
-    background-color: rgb(250, 234, 59);
+.calendar-date:hover {
+    background-color: #f0f0f0;
 }
 
-.schedule-table td.pending {
-    background-color: rgb(0, 123, 255);
+.calendar-date.selected {
+    background-color: #007bff;
+    color: white;
+}
+
+.calendar-date.today {
+    font-weight: bold;
+    border: 2px solid #007bff;
+}
+
+#schedule-details {
+    margin-top: 20px;
+}
+
+.schedule-item {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.schedule-item.available {
+    border-left: 5px solid #28a745;
+}
+
+.schedule-item.occupied {
+    border-left: 5px solid #dc3545;
+}
+
+.schedule-item.pending {
+    border-left: 5px solid #ffc107;
+}
+
+.schedule-item h4 {
+    margin: 0 0 5px 0;
+}
+
+.schedule-item p {
+    margin: 0;
+}
+
+@media screen and (max-width: 600px) {
+    .filters {
+        flex-direction: column;
+    }
+
+    .filters select {
+        margin-bottom: 10px;
+    }
+
+    .calendar-weekdays, .calendar-dates {
+        font-size: 0.8em;
+    }
 }

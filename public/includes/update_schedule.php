@@ -1,22 +1,58 @@
 <?php
-include 'includes/dbh.inc.php';
-include 'includes/week_info.inc.php';
+session_start();
+require_once 'includes/dbh.inc.php';
 
-if ($_POST['action'] == 'occupy') {
-    $scheduleId = $_POST['id'];
-    $weekNumber = $_POST['week'];
-    $year = $_POST['year'];
-
-    $query = "UPDATE schedules SET occupied = 1 WHERE id = :id AND week_number = :week AND year = :year";
-    $stmt = $pdo->prepare($query);
-    $stmt->execute(['id' => $scheduleId, 'week' => $weekNumber, 'year' => $year]);
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode(['error' => 'Not authenticated']);
+    exit();
 }
 
-$currentWeekInfo = getCurrentWeekInfo();
-if ($weekNumber < $currentWeekInfo['week'] && $year <= $currentWeekInfo['year']) {
-    echo "Cannot occupy past schedules.";
-    exit;
+$selected_date = $_POST['date'] ?? date('Y-m-d');
+$selected_room_id = $_POST['room'] ?? null;
+$selected_status = $_POST['status'] ?? null;
+
+if ($selected_room_id) {
+    $sql = "SELECT schedules.*, users.full_name FROM schedules LEFT JOIN users ON schedules.user_id = users.user_id WHERE schedules.room_id = :room_id AND schedules.day_of_week = :day_of_week";
+    $params = [
+        ':room_id' => $selected_room_id,
+        ':day_of_week' => date('l', strtotime($selected_date))
+    ];
+
+    if ($selected_status) {
+        $sql .= " AND schedules.status = :stat";
+        $params[':stat'] = $selected_status;
+    }
+
+    $sql .= " ORDER BY schedules.start_time";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $is_professor = isset($_SESSION['role']) && $_SESSION['role'] === 'Professor';
+    $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
+    foreach ($schedules as &$schedule) {
+        $schedule['actions'] = '';
+        if ($is_professor || $is_admin) {
+            $schedule['actions'] = "<form method='POST'>";
+            $schedule['actions'] .= "<input type='hidden' name='schedule_id' value='{$schedule['schedule_id']}'>";
+            
+            if ($is_professor) {
+                if ($schedule['status'] == 'Available') {
+                    $schedule['actions'] .= "<button type='submit' name='occupy_schedule'>Request</button>";
+                } elseif ($schedule['status'] == 'Occupied' && $schedule['user_id'] == $_SESSION['user_id']) {
+                    $schedule['actions'] .= "<button type='submit' name='unoccupy_schedule'>Unoccupy</button>";
+                }
+            } elseif ($is_admin && $schedule['status'] == 'Pending') {
+                $schedule['actions'] .= "<button type='submit' name='approve_schedule'>Approve</button>";
+                $schedule['actions'] .= "<button type='submit' name='deny_schedule'>Deny</button>";
+            }
+            
+            $schedule['actions'] .= "</form>";
+        }
+    }
+
+    echo json_encode($schedules);
+} else {
+    echo json_encode(['error' => 'No room selected']);
 }
-
-
-?>

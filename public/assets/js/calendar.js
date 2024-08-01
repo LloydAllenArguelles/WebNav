@@ -1,0 +1,83 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const calendarDates = document.getElementById('calendar-dates');
+    const currentMonth = document.getElementById('current-month');
+    const prevMonthBtn = document.getElementById('prev-month');
+    const nextMonthBtn = document.getElementById('next-month');
+    const selectedDateInput = document.getElementById('selected_date');
+    const selectedDateDisplay = document.getElementById('selected-date-display');
+    const scheduleContainer = document.getElementById('schedule-container');
+
+    let date = new Date();
+
+    function getStatusForDate(dateStr) {
+        const statuses = {
+            '2024-08-01': 'available',
+            '2024-08-02': 'booked',
+            '2024-08-03': 'pending'
+        };
+        return statuses[dateStr] || 'default';
+    }
+
+    function renderCalendar() {
+        const year = date.getFullYear();
+        const month = date.getMonth();
+
+        currentMonth.textContent = `${date.toLocaleString('default', { month: 'long' })} ${year}`;
+        calendarDates.innerHTML = '';
+
+        const firstDayOfMonth = new Date(year, month, 1).getDay();
+        const lastDateOfMonth = new Date(year, month + 1, 0).getDate();
+
+        let calendarHTML = '';
+        for (let i = 0; i < firstDayOfMonth; i++) {
+            calendarHTML += '<div class="calendar-date empty"></div>';
+        }
+
+        for (let day = 1; day <= lastDateOfMonth; day++) {
+            const dateStr = `${year}-${month + 1}-${day}`;
+            const isToday = new Date().toISOString().slice(0, 10) === dateStr ? 'today' : '';
+            const isSelected = selectedDateInput.value === dateStr ? 'selected' : '';
+            const status = getStatusForDate(dateStr);
+            calendarHTML += `<div class="calendar-date ${isToday} ${isSelected} ${status}" data-date="${dateStr}">${day}</div>`;
+        }
+
+        calendarDates.innerHTML = calendarHTML;
+        selectedDateDisplay.textContent = selectedDateInput.value || 'Select a date';
+    }
+
+    function changeMonth(direction) {
+        date.setMonth(date.getMonth() + direction);
+        renderCalendar();
+    }
+
+    prevMonthBtn.addEventListener('click', () => changeMonth(-1));
+    nextMonthBtn.addEventListener('click', () => changeMonth(1));
+
+    calendarDates.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target.classList.contains('calendar-date') && target.dataset.date) {
+            const selectedDate = target.dataset.date;
+            selectedDateInput.value = selectedDate;
+            renderCalendar();
+
+            const url = `../includes/fetch_schedules.php?date=${selectedDate}`;
+            console.log(`Request URL: ${url}`);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    scheduleContainer.innerHTML = xhr.responseText;
+                } else {
+                    console.error('Failed to load schedule:', xhr.statusText);
+                }
+            };
+            xhr.onerror = function () {
+                console.error('Request error');
+            };
+            xhr.send();
+        }
+    });
+
+    renderCalendar();
+});
