@@ -14,6 +14,10 @@ if (isset($_SESSION['user_id'])) {
     // Output the JavaScript
     echo $script;
 }
+$selected_room_id = 'Gusaling Ejercito Estrada';
+$currentDay = date('w');
+$daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+$selected_day = $daysOfWeek[$currentDay];
 try {
     $stmt = $pdo->prepare("SELECT username, profile_image FROM users WHERE user_id = :user_id");
     $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
@@ -48,7 +52,7 @@ try {
 
 <body class="multiple-scenes">
   <div style="position: absolute; width: 100%; height: 100%;">
-    <div class="top-ribbon">
+    <div class="top-ribbon"> 
         <div class="ribbon-button-container dropdown stay">
             <span class="ribbon-button ribbon-trigger dropView">360 VIEW</span>
             <div class="dropdown-content dropView">
@@ -189,6 +193,18 @@ try {
       <a href="javascript:void(0)" class="scene" data-id="43-gee-3f-right-stairs">
         <li class="text">GEE 3F Right Stairs</li>
       </a>
+      
+      <a href="javascript:void(0)" class="scene" data-id="67-gee-3f-rm-302">
+        <li class="text">GEE 3F RM 302</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="68-gee-3f-rm-303">
+        <li class="text">GEE 3F RM 303</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="scene" data-id="69-gee-3f-center-stairs">
+        <li class="text">GEE 3F Center Stairs</li>
+      </a>
   </ul>
 </div>
 
@@ -285,6 +301,18 @@ try {
     
       <a href="javascript:void(0)" class="target" data-id="43-gee-3f-right-stairs">
         <li class="text">GEE 3F Right Stairs</li>
+      </a>
+      
+      <a href="javascript:void(0)" class="target" data-id="67-gee-3f-rm-302">
+        <li class="text">GEE 3F RM 302</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="target" data-id="68-gee-3f-rm-303">
+        <li class="text">GEE 3F RM 303</li>
+      </a>
+    
+      <a href="javascript:void(0)" class="target" data-id="69-gee-3f-center-stairs">
+        <li class="text">GEE 3F Center Stairs</li>
       </a>
   </ul>
 </div>

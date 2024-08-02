@@ -78,7 +78,7 @@ var APP_DATA = {
           "yaw": 1.3191941307309012,
           "pitch": 0.04147490485746452,
           "rotation": 0,
-          "target": "39-gee-3f-rm-306"
+          "target": "69-gee-3f-center-stairs"
         },
         {
           "yaw": 0.09108827243060702,
@@ -773,13 +773,7 @@ var APP_DATA = {
           "yaw": -2.36077140425658,
           "pitch": 0.3918284081373322,
           "rotation": 0,
-          "target": "40-gee-3f-rm-305"
-        },
-        {
-          "yaw": -2.5385771496773355,
-          "pitch": 0.10057092886296282,
-          "rotation": 0,
-          "target": "30-gee-2f-center-stairs"
+          "target": "69-gee-3f-center-stairs"
         }
       ],
       "infoHotspots": [
@@ -827,13 +821,7 @@ var APP_DATA = {
           "yaw": -3.07736786709029,
           "pitch": 0.43574412038345045,
           "rotation": 0,
-          "target": "39-gee-3f-rm-306"
-        },
-        {
-          "yaw": -2.8232087823331042,
-          "pitch": 0.1472015855817439,
-          "rotation": 0,
-          "target": "30-gee-2f-center-stairs"
+          "target": "69-gee-3f-center-stairs"
         },
         {
           "yaw": -0.02907484326237153,
@@ -893,7 +881,7 @@ var APP_DATA = {
           "yaw": 0.03522697132975061,
           "pitch": 0.36190012650189907,
           "rotation": 0,
-          "target": "42-gee-3f-rm-301"
+          "target": "68-gee-3f-rm-303"
         }
       ],
       "infoHotspots": [
@@ -941,7 +929,7 @@ var APP_DATA = {
           "yaw": -3.0840177257869286,
           "pitch": 0.3490631257580432,
           "rotation": 0,
-          "target": "41-gee-3f-rm-304"
+          "target": "67-gee-3f-rm-302"
         },
         {
           "yaw": 0.004763543878537391,
@@ -1203,6 +1191,161 @@ var APP_DATA = {
           "text": "-"
         }
       ],
+      "pageHotspots":[]
+    },
+    {
+      "id": "67-gee-3f-rm-302",
+      "name": "GEE 3F RM 302",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        }
+      ],
+      "faceSize": 896,
+      "initialViewParameters": {
+        "yaw": 2.2180136480683785,
+        "pitch": 0.08653365287296566,
+        "fov": 1.4004924010941646
+      },
+      "linkHotspots": [
+        {
+          "yaw": -0.6776510152346358,
+          "pitch": 0.25935741784028465,
+          "rotation": 0,
+          "target": "68-gee-3f-rm-303"
+        },
+        {
+          "yaw": 2.3125525791068657,
+          "pitch": 0.2684030896841385,
+          "rotation": 0,
+          "target": "42-gee-3f-rm-301"
+        }
+      ],
+      "infoHotspots": [
+        {
+          "yaw": -0.20145579672617941,
+          "pitch": -0.04835017662355057,
+          "title": "Title",
+          "text": "Text"
+        },
+        {
+          "yaw": 1.8487992997275704,
+          "pitch": -0.013428501318980324,
+          "title": "Title",
+          "text": "Text"
+        }
+      ],
+      "pageHotspots":[]
+    },
+    {
+      "id": "68-gee-3f-rm-303",
+      "name": "GEE 3F RM 303",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        }
+      ],
+      "faceSize": 896,
+      "initialViewParameters": {
+        "yaw": 2.4237963833917604,
+        "pitch": 0.19417816829864876,
+        "fov": 1.4004924010941646
+      },
+      "linkHotspots": [
+        {
+          "yaw": -0.5037055809455744,
+          "pitch": 0.32830003549146447,
+          "rotation": 0,
+          "target": "41-gee-3f-rm-304"
+        },
+        {
+          "yaw": 2.487647547216919,
+          "pitch": 0.4603918466394923,
+          "rotation": 0,
+          "target": "67-gee-3f-rm-302"
+        }
+      ],
+      "infoHotspots": [
+        {
+          "yaw": 0.014529260979694314,
+          "pitch": 0.0005067177728701466,
+          "title": "Title",
+          "text": "Text"
+        },
+        {
+          "yaw": 1.904118752930004,
+          "pitch": 0.07086337590983405,
+          "title": "Title",
+          "text": "Text"
+        }
+      ],
+      "pageHotspots":[]
+    },
+    {
+      "id": "69-gee-3f-center-stairs",
+      "name": "GEE 3F Center Stairs",
+      "levels": [
+        {
+          "tileSize": 256,
+          "size": 256,
+          "fallbackOnly": true
+        },
+        {
+          "tileSize": 512,
+          "size": 512
+        },
+        {
+          "tileSize": 512,
+          "size": 1024
+        }
+      ],
+      "faceSize": 896,
+      "initialViewParameters": {
+        "pitch": 0,
+        "yaw": 0,
+        "fov": 1.5707963267948966
+      },
+      "linkHotspots": [
+        {
+          "yaw": -1.464585064129384,
+          "pitch": 0.3329794679790261,
+          "rotation": 0,
+          "target": "39-gee-3f-rm-306"
+        },
+        {
+          "yaw": 0.19836848949833552,
+          "pitch": 0.35454776297919466,
+          "rotation": 0,
+          "target": "30-gee-2f-center-stairs"
+        },
+        {
+          "yaw": 1.689757061326624,
+          "pitch": 0.4097091893230349,
+          "rotation": 0,
+          "target": "40-gee-3f-rm-305"
+        }
+      ],
+      "infoHotspots": [],
       "pageHotspots":[]
     }
   ],
