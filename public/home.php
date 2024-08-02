@@ -5,9 +5,9 @@ if (isset($_SESSION['user_id'])) {
 $userId = $_SESSION['user_id'];
 $script = "<script>
 document.addEventListener('DOMContentLoaded', function() {
-var elements = document.querySelectorAll('.ribbon-button-container.guest');
+var elements = document.querySelectorAll('.ribbon-button-container');
 elements.forEach(function(element) {
-element.style.display = 'none';
+element.classList.add('noguest');
 });
 });
 </script>";
@@ -37,8 +37,8 @@ exit;
 <title>PLM Navigation App - Home</title>
 <link rel="stylesheet" href="assets/home.css">
 <link rel="stylesheet" href="assets/dropdown.css">
-<link rel="stylesheet" href="assets/hide.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
+<link rel="stylesheet" href="assets/hide.css">
 </head>
 <body>
 <div class="top-ribbon">
