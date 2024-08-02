@@ -404,37 +404,21 @@
 
     wrapper.addEventListener('click', function() {
         wrapper.classList.add('visited');
-        const selectedDay = getDayOfWeek();
-        const selectedRoom = extractSceneInfo(currentScene);
-
-        // AJAX request to PHP script
-        fetch('../../includes/fetch_schedule_view.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ room: selectedRoom, day: selectedDay })
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.error) {
-                console.error('Error from server:', data.error);
-            } else {
-                // Handle the response data (display it in the desired format)
-                displaySchedule(data);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Error: ' + error.message);
-        });
-
+  
+        // Find the previous scene's hotspot element
+        const previousSceneId = currentScene;
+        notifyElement.classList.remove('enabled');
         switchScene(findSceneById(hotspot.target));
+        const hotspotElements = document.querySelectorAll(`#pano .hotspot.link-hotspot[data-target="${previousSceneId}"]`);
+        toggleNotify();
+        hotspotElements.forEach(element => {
+          if (element.getAttribute('data-target') === previousSceneId) {
+              element.classList.remove('pathing');
+              element.classList.add('visited');
+          }
+      });
+        switchScene(findSceneById(hotspot.target));
+        getRoomInfo();
     });
 
     stopTouchAndScrollEventPropagation(wrapper);
@@ -448,62 +432,6 @@
     wrapper.appendChild(tooltip);
 
     return wrapper;
-}
-  
-  function extractSceneInfo(currentScene) {
-    if (!currentScene) {
-      return null; // Return null if currentScene is null or undefined
-    }
-    console.log("OWAH " + currentScene); // Log the received scene
-  
-    // Adjusted regex to allow alphanumeric room identifiers with hyphens
-    const match = currentScene.match(/\b(GEE|GCA|GV)-[\w-]+-(\d{3})\b/i);
-    if (match) {
-      const buildingCode = match[1].toUpperCase();
-      const roomNumber = match[2];
-      const result = `${buildingCode} ${roomNumber}`;
-      console.log("Results:"+result); // Log the matched building code and room number
-      return result; // Return the formatted result
-    }
-  
-    console.log(match); // Log null if no match
-    return null; // Return null if the pattern doesn't match
-  }
-
-  function getDayOfWeek() {
-    const date = new Date();
-    const options = { weekday: 'long' };
-    const dayOfWeek = new Intl.DateTimeFormat('en-US', options).format(date);
-    return dayOfWeek;
-  }
-  
-  function displaySchedule(data) {
-    // Assuming you have an element to display the schedule
-    const scheduleElements = document.querySelectorAll('.info-hotspot-text');
-    scheduleElements.innerHTML = '';
-    // Loop through each schedule element
-    scheduleElements.forEach(scheduleElement => {
-      scheduleElement.innerHTML = ''; // Clear previous content
-
-      if (data.length > 0) {
-          const table = document.createElement('table');
-          table.classList.add('schedule-table');
-
-          const headerRow = document.createElement('tr');
-          headerRow.innerHTML = '<th>Time</th><th>Subject</th><th>Instructor</th>';
-          table.appendChild(headerRow);
-
-          data.forEach(schedule => {
-              const row = document.createElement('tr');
-              row.innerHTML = `<td>${schedule.time}</td><td>${schedule.subject}</td><td>${schedule.instructor}</td>`;
-              table.appendChild(row);
-          });
-
-          scheduleElement.appendChild(table);
-      } else {
-          scheduleElement.textContent = 'No schedules available for the selected room and day.';
-      }
-  });
 }
 
   function createInfoHotspotElement(hotspot) {
@@ -617,6 +545,95 @@
   
     return wrapper;
   }
+
+  
+  function getRoomInfo() {
+  const selectedDay = getDayOfWeek();
+  const selectedRoom = extractSceneInfo(currentScene);
+
+  // AJAX request to PHP script
+  fetch('../../includes/fetch_schedule_view.php', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ room: selectedRoom, day: selectedDay })
+  })
+  .then(response => {
+      if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json();
+  })
+  .then(data => {
+      if (data.error) {
+          console.error('Error from server:', data.error);
+      } else {
+          // Handle the response data (display it in the desired format)
+          displaySchedule(data);
+      }
+  })
+  .catch(error => {
+      console.error('Error:', error);
+      alert('Error: ' + error.message);
+  });
+}
+
+  function extractSceneInfo(currentScene) {
+    if (!currentScene) {
+      return null; // Return null if currentScene is null or undefined
+    }
+    console.log("OWAH " + currentScene); // Log the received scene
+  
+    // Adjusted regex to allow alphanumeric room identifiers with hyphens
+    const match = currentScene.match(/\b(GEE|GCA|GV)-[\w-]+-(\d{3})\b/i);
+    if (match) {
+      const buildingCode = match[1].toUpperCase();
+      const roomNumber = match[2];
+      const result = `${buildingCode} ${roomNumber}`;
+      console.log("Results:"+result); // Log the matched building code and room number
+      return result; // Return the formatted result
+    }
+  
+    console.log(match); // Log null if no match
+    return null; // Return null if the pattern doesn't match
+  }
+
+  function getDayOfWeek() {
+    const date = new Date();
+    const options = { weekday: 'long' };
+    const dayOfWeek = new Intl.DateTimeFormat('en-US', options).format(date);
+    return dayOfWeek;
+  }
+  
+  function displaySchedule(data) {
+    // Assuming you have an element to display the schedule
+    const scheduleElements = document.querySelectorAll('.info-hotspot-text');
+    scheduleElements.innerHTML = '';
+    // Loop through each schedule element
+    scheduleElements.forEach(scheduleElement => {
+      scheduleElement.innerHTML = ''; // Clear previous content
+
+      if (data.length > 0) {
+          const table = document.createElement('table');
+          table.classList.add('schedule-table');
+
+          const headerRow = document.createElement('tr');
+          headerRow.innerHTML = '<th>Time</th><th>Subject</th><th>Instructor</th>';
+          table.appendChild(headerRow);
+
+          data.forEach(schedule => {
+              const row = document.createElement('tr');
+              row.innerHTML = `<td>${schedule.time}</td><td>${schedule.subject}</td><td>${schedule.instructor}</td>`;
+              table.appendChild(row);
+          });
+
+          scheduleElement.appendChild(table);
+      } else {
+          scheduleElement.textContent = 'No schedules available for the selected room and day.';
+      }
+  });
+}
 
   // Prevent touch and scroll events from reaching the parent element.
   function stopTouchAndScrollEventPropagation(element, eventList) {
