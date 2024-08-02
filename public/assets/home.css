@@ -16,6 +16,7 @@ body {
     width: 100%;
     background-color: #007bff;
     padding: 10px 0;
+    flex-wrap: wrap; /* Allow wrapping of buttons */
 }
 
 .ribbon-button-container {
@@ -70,21 +71,24 @@ body {
 
 /* Mobile styles */
 @media (max-width: 768px) {
-    .top-ribbon .ribbon-button-container:not(.dropdown):not(.stay) {
-        display: none;
-    }
-    .top-ribbon .ribbon-button-container.dropdown {
-        display: block;
+    .top-ribbon .ribbon-button-container {
+        margin: 5px 0; /* Adjust margin for better spacing on small screens */
     }
 }
 
-/* Desktop styles */
-@media (min-width: 769px) {
-    .top-ribbon .ribbon-button-container.dropdown .dropdown-content {
-        top: 100%;
-        left: 0;
+/* Super slim mobile styles */
+@media (max-width: 480px) {
+    .top-ribbon .ribbon-button-container {
+        flex: 1 1 auto; /* Allow buttons to resize */
+        min-width: 0; /* Allow buttons to shrink */
+    }
+
+    .ribbon-button {
+        padding: 5px 10px; /* Reduce padding to fit more buttons */
+        font-size: 14px; /* Reduce font size */
     }
 }
+
 
 /* Rest of your existing styles */
 .home-bg {

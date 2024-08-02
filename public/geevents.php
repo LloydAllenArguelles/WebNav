@@ -156,6 +156,18 @@ ob_clean();
         .schedule-table tbody tr:hover {
             background-color: #f1f1f1;
         }
+        .day-header {
+        font-weight: bold;
+        background-color: #f0f0f0; /* Light background for day headers */
+        text-align: center;
+        padding: 8px;
+        }
+
+        .no-events {
+        text-align: center;
+        font-style: italic;
+        color: #888; /* Gray color for no events message */
+        }
     </style>
 </head>
 <body>
@@ -234,92 +246,78 @@ ob_clean();
     </div>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        function fetchEvents() {
-            fetch('includes/fetch_events_ejercito.php')
-                .then(response => response.json())
-                .then(data => {
+    function fetchEvents() {
+        fetch('includes/fetch_events_ejercito.php')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Fetched data:', data); // Log the data to check structure
+                if (data && Array.isArray(data.currentWeek) && Array.isArray(data.nextWeek)) {
                     displayEvents(data);
-                })
-                .catch(error => console.error('Error fetching events:', error));
+                } else {
+                    console.error('Unexpected data format:', data);
+                }
+            })
+            .catch(error => console.error('Error fetching events:', error));
+    }
+
+    function displayEvents(data) {
+        const currentWeekContainer = document.getElementById('current-week-schedule');
+        const nextWeekContainer = document.getElementById('next-week-schedule');
+
+        if (!currentWeekContainer || !nextWeekContainer) {
+            console.error('One or both schedule containers not found.');
+            return;
         }
 
-        function displayEvents(events) {
-            const currentWeekContainer = document.getElementById('current-week-schedule');
-            const nextWeekContainer = document.getElementById('next-week-schedule');
+        // Clear previous content
+        currentWeekContainer.innerHTML = '';
+        nextWeekContainer.innerHTML = '';
 
-            if (!currentWeekContainer || !nextWeekContainer) {
-                console.error('One or both schedule containers not found.');
-                return;
+        // Helper function to format events by day
+        function formatEvents(events) {
+            const groupedEvents = events.reduce((acc, event) => {
+                const day = event.day;
+                if (!acc[day]) acc[day] = [];
+                acc[day].push(event);
+                return acc;
+            }, {});
+
+            let html = '';
+            for (const [day, events] of Object.entries(groupedEvents)) {
+                html += `<tr><td colspan="2" class="day-header">${day}</td></tr>`;
+                if (events.length) {
+                    events.forEach(event => {
+                        html += `
+                            <tr>
+                                <td>${event.time}</td>
+                                <td>${event.event_name} in Room ${event.room_number}</td>
+                            </tr>
+                        `;
+                    });
+                } else {
+                    html += `<tr><td colspan="2" class="no-events">No events scheduled</td></tr>`;
+                }
             }
-
-            // Clear previous content
-            currentWeekContainer.innerHTML = '';
-            nextWeekContainer.innerHTML = '';
-
-            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-            // Get the current day index (0 = Monday, 6 = Sunday)
-            const todayIndex = days.indexOf(new Date().toLocaleDateString('en-US', { weekday: 'long' }));
-
-            // Filter and display events based on the current day
-            days.forEach((day, index) => {
-                let currentWeekDayEvents = events.filter(event => event.day === day && isCurrentWeek(event));
-                let nextWeekDayEvents = events.filter(event => event.day === day && isNextWeek(event));
-
-                if (index >= todayIndex || todayIndex === -1) {
-                    // Render events for current week
-                    currentWeekContainer.innerHTML += `
-                        <tr>
-                            <td colspan="2"><strong>${day}</strong></td>
-                        </tr>
-                        ${currentWeekDayEvents.length ? 
-                            currentWeekDayEvents.map(event => `
-                                <tr>
-                                    <td>${event.time}</td>
-                                    <td>${event.event_name} in Room ${event.room_number}</td>
-                                </tr>
-                            `).join('') : 
-                            `<tr><td colspan="2" class="no-events">No events scheduled</td></tr>`
-                        }
-                    `;
-                }
-
-                // Render events for next week
-                if (index < todayIndex && todayIndex !== -1) {
-                    nextWeekContainer.innerHTML += `
-                        <tr>
-                            <td colspan="2"><strong>${day}</strong></td>
-                        </tr>
-                        ${nextWeekDayEvents.length ? 
-                            nextWeekDayEvents.map(event => `
-                                <tr>
-                                    <td>${event.time}</td>
-                                    <td>${event.event_name} in Room ${event.room_number}</td>
-                                </tr>
-                            `).join('') : 
-                            `<tr><td colspan="2" class="no-events">No events scheduled</td></tr>`
-                        }
-                    `;
-                }
-            });
+            return html;
         }
 
-        function isCurrentWeek(event) {
-            const eventDate = new Date(event.time);
-            const weekStart = new Date('<?php echo $currentWeekStart; ?>');
-            const weekEnd = new Date('<?php echo $currentWeekEnd; ?>');
-            return eventDate >= weekStart && eventDate <= weekEnd;
-        }
+        // Handle current week events
+        const currentWeekEvents = data.currentWeek || [];
+        currentWeekContainer.innerHTML = formatEvents(currentWeekEvents);
 
-        function isNextWeek(event) {
-            const eventDate = new Date(event.time);
-            const weekStart = new Date('<?php echo $nextWeekStart; ?>');
-            const weekEnd = new Date('<?php echo $nextWeekEnd; ?>');
-            return eventDate >= weekStart && eventDate <= weekEnd;
-        }
+        // Handle next week events
+        const nextWeekEvents = data.nextWeek || [];
+        nextWeekContainer.innerHTML = formatEvents(nextWeekEvents);
+    }
 
-        fetchEvents();
-    });
+    fetchEvents();
+});
+
     </script>
 </body>
 </html>
