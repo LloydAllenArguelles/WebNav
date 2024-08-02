@@ -290,6 +290,8 @@
     updateSceneList(scene);
     console.log(scene.data.id);
     currentScene = scene.data.id;
+    const sceneInfo = extractSceneInfo(currentScene);
+    console.log(extractSceneInfo(sceneInfo));
   }
 
   function updateSceneName(scene) {
@@ -385,47 +387,58 @@
   }
 
   function createLinkHotspotElement(hotspot) {
-
-    // Create wrapper element to hold icon and tooltip.
     var wrapper = document.createElement('div');
     wrapper.classList.add('hotspot');
     wrapper.classList.add('link-hotspot');
     wrapper.setAttribute('data-target', hotspot.target);
 
-    // Create image element.
     var icon = document.createElement('img');
     icon.src = 'img/link.png';
     icon.classList.add('link-hotspot-icon');
 
-    // Set rotation transform.
-    var transformProperties = [ '-ms-transform', '-webkit-transform', 'transform' ];
+    var transformProperties = ['-ms-transform', '-webkit-transform', 'transform'];
     for (var i = 0; i < transformProperties.length; i++) {
-      var property = transformProperties[i];
-      icon.style[property] = 'rotate(' + hotspot.rotation + 'rad)';
+        var property = transformProperties[i];
+        icon.style[property] = 'rotate(' + hotspot.rotation + 'rad)';
     }
-    // Add click event handler.
+
     wrapper.addEventListener('click', function() {
-      wrapper.classList.add('visited');
-  
-      // Find the previous scene's hotspot element
-      const previousSceneId = currentScene;
-      notifyElement.classList.remove('enabled');
-      switchScene(findSceneById(hotspot.target));
-      const hotspotElements = document.querySelectorAll(`#pano .hotspot.link-hotspot[data-target="${previousSceneId}"]`);
-      toggleNotify();
-      hotspotElements.forEach(element => {
-        if (element.getAttribute('data-target') === previousSceneId) {
-            element.classList.remove('pathing');
-            element.classList.add('visited');
-        }
-    });
+        wrapper.classList.add('visited');
+        const selectedDay = getDayOfWeek();
+        const selectedRoom = extractSceneInfo(currentScene);
+
+        // AJAX request to PHP script
+        fetch('../../includes/fetch_schedule_view.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ room: selectedRoom, day: selectedDay })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                console.error('Error from server:', data.error);
+            } else {
+                // Handle the response data (display it in the desired format)
+                displaySchedule(data);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error: ' + error.message);
+        });
+
+        switchScene(findSceneById(hotspot.target));
     });
 
-    // Prevent touch and scroll events from reaching the parent element.
-    // This prevents the view control logic from interfering with the hotspot.
     stopTouchAndScrollEventPropagation(wrapper);
 
-    // Create tooltip element.
     var tooltip = document.createElement('div');
     tooltip.classList.add('hotspot-tooltip');
     tooltip.classList.add('link-hotspot-tooltip');
@@ -435,7 +448,63 @@
     wrapper.appendChild(tooltip);
 
     return wrapper;
+}
+  
+  function extractSceneInfo(currentScene) {
+    if (!currentScene) {
+      return null; // Return null if currentScene is null or undefined
+    }
+    console.log("OWAH " + currentScene); // Log the received scene
+  
+    // Adjusted regex to allow alphanumeric room identifiers with hyphens
+    const match = currentScene.match(/\b(GEE|GCA|GV)-[\w-]+-(\d{3})\b/i);
+    if (match) {
+      const buildingCode = match[1].toUpperCase();
+      const roomNumber = match[2];
+      const result = `${buildingCode} ${roomNumber}`;
+      console.log("Results:"+result); // Log the matched building code and room number
+      return result; // Return the formatted result
+    }
+  
+    console.log(match); // Log null if no match
+    return null; // Return null if the pattern doesn't match
   }
+
+  function getDayOfWeek() {
+    const date = new Date();
+    const options = { weekday: 'long' };
+    const dayOfWeek = new Intl.DateTimeFormat('en-US', options).format(date);
+    return dayOfWeek;
+  }
+  
+  function displaySchedule(data) {
+    // Assuming you have an element to display the schedule
+    const scheduleElements = document.querySelectorAll('.info-hotspot-text');
+    scheduleElements.innerHTML = '';
+    // Loop through each schedule element
+    scheduleElements.forEach(scheduleElement => {
+      scheduleElement.innerHTML = ''; // Clear previous content
+
+      if (data.length > 0) {
+          const table = document.createElement('table');
+          table.classList.add('schedule-table');
+
+          const headerRow = document.createElement('tr');
+          headerRow.innerHTML = '<th>Time</th><th>Subject</th><th>Instructor</th>';
+          table.appendChild(headerRow);
+
+          data.forEach(schedule => {
+              const row = document.createElement('tr');
+              row.innerHTML = `<td>${schedule.time}</td><td>${schedule.subject}</td><td>${schedule.instructor}</td>`;
+              table.appendChild(row);
+          });
+
+          scheduleElement.appendChild(table);
+      } else {
+          scheduleElement.textContent = 'No schedules available for the selected room and day.';
+      }
+  });
+}
 
   function createInfoHotspotElement(hotspot) {
 
@@ -480,6 +549,7 @@
     var text = document.createElement('div');
     text.classList.add('info-hotspot-text');
     text.innerHTML = hotspot.text;
+    displaySchedule(data);
 
     // Place header and text into wrapper element.
     wrapper.appendChild(header);
@@ -696,6 +766,9 @@
   }
   
   // Display the initial scene.
+  currentScene = scenes[0];
+  console.log(currentScene.data.id);
+  console.log("WOA");
   switchScene(scenes[0]);
 })();
 
