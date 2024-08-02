@@ -1,0 +1,117 @@
+.upload-container {
+    background-color: #ffffff;
+    padding: 20px 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 50%;
+    width: 80%;
+}
+
+.upload-container #filename{
+    margin-left: 10px;
+}
+
+.upload-container h1 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #333;
+    font-weight: 300;
+}
+
+.upload-form {
+    width:100%;
+    justify-content: space-between;
+    align-content: center;
+    display: flex;
+    flex-direction: row;
+    background-color: #ccc;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.back-button {
+    bottom: 0;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+
+label {
+    display: block;
+    width: 100px;
+    height: 25px;
+    align-content: center;
+    background: #b5c9f3;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    border: black 2px solid;
+}
+
+input {
+    display: none;
+}
+
+.file-input {
+    position: relative;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.button, .upload-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover, .upload-button:hover {
+    background-color: #0056b3;
+}
+
+.upload-button {
+    background-color: white;
+    color: #007BFF;
+    border: 2px solid #007BFF;
+}
+
+.upload-button:hover {
+    background-color: #007BFF;
+    color: white;
+}
+
+#file {
+    display: none;
+  }
+
+  /* Style for the custom button to show file name */
+  .custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+
+  .span {
+    text-align: center;
+  }
