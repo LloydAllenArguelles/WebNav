@@ -172,7 +172,7 @@ ob_clean();
     </div>
 
     <!-- Back button to navigate back to events page -->
-    <a href="events.html" class="back-button">Back</a>
+    <a href="events.php" class="back-button">Back</a>
 
     <!-- JavaScript functions and closing tags -->
     <script src="assets/js/buttons.js"></script>

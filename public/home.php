@@ -69,7 +69,7 @@ try {
             <div class="dropdown-content dropMenu">
                 <a href="forum.php">FORUM</a>
                 <a href="schedule.php">SCHEDULE</a>
-                <a href="events.html">EVENTS</a>
+                <a href="events.php">EVENTS</a>
                 <a href="settings.php">SETTINGS</a>
             </div>
         </div>
