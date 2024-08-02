@@ -39,7 +39,7 @@ ob_clean();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - Gusaling Corazon Aquino</title>
-    <link rel="stylesheet" href="gvevents.css">
+    <link rel="stylesheet" href="assets/events.css">
     <link rel="stylesheet" href="assets/dropdown.css">
     <style>
         body {

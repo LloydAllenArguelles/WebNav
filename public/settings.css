@@ -1,6 +1,6 @@
 body {
-    font-family: 'Times New Roman', Times, serif;
-    background-color: #f4f4f9;
+    font-family: Arial, sans-serif;
+    background-color: #e6f0ff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -9,7 +9,7 @@ body {
 }
 
 .top-ribbon {
-    background-color: #003366;
+    background-color: #007bff;
     width: 100%;
     padding: 10px 0;
     display: flex;
@@ -23,17 +23,16 @@ body {
 
 .ribbon-button {
     padding: 10px 20px;
-    background-color: #003366;
+    background-color: #007bff;
     color: white;
     text-decoration: none;
     border-radius: 20px;
     font-size: 16px;
     transition: background-color 0.3s, color 0.3s, transform 0.3s;
-    font-weight: bold;
 }
 
 .ribbon-button:hover {
-    background-color: #001a33;
+    background-color: #0056b3;
     transform: scale(1.1);
 }
 
@@ -54,7 +53,7 @@ body {
 .settings-container h1 {
     margin-bottom: 30px;
     font-size: 32px;
-    color: #003366;
+    color: #333;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -69,8 +68,8 @@ body {
 }
 
 .settings-button {
-    padding: 20px 40px;
-    background-color: #0055cc;
+    padding: 15px 30px;
+    background-color: #007bff;
     color: white;
     text-decoration: none;
     border-radius: 8px;
@@ -83,7 +82,7 @@ body {
 }
 
 .settings-button:hover {
-    background-color: #003399;
+    background-color: #0056b3;
     transform: scale(1.05);
 }
 
@@ -94,18 +93,17 @@ body {
 
 .back-button {
     display: inline-block;
-    padding: 15px 30px;
-    background-color: #003366;
+    padding: 10px 20px;
+    background-color: #007bff;
     color: white;
     text-decoration: none;
     border-radius: 20px;
     transition: background-color 0.3s, transform 0.3s;
-    margin-top: 30px;
-    font-weight: bold;
+    margin-top: 20px;
 }
 
 .back-button:hover {
-    background-color: #001a33;
+    background-color: #0056b3;
     transform: scale(1.1);
 }
 

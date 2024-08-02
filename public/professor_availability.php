@@ -19,6 +19,9 @@ if (!$pdo) {
 
 $selectedDepartment = isset($_GET['department']) ? $_GET['department'] : '';
 
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+}
 try {
     $stmt = $pdo->prepare("SELECT DISTINCT department FROM users WHERE role = 'professor'");
     $stmt->execute();
@@ -39,6 +42,21 @@ try {
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
     exit();
+}
+
+try {
+    $stmt = $pdo->prepare("SELECT username, profile_image FROM users WHERE user_id = :user_id");
+    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$user) {
+        $user = NULL;
+    } else if (empty($user['profile_image'])) {
+        $user['profile_image'] = 'assets/front/pic.jpg';
+    }
+} catch (PDOException $e) {
+    echo "Error fetching user details: " . $e->getMessage();
+    exit;
 }
 ?>
 
@@ -106,7 +124,7 @@ try {
             background-color: #218838;
         }
     </style>
-    <link rel="stylesheet" href="schedule.css"> 
+    <link rel="stylesheet" href="assets/schedule.css"> 
     <link rel="stylesheet" href="assets/dropdown.css">
 </head>
 <body>
@@ -118,10 +136,8 @@ try {
                 <a href="assets/tour/gca-tour.php">GCA</a>
                 <a href="assets/tour/gee-tour.php">GEE</a>
             </div>
-        </div>
-        <div class="ribbon-button-container stay">
-            <a href="home.php" class="ribbon-button">HOME</a>
-        </div>        <div class="ribbon-button-container stay">
+        </div>        
+	<div class="ribbon-button-container">
             <a href="home.php" class="ribbon-button">HOME</a>
         </div>
         <div class="ribbon-button-container">
@@ -134,9 +150,6 @@ try {
             <a href="events.php" class="ribbon-button">EVENTS</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="user.php" class="ribbon-button">USER</a>
-        </div>
-        <div class="ribbon-button-container">
             <a href="settings.php" class="ribbon-button">SETTINGS</a>
         </div>
         <div class="ribbon-button-container dropdown">
@@ -144,10 +157,14 @@ try {
             <div class="dropdown-content dropMenu">
                 <a href="forum.php">FORUM</a>
                 <a href="schedule.php">SCHEDULE</a>
-                <a href="events.html">EVENTS</a>
-                <a href="user.php">USER</a>
+                <a href="events.php">EVENTS</a>
                 <a href="settings.php">SETTINGS</a>
             </div>
+        </div>
+        <div class="ribbon-button-container">
+            <?php echo 
+            "<a href='user.php' class='ribbon-button'>USER: {$user['username']}</a>"
+            ?>
         </div>
     </div>
 
