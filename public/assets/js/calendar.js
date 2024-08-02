@@ -59,17 +59,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const selectedDate = target.dataset.date;
             selectedDateInput.value = selectedDate;
             renderCalendar();
-
-            const url = `../includes/fetch_schedules.php?date=${selectedDate}`;
+    
+            const url = `/WebNav/public/includes/fetch_schedules.php?date=${selectedDate}`;
             console.log(`Request URL: ${url}`);
-
+    
             const xhr = new XMLHttpRequest();
             xhr.open('GET', url, true);
             xhr.onload = function () {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     scheduleContainer.innerHTML = xhr.responseText;
                 } else {
-                    console.error('Failed to load schedule:', xhr.statusText);
+                    console.error(`Failed to load schedule: ${xhr.statusText} (Status: ${xhr.status})`);
                 }
             };
             xhr.onerror = function () {
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             xhr.send();
         }
-    });
+    });    
 
     renderCalendar();
 });

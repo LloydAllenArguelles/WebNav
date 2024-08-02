@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #e6f0ff; 
+    background-color: #e6f0ff;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,7 +26,7 @@ body {
     background-color: #007bff;
     color: white;
     text-decoration: none;
-    border-radius: 20px; 
+    border-radius: 20px;
     font-size: 16px;
     transition: background-color 0.3s, color 0.3s;
 }
@@ -37,7 +37,7 @@ body {
 
 .events-container {
     background-color: #ffffff;
-    padding: 20px 40px;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -45,8 +45,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100%;
     width: 80%;
 }
 
@@ -59,8 +57,9 @@ body {
 
 .events-table {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
@@ -69,25 +68,28 @@ body {
     background-color: #007bff;
     color: white;
     text-decoration: none;
-    border-radius: 8px; 
+    border-radius: 8px;
     font-size: 18px;
     transition: background-color 0.3s, transform 0.3s;
     text-align: center;
+    margin: 10px;  /* Updated margin for better spacing */
 }
 
 .event-button:hover {
     background-color: #0056b3;
-    transform: scale(1.05); 
+    transform: scale(1.05);
 }
 
 .back-button {
+    display: inline-block;
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 20px;
     font-size: 16px;
     transition: background-color 0.3s;
+    margin-top: 20px;
 }
 
 .back-button:hover {
@@ -105,7 +107,7 @@ body {
     background-color: #f9f9f9;
     min-width: 100px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    top:25px;
+    top: 25px;
     z-index: 1;
 }
 
@@ -126,4 +128,16 @@ body {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+@media (max-width: 768px) {
+    .events-table {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .event-button {
+        width: 80%; /* Ensures buttons do not span full width */
+        margin: 5px 0; /* Additional spacing between buttons */
+    }
 }

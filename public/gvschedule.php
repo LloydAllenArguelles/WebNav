@@ -75,6 +75,127 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
     <link rel="stylesheet" href="assets/dropdown.css">
     <link rel="stylesheet" href="assets/schedule.css">
 </head>
+
+<style>
+       
+.top-ribbon {
+    background-color: #007bff;
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ribbon-button-container {
+    margin: 0 10px;
+    display: block;
+}
+
+.ribbon-button {
+    padding: 10px 10px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px; 
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.ribbon-button:hover {
+    background-color: #0056b3;
+}
+
+.dropdown {
+    position: relative;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    top:25px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+.dropdown-content.dropMenu {
+    display: none;
+}
+
+.ribbon-trigger {
+    cursor: pointer;
+    display: none;
+}
+
+.stay .ribbon-trigger {
+    display: unset;
+}
+
+/* Media Query for screens less than or equal to 805px */
+@media screen and (max-width: 805px) {
+    .top-ribbon {
+        flex-direction: row;
+        align-items: flex-end;
+    }
+
+    .ribbon-button-container {
+        display: none;
+    }
+
+    .ribbon-button-container.stay {
+        display: unset;
+    }
+
+    .ribbon-button-container.dropdown {
+        display: unset;
+    }
+
+    .dropdown-content {
+        position: fixed;
+        left: 0;
+        right: 0;
+        margin-top: 11px;
+    }
+
+    .dropdown-content.show {
+        display: block;
+    }
+
+    .dropdown-content a {
+        text-align: left;
+    }
+    
+    .dropdown-content {
+        border-bottom: blue 2px solid;
+        border-top: blue 2px solid;
+    }
+
+    .ribbon-trigger {
+        display: unset;
+    }
+}
+</style>
+
+
 <body>
 <header>
     <div class="top-ribbon">
