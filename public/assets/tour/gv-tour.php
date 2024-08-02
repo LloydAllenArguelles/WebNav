@@ -85,6 +85,7 @@ try {
         <div class="ribbon-button-container guest">
             <a href="../../index.php" class="ribbon-button">LOGIN</a>
         </div>
+        <div id="schedule"></div>
         <div class="ribbon-button-container dropdown">
             <?php echo 
             "<a href='../../user.php' class='ribbon-button'>USER: {$user['username']}</a>"
