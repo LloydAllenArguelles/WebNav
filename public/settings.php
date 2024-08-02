@@ -18,7 +18,7 @@ try {
     echo "Error fetching user details: " . $e->getMessage();
     exit;
 }
-$is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
+$is_admin = isset($user['role']) && $user['role'] === 'Admin';
 ?>
 
 <!DOCTYPE html>
@@ -27,65 +27,63 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - SETTINGS</title>
-    <link rel="stylesheet" href="settings.css"> <!-- if ayaw gumana lagay muna sa public yung css idk din y ayaw gumana pag nasa assets e  -->
+    <link rel="stylesheet" href="settings.css">
     <link rel="stylesheet" href="assets/dropdown.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Font Awesome -->
 </head>
 <body>
     <div class="top-ribbon">
         <div class="ribbon-button-container dropdown stay">
-            <span class="ribbon-button ribbon-trigger dropView">360 VIEW</span>
+            <span class="ribbon-button ribbon-trigger dropView"><i class="fas fa-globe"></i> 360 VIEW</span>
             <div class="dropdown-content dropView">
                 <a href="assets/tour/gv-tour.php">GV</a>
                 <a href="assets/tour/gca-tour.php">GCA</a>
                 <a href="assets/tour/gee-tour.php">GEE</a>
             </div>
-        </div>        
-	<div class="ribbon-button-container">
-            <a href="home.php" class="ribbon-button">HOME</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="forum.php" class="ribbon-button">FORUM</a>
+            <a href="home.php" class="ribbon-button"><i class="fas fa-home"></i> HOME</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="schedule.php" class="ribbon-button">SCHEDULE</a>
+            <a href="forum.php" class="ribbon-button"><i class="fas fa-comments"></i> FORUM</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="events.php" class="ribbon-button">EVENTS</a>
+            <a href="schedule.php" class="ribbon-button"><i class="fas fa-calendar-alt"></i> SCHEDULE</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="settings.php" class="ribbon-button">SETTINGS</a>
+            <a href="events.php" class="ribbon-button"><i class="fas fa-calendar-day"></i> EVENTS</a>
+        </div>
+        <div class="ribbon-button-container">
+            <a href="settings.php" class="ribbon-button"><i class="fas fa-cogs"></i> SETTINGS</a>
         </div>
         <div class="ribbon-button-container dropdown">
-            <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
+            <span class="ribbon-button ribbon-trigger dropMenu"><i class="fas fa-bars"></i> MENU</span>
             <div class="dropdown-content dropMenu">
-                <a href="forum.php">FORUM</a>
-                <a href="schedule.php">SCHEDULE</a>
-                <a href="events.php">EVENTS</a>
-                <a href="settings.php">SETTINGS</a>
+                <a href="forum.php"><i class="fas fa-comments"></i> FORUM</a>
+                <a href="schedule.php"><i class="fas fa-calendar-alt"></i> SCHEDULE</a>
+                <a href="events.php"><i class="fas fa-calendar-day"></i> EVENTS</a>
+                <a href="settings.php"><i class="fas fa-cogs"></i> SETTINGS</a>
             </div>
         </div>
         <div class="ribbon-button-container">
             <?php echo 
-            "<a href='user.php' class='ribbon-button'>USER: {$user['username']}</a>"
+            "<a href='user.php' class='ribbon-button'><i class='fas fa-user'></i> USER: {$user['username']}</a>"
             ?>
         </div>
     </div>
 
     <div class="settings-container">
-    <h1>Settings</h1>
+        <h1><i class="fas fa-cogs"></i> Settings</h1>
         <div class="settings-table" style='flex-direction: column;'>
-            <a href="privacypolicy.php" class="settings-button button">Privacy Policy</a>
-            <a href="usermanual.php" class="settings-button button">How it Works?</a>
-            <a href="includes/logout.php" class="settings-button button">LOG OUT</a>
+            <a href="privacypolicy.php" class="settings-button button"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
+            <a href="usermanual.php" class="settings-button button"><i class="fas fa-book"></i> How it Works?</a>
+            <a href="includes/logout.php" class="settings-button button"><i class="fas fa-sign-out-alt"></i> LOG OUT</a>
             <?php if ($is_admin) {
-                echo "<a href='uploadcsv.php' class='settings-button button'>Upload .csv file</a>";
+                echo "<a href='uploadcsv.php' class='settings-button button'><i class='fas fa-upload'></i> Upload .csv file</a>";
             }?>
         </div>
-        <a href="home.php" class="back-button">Back to Home</a>
+        <a href="home.php" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</a>
     </div>
-
-
 
 <!-- Chatbot Part Start -->
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
@@ -97,7 +95,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
       language-code="en"
     ></df-messenger>
 <!-- Chatbot Part End -->
-    <script src="assets/js/buttons.js"></script>
 
+    <script src="assets/js/buttons.js"></script>
 </body>
 </html>

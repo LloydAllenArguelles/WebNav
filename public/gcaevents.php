@@ -75,6 +75,7 @@ ob_clean();
     <title>PLM Navigation App - Gusaling Corazon Aquino</title>
     <link rel="stylesheet" href="assets/buildingevents.css">
     <link rel="stylesheet" href="assets/dropdown.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             background-color: #f8f9fa; 
@@ -158,45 +159,43 @@ ob_clean();
     </style>
 </head>
 <body>
-    <div class="top-ribbon">
+<div class="top-ribbon">
         <div class="ribbon-button-container dropdown stay">
-            <span class="ribbon-button ribbon-trigger dropView">360 VIEW</span>
+            <span class="ribbon-button ribbon-trigger dropView"><i class="fas fa-globe"></i> 360 VIEW</span>
             <div class="dropdown-content dropView">
                 <a href="assets/tour/gv-tour.php">GV</a>
                 <a href="assets/tour/gca-tour.php">GCA</a>
                 <a href="assets/tour/gee-tour.php">GEE</a>
             </div>
-        </div>        
+        </div>
         <div class="ribbon-button-container stay">
-            <a href="home.php" class="ribbon-button">HOME</a>
+            <a href="home.php" class="ribbon-button"><i class="fas fa-home"></i> HOME</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="forum.php" class="ribbon-button">FORUM</a>
+            <a href="forum.php" class="ribbon-button"><i class="fas fa-comments"></i> FORUM</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="schedule.php" class="ribbon-button">SCHEDULE</a>
+            <a href="schedule.php" class="ribbon-button"><i class="fas fa-calendar-alt"></i> SCHEDULE</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="events.php" class="ribbon-button">EVENTS</a>
+            <a href="events.php" class="ribbon-button"><i class="fas fa-calendar-day"></i> EVENTS</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="settings.php" class="ribbon-button">SETTINGS</a>
+            <a href="settings.php" class="ribbon-button"><i class="fas fa-cogs"></i> SETTINGS</a>
         </div>
         <div class="ribbon-button-container dropdown">
-            <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
+            <span class="ribbon-button ribbon-trigger dropMenu"><i class="fas fa-bars"></i> MENU</span>
             <div class="dropdown-content dropMenu">
-                <a href="forum.php">FORUM</a>
-                <a href="schedule.php">SCHEDULE</a>
-                <a href="events.php">EVENTS</a>
-                <a href="settings.php">SETTINGS</a>
+                <a href="forum.php"><i class="fas fa-comments"></i> FORUM</a>
+                <a href="schedule.php"><i class="fas fa-calendar-alt"></i> SCHEDULE</a>
+                <a href="events.php"><i class="fas fa-calendar-day"></i> EVENTS</a>
+                <a href="settings.php"><i class="fas fa-cogs"></i> SETTINGS</a>
             </div>
         </div>
         <div class="ribbon-button-container">
-            <?php if ($user): ?>
-                <a href='user.php' class='ribbon-button'>USER: <?php echo htmlspecialchars($user['username']); ?></a>
-            <?php else: ?>
-                <a href='user.php' class='ribbon-button'>USER</a>
-            <?php endif; ?>
+            <?php echo 
+            "<a href='user.php' class='ribbon-button'><i class='fas fa-user'></i> USER: {$user['username']}</a>"
+            ?>
         </div>
     </div>
 

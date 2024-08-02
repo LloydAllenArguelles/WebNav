@@ -25,80 +25,80 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PLM Navigation App - SETTINGS</title>
-    <link rel="stylesheet" href="settings.css"> <!-- if ayaw gumana lagay muna sa public yung css idk din y ayaw gumana pag nasa assets e  -->
+    <link rel="stylesheet" href="settings.css">
     <link rel="stylesheet" href="assets/dropdown.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="top-ribbon">
         <div class="ribbon-button-container dropdown stay">
-            <span class="ribbon-button ribbon-trigger dropView">360 VIEW</span>
+            <span class="ribbon-button ribbon-trigger dropView"><i class="fas fa-globe"></i> 360 VIEW</span>
             <div class="dropdown-content dropView">
                 <a href="assets/tour/gv-tour.php">GV</a>
                 <a href="assets/tour/gca-tour.php">GCA</a>
                 <a href="assets/tour/gee-tour.php">GEE</a>
             </div>
         </div>        
-	<div class="ribbon-button-container">
-            <a href="home.php" class="ribbon-button">HOME</a>
+        <div class="ribbon-button-container">
+            <a href="home.php" class="ribbon-button"><i class="fas fa-home"></i> HOME</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="forum.php" class="ribbon-button">FORUM</a>
+            <a href="forum.php" class="ribbon-button"><i class="fas fa-comments"></i> FORUM</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="schedule.php" class="ribbon-button">SCHEDULE</a>
+            <a href="schedule.php" class="ribbon-button"><i class="fas fa-calendar-alt"></i> SCHEDULE</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="events.php" class="ribbon-button">EVENTS</a>
+            <a href="events.php" class="ribbon-button"><i class="fas fa-calendar-day"></i> EVENTS</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="settings.php" class="ribbon-button">SETTINGS</a>
+            <a href="settings.php" class="ribbon-button"><i class="fas fa-cogs"></i> SETTINGS</a>
         </div>
         <div class="ribbon-button-container dropdown">
-            <span class="ribbon-button ribbon-trigger dropMenu">MENU</span>
+            <span class="ribbon-button ribbon-trigger dropMenu"><i class="fas fa-bars"></i> MENU</span>
             <div class="dropdown-content dropMenu">
-                <a href="forum.php">FORUM</a>
-                <a href="schedule.php">SCHEDULE</a>
-                <a href="events.php">EVENTS</a>
-                <a href="settings.php">SETTINGS</a>
+                <a href="forum.php"><i class="fas fa-comments"></i> FORUM</a>
+                <a href="schedule.php"><i class="fas fa-calendar-day"></i> SCHEDULE</a>
+                <a href="events.php"><i class="fas fa-calendar-alt"></i> EVENTS</a>
+                <a href="settings.php"><i class="fas fa-cogs"></i> SETTINGS</a>
             </div>
         </div>
         <div class="ribbon-button-container">
             <?php echo 
-            "<a href='user.php' class='ribbon-button'>USER: {$user['username']}</a>"
+            "<a href='user.php' class='ribbon-button'><i class='fas fa-user'></i> USER: {$user['username']}</a>"
             ?>
         </div>
     </div>
 
     <div class="settings-container">
-    <h1>User Guide</h1>
+        <h1>User Guide</h1>
         <div class="settings-table" style='flex-direction: column;'>
             <a >
                 This page shows how to use the different functions of this web app. 
             </a>
             <h2>
-                360 View 
+                <i class="fas fa-globe"></i> 360 View 
             </h2>
             <h2>
-                Forum 
+                <i class="fas fa-comments"></i> Forum 
             </h2>
             <h2>
-                Schedule 
+                <i class="fas fa-calendar-day"></i> Schedule 
             </h2>
             <h2>
-                Events 
+                <i class="fas fa-calendar-alt"></i> Events 
             </h2>
             <h2>
-                User 
+                <i class="fas fa-user"></i> User 
             </h2>
         </div>
-        <a href="home.php" class="back-button">Back to Home</a>
+        <a href="home.php" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</a>
     </div>
 
 <!-- Chatbot Part Start -->
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger
-      chat-icon="https:&#x2F;&#x2F;assets.stickpng.com&#x2F;images&#x2F;580b57fbd9996e24bc43be12.png"
+      chat-icon="https://assets.stickpng.com/images/580b57fbd9996e24bc43be12.png"
       intent="WELCOME"
       chat-title="Chatbot"
       agent-id="060d64ba-b3ff-4be9-87c6-88c97d332f18"
