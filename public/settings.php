@@ -42,7 +42,7 @@ $is_admin = isset($user['role']) && $user['role'] === 'Admin';
             </div>
         </div>
         <div class="ribbon-button-container">
-            <a href="home.php" class="ribbon-button"><i class="fas fa-home"></i> HOME</a>
+            <a href="home.php" class="ribbon-button home-button"><i class="fas fa-home"></i> HOME</a>
         </div>
         <div class="ribbon-button-container">
             <a href="forum.php" class="ribbon-button"><i class="fas fa-comments"></i> FORUM</a>
@@ -85,7 +85,7 @@ $is_admin = isset($user['role']) && $user['role'] === 'Admin';
         <a href="home.php" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</a>
     </div>
 
-<!-- Chatbot Part Start -->
+    <!-- Chatbot Part Start -->
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger
       chat-icon="https:&#x2F;&#x2F;assets.stickpng.com&#x2F;images&#x2F;580b57fbd9996e24bc43be12.png"
@@ -94,7 +94,7 @@ $is_admin = isset($user['role']) && $user['role'] === 'Admin';
       agent-id="060d64ba-b3ff-4be9-87c6-88c97d332f18"
       language-code="en"
     ></df-messenger>
-<!-- Chatbot Part End -->
+    <!-- Chatbot Part End -->
 
     <script src="assets/js/buttons.js"></script>
 </body>

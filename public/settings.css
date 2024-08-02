@@ -13,6 +13,7 @@ body {
     width: 100%;
     padding: 10px 0;
     display: flex;
+    flex-wrap: wrap; /* Allow wrapping for mobile view */
     justify-content: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -33,7 +34,6 @@ body {
 
 .ribbon-button:hover {
     background-color: #0056b3;
-    transform: scale(1.1);
 }
 
 .settings-container {
@@ -141,17 +141,35 @@ body {
 }
 
 @media (max-width: 768px) {
-    .settings-container {
-        width: 90%;
+    .top-ribbon {
+        flex-direction: column; /* Stack buttons vertically in mobile view */
+        align-items: center;
     }
 
-    .settings-button {
-        width: 80%;
+    .ribbon-button-container {
         margin: 5px 0;
     }
 
-    .settings-table {
-        flex-direction: column;
-        align-items: center;
+    .ribbon-button {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    /* Ensure home button is visible in mobile view */
+    .home-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 20px;
+        font-size: 16px;
+        transition: background-color 0.3s;
+        margin: 10px;
+        visibility: visible;
+    }
+
+    .home-button:hover {
+        background-color: #0056b3;
     }
 }
