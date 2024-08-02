@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'professor') {
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'Professor') {
     header("Location: index.php");
     exit();
 }
@@ -19,24 +19,34 @@ if (!$pdo) {
 
 $userId = $_SESSION['user_id'];
 
+function validateAvailability($availability) {
+    // Define a regular expression pattern to match day and time
+    $pattern = '/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+\d{1,2}:\d{2}\s*(AM|PM)$/i';
+    return preg_match($pattern, $availability);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $availability = $_POST['availability'];
+    $availability = trim($_POST['availability']);
 
-    try {
-        $stmt = $pdo->prepare("UPDATE professor_availability SET availability = :availability WHERE user_id = :user_id");
-        $stmt->bindParam(':availability', $availability);
-        $stmt->bindParam(':user_id', $userId);
-        $stmt->execute();
+    if (validateAvailability($availability)) {
+        try {
+            $stmt = $pdo->prepare("UPDATE Professor_availability SET availability = :availability WHERE user_id = :user_id");
+            $stmt->bindParam(':availability', $availability);
+            $stmt->bindParam(':user_id', $userId);
+            $stmt->execute();
 
-        header("Location: professor_availability.php");
-        exit();
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+            header("Location: Professor_availability.php");
+            exit();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    } else {
+        echo "Invalid availability format. Please use the format 'Day of the week Time (AM/PM)'.";
     }
 }
 
 try {
-    $stmt = $pdo->prepare("SELECT availability FROM professor_availability WHERE user_id = :user_id");
+    $stmt = $pdo->prepare("SELECT availability FROM Professor_availability WHERE user_id = :user_id");
     $stmt->bindParam(':user_id', $userId);
     $stmt->execute();
     $availability = $stmt->fetchColumn();
@@ -119,7 +129,7 @@ try {
             <textarea name="availability" id="availability" required><?php echo htmlspecialchars($availability); ?></textarea>
             <div class="button-container">
                 <button type="submit" class="submit-button">Save Changes</button>
-                <a href="professor_availability.php" class="back-button">Back to Availability</a>
+                <a href="Professor_availability.php" class="back-button">Back to Availability</a>
             </div>
         </form>
     </div>

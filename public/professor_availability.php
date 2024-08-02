@@ -27,7 +27,7 @@ try {
     $stmt->execute();
     $departments = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $professors = [];
+    $Professors = [];
     if ($selectedDepartment) {
         $stmt = $pdo->prepare("
             SELECT u.full_name, pa.availability
@@ -37,7 +37,7 @@ try {
         ");
         $stmt->bindParam(':department', $selectedDepartment);
         $stmt->execute();
-        $professors = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $Professors = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
@@ -186,7 +186,7 @@ try {
 
         <?php if ($selectedDepartment): ?>
             <div class="professor-availability-table">
-                <?php if (!empty($professors)): ?>
+                <?php if (!empty($Professors)): ?>
                     <table>
                         <thead>
                             <tr>
@@ -195,10 +195,10 @@ try {
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($professors as $professor): ?>
+                            <?php foreach ($Professors as $Professor): ?>
                                 <tr>
-                                    <td><?php echo htmlspecialchars($professor['full_name']); ?></td>
-                                    <td><?php echo htmlspecialchars($professor['availability']); ?></td>
+                                    <td><?php echo htmlspecialchars($Professor['full_name']); ?></td>
+                                    <td><?php echo htmlspecialchars($Professor['availability']); ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -210,7 +210,7 @@ try {
         <?php endif; ?>
 
         <a href="schedule.php" class="back-button">Back to Schedule</a>
-        <?php if ($_SESSION['role'] === 'professor'): ?>
+        <?php if ($_SESSION['role'] === 'Professor'): ?>
             <a href="edit_schedule.php" class="edit-button">Edit Schedule</a>
         <?php endif; ?>
     </div>
