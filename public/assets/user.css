@@ -44,21 +44,21 @@ body {
 
 .user-container {
     background-color: #ffffff;
-    padding: 10px;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    text-align: left;
-    margin-top: 10px;
+    text-align: center;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 60%;
-    max-width: 500px;
+    width: 80%;
+    max-width: 800px;
 }
 
 .user-container h1 {
-    margin-bottom: 5px;
-    font-size: 25px;
+    margin-bottom: 20px;
+    font-size: 28px;
     color: #333;
     font-weight: 300;
 }
@@ -67,12 +67,12 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    margin-top: 10px;
+    gap: 20px;
+    margin-top: 20px;
 }
 
 #user-profile p {
-    margin-left: 30px;
+    margin-left: 0;
     color: #333;
     font-weight: 500;
 }
@@ -88,28 +88,29 @@ body {
     background: #fff;
     display: flex;
     align-items: center;
-    padding: 50px;
-    width: 900px;
-    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .card img {
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    margin-top: 10px;
-    margin-bottom: 30px;
+    margin: 10px 20px;
 }
 
 label {
     display: block;
-    width: 100px;
+    width: 120px;
     background: #b5c9f3;
-    padding: 12px;
-    margin: 5px auto;
+    padding: 10px;
+    margin: 10px auto;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 input {
@@ -117,41 +118,34 @@ input {
 }
 
 #user-profile table {
-    border-collapse: collapse; /* Remove space between table cells */
+    border-collapse: collapse;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-    border-radius: 15px;
-    min-width: 300px;
-  }
+    border-radius: 8px;
+    width: 100%;
+}
 
-  .mobile #user-profile table {
-      width:300px;
-      border-collapse: collapse; /* Remove space between table cells */
-    }
-  
-  /* Style table headers (th) */
-  #user-profile table th {
+#user-profile table th {
     background-color: #007bff;
     color: white;
-    padding: 10px; /* Add padding for better readability */
-    text-align: left; /* Align table headers to the left */
-    width:100px;
-  }
+    padding: 10px;
+    text-align: left;
+    font-size: 16px;
+}
 
-  #user-profile table tr:first-child th {
-    border-top-left-radius: 15px;
-  }
-  #user-profile table tr:last-child th {
-    border-bottom-left-radius: 15px;
-  }
-  
-  /* Style table data cells (td) */
-  #user-profile table td {
-    padding: 10px; /* Add padding for better readability */
-  }
+#user-profile table tr:first-child th {
+    border-top-left-radius: 8px;
+}
 
-  
+#user-profile table tr:last-child th {
+    border-bottom-left-radius: 8px;
+}
 
-  .switch {
+#user-profile table td {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.switch {
     position: relative;
     display: inline-block;
     width: 60px;
@@ -194,4 +188,25 @@ input:checked + .slider {
 
 input:checked + .slider:before {
     transform: translateX(26px);
+}
+
+@media (max-width: 768px) {
+    .user-container,
+    .card {
+        width: 90%;
+        padding: 10px;
+    }
+
+    .card img {
+        width: 120px;
+        height: 120px;
+    }
+
+    label {
+        width: 100px;
+    }
+
+    #user-profile table {
+        width: 100%;
+    }
 }
