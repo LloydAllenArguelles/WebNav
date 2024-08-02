@@ -29,7 +29,7 @@
                 <a href="../../home.php">HOME</a>
                 <a href="../../forum.php">FORUM</a>
                 <a href="../../schedule.php">SCHEDULE</a>
-                <a href="../../events.html">EVENTS</a>
+                <a href="../../events.php">EVENTS</a>
                 <a href="../../user.php">USER</a>
                 <a href="../../settings.php">SETTINGS</a>
             </div>
@@ -44,7 +44,7 @@
             <a href="../../schedule.php" class="ribbon-button">SCHEDULE</a>
         </div>
         <div class="ribbon-button-container">
-            <a href="../../events.html" class="ribbon-button">EVENTS</a>
+            <a href="../../events.php" class="ribbon-button">EVENTS</a>
         </div>
         <div class="ribbon-button-container">
             <a href="../../user.php" class="ribbon-button">USER</a>

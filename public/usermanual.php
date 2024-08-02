@@ -71,7 +71,7 @@ try {
     </div>
 
     <div class="settings-container">
-    <h1>Privacy Policy</h1>
+    <h1>User Guide</h1>
         <div class="settings-table" style='flex-direction: column;'>
             <a >
                 This page shows how to use the different functions of this web app. 
