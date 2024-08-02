@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 01, 2024 at 09:59 PM
+-- Generation Time: Aug 02, 2024 at 06:36 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -57,48 +57,78 @@ CREATE TABLE `events` (
   `time` time NOT NULL,
   `day` varchar(20) NOT NULL,
   `room_number` varchar(10) NOT NULL,
-  `room_id` int(11) DEFAULT NULL
+  `room_id` int(11) DEFAULT NULL,
+  `expiration_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`event_id`, `event_name`, `time`, `day`, `room_number`, `room_id`) VALUES
-(1, 'Seminar on AI', '09:00:00', 'Monday', 'GV 204', 1),
-(2, 'Workshop on Data Science', '14:00:00', 'Tuesday', 'GV 205', 2),
-(3, 'Conference on Robotics', '11:00:00', 'Wednesday', 'GV 206', 3),
-(4, 'Panel Discussion on IoT', '10:30:00', 'Thursday', 'GV 207', 4),
-(5, 'Hackathon Event', '13:00:00', 'Friday', 'GV 208', 5),
-(6, 'Career Fair', '10:00:00', 'Monday', 'GV 209', 6),
-(7, 'Seminar on Machine Learning', '15:30:00', 'Tuesday', 'GV 304', 7),
-(8, 'Workshop on Cloud Computing', '09:30:00', 'Wednesday', 'GV 305', 8),
-(9, 'Panel Discussion on Blockchain', '12:00:00', 'Thursday', 'GV 306', 9),
-(10, 'Startup Pitch Event', '14:30:00', 'Friday', 'GV 307', 10),
-(11, 'Seminar on Cybersecurity', '11:30:00', 'Monday', 'GCA 201', 13),
-(12, 'Workshop on Ethical Hacking', '13:45:00', 'Tuesday', 'GCA 202', 14),
-(13, 'Conference on Digital Marketing', '10:00:00', 'Wednesday', 'GCA 203', 15),
-(14, 'Panel Discussion on Social Media', '09:15:00', 'Thursday', 'GCA 204', 16),
-(15, 'Hackathon Event', '14:00:00', 'Friday', 'GCA 301', 17),
-(16, 'Career Fair', '11:30:00', 'Monday', 'GCA 302', 18),
-(17, 'Seminar on AI', '12:45:00', 'Tuesday', 'GCA 303', 19),
-(18, 'Workshop on Data Science', '10:30:00', 'Wednesday', 'GCA 304', 20),
-(19, 'Panel Discussion on IoT', '13:15:00', 'Thursday', 'GCA 305', 21),
-(20, 'Hackathon Event', '11:00:00', 'Friday', 'GCA 306', 22),
-(21, 'Career Fair', '14:30:00', 'Monday', 'GCA 307', 23),
-(22, 'Seminar on Blockchain', '09:45:00', 'Tuesday', 'GCA 308', 24),
-(23, 'Workshop on Cloud Computing', '12:00:00', 'Wednesday', 'GCA 309', 25),
-(24, 'Panel Discussion on AI', '15:00:00', 'Thursday', 'GEE 201', 26),
-(25, 'Hackathon Event', '11:30:00', 'Friday', 'GEE 202', 27),
-(26, 'Career Fair', '14:00:00', 'Monday', 'GEE 203', 28),
-(27, 'Seminar on Data Science', '10:15:00', 'Tuesday', 'GEE 204', 29),
-(28, 'Workshop on Machine Learning', '13:30:00', 'Wednesday', 'GEE 205', 30),
-(29, 'Panel Discussion on Robotics', '12:00:00', 'Thursday', 'GEE 301', 31),
-(30, 'Hackathon Event', '15:45:00', 'Friday', 'GEE 302', 32),
-(31, 'Career Fair', '09:30:00', 'Monday', 'GEE 303', 33),
-(32, 'Seminar on AI Ethics', '11:45:00', 'Tuesday', 'GEE 304', 34),
-(33, 'Workshop on Blockchain', '14:15:00', 'Wednesday', 'GEE 305', 35),
-(34, 'Panel Discussion on Cloud Computing', '10:30:00', 'Thursday', 'GEE 306', 36);
+INSERT INTO `events` (`event_id`, `event_name`, `time`, `day`, `room_number`, `room_id`, `expiration_date`) VALUES
+(1, 'Seminar on AI', '09:00:00', 'Monday', 'GV 204', 1, '2024-08-10'),
+(2, 'Workshop on Data Science', '14:00:00', 'Tuesday', 'GV 205', 2, '2024-08-11'),
+(3, 'Conference on Robotics', '11:00:00', 'Wednesday', 'GV 206', 3, '2024-08-12'),
+(4, 'Panel Discussion on IoT', '10:30:00', 'Thursday', 'GV 207', 4, '2024-08-13'),
+(5, 'Hackathon Event', '13:00:00', 'Friday', 'GV 208', 5, '2024-08-14'),
+(6, 'Career Fair', '10:00:00', 'Monday', 'GV 209', 6, '2024-08-10'),
+(7, 'Seminar on Machine Learning', '15:30:00', 'Tuesday', 'GV 304', 7, '2024-08-11'),
+(8, 'Workshop on Cloud Computing', '09:30:00', 'Wednesday', 'GV 305', 8, '2024-08-12'),
+(9, 'Panel Discussion on Blockchain', '12:00:00', 'Thursday', 'GV 306', 9, '2024-08-13'),
+(10, 'Startup Pitch Event', '14:30:00', 'Friday', 'GV 307', 10, '2024-08-14'),
+(11, 'Seminar on Cybersecurity', '11:30:00', 'Monday', 'GCA 201', 13, '2024-08-10'),
+(12, 'Workshop on Ethical Hacking', '13:45:00', 'Tuesday', 'GCA 202', 14, '2024-08-11'),
+(13, 'Conference on Digital Marketing', '10:00:00', 'Wednesday', 'GCA 203', 15, '2024-08-12'),
+(14, 'Panel Discussion on Social Media', '09:15:00', 'Thursday', 'GCA 204', 16, '2024-08-13'),
+(15, 'Hackathon Event', '14:00:00', 'Friday', 'GCA 301', 17, '2024-08-14'),
+(16, 'Career Fair', '11:30:00', 'Monday', 'GCA 302', 18, '2024-08-10'),
+(17, 'Seminar on AI', '12:45:00', 'Tuesday', 'GCA 303', 19, '2024-08-11'),
+(18, 'Workshop on Data Science', '10:30:00', 'Wednesday', 'GCA 304', 20, '2024-08-12'),
+(19, 'Panel Discussion on IoT', '13:15:00', 'Thursday', 'GCA 305', 21, '2024-08-13'),
+(20, 'Hackathon Event', '11:00:00', 'Friday', 'GCA 306', 22, '2024-08-14'),
+(21, 'Career Fair', '14:30:00', 'Monday', 'GCA 307', 23, '2024-08-10'),
+(22, 'Seminar on Blockchain', '09:45:00', 'Tuesday', 'GCA 308', 24, '2024-08-11'),
+(23, 'Workshop on Cloud Computing', '12:00:00', 'Wednesday', 'GCA 309', 25, '2024-08-12'),
+(24, 'Panel Discussion on AI', '15:00:00', 'Thursday', 'GEE 201', 26, '2024-08-13'),
+(25, 'Hackathon Event', '11:30:00', 'Friday', 'GEE 202', 27, '2024-08-14'),
+(26, 'Career Fair', '14:00:00', 'Monday', 'GEE 203', 28, '2024-08-10'),
+(27, 'Seminar on Data Science', '10:15:00', 'Tuesday', 'GEE 204', 29, '2024-08-11'),
+(28, 'Workshop on Machine Learning', '13:30:00', 'Wednesday', 'GEE 205', 30, '2024-08-12'),
+(29, 'Panel Discussion on Robotics', '12:00:00', 'Thursday', 'GEE 301', 31, '2024-08-13'),
+(30, 'Hackathon Event', '15:45:00', 'Friday', 'GEE 302', 32, '2024-08-14'),
+(31, 'Career Fair', '09:30:00', 'Monday', 'GEE 303', 33, '2024-08-10'),
+(32, 'Seminar on AI Ethics', '11:45:00', 'Tuesday', 'GEE 304', 34, '2024-08-11'),
+(33, 'Workshop on Blockchain', '14:15:00', 'Wednesday', 'GEE 305', 35, '2024-08-12'),
+(34, 'Panel Discussion on Cloud Computing', '10:30:00', 'Thursday', 'GEE 306', 36, '2024-08-13'),
+(35, 'Seminar on AI', '09:00:00', 'Monday', 'GV 204', 1, '2024-08-05'),
+(36, 'Career Fair', '10:00:00', 'Monday', 'GV 209', 6, '2024-08-05'),
+(37, 'Workshop on Data Science', '14:00:00', 'Tuesday', 'GV 205', 2, '2024-08-06'),
+(38, 'Seminar on Machine Learning', '15:30:00', 'Tuesday', 'GV 304', 7, '2024-08-06'),
+(39, 'Conference on Robotics', '11:00:00', 'Wednesday', 'GV 206', 3, '2024-08-07'),
+(40, 'Workshop on Cloud Computing', '09:30:00', 'Wednesday', 'GV 305', 8, '2024-08-07'),
+(41, 'Panel Discussion on IoT', '10:30:00', 'Thursday', 'GV 207', 4, '2024-08-08'),
+(42, 'Panel Discussion on Blockchain', '12:00:00', 'Thursday', 'GV 306', 9, '2024-08-08'),
+(43, 'Hackathon Event', '13:00:00', 'Friday', 'GV 208', 5, '2024-08-09'),
+(44, 'Startup Pitch Event', '14:30:00', 'Friday', 'GV 307', 10, '2024-08-09'),
+(45, 'Seminar on Cybersecurity', '11:30:00', 'Monday', 'GCA 201', 13, '2024-08-05'),
+(46, 'Career Fair', '11:30:00', 'Monday', 'GCA 302', 18, '2024-08-05'),
+(47, 'Workshop on Ethical Hacking', '13:45:00', 'Tuesday', 'GCA 202', 14, '2024-08-06'),
+(48, 'Seminar on AI', '12:45:00', 'Tuesday', 'GCA 303', 19, '2024-08-06'),
+(49, 'Conference on Digital Marketing', '10:00:00', 'Wednesday', 'GCA 203', 15, '2024-08-07'),
+(50, 'Workshop on Data Science', '10:30:00', 'Wednesday', 'GCA 304', 20, '2024-08-07'),
+(51, 'Panel Discussion on Social Media', '09:15:00', 'Thursday', 'GCA 204', 16, '2024-08-08'),
+(52, 'Panel Discussion on IoT', '13:15:00', 'Thursday', 'GCA 305', 21, '2024-08-08'),
+(53, 'Hackathon Event', '14:00:00', 'Friday', 'GCA 301', 17, '2024-08-09'),
+(54, 'Hackathon Event', '11:00:00', 'Friday', 'GCA 306', 22, '2024-08-09'),
+(55, 'Career Fair', '09:30:00', 'Monday', 'GEE 303', 33, '2024-08-05'),
+(56, 'Seminar on AI Ethics', '11:45:00', 'Tuesday', 'GEE 304', 34, '2024-08-06'),
+(57, 'Workshop on Blockchain', '14:15:00', 'Wednesday', 'GEE 305', 35, '2024-08-07'),
+(58, 'Panel Discussion on Cloud Computing', '10:30:00', 'Thursday', 'GEE 306', 36, '2024-08-08'),
+(59, 'Hackathon Event', '11:30:00', 'Friday', 'GEE 202', 27, '2024-08-09'),
+(60, 'Basketball Club Meeting', '09:00:00', 'Saturday', 'GV 204', 1, '2024-08-03'),
+(61, 'Music Workshop', '10:00:00', 'Saturday', 'GV 209', 6, '2024-08-03'),
+(62, 'Student Council Conference', '11:30:00', 'Saturday', 'GCA 201', 13, '2024-08-03'),
+(63, 'IOT Contest', '14:15:00', 'Saturday', 'GEE 305', 35, '2024-08-03');
 
 -- --------------------------------------------------------
 
@@ -2604,7 +2634,7 @@ ALTER TABLE `chat_history`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `professor_availability`
