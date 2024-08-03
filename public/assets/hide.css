@@ -26,7 +26,7 @@
         align-items: flex-end;
     }
 
-    .top-ribbon .ribbon-button-container, .ribbon-button-container.noguest {
+    .top-ribbon .ribbon-button-container, .top-ribbon .ribbon-button-container.noguest {
         display: none;
     }
 
@@ -36,7 +36,7 @@
     }
 
     .top-ribbon .ribbon-button-container.dropdown.noguest {
-        display: unset;
+        display: block;
     }
     
     .top-ribbon .ribbon-button-container.stay {

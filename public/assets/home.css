@@ -68,31 +68,12 @@ body {
     .top-ribbon .ribbon-button-container {
         display: none; /* Hide all buttons initially */
     }
+
     .top-ribbon .ribbon-button-container.noguest,
     .top-ribbon .ribbon-button-container.dropdown,
     .top-ribbon .ribbon-button-container.stay {
         display: block; /* Show necessary buttons */
     }
-    .top-ribbon .ribbon-button-container.guest {
-        display: block; /* Ensure LOGIN button is visible */
-    }
-}
-
-/* Hide guest buttons if user is logged in */
-.ribbon-button-container.guest {
-    display: none;
-}
-
-/* Show guest buttons if user is not logged in */
-.ribbon-button-container.noguest {
-    display: none;
-}
-
-.ribbon-button-container.guest {
-    display: none;
-}
-.ribbon-button-container.noguest {
-    display: block;
 }
 
 /* Desktop styles for dropdown menu */
@@ -102,6 +83,16 @@ body {
         left: 0;
     }
 }
+
+/* Styles for user status */
+.ribbon-button-container.guest {
+    display: none; /* Hide guest buttons if user is logged in */
+}
+
+.ribbon-button-container.noguest {
+    display: block; /* Show guest buttons if user is not logged in */
+}
+
 
 /* Rest of your existing styles */
 .home-bg {
