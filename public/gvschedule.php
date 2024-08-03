@@ -271,9 +271,6 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
             </form>
         </div>
 
-        <button id="show-occupied-schedules" class="ribbon-button"><i class="fas fa-list-alt"></i> User Temporary Occupied Schedules</button>
-        <div id="occupied-schedules-list"></div>
-
         <div class="calendar">
             <div class="calendar-header">
                 <button id="prev-month">&lt;</button>
