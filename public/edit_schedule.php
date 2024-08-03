@@ -196,7 +196,7 @@ foreach ($times as $start) {
             <button type="button" class="add-button" onclick="addAvailability()">Add Availability</button>
             <div class="button-container">
                 <button type="submit" class="submit-button">Save Changes</button>
-                <a href="Professor_availability.php" class="back-button">Back to Availability</a>
+                <a href="professor_availability.php" class="back-button">Back to Availability</a>
             </div>
         </form>
     </div>
