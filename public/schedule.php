@@ -84,8 +84,8 @@ try {
         <h1>Building Schedules</h1>
         <div class="building-schedule-table">
             <a href="gvschedule.php" class="schedule-button button"><i class="fas fa-building"></i> Gusaling Villegas</a>
-            <a href="geschedule.php" class="schedule-button button"><i class="fas fa-building"></i> Gusaling Ejercito</a>
-            <a href="gcaschedule.php" class="schedule-button button"><i class="fas fa-building"></i> Gusaling Aquino</a>
+            <a href="geschedule2.php" class="schedule-button button"><i class="fas fa-building"></i> Gusaling Ejercito</a>
+            <a href="gcaschedule2.php" class="schedule-button button"><i class="fas fa-building"></i> Gusaling Aquino</a>
         </div>
         <a href="home.php" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</a>
     </div>
