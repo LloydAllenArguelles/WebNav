@@ -63,22 +63,39 @@ body {
     background-color: #f1f1f1;
 }
 
-/* Ensure all buttons are visible on desktop */
-.top-ribbon .ribbon-button-container {
+/* Mobile styles */
+@media (max-width: 768px) {
+    .top-ribbon .ribbon-button-container {
+        display: none; /* Hide all buttons initially */
+    }
+    .top-ribbon .ribbon-button-container.noguest,
+    .top-ribbon .ribbon-button-container.dropdown,
+    .top-ribbon .ribbon-button-container.stay {
+        display: block; /* Show necessary buttons */
+    }
+    .top-ribbon .ribbon-button-container.guest {
+        display: block; /* Ensure LOGIN button is visible */
+    }
+}
+
+/* Hide guest buttons if user is logged in */
+.ribbon-button-container.guest {
+    display: none;
+}
+
+/* Show guest buttons if user is not logged in */
+.ribbon-button-container.noguest {
+    display: none;
+}
+
+.ribbon-button-container.guest {
+    display: none;
+}
+.ribbon-button-container.noguest {
     display: block;
 }
 
-/* Mobile styles */
-@media (max-width: 768px) {
-    .top-ribbon .ribbon-button-container:not(.dropdown):not(.stay) {
-        display: none;
-    }
-    .top-ribbon .ribbon-button-container.dropdown {
-        display: block;
-    }
-}
-
-/* Desktop styles */
+/* Desktop styles for dropdown menu */
 @media (min-width: 769px) {
     .top-ribbon .ribbon-button-container.dropdown .dropdown-content {
         top: 100%;
@@ -96,24 +113,24 @@ body {
     justify-content: center;
     align-items: center;
 }
-    
-    .home-container {
+
+.home-container {
     display: flex;
     flex-direction: row; /* Stack the text boxes vertically */
     justify-content: center;
     align-items: center;
     height: auto; /* Adjust height to fit content */
     width: 100%;
-    }
-    
-    .center-button-container {
+}
+
+.center-button-container {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
-    }
-    
-    .home-button {
+}
+
+.home-button {
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
@@ -123,14 +140,14 @@ body {
     transition: 0.3s;
     text-align: center;
     width: 150px;
-    }
-    
-    .home-button:hover {
+}
+
+.home-button:hover {
     background-color: #0056b3;
     transition: 0.3s;
-    }
-    
-    .floating-headline {
+}
+
+.floating-headline {
     position: relative;
     left: 0;
     width: 100%;
@@ -139,10 +156,10 @@ body {
     text-align: center;
     padding: 10px 0;
     font-size: 20px;
-    }
-    
-    /* New styles for the text boxes */
-    .text-box {
+}
+
+/* New styles for the text boxes */
+.text-box {
     background-color: rgba(255, 255, 255, 0.95);
     color: black;
     padding: 20px;
@@ -152,24 +169,24 @@ body {
     text-align: center;
     width: 200px; /* Ensure a maximum width for consistency */
     margin: 15px;
-    }
-    
-    .text-box h2 {
+}
+
+.text-box h2 {
     font-size: 24px;
-    }
-    
-    .text-box p {
+}
+
+.text-box p {
     font-size: 16px;
-    }
-    
-    /* Media Query for screens less than or equal to 805px */
-    @media screen and (max-width: 805px) {
+}
+
+/* Media Query for screens less than or equal to 805px */
+@media screen and (max-width: 805px) {
     .text-box {
-    width: 80%;
-    margin-top: 5px;
-    max-width: unset; /* Ensure a maximum width for consistency */
+        width: 80%;
+        margin-top: 5px;
+        max-width: unset; /* Ensure a maximum width for consistency */
     }
     .home-container {
-    flex-direction: column;
+        flex-direction: column;
     }
-    }
+}
