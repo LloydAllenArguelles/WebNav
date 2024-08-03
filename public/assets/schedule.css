@@ -191,3 +191,22 @@ body {
         font-size: 0.8em;
     }
 }
+
+#show-occupied-schedules {
+    background-color: transparent; /* Matches dropdown background */
+    border: 1px solid #ccc; /* Matches dropdown border */
+    color: #333; /* Matches dropdown text color */
+    padding: 6px 10px; /* Slightly smaller padding */
+    border-radius: 4px; /* Less circular */
+    cursor: pointer;
+    margin-bottom: 10px; /* Ensure it stays on top */
+    font-size: 14px; /* Slightly smaller font */
+}
+
+#show-occupied-schedules:hover {
+    background-color: #e9ecef; /* Subtle hover effect */
+}
+
+#occupied-schedules-list {
+    margin-top: 10px; /* Spacing from button */
+}

@@ -271,6 +271,9 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
             </form>
         </div>
 
+        <button id="show-occupied-schedules" class="ribbon-button"><i class="fas fa-list-alt"></i> User Temporary Occupied Schedules</button>
+        <div id="occupied-schedules-list"></div>
+
         <div class="calendar">
             <div class="calendar-header">
                 <button id="prev-month">&lt;</button>
@@ -457,6 +460,32 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
     <script src="assets/js/calendar.js"></script>
 
     <script>
+    document.getElementById('show-occupied-schedules').addEventListener('click', function() {
+        fetch('fetch_occupied_schedules.php')
+            .then(response => response.json())
+            .then(data => {
+                const list = document.getElementById('occupied-schedules-list');
+                list.innerHTML = ''; // Clear existing content
+
+                if (data.length > 0) {
+                    const ul = document.createElement('ul');
+                    data.forEach(schedule => {
+                        const li = document.createElement('li');
+                        li.textContent = `Room ${schedule.room_number} - ${schedule.time_slot} - ${schedule.status}`;
+                        ul.appendChild(li);
+                    });
+                    list.appendChild(ul);
+                } else {
+                    list.textContent = 'No occupied schedules found.';
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching occupied schedules:', error);
+            });
+    });
+
+    
+    
     document.addEventListener('DOMContentLoaded', function() {
         var selectedDate = document.getElementById('selected_date').value;
         var selectedDateDisplay = document.getElementById('selected-date-display');
