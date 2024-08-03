@@ -19,29 +19,20 @@ if (!$pdo) {
 
 $userId = $_SESSION['user_id'];
 
-function validateAvailability($availability) {
-    // Define a regular expression pattern to match day and time
-    $pattern = '/^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday)\s+\d{1,2}:\d{2}\s*(AM|PM)$/i';
-    return preg_match($pattern, $availability);
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $availability = trim($_POST['availability']);
+    $availabilities = $_POST['availability'];
+    $formattedAvailability = implode(", ", array_filter(array_map('trim', $availabilities)));
 
-    if (validateAvailability($availability)) {
-        try {
-            $stmt = $pdo->prepare("UPDATE Professor_availability SET availability = :availability WHERE user_id = :user_id");
-            $stmt->bindParam(':availability', $availability);
-            $stmt->bindParam(':user_id', $userId);
-            $stmt->execute();
+    try {
+        $stmt = $pdo->prepare("UPDATE Professor_availability SET availability = :availability WHERE user_id = :user_id");
+        $stmt->bindParam(':availability', $formattedAvailability);
+        $stmt->bindParam(':user_id', $userId);
+        $stmt->execute();
 
-            header("Location: Professor_availability.php");
-            exit();
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    } else {
-        echo "Invalid availability format. Please use the format 'Day of the week Time (AM/PM)'.";
+        header("Location: Professor_availability.php");
+        exit();
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
     }
 }
 
@@ -50,9 +41,21 @@ try {
     $stmt->bindParam(':user_id', $userId);
     $stmt->execute();
     $availability = $stmt->fetchColumn();
+    $availabilityArray = explode(", ", $availability);
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
     exit();
+}
+
+$days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+$times = ['7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm'];
+$timeRanges = [];
+foreach ($times as $start) {
+    foreach ($times as $end) {
+        if ($start < $end) {
+            $timeRanges[] = "$start-$end";
+        }
+    }
 }
 ?>
 
@@ -88,14 +91,40 @@ try {
             margin-bottom: 10px;
             font-weight: bold;
         }
-        textarea {
-            resize: vertical;
+        .availability-entry {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .availability-entry select, .availability-entry button {
             padding: 10px;
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            min-height: 150px;
+            margin-right: 10px;
+        }
+        .availability-entry button {
+            background-color: #dc3545;
+            color: #fff;
+            cursor: pointer;
+        }
+        .availability-entry button:hover {
+            background-color: #c82333;
+        }
+        .add-button {
             margin-bottom: 20px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+        .add-button:hover {
+            background-color: #218838;
         }
         .button-container {
             display: flex;
@@ -120,13 +149,51 @@ try {
             margin-right: 10px;
         }
     </style>
+    <script>
+        function addAvailability() {
+            const container = document.getElementById('availability-container');
+            const entry = document.createElement('div');
+            entry.className = 'availability-entry';
+            entry.innerHTML = `
+                <select name="availability[]">
+                    <option value="">Select day and time</option>
+                    <?php foreach ($days as $day): ?>
+                        <?php foreach ($timeRanges as $range): ?>
+                            <option value="<?php echo "$day $range"; ?>"><?php echo "$day $range"; ?></option>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </select>
+                <button type="button" onclick="removeAvailability(this)">Remove</button>
+            `;
+            container.appendChild(entry);
+        }
+
+        function removeAvailability(button) {
+            button.parentElement.remove();
+        }
+    </script>
 </head>
 <body>
     <div class="container">
         <h1>Edit Schedule</h1>
         <form method="POST" action="edit_schedule.php">
             <label for="availability">Availability:</label>
-            <textarea name="availability" id="availability" required><?php echo htmlspecialchars($availability); ?></textarea>
+            <div id="availability-container">
+                <?php foreach ($availabilityArray as $slot): ?>
+                    <div class="availability-entry">
+                        <select name="availability[]">
+                            <option value="">Select day and time</option>
+                            <?php foreach ($days as $day): ?>
+                                <?php foreach ($timeRanges as $range): ?>
+                                    <option value="<?php echo "$day $range"; ?>" <?php echo ($slot === "$day $range") ? 'selected' : ''; ?>><?php echo "$day $range"; ?></option>
+                                <?php endforeach; ?>
+                            <?php endforeach; ?>
+                        </select>
+                        <button type="button" onclick="removeAvailability(this)">Remove</button>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <button type="button" class="add-button" onclick="addAvailability()">Add Availability</button>
             <div class="button-container">
                 <button type="submit" class="submit-button">Save Changes</button>
                 <a href="Professor_availability.php" class="back-button">Back to Availability</a>
