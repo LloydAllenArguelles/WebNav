@@ -24,12 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $formattedAvailability = implode(", ", array_filter(array_map('trim', $availabilities)));
 
     try {
-        $stmt = $pdo->prepare("UPDATE Professor_availability SET availability = :availability WHERE user_id = :user_id");
+        $stmt = $pdo->prepare("UPDATE professor_availability SET availability = :availability WHERE user_id = :user_id");
         $stmt->bindParam(':availability', $formattedAvailability);
         $stmt->bindParam(':user_id', $userId);
         $stmt->execute();
 
-        header("Location: Professor_availability.php");
+        header("Location: professor_availability.php");
         exit();
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 try {
-    $stmt = $pdo->prepare("SELECT availability FROM Professor_availability WHERE user_id = :user_id");
+    $stmt = $pdo->prepare("SELECT availability FROM professor_availability WHERE user_id = :user_id");
     $stmt->bindParam(':user_id', $userId);
     $stmt->execute();
     $availability = $stmt->fetchColumn();
