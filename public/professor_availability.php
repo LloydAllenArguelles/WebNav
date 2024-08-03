@@ -209,7 +209,7 @@ try {
             </div>
         <?php endif; ?>
 
-        <a href="schedule.php" class="back-button">Back to Schedule</a>
+        <a href="schedule.php" class="back-button">Back to Building Schedule Page</a>
         <?php if ($_SESSION['role'] === 'Professor'): ?>
             <a href="edit_schedule.php" class="edit-button">Edit Schedule</a>
         <?php endif; ?>
