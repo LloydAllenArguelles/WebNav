@@ -52,9 +52,6 @@ try {
         </div>
     </div>
     <?php if ($userLoggedIn): ?>
-    <div class="ribbon-button-container stay">
-        <a href="home.php" class="ribbon-button"><i class="fas fa-home"></i> HOME</a>
-    </div>
     <div class="ribbon-button-container">
         <a href="forum.php" class="ribbon-button"><i class="fas fa-comments"></i> FORUM</a>
     </div>
