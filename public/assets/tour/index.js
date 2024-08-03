@@ -619,12 +619,12 @@
           table.classList.add('schedule-table');
 
           const headerRow = document.createElement('tr');
-          headerRow.innerHTML = '<th>Time</th><th>Subject</th><th>Instructor</th>';
+          headerRow.innerHTML = '<th>Time</th><th>Subject</th><th>Status</th>';
           table.appendChild(headerRow);
 
-          data.forEach(schedule => {
+          data.forEach(schedules => {
               const row = document.createElement('tr');
-              row.innerHTML = `<td>${schedule.time}</td><td>${schedule.subject}</td><td>${schedule.instructor}</td>`;
+              row.innerHTML = `<td>${schedules.start_time}" - "${schedules.end_time}</td><td>${schedules.subject}</td><td>${schedules.status}</td>`;
               table.appendChild(row);
           });
 
