@@ -457,7 +457,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
 
     <script> const selectedDate = "<?php echo $selected_date; ?>"; </script>
     <script src="assets/js/buttons.js"></script>
-    <script src="assets/js/calendar.js"></script>
+    <script src="assets/js/calendargee.js"></script>
 
     <script>
     document.getElementById('show-occupied-schedules').addEventListener('click', function() {
@@ -509,7 +509,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
             console.log("THIS IS " + buildingName);
             
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/WebNav/public/includes/fetch_schedules.php', true);
+            xhr.open('POST', '/WebNav/public/includes/fetch_schedules_gee.php', true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             
             xhr.onload = function() {

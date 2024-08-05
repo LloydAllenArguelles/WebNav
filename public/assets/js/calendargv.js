@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('selectedDate', selectedDate); // Save selected date to local storage
             renderCalendar();
     
-            const url = `/WebNav/public/includes/fetch_schedules.php?date=${encodeURIComponent(selectedDate)}`;
+            const url = `/WebNav/public/includes/fetch_schedules_gv.php?date=${encodeURIComponent(selectedDate)}`;
             console.log(`Request URL: ${url}`);
     
             const xhr = new XMLHttpRequest();
@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedDateInput.value = selectedDate;
         renderCalendar();
 
-        const url = `/WebNav/public/includes/fetch_schedules.php?date=${encodeURIComponent(selectedDate)}`;
+        const url = `/WebNav/public/includes/fetch_schedules_gv.php?date=${encodeURIComponent(selectedDate)}`;
         console.log(`Request URL on load: ${url}`);
 
         const xhr = new XMLHttpRequest();
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
         renderCalendar();
     }
     const xhr = new XMLHttpRequest();
-    const url = '/WebNav/public/includes/fetch_schedules.php'; // Replace with your target PHP script
+    const url = '/WebNav/public/includes/fetch_schedules_gv.php'; // Replace with your target PHP script
 
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
