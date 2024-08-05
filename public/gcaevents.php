@@ -18,7 +18,7 @@ if ($todayDayOfWeek == 'Friday') {
 $nextWeekStart = date('Y-m-d', strtotime('next week'));
 $nextWeekEnd = date('Y-m-d', strtotime('next week + 6 days'));
 
-$building_name = 'Gusaling Corazon Aquino'; // Updated building name
+$building_name = 'Gusaling Corazon Aquino';
 
 // Fetch current week events
 $sql = "SELECT e.event_name, e.time, e.day, r.room_number 
@@ -156,19 +156,6 @@ ob_clean();
         .schedule-table tbody tr:hover {
             background-color: #f1f1f1;
         }
-
-        .day-header {
-            font-weight: bold;
-            background-color: #f0f0f0; /* Light background for day headers */
-            text-align: center;
-            padding: 8px;
-        }
-
-        .no-events {
-            text-align: center;
-            font-style: italic;
-            color: #888; /* Gray color for no events message */
-        }
     </style>
 </head>
 <body>
@@ -215,111 +202,93 @@ ob_clean();
     <div class="building-schedule-container">
         <h2 class="building-title">Gusaling Corazon Aquino Scheduled Events</h2>
 
-        <!-- Current Week Schedule Table -->
-        <h3>Current Week Schedule</h3>
-        <table id="current-week-schedule" class="schedule-table">
-            <thead>
-                <tr>
-                    <th>Event Name</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Content will be dynamically inserted here -->
-            </tbody>
-        </table>
+<!-- Current Week Schedule Table -->
+<h3>Current Week Schedule</h3>
+<table id="current-week-schedule" class="schedule-table">
+    <thead>
+        <tr>
+            <th>Time</th>
+            <th>Event Name</th>
+            <th>Room</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Content will be dynamically inserted here -->
+    </tbody>
+</table>
 
-        <!-- Next Week Schedule Table -->
-        <h3>Next Week Schedule</h3>
-        <table id="next-week-schedule" class="schedule-table">
-            <thead>
-                <tr>
-                    <th>Event Name</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Content will be dynamically inserted here -->
-            </tbody>
-        </table>
+<!-- Next Week Schedule Table -->
+<h3>Next Week Schedule</h3>
+<table id="next-week-schedule" class="schedule-table">
+    <thead>
+        <tr>
+            <th>Time</th>
+            <th>Event Name</th>
+            <th>Room</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Content will be dynamically inserted here -->
+    </tbody>
+</table>
 
         <a href="events.php" class="back-button">Back</a>
     </div>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function() {
     function fetchEvents() {
-        fetch('includes/fetch_events_corazon.php')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
+        const today = new Date().toISOString().split('T')[0];
+        fetch(`includes/fetch_events_corazon.php?date=${today}`)
+            .then(response => response.json())
             .then(data => {
-                console.log('Fetched data:', data); // Log the data to check structure
-                if (data && Array.isArray(data.currentWeek) && Array.isArray(data.nextWeek)) {
-                    displayEvents(data);
-                } else {
-                    console.error('Unexpected data format:', data);
-                }
+                displayEvents(data.currentWeek, 'current-week-schedule');
+                displayEvents(data.nextWeek, 'next-week-schedule');
             })
             .catch(error => console.error('Error fetching events:', error));
     }
 
-    function displayEvents(data) {
-        const currentWeekContainer = document.getElementById('current-week-schedule');
-        const nextWeekContainer = document.getElementById('next-week-schedule');
-
-        if (!currentWeekContainer || !nextWeekContainer) {
-            console.error('One or both schedule containers not found.');
+    function displayEvents(events, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) {
+            console.error(`Container ${containerId} not found.`);
             return;
         }
 
-        // Clear previous content
-        currentWeekContainer.innerHTML = '';
-        nextWeekContainer.innerHTML = '';
+        const tbody = container.querySelector('tbody');
+        tbody.innerHTML = ''; // Clear previous content
 
-        // Helper function to format events by day
-        function formatEvents(events) {
-            const groupedEvents = events.reduce((acc, event) => {
-                const day = event.day;
-                if (!acc[day]) acc[day] = [];
-                acc[day].push(event);
-                return acc;
-            }, {});
+        let currentDate = '';
 
-            let html = '';
-            for (const [day, events] of Object.entries(groupedEvents)) {
-                html += `<tr><td colspan="2" class="day-header">${day}</td></tr>`;
-                if (events.length) {
-                    events.forEach(event => {
-                        html += `
-                            <tr>
-                                <td>${event.time}</td>
-                                <td>${event.event_name} in Room ${event.room_number}</td>
-                            </tr>
-                        `;
-                    });
-                } else {
-                    html += `<tr><td colspan="2" class="no-events">No events scheduled</td></tr>`;
-                }
+        events.forEach(event => {
+            if (event.expiration_date !== currentDate) {
+                currentDate = event.expiration_date;
+                const date = new Date(currentDate);
+                const formattedDate = date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                tbody.innerHTML += `
+                    <tr>
+                        <td colspan="3"><strong>${formattedDate}</strong></td>
+                    </tr>
+                `;
             }
-            return html;
+            
+            tbody.innerHTML += `
+                <tr>
+                    <td>${event.time}</td>
+                    <td>${event.event_name}</td>
+                    <td>Room ${event.room_number}</td>
+                </tr>
+            `;
+        });
+
+        if (events.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="3" class="no-events">No events scheduled</td></tr>`;
         }
-
-        // Handle current week events
-        const currentWeekEvents = data.currentWeek || [];
-        currentWeekContainer.innerHTML = formatEvents(currentWeekEvents);
-
-        // Handle next week events
-        const nextWeekEvents = data.nextWeek || [];
-        nextWeekContainer.innerHTML = formatEvents(nextWeekEvents);
     }
 
     fetchEvents();
 });
-    </script>
-    <script>
+</script>
+<script>
 document.addEventListener('DOMContentLoaded', function() {
     // Function to toggle dropdown
     function toggleDropdown(event) {

@@ -202,130 +202,91 @@ ob_clean();
     <div class="building-schedule-container">
         <h2 class="building-title">Gusaling Villegas Scheduled Events</h2>
 
-        <!-- Current Week Schedule Table -->
-        <h3>Current Week Schedule</h3>
-        <table id="current-week-schedule" class="schedule-table">
-            <thead>
-                <tr>
-                    <th>Event Name</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Content will be dynamically inserted here -->
-            </tbody>
-        </table>
+<!-- Current Week Schedule Table -->
+<h3>Current Week Schedule</h3>
+<table id="current-week-schedule" class="schedule-table">
+    <thead>
+        <tr>
+            <th>Time</th>
+            <th>Event Name</th>
+            <th>Room</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Content will be dynamically inserted here -->
+    </tbody>
+</table>
 
-        <!-- Next Week Schedule Table -->
-        <h3>Next Week Schedule</h3>
-        <table id="next-week-schedule" class="schedule-table">
-            <thead>
-                <tr>
-                    <th>Event Name</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Content will be dynamically inserted here -->
-            </tbody>
-        </table>
+<!-- Next Week Schedule Table -->
+<h3>Next Week Schedule</h3>
+<table id="next-week-schedule" class="schedule-table">
+    <thead>
+        <tr>
+            <th>Time</th>
+            <th>Event Name</th>
+            <th>Room</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Content will be dynamically inserted here -->
+    </tbody>
+</table>
 
         <a href="events.php" class="back-button">Back</a>
     </div>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        function fetchEvents() {
-            fetch('includes/fetch_events.php')
-                .then(response => response.json())
-                .then(data => {
-                    displayEvents(data);
-                })
-                .catch(error => console.error('Error fetching events:', error));
+document.addEventListener('DOMContentLoaded', function() {
+    function fetchEvents() {
+        const today = new Date().toISOString().split('T')[0];
+        fetch(`includes/fetch_events.php?date=${today}`)
+            .then(response => response.json())
+            .then(data => {
+                displayEvents(data.currentWeek, 'current-week-schedule');
+                displayEvents(data.nextWeek, 'next-week-schedule');
+            })
+            .catch(error => console.error('Error fetching events:', error));
+    }
+
+    function displayEvents(events, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) {
+            console.error(`Container ${containerId} not found.`);
+            return;
         }
 
-        function displayEvents(events) {
-            const currentWeekContainer = document.getElementById('current-week-schedule');
-            const nextWeekContainer = document.getElementById('next-week-schedule');
+        const tbody = container.querySelector('tbody');
+        tbody.innerHTML = ''; // Clear previous content
 
-            if (!currentWeekContainer || !nextWeekContainer) {
-                console.error('One or both schedule containers not found.');
-                return;
+        let currentDate = '';
+
+        events.forEach(event => {
+            if (event.expiration_date !== currentDate) {
+                currentDate = event.expiration_date;
+                const date = new Date(currentDate);
+                const formattedDate = date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+                tbody.innerHTML += `
+                    <tr>
+                        <td colspan="3"><strong>${formattedDate}</strong></td>
+                    </tr>
+                `;
             }
+            
+            tbody.innerHTML += `
+                <tr>
+                    <td>${event.time}</td>
+                    <td>${event.event_name}</td>
+                    <td>Room ${event.room_number}</td>
+                </tr>
+            `;
+        });
 
-            // Clear previous content
-            currentWeekContainer.innerHTML = '';
-            nextWeekContainer.innerHTML = '';
-
-            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-            // Get the current day index (0 = Monday, 6 = Sunday)
-            const todayIndex = days.indexOf(new Date().toLocaleDateString('en-US', { weekday: 'long' }));
-
-            // Filter and display events based on the current day
-            days.forEach((day, index) => {
-                let currentWeekDayEvents = events.filter(event => event.day === day && isCurrentWeek(event));
-                let nextWeekDayEvents = events.filter(event => event.day === day && isNextWeek(event));
-
-                if (index >= todayIndex || todayIndex === -1) {
-                    // Render events for current week
-                    currentWeekContainer.innerHTML += `
-                        <tr>
-                            <td colspan="2"><strong>${day}</strong></td>
-                        </tr>
-                        ${currentWeekDayEvents.length ? 
-                            currentWeekDayEvents.map(event => `
-                                <tr>
-                                    <td>${event.time}</td>
-                                    <td>${event.event_name} in Room ${event.room_number}</td>
-                                </tr>
-                            `).join('') : 
-                            `<tr><td colspan="2" class="no-events">No events scheduled</td></tr>`
-                        }
-                    `;
-                }
-
-                // Render events for next week
-                if (index < todayIndex && todayIndex !== -1) {
-                    nextWeekContainer.innerHTML += `
-                        <tr>
-                            <td colspan="2"><strong>${day}</strong></td>
-                        </tr>
-                        ${nextWeekDayEvents.length ? 
-                            nextWeekDayEvents.map(event => `
-                                <tr>
-                                    <td>${event.time}</td>
-                                    <td>${event.event_name} in Room ${event.room_number}</td>
-                                </tr>
-                            `).join('') : 
-                            `<tr><td colspan="2" class="no-events">No events scheduled</td></tr>`
-                        }
-                    `;
-                }
-            });
+        if (events.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="3" class="no-events">No events scheduled</td></tr>`;
         }
+    }
 
-        function isCurrentWeek(event) {
-            const today = new Date();
-            const expirationDate = new Date(event.expiration_date);
-            const start = new Date(today.setDate(today.getDate() - today.getDay() + 1)); // Start of this week
-            const end = new Date(start);
-            end.setDate(start.getDate() + 6); // End of this week
-
-            return expirationDate >= start && expirationDate <= end;
-        }
-
-        function isNextWeek(event) {
-            const today = new Date();
-            const expirationDate = new Date(event.expiration_date);
-            const start = new Date(today.setDate(today.getDate() - today.getDay() + 8)); // Start of next week
-            const end = new Date(start);
-            end.setDate(start.getDate() + 6); // End of next week
-
-            return expirationDate >= start && expirationDate <= end;
-        }
-
-        fetchEvents();
-    });
+    fetchEvents();
+});
 </script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
