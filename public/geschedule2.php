@@ -364,24 +364,27 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
     if (isset($_POST['occupy_schedule'])) {
         if ($is_professor) {
             $schedule_id = $_POST['schedule_id'];
-
+    
             $sql_check_available = "SELECT * FROM schedules WHERE schedule_id = :schedule_id AND status = 'Available'";
             $stmt_check_available = $pdo->prepare($sql_check_available);
             $stmt_check_available->execute([':schedule_id' => $schedule_id]);
             $schedule = $stmt_check_available->fetch(PDO::FETCH_ASSOC);
-
+    
             if ($schedule) {
                 $sql_update = "UPDATE schedules SET status = 'Pending', user_id = :user_id WHERE schedule_id = :schedule_id";
                 $stmt_update = $pdo->prepare($sql_update);
                 $stmt_update->execute([':user_id' => $_SESSION['user_id'], ':schedule_id' => $schedule_id]);
-
+    
                 if ($stmt_update->rowCount() > 0) {
-                    echo "<script>alert('Schedule request sent successfully!');</script>";
+                    echo "<script>
+                            alert('Schedule request sent successfully!');
+                            window.location.reload();
+                          </script>";
                 } else {
                     echo "<script>alert('Failed to send schedule request!');</script>";
                 }
             } else {
-                echo "<script>alert('Schedule is already occupied or does not exist!');</script>";
+                echo "<script>console.log('Schedule is already occupied or does not exist!');</script>";
             }
         } else {
             echo "<script>alert('You do not have permission to request this schedule!');</script>";
@@ -491,49 +494,38 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
             selectedDateDisplay.textContent = selectedDate;
         }
     });
-    </script>
+    const schedules = JSON.parse(document.getElementById("schedules").textContent);
 
-<script>
-    // Refresh the page every 3 seconds
-    setInterval(function() {
+    // Process the schedules data (optional)
+
+    // Optionally refresh the page after processing (adjust timeout as needed)
+    setTimeout(() => {
         location.reload();
-    }, 10000);
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var selectedDate = document.getElementById('selected_date').value;
-        var selectedDateDisplay = document.getElementById('selected-date-display');
-
-        if (selectedDate) {
-            selectedDateDisplay.textContent = selectedDate;
-        }
-    });
-
-    document.getElementById('show-occupied-schedules').addEventListener('click', function() {
-        fetch('fetch_occupied_schedules.php')
-            .then(response => response.json())
-            .then(data => {
-                const list = document.getElementById('occupied-schedules-list');
-                list.innerHTML = ''; // Clear existing content
-
-                if (data.length > 0) {
-                    const ul = document.createElement('ul');
-                    data.forEach(schedule => {
-                        const li = document.createElement('li');
-                        li.textContent = `Room ${schedule.room_number} - ${schedule.time_slot} - ${schedule.status}`;
-                        ul.appendChild(li);
-                    });
-                    list.appendChild(ul);
+    }, 1);
+    </script>
+    <script>
+        window.onload = function() {
+            var buildingName = "<?php echo htmlspecialchars($building_name ?? ''); ?>"; // Use null coalescing operator in case $building_name is not set.
+            console.log("THIS IS " + buildingName);
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/WebNav/public/includes/fetch_schedules.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    console.log('Building name sent successfully');
+                    console.log('Response:', xhr.responseText);
                 } else {
-                    list.textContent = 'No occupied schedules found.';
+                    console.log('Error sending building name');
+                    console.log('Status:', xhr.status);
+                    console.log('Response:', xhr.responseText);
                 }
-            })
-            .catch(error => {
-                console.error('Error fetching occupied schedules:', error);
-            });
-    });
-</script>
-
-
-
+            };
+            
+            xhr.send('building_name=' + encodeURIComponent(buildingName));
+            console.log('building_name=' + encodeURIComponent(buildingName));
+        };
+    </script>
 </body>
 </html>

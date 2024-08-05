@@ -5,9 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextMonthBtn = document.getElementById('next-month');
     const selectedDateInput = document.getElementById('selected_date');
     const selectedDateDisplay = document.getElementById('selected-date-display');
-    const scheduleContainer = document.getElementById('schedule-container');
+    const scheduleContainer = document.getElementById('schedule-list');
 
     let date = new Date();
+    let selectedDate = localStorage.getItem('selectedDate') || selectedDateInput.value; // Initialize selectedDate
 
     function getStatusForDate(dateStr) {
         const statuses = {
@@ -16,6 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
             '2024-08-03': 'pending'
         };
         return statuses[dateStr] || 'default';
+    }
+
+    function getDayName(dateStr) {
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        const dateObj = new Date(dateStr);
+        return days[dateObj.getDay()];
     }
 
     function renderCalendar() {
@@ -34,15 +41,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         for (let day = 1; day <= lastDateOfMonth; day++) {
-            const dateStr = `${year}-${month + 1}-${day}`;
+            const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
             const isToday = new Date().toISOString().slice(0, 10) === dateStr ? 'today' : '';
-            const isSelected = selectedDateInput.value === dateStr ? 'selected' : '';
+            const isSelected = selectedDate === dateStr ? 'selected' : '';
             const status = getStatusForDate(dateStr);
             calendarHTML += `<div class="calendar-date ${isToday} ${isSelected} ${status}" data-date="${dateStr}">${day}</div>`;
         }
 
         calendarDates.innerHTML = calendarHTML;
-        selectedDateDisplay.textContent = selectedDateInput.value || 'Select a date';
+        selectedDateDisplay.textContent = `${selectedDate} (${getDayName(selectedDate)})`;
+        console.log('Selected Date: ' + selectedDate);
+        console.log('Selected Date Display: ' + selectedDateDisplay.textContent);
     }
 
     function changeMonth(direction) {
@@ -56,11 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
     calendarDates.addEventListener('click', (event) => {
         const target = event.target;
         if (target.classList.contains('calendar-date') && target.dataset.date) {
-            const selectedDate = target.dataset.date;
+            selectedDate = target.dataset.date; // Update selectedDate here
             selectedDateInput.value = selectedDate;
+            localStorage.setItem('selectedDate', selectedDate); // Save selected date to local storage
             renderCalendar();
     
-            const url = `/WebNav/public/includes/fetch_schedules.php?date=${selectedDate}`;
+            const url = `/WebNav/public/includes/fetch_schedules.php?date=${encodeURIComponent(selectedDate)}`;
             console.log(`Request URL: ${url}`);
     
             const xhr = new XMLHttpRequest();
@@ -77,7 +87,49 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             xhr.send();
         }
-    });    
+    });
 
-    renderCalendar();
+    // On page load, if selected date exists in local storage, use it
+    if (selectedDate) {
+        selectedDateInput.value = selectedDate;
+        renderCalendar();
+
+        const url = `/WebNav/public/includes/fetch_schedules.php?date=${encodeURIComponent(selectedDate)}`;
+        console.log(`Request URL on load: ${url}`);
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                scheduleContainer.innerHTML = xhr.responseText;
+            } else {
+                console.error(`Failed to load schedule: ${xhr.statusText} (Status: ${xhr.status})`);
+            }
+        };
+        xhr.onerror = function () {
+            console.error('Request error');
+        };
+        xhr.send();
+    } else {
+        renderCalendar();
+    }
+    const xhr = new XMLHttpRequest();
+    const url = '/WebNav/public/includes/fetch_schedules.php'; // Replace with your target PHP script
+
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+    xhr.onload = function() {
+    if (xhr.status === 200) {
+        console.log('Building name sent successfully');
+        // Handle response from the PHP script (optional)
+    } else {
+        console.error('Error sending building name');
+        console.error('Status:', xhr.status);
+        console.error('Response:', xhr.responseText);
+    }
+    };
+
+    xhr.send('building_name=' + encodeURIComponent(buildingName));
+    
 });
