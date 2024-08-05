@@ -93,3 +93,25 @@
 .mobile .manual-tile h1{
     font-size: 15px;
 }
+
+.schedule-table {
+    font-size: 20px;
+    width: 100%;
+    text-align:center;
+    border: white 1px solid;
+}
+
+.schedule-table th {
+    padding-bottom: 15px;
+    border-right: white 1px solid;
+}
+
+.schedule-table td {
+    padding-bottom: 5px;
+    border-right: white 1px solid;
+}
+
+.desktop .schedule-table {
+    font-size: 12px;
+    width: 100%;
+}

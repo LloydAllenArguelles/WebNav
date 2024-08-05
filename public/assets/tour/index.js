@@ -625,7 +625,7 @@
 
           data.forEach(schedules => {
               const row = document.createElement('tr');
-              row.innerHTML = `<td>${schedules.start_time}" - "${schedules.end_time}</td><td>${schedules.subject}</td><td>${schedules.status}</td>`;
+              row.innerHTML = `<td>${schedules.start_time} - ${schedules.end_time}</td><td>${schedules.subject}</td><td>${schedules.status}</td>`;
               table.appendChild(row);
           });
 
