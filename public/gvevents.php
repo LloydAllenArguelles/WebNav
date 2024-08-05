@@ -327,5 +327,35 @@ ob_clean();
         fetchEvents();
     });
 </script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Function to toggle dropdown
+    function toggleDropdown(event) {
+        var dropdownContent = this.nextElementSibling;
+        dropdownContent.classList.toggle('show');
+        event.stopPropagation();
+    }
+
+    // Get all dropdown triggers
+    var dropdownTriggers = document.querySelectorAll('.ribbon-trigger');
+
+    // Add click event listener to each trigger
+    dropdownTriggers.forEach(function(trigger) {
+        trigger.addEventListener('click', toggleDropdown);
+    });
+
+    // Close dropdowns when clicking outside
+    window.addEventListener('click', function(event) {
+        if (!event.target.matches('.ribbon-trigger')) {
+            var dropdowns = document.querySelectorAll('.dropdown-content');
+            dropdowns.forEach(function(dropdown) {
+                if (dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                }
+            });
+        }
+    });
+});
+</script>
 </body>
 </html>
