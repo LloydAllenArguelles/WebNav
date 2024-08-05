@@ -497,7 +497,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
     // Refresh the page every 3 seconds
     setInterval(function() {
         location.reload();
-    }, 3000);
+    }, 10000);
 
     document.addEventListener('DOMContentLoaded', function() {
         var selectedDate = document.getElementById('selected_date').value;
