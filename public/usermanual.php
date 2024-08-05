@@ -108,7 +108,7 @@ try {
 <!-- Chatbot Part Start -->
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger
-      chat-icon="uploads/profile_pictures/1"
+      chat-icon="uploads/profile_pictures/1.png"
       intent="WELCOME"
       chat-title="Chatbot"
       agent-id="060d64ba-b3ff-4be9-87c6-88c97d332f18"

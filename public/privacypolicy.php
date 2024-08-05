@@ -82,7 +82,7 @@ try {
                 All of the data here will all be kept private and used exclusively for study. All information gathered will be absolutely confidential and shared only with the panelists, the respondent, and the group Codedigo.
             </div>
         </div>
-        <a href="home.php" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</a>
+        <a href="settings.php" class="back-button"><i class="fas fa-arrow-left"></i> Back to Settings Page</a>
     </div>
 
     <!-- Chatbot Part Start -->
