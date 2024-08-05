@@ -568,6 +568,7 @@
   .then(data => {
       if (data.error) {
           console.error('Error from server:', data.error);
+          displaySchedule(data);
       } else {
           // Handle the response data (display it in the desired format)
           displaySchedule(data);
@@ -630,7 +631,7 @@
 
           scheduleElement.appendChild(table);
       } else {
-          scheduleElement.textContent = 'No schedules available for the selected room and day.';
+          scheduleElement.textContent = 'No schedules available for the selected room.';
       }
   });
 }
