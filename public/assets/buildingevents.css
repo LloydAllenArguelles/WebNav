@@ -131,6 +131,26 @@ body {
     background-color: #3367d6;
 }
 
+.admin-controls {
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.add-event-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.add-event-button:hover {
+    background-color: #218838;
+}
+
 .week-navigation {
     text-align: center;
     margin: 20px 0;

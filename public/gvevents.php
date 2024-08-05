@@ -4,7 +4,6 @@ require_once 'includes/dbh.inc.php';
 
 $today = date('Y-m-d');
 $todayDayOfWeek = date('l'); // Full textual representation of the current day
-
 $currentWeekStart = date('Y-m-d', strtotime('this week'));
 $currentWeekEnd = date('Y-m-d', strtotime('this week + 6 days'));
 
@@ -47,10 +46,12 @@ $nextWeekEvents = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 session_start();
 $user = NULL;
+$is_admin = false; // Add this line for admin check
+
 if (isset($_SESSION['user_id'])) {
     $userId = $_SESSION['user_id'];
     try {
-        $stmt = $pdo->prepare("SELECT username, profile_image FROM users WHERE user_id = :user_id");
+        $stmt = $pdo->prepare("SELECT username, profile_image, role FROM users WHERE user_id = :user_id");
         $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -59,6 +60,7 @@ if (isset($_SESSION['user_id'])) {
         } else if (empty($user['profile_image'])) {
             $user['profile_image'] = 'assets/front/pic.jpg';
         }
+        $is_admin = ($user['role'] === 'Admin'); // Add this line for admin check
     } catch (PDOException $e) {
         echo "Error fetching user details: " . $e->getMessage();
         exit;
@@ -201,6 +203,12 @@ ob_clean();
 
     <div class="building-schedule-container">
         <h2 class="building-title">Gusaling Villegas Scheduled Events</h2>
+
+        <?php if ($is_admin): ?>
+    <div class="admin-controls">
+        <a href="add_event.php" class="button add-event-button">Add Event</a>
+    </div>
+    <?php endif; ?>
 
 <!-- Current Week Schedule Table -->
 <h3>Current Week Schedule</h3>
