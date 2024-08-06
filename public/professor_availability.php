@@ -210,9 +210,14 @@ try {
         <?php endif; ?>
 
         <a href="schedule.php" class="back-button">Back to Building Schedule Page</a>
-        <?php if ($_SESSION['role'] === 'Professor'): ?>
-            <a href="edit_schedule.php" class="edit-button">Edit Schedule</a>
-        <?php endif; ?>
+        <!-- Replace the existing edit button code with this -->
+<?php if ($_SESSION['role'] === 'Professor' || $_SESSION['role'] === 'Admin'): ?>
+    <?php if ($_SESSION['role'] === 'Professor'): ?>
+        <a href="edit_schedule.php" class="edit-button">Edit My Schedule</a>
+    <?php elseif ($_SESSION['role'] === 'Admin'): ?>
+        <a href="edit_schedule.php" class="edit-button">Edit Professor Schedules</a>
+    <?php endif; ?>
+<?php endif; ?>
     </div>
     <script src="assets/js/buttons.js"></script>
 </body>

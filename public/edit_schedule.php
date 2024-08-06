@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'Professor') {
+if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'Professor' && $_SESSION['role'] !== 'Admin')) {
     header("Location: index.php");
     exit();
 }
@@ -17,23 +17,38 @@ if (!$pdo) {
     exit();
 }
 
+if ($_SESSION['role'] === 'Admin') {
+    $stmt = $pdo->query("SELECT user_id, full_name FROM users WHERE role = 'Professor'");
+    $professors = $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 $userId = $_SESSION['user_id'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $availabilities = $_POST['availability'];
-    $formattedAvailability = implode(", ", array_filter(array_map('trim', $availabilities)));
+    if (isset($_POST['availability']) && is_array($_POST['availability'])) {
+        $availabilities = $_POST['availability'];
+        $formattedAvailability = implode(", ", array_filter(array_map('trim', $availabilities)));
 
-    try {
-        $stmt = $pdo->prepare("UPDATE professor_availability SET availability = :availability WHERE user_id = :user_id");
-        $stmt->bindParam(':availability', $formattedAvailability);
-        $stmt->bindParam(':user_id', $userId);
-        $stmt->execute();
+        if ($_SESSION['role'] === 'Admin' && isset($_POST['professor_id'])) {
+            $userId = $_POST['professor_id'];
+        }
 
-        header("Location: professor_availability.php");
-        exit();
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+        try {
+            $stmt = $pdo->prepare("UPDATE professor_availability SET availability = :availability WHERE user_id = :user_id");
+            $stmt->bindParam(':availability', $formattedAvailability);
+            $stmt->bindParam(':user_id', $userId);
+            $stmt->execute();
+
+            header("Location: professor_availability.php");
+            exit();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
+}
+
+if ($_SESSION['role'] === 'Admin' && isset($_GET['professor_id'])) {
+    $userId = $_GET['professor_id'];
 }
 
 try {
@@ -41,7 +56,7 @@ try {
     $stmt->bindParam(':user_id', $userId);
     $stmt->execute();
     $availability = $stmt->fetchColumn();
-    $availabilityArray = explode(", ", $availability);
+    $availabilityArray = $availability ? explode(", ", $availability) : [];
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
     exit();
@@ -176,7 +191,25 @@ foreach ($times as $start) {
 <body>
     <div class="container">
         <h1>Edit Schedule</h1>
-        <form method="POST" action="edit_schedule.php">
+        <?php if ($_SESSION['role'] === 'Admin'): ?>
+            <form method="GET" action="edit_schedule.php">
+                <label for="professor_id">Select Professor:</label>
+                <select name="professor_id" id="professor_id" onchange="this.form.submit()">
+                    <option value="">Select a Professor</option>
+                    <?php foreach ($professors as $professor): ?>
+                        <option value="<?php echo $professor['user_id']; ?>" <?php echo (isset($_GET['professor_id']) && $_GET['professor_id'] == $professor['user_id']) ? 'selected' : ''; ?>>
+                            <?php echo htmlspecialchars($professor['full_name']); ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </form>
+        <?php endif; ?>
+
+        <form method="POST" action="edit_schedule.php<?php echo isset($_GET['professor_id']) ? '?professor_id=' . $_GET['professor_id'] : ''; ?>">
+            <?php if ($_SESSION['role'] === 'Admin' && isset($_GET['professor_id'])): ?>
+                <input type="hidden" name="professor_id" value="<?php echo $_GET['professor_id']; ?>">
+            <?php endif; ?>
+
             <label for="availability">Availability:</label>
             <div id="availability-container">
                 <?php foreach ($availabilityArray as $slot): ?>
