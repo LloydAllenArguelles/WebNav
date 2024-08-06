@@ -31,7 +31,6 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
 $timestamp = strtotime($selected_date);
 $dayOfWeek = date('l', $timestamp);
 
-// Debug output
 error_log("Selected Date: " . $selected_date);
 error_log("Selected Room ID: " . $selected_room_id);
 error_log("Selected Status: " . $selected_status);
@@ -63,22 +62,33 @@ try {
 
     $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    error_log("Number of schedules fetched: " . count($schedules));
+
     if (empty($schedules)) {
         echo "<p>No schedules available for this date.</p>";
     } else {
         foreach ($schedules as $schedule) {
+            error_log("Schedule status: " . $schedule['status']);
             echo "<div class='schedule-item {$schedule['status']}'>";
-            echo "<h4>{$schedule['subject']}</h4>";
+            echo "<h4>" . htmlspecialchars($schedule['subject']) . "</h4>";
             echo "<p>{$schedule['start_time']} - {$schedule['end_time']}</p>";
             echo "<p>Status: ";
-            if ($schedule['status'] == 'Available') {
-                echo "<span class=\"available\">{$schedule['status']}</span>";
-            } elseif ($schedule['status'] == 'Occupied' && $schedule['user_id'] == $_SESSION['user_id']) {
-                echo "<span class=\"occupied-own\">{$schedule['status']} (YOU)</span>";
-            } elseif ($schedule['status'] == 'Pending') {
-                echo "<span class=\"pending\">{$schedule['status']}</span>";
-            } else {
-                echo "<span class=\"occupied\">{$schedule['status']}</span>";
+            switch ($schedule['status']) {
+                case 'Available':
+                    echo "<span class=\"available\">Available</span>";
+                    break;
+                case 'Occupied':
+                    if ($schedule['user_id'] == $_SESSION['user_id']) {
+                        echo "<span class=\"occupied-own\">Occupied (YOU)</span>";
+                    } else {
+                        echo "<span class=\"occupied\">Occupied</span>";
+                    }
+                    break;
+                case 'Pending':
+                    echo "<span class=\"pending\">Pending</span>";
+                    break;
+                default:
+                    echo "<span>" . htmlspecialchars($schedule['status']) . "</span>";
             }
             echo "</p>";
             echo "<p>Requestor: " . ($schedule['full_name'] ? htmlspecialchars($schedule['full_name']) : 'N/A') . "</p>";
