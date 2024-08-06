@@ -73,6 +73,7 @@ try {
             $subject = !empty($schedule['profsubject']) ? $schedule['profsubject'] : $schedule['subject'];
 
             echo "<div class='schedule-item {$schedule['status']}'>";
+            echo "<div>";
             echo "<h4>" . htmlspecialchars($subject) . "</h4>";
             echo "<p>{$schedule['start_time']} - {$schedule['end_time']}</p>";
             echo "<p>Status: ";
@@ -82,7 +83,7 @@ try {
                     break;
                 case 'Occupied':
                     if ($schedule['user_id'] == $_SESSION['user_id']) {
-                        echo "<span class=\"occupied-own\">Occupied (YOU)</span>";
+                        echo "<span class=\"occupied-own\">Approved</span>";
                     } else {
                         echo "<span class=\"occupied\">Occupied</span>";
                     }
@@ -123,7 +124,8 @@ try {
             } else {
                 echo "<p>Actions not available for past dates</p>";
             }
-            echo "</div>";        
+            echo "</div>";
+        echo "</div>";        
         }
     }
 } catch (PDOException $e) {

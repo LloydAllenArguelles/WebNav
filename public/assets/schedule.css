@@ -123,6 +123,8 @@ body {
     border-radius: 4px;
     padding: 10px;
     margin-bottom: 10px;
+    display: flex;
+    gap: 5%; /* Adjust the gap value as needed */
 }
 
 .schedule-item.Available {

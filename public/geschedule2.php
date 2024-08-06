@@ -325,7 +325,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
                     if ($schedule['status'] == 'Available') {
                         echo "<span class=\"available\">{$schedule['status']}</span>";
                     } elseif ($schedule['status'] == 'Occupied' && $schedule['user_id'] == $_SESSION['user_id']) {
-                        echo "<span class=\"occupied-own\">{$schedule['status']} (YOU)</span>";
+                        echo "<span class=\"occupied-own\">Approved</span>";
                     } elseif ($schedule['status'] == 'Pending') {
                         echo "<span class=\"pending\">{$schedule['status']}</span>";
                     } else {
