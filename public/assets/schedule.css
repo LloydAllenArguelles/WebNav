@@ -125,15 +125,15 @@ body {
     margin-bottom: 10px;
 }
 
-.schedule-item.available {
+.schedule-item.Available {
     border-left: 5px solid #28a745;
 }
 
-.schedule-item.occupied {
+.schedule-item.Occupied {
     border-left: 5px solid #dc3545;
 }
 
-.schedule-item.pending {
+.schedule-item.Pending {
     border-left: 5px solid #ffc107;
 }
 
