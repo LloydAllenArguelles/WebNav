@@ -6,6 +6,7 @@ require_once 'includes/dbh.inc.php';
 $building_name = 'Gusaling Corazon Aquino';
 
 $selected_room_id = null;
+$selected_date = null;
 $selected_status = null;
 
 if (isset($_POST['room'])) {
