@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+$_SESSION['selected_status'] = 'Available';
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php"); 
     exit();

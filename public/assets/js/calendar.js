@@ -67,10 +67,15 @@ document.addEventListener('DOMContentLoaded', () => {
         date.setMonth(date.getMonth() + direction);
         renderCalendar();
     }
+    
+    window.addEventListener('load', () => {
+        console.log('PAGE LOADED!')
+        renderCalendar();
+    });
 
     function fetchSchedules(date) {
         const selectedStatus = document.getElementById('stat').value;
-        const url = `/PLM/public/includes/fetch_schedules_gca.php?date=${encodeURIComponent(date)}&stat=${encodeURIComponent(selectedStatus)}`;
+        const url = `/WebNav/public/includes/fetch_schedules_gca.php?date=${encodeURIComponent(date)}&stat=${encodeURIComponent(selectedStatus)}`;
         console.log(`Request URL: ${url}`);
     
         const xhr = new XMLHttpRequest();
@@ -108,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fetchSchedules(selectedDate);
 
             const selectedStatus = document.getElementById('stat').value;
-            const url = `/PLM/public/includes/fetch_schedules_gca.php?date=${encodeURIComponent(selectedDate)}&stat=${encodeURIComponent(selectedStatus)}`;
+            const url = `/WebNav/public/includes/fetch_schedules_gca.php?date=${encodeURIComponent(selectedDate)}&stat=${encodeURIComponent(selectedStatus)}`;
             console.log(`Request URL: ${url}`);
 
             const xhr = new XMLHttpRequest();
@@ -138,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedDateInput.value = selectedDate;
         renderCalendar();
 
-        const url = `/PLM/public/includes/fetch_schedules_gca.php?date=${encodeURIComponent(selectedDate)}`;
+        const url = `/WebNav/public/includes/fetch_schedules_gca.php?date=${encodeURIComponent(selectedDate)}`;
         console.log(`Request URL on load: ${url}`);
 
         const xhr = new XMLHttpRequest();
@@ -160,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // This part seems to be duplicating the AJAX call, you might want to remove it or adjust as needed
     const xhr = new XMLHttpRequest();
-    const url = '/PLM/public/includes/fetch_schedules_gca.php';
+    const url = '/WebNav/public/includes/fetch_schedules_gca.php';
 
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');

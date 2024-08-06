@@ -67,6 +67,11 @@ document.addEventListener('DOMContentLoaded', () => {
         date.setMonth(date.getMonth() + direction);
         renderCalendar();
     }
+    
+    window.addEventListener('load', () => {
+        console.log('PAGE LOADED!')
+        renderCalendar();
+    });
 
     function fetchSchedules(date) {
         const selectedStatus = document.getElementById('stat').value;
