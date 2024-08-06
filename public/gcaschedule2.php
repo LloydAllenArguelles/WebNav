@@ -281,7 +281,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
 
         <div id="schedule-details">
             <h3>Schedule for <span id="selected-date-display"></span></h3>
-            <div id="schedule-list">
+            <div id="schedule-container">
                 <?php
                 if ($selected_room_id) {
                     $room_id = $selected_room_id;
