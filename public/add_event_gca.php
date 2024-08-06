@@ -3,7 +3,7 @@ session_start();
 require_once 'includes/dbh.inc.php';
 
 // Check if the user is an admin
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Admin') {
+if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'Admin' && $_SESSION['role'] !== 'Professor')) {
     header("Location: home.php");
     exit();
 }

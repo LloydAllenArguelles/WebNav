@@ -46,7 +46,8 @@ $nextWeekEvents = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 session_start();
 $user = NULL;
-$is_admin = false; // Add this line for admin check
+$is_admin = false;
+$can_add_events = false;
 
 if (isset($_SESSION['user_id'])) {
     $userId = $_SESSION['user_id'];
@@ -60,7 +61,8 @@ if (isset($_SESSION['user_id'])) {
         } else if (empty($user['profile_image'])) {
             $user['profile_image'] = 'assets/front/pic.jpg';
         }
-        $is_admin = ($user['role'] === 'Admin'); // Add this line for admin check
+        $is_admin = ($user['role'] === 'Admin');
+        $can_add_events = ($user['role'] === 'Admin' || $user['role'] === 'Professor');
     } catch (PDOException $e) {
         echo "Error fetching user details: " . $e->getMessage();
         exit;
@@ -145,6 +147,35 @@ ob_clean();
             background-color: #3367d6;
         }
 
+        .event-controls {
+            margin-bottom: 20px;
+        }
+
+        .event-controls a {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 10px 15px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .add-event-button {
+            background-color: #4CAF50;
+        }
+
+        .remove-event-button {
+            background-color: #f44336;
+        }
+
+        .add-event-button:hover {
+            background-color: #45a049;
+        }
+
+        .remove-event-button:hover {
+            background-color: #d32f2f;
+        }
+
         /* Additional styles for table headers and rows */
         .schedule-table thead th {
             background-color: #007bff;
@@ -204,11 +235,14 @@ ob_clean();
     <div class="building-schedule-container">
         <h2 class="building-title">Gusaling Villegas Scheduled Events</h2>
 
-        <?php if ($is_admin): ?>
-    <div class="admin-controls">
+        <div class="event-controls">
+    <?php if ($can_add_events): ?>
         <a href="add_event.php" class="button add-event-button">Add Event</a>
-    </div>
     <?php endif; ?>
+    <?php if ($is_admin): ?>
+        <a href="remove_event.php" class="button remove-event-button">Remove Events</a>
+    <?php endif; ?>
+</div>
 
 <!-- Current Week Schedule Table -->
 <h3>Current Week Schedule</h3>

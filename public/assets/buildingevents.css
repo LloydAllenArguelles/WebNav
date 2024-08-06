@@ -151,6 +151,15 @@ body {
     background-color: #218838;
 }
 
+.remove-event-button {
+    background-color: #f44336;
+    margin-left: 10px;
+}
+
+.remove-event-button:hover {
+    background-color: #d32f2f;
+}
+
 .week-navigation {
     text-align: center;
     margin: 20px 0;
