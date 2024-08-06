@@ -59,11 +59,39 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedDateDisplay.textContent = `${selectedDate} (${getDayName(selectedDate)})`;
         console.log('Selected Date: ' + selectedDate);
         console.log('Selected Date Display: ' + selectedDateDisplay.textContent);
+
+        fetchSchedules(selectedDate);
     }
 
     function changeMonth(direction) {
         date.setMonth(date.getMonth() + direction);
         renderCalendar();
+    }
+
+    function fetchSchedules(date) {
+        const selectedStatus = document.getElementById('stat').value;
+        const url = `/WebNav/public/includes/fetch_schedules_gee.php?date=${encodeURIComponent(date)}&stat=${encodeURIComponent(selectedStatus)}`;
+        console.log(`Request URL: ${url}`);
+    
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onload = function () {
+            if (xhr.status >= 200 && xhr.status < 300) {
+                scheduleContainer.innerHTML = xhr.responseText;
+                if (xhr.responseText.trim() === "<p>No schedules available for this date.</p>") {
+                    console.log("No schedules available or all schedules have expired.");
+                }
+                if (isPastDate(selectedDate)) {
+                    console.log("Selected date is in the past. Actions are disabled.");
+                }
+            } else {
+                console.error(`Failed to load schedule: ${xhr.statusText} (Status: ${xhr.status})`);
+            }
+        };
+        xhr.onerror = function () {
+            console.error('Request error');
+        };
+        xhr.send();
     }
 
     prevMonthBtn.addEventListener('click', () => changeMonth(-1));
@@ -77,8 +105,10 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('selectedDate', selectedDate);
             renderCalendar();
 
+            fetchSchedules(selectedDate);
+
             const selectedStatus = document.getElementById('stat').value;
-            const url = `../../includes/fetch_schedules_gee.php?date=${encodeURIComponent(selectedDate)}&stat=${encodeURIComponent(selectedStatus)}`;
+            const url = `/WebNav/public/includes/fetch_schedules_gee.php?date=${encodeURIComponent(selectedDate)}&stat=${encodeURIComponent(selectedStatus)}`;
             console.log(`Request URL: ${url}`);
 
             const xhr = new XMLHttpRequest();
@@ -108,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedDateInput.value = selectedDate;
         renderCalendar();
 
-        const url = `../../includes/fetch_schedules_gee.php?date=${encodeURIComponent(selectedDate)}`;
+        const url = `/WebNav/public/includes/fetch_schedules_gee.php?date=${encodeURIComponent(selectedDate)}`;
         console.log(`Request URL on load: ${url}`);
 
         const xhr = new XMLHttpRequest();
@@ -130,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // This part seems to be duplicating the AJAX call, you might want to remove it or adjust as needed
     const xhr = new XMLHttpRequest();
-    const url = '../../includes/fetch_schedules_gee.php';
+    const url = '/WebNav/public/includes/fetch_schedules_gee.php';
 
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');

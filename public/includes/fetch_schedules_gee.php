@@ -14,16 +14,11 @@ $today = date('Y-m-d');
 
 $building_name = 'Gusaling Ejercito Estrada';
 
-$selected_room_id = null;
-$selected_date = null;
-$selected_status = isset($_GET['stat']) ? $_GET['stat'] : null;
+$selected_room_id = $_SESSION['selected_room_id'] ?? null;
+$selected_date = $_GET['date'] ?? date('Y-m-d');
+$selected_status = $_GET['stat'] ?? null;
 
-if (isset($_POST['room'])) {
-    $selected_room_id = $_POST['room'];
-    $_SESSION['selected_room_id'] = $selected_room_id;
-} else if (isset($_SESSION['selected_room_id'])) {
-    $selected_room_id = $_SESSION['selected_room_id'];
-} else {
+if (!$selected_room_id) {
     $sql = "SELECT room_id FROM rooms WHERE building = :building LIMIT 1";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([':building' => $building_name]);
@@ -31,90 +26,45 @@ if (isset($_POST['room'])) {
     $selected_room_id = $room['room_id'] ?? null;
 }
 
-if (isset($_POST['date'])) {
-    $selected_date = $_POST['date'];
-    $_SESSION['selected_date'] = $selected_date;
-} else if (isset($_SESSION['selected_date'])) {
-    $selected_date = $_SESSION['selected_date'];
-} else {
-    $selected_date = date('Y-m-d'); 
-}
-
-if (isset($_POST['stat'])) {
-    $selected_status = $_POST['stat'];
-    $_SESSION['selected_status'] = $selected_status;
-} else if (isset($_SESSION['selected_status'])) {
-    $selected_status = $_SESSION['selected_status'];
-}
-
-if (isset($_SESSION['user_id'])) {
-    $userId = $_SESSION['user_id'];
-}
-
-try {
-    $stmt = $pdo->prepare("SELECT username, profile_image FROM users WHERE user_id = :user_id");
-    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-    if (!$user) {
-        $user = NULL;
-    } else if (empty($user['profile_image'])) {
-        $user['profile_image'] = 'assets/front/pic.jpg';
-    }
-} catch (PDOException $e) {
-    echo "Error fetching user details: " . $e->getMessage();
-    exit;
-}
-
 $is_professor = isset($_SESSION['role']) && $_SESSION['role'] === 'Professor';
 $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
 
-if (isset($_GET['date'])) {
-    $selectedDate = $_GET['date'];
+// Convert the date to day_of_week
+$timestamp = strtotime($selected_date);
+$dayOfWeek = date('l', $timestamp);
 
-    // Convert the date to day_of_week
-    $timestamp = strtotime($selectedDate);
-    $dayOfWeek = date('l', $timestamp);
+try {
+    // Prepare the SQL statement to fetch schedules for the selected day of the week
+    $sql = "SELECT schedules.*, users.full_name 
+    FROM schedules 
+    LEFT JOIN users ON schedules.user_id = users.user_id 
+    WHERE schedules.room_id = :room_id 
+    AND schedules.day_of_week = :day_of_week
+    AND (schedules.expiry_date IS NULL OR schedules.expiry_date >= :selected_date)";
 
-    // Include the database connection file
-    include 'dbh.inc.php';
+    $params = [
+        ':room_id' => $selected_room_id,
+        ':day_of_week' => $dayOfWeek,
+        ':selected_date' => $selected_date
+    ];
 
-    try {
-        // Prepare the SQL statement to fetch schedules for the selected day of the week
-        $sql = "SELECT schedules.*, users.full_name 
-        FROM schedules 
-        LEFT JOIN users ON schedules.user_id = users.user_id 
-        WHERE schedules.room_id = :room_id 
-        AND schedules.day_of_week = :day_of_week
-        AND (schedules.expiry_date IS NULL OR schedules.expiry_date >= :selected_date)";
+    if ($selected_status && $selected_status !== '') {
+        $sql .= " AND schedules.status = :stat";
+        $params[':stat'] = $selected_status;
+    }
 
-$params = [
-    ':room_id' => $selected_room_id,
-    ':day_of_week' => $dayOfWeek,
-    ':selected_date' => $selectedDate
-];
+    $sql .= " ORDER BY schedules.start_time";
 
-if ($selected_status && $selected_status !== '') {
-    $sql .= " AND schedules.status = :stat";
-    $params[':stat'] = $selected_status;
-}
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
 
-$sql .= " ORDER BY schedules.start_time";
+    // Fetch all schedules for the selected date
+    $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$stmt = $pdo->prepare($sql);
-$stmt->execute($params);
-
-// Fetch all schedules for the selected date
-$schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// If no schedules are found, return a message
-if (empty($schedules)) {
-    echo "<p>No schedules available for this date.</p>";
-} else {
-}
-
-
-        // Debugging output
+    // If no schedules are found, return a message
+    if (empty($schedules)) {
+        echo "<p>No schedules available for this date.</p>";
+    } else {
         foreach ($schedules as $schedule) {
             echo "<div class='schedule-item {$schedule['status']}'>";
             echo "<h4>{$schedule['subject']}</h4>";
@@ -129,8 +79,9 @@ if (empty($schedules)) {
             } else {
                 echo "<span class=\"occupied\">{$schedule['status']}</span>";
             }
+            echo "</p>";
             echo "<p>Requestor: {$schedule['full_name']}</p>";
-            if ($selectedDate >= $today) {
+            if ($selected_date >= $today) {
                 echo "<form method='POST'>";
                 echo "<input type='hidden' name='schedule_id' value='{$schedule['schedule_id']}'>";        
             
@@ -149,17 +100,10 @@ if (empty($schedules)) {
             } else {
                 echo "<p>Actions not available for past dates</p>";
             }
-            echo "</p>";
             echo "</div>";        
         }
-
-        // Return the schedules as JSON
-        header("Refresh: 2");
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
     }
-} else {
-    echo "Date not specified.";
+} catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
 }
 ?>
-
