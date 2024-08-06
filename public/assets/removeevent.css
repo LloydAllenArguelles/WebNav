@@ -47,7 +47,6 @@ button {
     font-size: 16px;
     width: 100%;
     box-sizing: border-box;
-    margin: 0; /* Ensure no margin that might push it out */
 }
 
 button:hover {
@@ -80,7 +79,7 @@ a:hover {
 
 @media (max-width: 600px) {
     .container {
-        width: 90%;
+        width: calc(100% - 40px);
         margin: 20px auto;
         padding: 10px;
         box-sizing: border-box;
@@ -93,7 +92,7 @@ a:hover {
     button {
         padding: 8px;
         font-size: 14px;
-        width: 100%; /* Ensure full width within the container */
+        width: 100%;
         box-sizing: border-box;
     }
 
