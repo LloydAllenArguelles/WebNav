@@ -643,25 +643,25 @@
   style.textContent = `
     .schedule-table {
       width: 100%;
-      border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0 10px;
       font-family: Arial, sans-serif;
-      background-color: #f8f8f8;
-      color: #333;
+      color: #FFFFFF;
     }
     .schedule-table th, .schedule-table td {
-      border: 1px solid #ddd;
-      padding: 8px;
+      padding: 12px;
       text-align: left;
+      border-bottom: 1px solid #ddd;
     }
     .schedule-table th {
       font-weight: bold;
-      background-color: #e0e0e0;
-    }
-    .schedule-table tr:hover {
-      background-color: #e8e8e8;
+      border-bottom: 2px solid #ddd;
     }
   `;
   document.head.appendChild(style);
+
+
+
 
 
 
