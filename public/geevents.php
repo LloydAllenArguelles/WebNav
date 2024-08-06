@@ -280,7 +280,7 @@ ob_clean();
 document.addEventListener('DOMContentLoaded', function() {
     function fetchEvents() {
         const today = new Date().toISOString().split('T')[0];
-        fetch(`includes/fetch_events.php?date=${today}`)
+        fetch(`includes/fetch_events_ejercito.php?date=${today}`)
             .then(response => response.json())
             .then(data => {
                 displayEvents(data.currentWeek, 'current-week-schedule');

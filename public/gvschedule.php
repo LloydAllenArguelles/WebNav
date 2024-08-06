@@ -328,17 +328,22 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
                         echo "</p>";
 
                         if ($is_professor || $is_admin) {
-                            echo "<p>Requestor: {$schedule['full_name']}</p>";
                             echo "<form method='POST'>";
                             echo "<input type='hidden' name='schedule_id' value='{$schedule['schedule_id']}'>";
                             
-                            if ($is_professor) {
-                                if ($schedule['status'] == 'Available') {
+                            if ($schedule['status'] == 'Available') {
+                                if ($is_admin) {
+                                    echo "<button type='submit' name='admin_occupy_schedule'>Occupy</button>";
+                                } else {
                                     echo "<button type='submit' name='occupy_schedule'>Request</button>";
-                                } elseif ($schedule['status'] == 'Occupied' && $schedule['user_id'] == $_SESSION['user_id']) {
+                                }
+                            } elseif ($schedule['status'] == 'Occupied') {
+                                if ($is_admin || $schedule['user_id'] == $_SESSION['user_id']) {
                                     echo "<button type='submit' name='unoccupy_schedule'>Unoccupy</button>";
                                 }
-                            } elseif ($is_admin && $schedule['status'] == 'Pending') {
+                            }
+                            
+                            if ($is_admin && $schedule['status'] == 'Pending') {
                                 echo "<button type='submit' name='approve_schedule'>Approve</button>";
                                 echo "<button type='submit' name='deny_schedule'>Deny</button>";
                             }
@@ -446,6 +451,33 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
             }
         } else {
             echo "<script>alert('You do not have permission to deny this schedule!');</script>";
+        }
+    }
+
+    if (isset($_POST['unoccupy_schedule'])) {
+        if ($is_professor || $is_admin) {
+            $schedule_id = $_POST['schedule_id'];
+    
+            $sql_check_owner = "SELECT user_id FROM schedules WHERE schedule_id = :schedule_id";
+            $stmt_check_owner = $pdo->prepare($sql_check_owner);
+            $stmt_check_owner->execute([':schedule_id' => $schedule_id]);
+            $owner_id = $stmt_check_owner->fetchColumn();
+    
+            if ($is_admin || $owner_id == $_SESSION['user_id']) {
+                $sql_update = "UPDATE schedules SET status = 'Available', user_id = NULL WHERE schedule_id = :schedule_id";
+                $stmt_update = $pdo->prepare($sql_update);
+                $stmt_update->execute([':schedule_id' => $schedule_id]);
+    
+                if ($stmt_update->rowCount() > 0) {
+                    echo "<script>alert('Schedule unoccupied successfully!'); window.location.reload();</script>";
+                } else {
+                    echo "<script>alert('Failed to unoccupy schedule!');</script>";
+                }
+            } else {
+                echo "<script>alert('You do not have permission to unoccupy this schedule!');</script>";
+            }
+        } else {
+            echo "<script>alert('You do not have permission to unoccupy this schedule!');</script>";
         }
     }
     ?>
