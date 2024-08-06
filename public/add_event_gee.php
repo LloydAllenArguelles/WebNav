@@ -2,7 +2,6 @@
 session_start();
 require_once 'includes/dbh.inc.php';
 
-// Check if the user is an admin
 if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'Admin' && $_SESSION['role'] !== 'Professor')) {
     header("Location: home.php");
     exit();
@@ -11,7 +10,6 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'Admin' && $_SESSION['ro
 $building_name = 'Gusaling Ejercito Estrada';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Sanitize and validate input
     $event_name = filter_input(INPUT_POST, 'event_name', FILTER_SANITIZE_STRING);
     $event_name = substr($event_name, 0, 20); // Limit to 20 characters
     $room_id = filter_input(INPUT_POST, 'room_id', FILTER_VALIDATE_INT);
@@ -21,7 +19,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($event_name && $room_id && $date && $time) {
         try {
-            // Check for conflicts
+            $sql = "SELECT room_number COLLATE utf8mb4_unicode_ci AS room_number FROM rooms WHERE room_id = :room_id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([':room_id' => $room_id]);
+            $room_number = $stmt->fetchColumn();
+
+            if (!$room_number) {
+                throw new Exception("Room not found for the given room_id");
+            }
+
             $sql = "SELECT COUNT(*) FROM events WHERE room_id = :room_id AND expiration_date = :expiration_date AND time = :time";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([
@@ -34,31 +40,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($conflict_count > 0) {
                 $error_message = "There is already an event scheduled at the same time in this room.";
             } else {
-                // Insert new event
-                $sql = "INSERT INTO events (event_name, room_id, day, time, expiration_date) VALUES (:event_name, :room_id, :day, :time, :expiration_date)";
+                $sql = "INSERT INTO events (event_name, room_id, room_number, day, time, expiration_date) 
+                        VALUES (:event_name, :room_id, :room_number COLLATE utf8mb4_unicode_ci, :day, :time, :expiration_date)";
                 $stmt = $pdo->prepare($sql);
-                $stmt->execute([
+                $result = $stmt->execute([
                     ':event_name' => $event_name,
                     ':room_id' => $room_id,
+                    ':room_number' => $room_number,
                     ':day' => $day,
                     ':time' => $time,
                     ':expiration_date' => $date
                 ]);
-                $success_message = "Event added successfully!";
+
+                if ($result) {
+                    $success_message = "Event added successfully!";
+                } else {
+                    throw new Exception("Failed to insert event into database");
+                }
             }
         } catch (PDOException $e) {
-            $error_message = "Error adding event: " . $e->getMessage();
+            $error_message = "Database error: " . $e->getMessage();
+        } catch (Exception $e) {
+            $error_message = "Error: " . $e->getMessage();
         }
     } else {
-        $error_message = "All fields are required.";
+        $error_message = "All fields are required and must be valid.";
     }
 }
 
-// Fetch rooms for the dropdown
-$sql = "SELECT room_id, room_number FROM rooms WHERE building = :building";
-$stmt = $pdo->prepare($sql);
-$stmt->execute([':building' => $building_name]);
-$rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+try {
+    $sql = "SELECT room_id, room_number COLLATE utf8mb4_unicode_ci AS room_number 
+            FROM rooms 
+            WHERE building COLLATE utf8mb4_unicode_ci = :building 
+            ORDER BY room_number COLLATE utf8mb4_unicode_ci";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':building' => $building_name]);
+    $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $error_message = "Error fetching rooms: " . $e->getMessage();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -79,31 +100,43 @@ $rooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <p class="error"><?php echo $error_message; ?></p>
         <?php endif; ?>
         <form method="POST" action="">
-            <div>
-                <label for="event_name">Event Name (max 20 characters):</label>
-                <input type="text" id="event_name" name="event_name" maxlength="20" required>
-            </div>
-            <div>
-                <label for="room_id">Room:</label>
-                <select id="room_id" name="room_id" required>
-                    <?php foreach ($rooms as $room): ?>
-                        <option value="<?php echo $room['room_id']; ?>"><?php echo $room['room_number']; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            <div>
-                <label for="date">Date:</label>
-                <input type="date" id="date" name="date" required>
-            </div>
-            <div>
-                <label for="time">Time:</label>
-                <input type="time" id="time" name="time" required>
-            </div>
-            <div>
-                <input type="submit" value="Add Event">
-            </div>
-        </form>
-        <a href="geevents.php">Back to GEE Events Page</a>
+    <div>
+        <label for="event_name">Event Name (max 20 characters):</label>
+        <input type="text" id="event_name" name="event_name" maxlength="20" required>
     </div>
+    <div>
+        <label for="room_id">Room:</label>
+        <select id="room_id" name="room_id" required>
+            <?php foreach ($rooms as $room): ?>
+                <option value="<?php echo $room['room_id']; ?>"><?php echo htmlspecialchars($room['room_number']); ?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
+    <div>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required min="<?php echo date('Y-m-d'); ?>">
+    </div>
+    <div>
+    <label for="time">Time (24-hour format, HH:MM):</label>
+    <input type="text" id="time" name="time" required pattern="([01]?[0-9]|2[0-3]):[0-5][0-9]" placeholder="HH:MM">
+    </div>
+    <div>
+        <input type="submit" value="Add Event">
+    </div>
+</form>
+        <a href="geevents.php">Back to GV Events Page</a>
+    </div>
+    <script>
+document.getElementById('time').addEventListener('input', function (e) {
+    var time = e.target.value;
+    var timePattern = /^([01]?[0-9]|2[0-3]):[0-5][0-9]$/;
+    
+    if (!timePattern.test(time)) {
+        e.target.setCustomValidity('Please enter a valid time in 24-hour format (HH:MM)');
+    } else {
+        e.target.setCustomValidity('');
+    }
+});
+</script>
 </body>
 </html>
