@@ -1,69 +1,84 @@
 <?php
 session_start();
-require_once 'includes/dbh.inc.php';
+require_once __DIR__ . '/includes/dbh.inc.php';
+
+// Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
     exit();
-} else {
-    $userId = $_SESSION['user_id'];
 }
 
+$userId = $_SESSION['user_id'];
 $building_name = 'Gusaling Villegas';
 
-$selected_room_id = null;
-$selected_date = null;
-$selected_status = null;
+// Use null coalescing operator for default values
+$selected_room_id = $_SESSION['selected_room_id'] ?? null;
+$selected_date = $_SESSION['selected_date'] ?? date('Y-m-d');
+$selected_status = $_SESSION['selected_status'] ?? null;
 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// Handle POST data
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['room'])) {
+        $selected_room_id = $_POST['room'];
+        $_SESSION['selected_room_id'] = $selected_room_id;
+    }
+    if (isset($_POST['date'])) {
+        $selected_date = $_POST['date'];
+        $_SESSION['selected_date'] = $selected_date;
+    }
+    if (isset($_POST['stat'])) {
+        $selected_status = $_POST['stat'];
+        $_SESSION['selected_status'] = $selected_status;
+    }
+}
 
-if (isset($_POST['room'])) {
-    $selected_room_id = $_POST['room'];
-    $_SESSION['selected_room_id'] = $selected_room_id;
-} else if (isset($_SESSION['selected_room_id'])) {
-    $selected_room_id = $_SESSION['selected_room_id'];
-} else {
-    $sql = "SELECT room_id FROM rooms WHERE building = :building LIMIT 1";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([':building' => $building_name]);
+// If no room is selected, get the first room for the building
+if (!$selected_room_id) {
+    $stmt = $pdo->prepare("SELECT room_id FROM rooms WHERE building = ? LIMIT 1");
+    $stmt->execute([$building_name]);
     $room = $stmt->fetch(PDO::FETCH_ASSOC);
     $selected_room_id = $room['room_id'] ?? null;
 }
 
-if (isset($_POST['date'])) {
-    $selected_date = $_POST['date'];
-    $_SESSION['selected_date'] = $selected_date;
-} else if (isset($_SESSION['selected_date'])) {
-    $selected_date = $_SESSION['selected_date'];
-} else {
-    $selected_date = date('Y-m-d'); 
-}
-
-if (isset($_POST['stat'])) {
-    $selected_status = $_POST['stat'];
-    $_SESSION['selected_status'] = $selected_status;
-} else if (isset($_SESSION['selected_status'])) {
-    $selected_status = $_SESSION['selected_status'];
-}
-
+// Fetch user details
 try {
-    $stmt = $pdo->prepare("SELECT username, profile_image FROM users WHERE user_id = :user_id");
-    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
-    $stmt->execute();
+    $stmt = $pdo->prepare("SELECT username, profile_image FROM users WHERE user_id = ?");
+    $stmt->execute([$userId]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$user) {
-        $user = NULL;
-    } else if (empty($user['profile_image'])) {
-        $user['profile_image'] = 'assets/front/pic.jpg';
+        throw new Exception("User not found");
     }
-} catch (PDOException $e) {
-    echo "Error fetching user details: " . $e->getMessage();
-    exit;
+    $user['profile_image'] = $user['profile_image'] ?: 'assets/front/pic.jpg';
+} catch (Exception $e) {
+    error_log("Error fetching user details: " . $e->getMessage());
+    // Handle error appropriately
 }
 
-$is_professor = isset($_SESSION['role']) && $_SESSION['role'] === 'Professor';
-$is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
+$is_professor = $_SESSION['role'] === 'Professor';
+$is_admin = $_SESSION['role'] === 'Admin';
 
+// Fetch schedules
+try {
+    $sql = "SELECT schedules.*, users.full_name 
+            FROM schedules 
+            LEFT JOIN users ON schedules.user_id = users.user_id 
+            WHERE schedules.room_id = ? AND schedules.day_of_week = ?";
+    $params = [$selected_room_id, date('l', strtotime($selected_date))];
+    
+    if ($selected_status) {
+        $sql .= " AND schedules.status = ?";
+        $params[] = $selected_status;
+    }
+    
+    $sql .= " ORDER BY schedules.start_time";
+    
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    error_log("Error fetching schedules: " . $e->getMessage());
+    // Handle error appropriately
+}
 ?>
 
 <!DOCTYPE html>
