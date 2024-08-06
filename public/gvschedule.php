@@ -284,6 +284,12 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
             <h3>Schedule for <span id="selected-date-display"></span></h3>
             <div id="schedule-container">   
             <?php
+            // Fetch the user's profsubject when the user logs in or as needed
+            $sql = "SELECT profsubject FROM users WHERE user_id = :user_id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([':user_id' => $_SESSION['user_id']]);
+            $user_subject = $stmt->fetchColumn();
+
             if ($selected_room_id) {
                 $room_id = $selected_room_id;
 
@@ -368,9 +374,9 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
                     $schedule = $stmt_check_available->fetch(PDO::FETCH_ASSOC);
 
                     if ($schedule) {
-                        $sql_update = "UPDATE schedules SET status = 'Pending', user_id = :user_id WHERE schedule_id = :schedule_id";
+                        $sql_update = "UPDATE schedules SET status = 'Pending', user_id = :user_id, subject = :subject WHERE schedule_id = :schedule_id";
                         $stmt_update = $pdo->prepare($sql_update);
-                        $stmt_update->execute([':user_id' => $_SESSION['user_id'], ':schedule_id' => $schedule_id]);
+                        $stmt_update->execute([':user_id' => $_SESSION['user_id'], ':subject' => $user_subject, ':schedule_id' => $schedule_id]);
 
                         if ($stmt_update->rowCount() > 0) {
                             echo "<script>
@@ -419,7 +425,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
                 if ($is_admin) {
                     $schedule_id = $_POST['schedule_id'];
 
-                    $sql_update = "UPDATE schedules SET status = 'Occupied' WHERE schedule_id = :schedule_id";
+                    $sql_update = "UPDATE schedules SET status = 'Occupied', subject = (SELECT profsubject FROM users WHERE user_id = schedules.user_id) WHERE schedule_id = :schedule_id";
                     $stmt_update = $pdo->prepare($sql_update);
                     $stmt_update->execute([':schedule_id' => $schedule_id]);
 
@@ -451,6 +457,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
                 }
             }
             ?>
+
 
     <script> const selectedDate = "<?php echo $selected_date; ?>"; </script>
     <script src="assets/js/buttons.js"></script>
