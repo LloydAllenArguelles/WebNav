@@ -10,6 +10,8 @@ if (!isset($_SESSION['user_id'])) {
 
 require_once 'dbh.inc.php';
 
+$today = date('Y-m-d');
+
 $building_name = 'Gusaling Corazon Aquino';
 
 $selected_room_id = null;
@@ -79,24 +81,37 @@ if (isset($_GET['date'])) {
 
     try {
         // Prepare the SQL statement to fetch schedules for the selected day of the week
-        $sql = "SELECT schedules.*, users.full_name FROM schedules LEFT JOIN users ON schedules.user_id = users.user_id WHERE schedules.room_id = :room_id AND schedules.day_of_week = :day_of_week";
-        $params = [
-            ':room_id' => $selected_room_id,
-            ':day_of_week' => $dayOfWeek
-        ];
+        $sql = "SELECT schedules.*, users.full_name 
+        FROM schedules 
+        LEFT JOIN users ON schedules.user_id = users.user_id 
+        WHERE schedules.room_id = :room_id 
+        AND schedules.day_of_week = :day_of_week
+        AND (schedules.expiry_date IS NULL OR schedules.expiry_date >= :selected_date)";
 
-        if ($selected_status && $selected_status !== '') {
-            $sql .= " AND schedules.status = :stat";
-            $params[':stat'] = $selected_status;
-        }
+$params = [
+    ':room_id' => $selected_room_id,
+    ':day_of_week' => $dayOfWeek,
+    ':selected_date' => $selectedDate
+];
 
-        $sql .= " ORDER BY schedules.start_time";
+if ($selected_status && $selected_status !== '') {
+    $sql .= " AND schedules.status = :stat";
+    $params[':stat'] = $selected_status;
+}
 
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute($params);
+$sql .= " ORDER BY schedules.start_time";
 
-        // Fetch all schedules for the selected date
-        $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
+
+// Fetch all schedules for the selected date
+$schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// If no schedules are found, return a message
+if (empty($schedules)) {
+    echo "<p>No schedules available for this date.</p>";
+} else {
+}
 
 
         // Debugging output
@@ -114,22 +129,26 @@ if (isset($_GET['date'])) {
             } else {
                 echo "<span class=\"occupied\">{$schedule['status']}</span>";
             }
-            echo "<p>Requestor: {$schedule['full_name']}</p>";;
-            echo "<form method='POST'>";
-            echo "<input type='hidden' name='schedule_id' value='{$schedule['schedule_id']}'>";
+            echo "<p>Requestor: {$schedule['full_name']}</p>";
+            if ($selectedDate >= $today) {
+                echo "<form method='POST'>";
+                echo "<input type='hidden' name='schedule_id' value='{$schedule['schedule_id']}'>";        
             
-            if ($is_professor) {
-                if ($schedule['status'] == 'Available') {
-                    echo "<button type='submit' name='occupy_schedule'>Request</button>";
-                } elseif ($schedule['status'] == 'Occupied' && $schedule['user_id'] == $_SESSION['user_id']) {
-                    echo "<button type='submit' name='unoccupy_schedule'>Unoccupy</button>";
+                if ($is_professor) {
+                    if ($schedule['status'] == 'Available') {
+                        echo "<button type='submit' name='occupy_schedule'>Request</button>";
+                    } elseif ($schedule['status'] == 'Occupied' && $schedule['user_id'] == $_SESSION['user_id']) {
+                        echo "<button type='submit' name='unoccupy_schedule'>Unoccupy</button>";
+                    }
+                } elseif ($is_admin && $schedule['status'] == 'Pending') {
+                    echo "<button type='submit' name='approve_schedule'>Approve</button>";
+                    echo "<button type='submit' name='deny_schedule'>Deny</button>";
                 }
-            } elseif ($is_admin && $schedule['status'] == 'Pending') {
-                echo "<button type='submit' name='approve_schedule'>Approve</button>";
-                echo "<button type='submit' name='deny_schedule'>Deny</button>";
+                
+                echo "</form>";
+            } else {
+                echo "<p>Actions not available for past dates</p>";
             }
-            
-            echo "</form>";
             echo "</p>";
             echo "</div>";        
         }
