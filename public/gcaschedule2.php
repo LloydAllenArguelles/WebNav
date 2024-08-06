@@ -1,11 +1,6 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
-}
-
 require_once 'includes/dbh.inc.php';
 
 $building_name = 'Gusaling Corazon Aquino';
