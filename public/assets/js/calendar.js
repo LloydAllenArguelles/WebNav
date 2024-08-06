@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextMonthBtn = document.getElementById('next-month');
     const selectedDateInput = document.getElementById('selected_date');
     const selectedDateDisplay = document.getElementById('selected-date-display');
-    const scheduleContainer = document.getElementById('schedule-list');
+    const scheduleContainer = document.getElementById('schedule-container');
 
     let date = new Date();
     let selectedDate = localStorage.getItem('selectedDate') || selectedDateInput.value; // Initialize selectedDate
