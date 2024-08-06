@@ -455,21 +455,6 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
     <script src="assets/js/calendar.js"></script>
 
     <script>
-        echo "Debug: Script started<br>";
-session_start();
-echo "Debug: Session started<br>";
-require_once 'includes/dbh.inc.php';
-echo "Debug: Database connection file included<br>";
-
-if (!isset($_SESSION['user_id'])) {
-    echo "Debug: User not logged in, redirecting<br>";
-    header("Location: index.php");
-    exit();
-} else {
-    echo "Debug: User logged in<br>";
-    $userId = $_SESSION['user_id'];
-}
-
     document.getElementById('show-occupied-schedules').addEventListener('click', function() {
         fetch('fetch_occupied_schedules.php')
             .then(response => response.json())
