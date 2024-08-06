@@ -1,67 +1,63 @@
 <?php
 session_start();
-// Temporary fix: Force a user session
-if (!isset($_SESSION['user_id'])) {
-    $_SESSION['user_id'] = 1; 
-    $_SESSION['role'] = 'Professor'; 
-}
-require_once __DIR__ . '/includes/dbh.inc.php';
+
+require_once 'includes/dbh.inc.php';
 
 $building_name = 'Gusaling Villegas';
 
-// Use null coalescing operator for default values
-$selected_room_id = $_SESSION['selected_room_id'] ?? null;
-$selected_date = $_SESSION['selected_date'] ?? date('Y-m-d');
-$selected_status = $_SESSION['selected_status'] ?? null;
+$selected_room_id = null;
+$selected_date = null;
+$selected_status = null;
 
-// Handle POST data
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['room'])) {
-        $selected_room_id = $_POST['room'];
-        $_SESSION['selected_room_id'] = $selected_room_id;
-    }
-    if (isset($_POST['date'])) {
-        $selected_date = $_POST['date'];
-        $_SESSION['selected_date'] = $selected_date;
-    }
-    if (isset($_POST['stat'])) {
-        $selected_status = $_POST['stat'];
-        $_SESSION['selected_status'] = $selected_status;
-    }
+if (isset($_POST['room'])) {
+    $selected_room_id = $_POST['room'];
+    $_SESSION['selected_room_id'] = $selected_room_id;
+} else if (isset($_SESSION['selected_room_id'])) {
+    $selected_room_id = $_SESSION['selected_room_id'];
+} else {
+    $sql = "SELECT room_id FROM rooms WHERE building = :building LIMIT 1";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([':building' => $building_name]);
+    $room = $stmt->fetch(PDO::FETCH_ASSOC);
+    $selected_room_id = $room['room_id'] ?? null;
 }
 
-// If no room is selected, get the first room for the building
-if (!$selected_room_id) {
-    try {
-        $stmt = $pdo->prepare("SELECT room_id FROM rooms WHERE building = ? LIMIT 1");
-        $stmt->execute([$building_name]);
-        $room = $stmt->fetch(PDO::FETCH_ASSOC);
-        $selected_room_id = $room['room_id'] ?? null;
-    } catch (PDOException $e) {
-        // Log the error and continue
-        error_log("Database error: " . $e->getMessage());
-    }
+if (isset($_POST['date'])) {
+    $selected_date = $_POST['date'];
+    $_SESSION['selected_date'] = $selected_date;
+} else if (isset($_SESSION['selected_date'])) {
+    $selected_date = $_SESSION['selected_date'];
+} else {
+    $selected_date = date('Y-m-d'); 
 }
 
-// Fetch user details
+if (isset($_POST['stat'])) {
+    $selected_status = $_POST['stat'];
+    $_SESSION['selected_status'] = $selected_status;
+} else if (isset($_SESSION['selected_status'])) {
+    $selected_status = $_SESSION['selected_status'];
+}
+
+if (isset($_SESSION['user_id'])) {
+    $userId = $_SESSION['user_id'];
+}
 try {
-    $stmt = $pdo->prepare("SELECT username, profile_image FROM users WHERE user_id = ?");
-    $stmt->execute([$userId]);
+    $stmt = $pdo->prepare("SELECT username, profile_image FROM users WHERE user_id = :user_id");
+    $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+    $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$user) {
-        $user = ['username' => 'Guest', 'profile_image' => 'assets/front/pic.jpg'];
-    } elseif (empty($user['profile_image'])) {
+        $user = NULL;
+    } else if (empty($user['profile_image'])) {
         $user['profile_image'] = 'assets/front/pic.jpg';
     }
 } catch (PDOException $e) {
-    // Log the error and set a default user
-    error_log("Database error: " . $e->getMessage());
-    $user = ['username' => 'Guest', 'profile_image' => 'assets/front/pic.jpg'];
+    echo "Error fetching user details: " . $e->getMessage();
+    exit;
 }
 
-// Set default roles
-$is_professor = $_SESSION['role'] ?? '' === 'Professor';
-$is_admin = $_SESSION['role'] ?? '' === 'Admin';
+$is_professor = isset($_SESSION['role']) && $_SESSION['role'] === 'Professor';
+$is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
 
 ?>
 
