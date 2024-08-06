@@ -608,33 +608,62 @@
   }
   
   function displaySchedule(data) {
-    // Assuming you have an element to display the schedule
     const scheduleElements = document.querySelectorAll('.info-hotspot-text');
-    scheduleElements.innerHTML = '';
-    // Loop through each schedule element
+    
     scheduleElements.forEach(scheduleElement => {
       scheduleElement.innerHTML = ''; // Clear previous content
-
+      
       if (data.length > 0) {
-          const table = document.createElement('table');
-          table.classList.add('schedule-table');
-
-          const headerRow = document.createElement('tr');
-          headerRow.innerHTML = '<th>Time</th><th>Subject</th><th>Status</th>';
-          table.appendChild(headerRow);
-
-          data.forEach(schedules => {
-              const row = document.createElement('tr');
-              row.innerHTML = `<td>${schedules.start_time} - ${schedules.end_time}</td><td>${schedules.subject}</td><td>${schedules.status}</td>`;
-              table.appendChild(row);
-          });
-
-          scheduleElement.appendChild(table);
+        const table = document.createElement('table');
+        table.classList.add('schedule-table');
+        
+        const headerRow = document.createElement('tr');
+        headerRow.innerHTML = '<th>Time</th><th>Subject</th><th>Status</th>';
+        table.appendChild(headerRow);
+        
+        data.forEach(schedule => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${schedule.start_time} - ${schedule.end_time}</td>
+            <td>${schedule.subject}</td>
+            <td>${schedule.status}</td>
+          `;
+          table.appendChild(row);
+        });
+        
+        scheduleElement.appendChild(table);
       } else {
-          scheduleElement.textContent = 'No schedules available for the selected room.';
+        scheduleElement.textContent = 'No schedules available for the selected room.';
       }
-  });
-}
+    });
+  
+    // Add CSS styles
+    const style = document.createElement('style');
+    style.textContent = `
+      .schedule-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        font-family: Arial, sans-serif;
+      }
+      .schedule-table th, .schedule-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      .schedule-table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+      .schedule-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      .schedule-table tr:hover {
+        background-color: #f5f5f5;
+      }
+    `;
+    document.head.appendChild(style);
+  }
 
   // Prevent touch and scroll events from reaching the parent element.
   function stopTouchAndScrollEventPropagation(element, eventList) {
