@@ -14,6 +14,9 @@ $selected_room_id = null;
 $selected_date = null;
 $selected_status = null;
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 if (isset($_POST['room'])) {
     $selected_room_id = $_POST['room'];
     $_SESSION['selected_room_id'] = $selected_room_id;
@@ -457,6 +460,21 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
     <script src="assets/js/calendargv.js"></script>
 
     <script>
+        echo "Debug: Script started<br>";
+session_start();
+echo "Debug: Session started<br>";
+require_once 'includes/dbh.inc.php';
+echo "Debug: Database connection file included<br>";
+
+if (!isset($_SESSION['user_id'])) {
+    echo "Debug: User not logged in, redirecting<br>";
+    header("Location: index.php");
+    exit();
+} else {
+    echo "Debug: User logged in<br>";
+    $userId = $_SESSION['user_id'];
+}
+
     document.getElementById('show-occupied-schedules').addEventListener('click', function() {
         fetch('fetch_occupied_schedules.php')
             .then(response => response.json())
