@@ -645,6 +645,8 @@
       width: 100%;
       border-collapse: collapse;
       font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
     }
     .schedule-table th, .schedule-table td {
       border: 1px solid #ddd;
@@ -652,18 +654,14 @@
       text-align: left;
     }
     .schedule-table th {
-      background-color: #f2f2f2;
       font-weight: bold;
-    }
-    .schedule-table tr:nth-child(even) {
-      background-color: #f9f9f9;
+      background-color: #e0e0e0;
     }
     .schedule-table tr:hover {
-      background-color: #f5f5f5;
+      background-color: #e8e8e8;
     }
   `;
   document.head.appendChild(style);
-
 
 
 
