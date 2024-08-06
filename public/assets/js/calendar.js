@@ -70,23 +70,22 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('selectedDate', selectedDate); // Save selected date to local storage
             renderCalendar();
     
-            const selectedStatus = document.getElementById('stat').value;
-const url = `/WebNav/public/includes/fetch_schedules_gca.php?date=${encodeURIComponent(selectedDate)}&stat=${encodeURIComponent(selectedStatus)}`;
-console.log(`Request URL: ${url}`);
-
-const xhr = new XMLHttpRequest();
-xhr.open('GET', url, true);
-xhr.onload = function () {
-    if (xhr.status >= 200 && xhr.status < 300) {
-        scheduleContainer.innerHTML = xhr.responseText;
-    } else {
-        console.error(`Failed to load schedule: ${xhr.statusText} (Status: ${xhr.status})`);
-    }
-};
-xhr.onerror = function () {
-    console.error('Request error');
-};
-xhr.send();
+            const url = `/WebNav/public/includes/fetch_schedules.php?date=${encodeURIComponent(selectedDate)}`;
+            console.log(`Request URL: ${url}`);
+    
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onload = function () {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    scheduleContainer.innerHTML = xhr.responseText;
+                } else {
+                    console.error(`Failed to load schedule: ${xhr.statusText} (Status: ${xhr.status})`);
+                }
+            };
+            xhr.onerror = function () {
+                console.error('Request error');
+            };
+            xhr.send();
         }
     });
 
@@ -95,7 +94,7 @@ xhr.send();
         selectedDateInput.value = selectedDate;
         renderCalendar();
 
-        const url = `/WebNav/public/includes/fetch_schedules_gca.php?date=${encodeURIComponent(selectedDate)}`;
+        const url = `/WebNav/public/includes/fetch_schedules.php?date=${encodeURIComponent(selectedDate)}`;
         console.log(`Request URL on load: ${url}`);
 
         const xhr = new XMLHttpRequest();
@@ -115,7 +114,7 @@ xhr.send();
         renderCalendar();
     }
     const xhr = new XMLHttpRequest();
-    const url = '/WebNav/public/includes/fetch_schedules_gca.php'; // Replace with your target PHP script
+    const url = '/WebNav/public/includes/fetch_schedules.php'; // Replace with your target PHP script
 
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');

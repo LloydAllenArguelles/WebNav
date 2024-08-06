@@ -457,7 +457,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
 
     <script> const selectedDate = "<?php echo $selected_date; ?>"; </script>
     <script src="assets/js/buttons.js"></script>
-    <script src="assets/js/calendargv.js"></script>
+    <script src="assets/js/calendar.js"></script>
 
     <script>
         echo "Debug: Script started<br>";
@@ -524,7 +524,7 @@ if (!isset($_SESSION['user_id'])) {
             console.log("THIS IS " + buildingName);
             
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/WebNav/public/includes/fetch_schedules_gv.php', true);
+            xhr.open('POST', '/WebNav/public/includes/fetch_schedules.php', true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             
             xhr.onload = function() {

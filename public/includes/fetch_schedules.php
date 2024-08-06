@@ -16,6 +16,12 @@ $selected_room_id = null;
 $selected_date = null;
 $selected_status = isset($_GET['stat']) ? $_GET['stat'] : null;
 
+echo $building_name;
+echo $selected_room_id;
+echo $selected_date;
+echo $selected_status;
+
+
 if (isset($_POST['room'])) {
     $selected_room_id = $_POST['room'];
     $_SESSION['selected_room_id'] = $selected_room_id;
