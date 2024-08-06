@@ -43,9 +43,6 @@ if (isset($_POST['stat'])) {
     $selected_status = $_SESSION['selected_status'];
 }
 
-if (isset($_SESSION['user_id'])) {
-    $userId = $_SESSION['user_id'];
-}
 try {
     $stmt = $pdo->prepare("SELECT username, profile_image FROM users WHERE user_id = :user_id");
     $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
