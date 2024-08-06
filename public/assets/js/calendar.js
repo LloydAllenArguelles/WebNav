@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const scheduleContainer = document.getElementById('schedule-container');
 
     let date = new Date();
-    let selectedDate = localStorage.getItem('selectedDate') || selectedDateInput.value; // Initialize selectedDate
+    let selectedDate = localStorage.getItem('selectedDate') || selectedDateInput.value;
 
     function getStatusForDate(dateStr) {
         const statuses = {
@@ -23,6 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const dateObj = new Date(dateStr);
         return days[dateObj.getDay()];
+    }
+
+    function isPastDate(dateStr) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        return new Date(dateStr) < today;
     }
 
     function renderCalendar() {
@@ -45,7 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const isToday = new Date().toISOString().slice(0, 10) === dateStr ? 'today' : '';
             const isSelected = selectedDate === dateStr ? 'selected' : '';
             const status = getStatusForDate(dateStr);
-            calendarHTML += `<div class="calendar-date ${isToday} ${isSelected} ${status}" data-date="${dateStr}">${day}</div>`;
+            const isPast = isPastDate(dateStr) ? 'past' : '';
+            calendarHTML += `<div class="calendar-date ${isToday} ${isSelected} ${status} ${isPast}" data-date="${dateStr}">${day}</div>`;
         }
 
         calendarDates.innerHTML = calendarHTML;
@@ -65,19 +72,26 @@ document.addEventListener('DOMContentLoaded', () => {
     calendarDates.addEventListener('click', (event) => {
         const target = event.target;
         if (target.classList.contains('calendar-date') && target.dataset.date) {
-            selectedDate = target.dataset.date; // Update selectedDate here
+            selectedDate = target.dataset.date;
             selectedDateInput.value = selectedDate;
-            localStorage.setItem('selectedDate', selectedDate); // Save selected date to local storage
+            localStorage.setItem('selectedDate', selectedDate);
             renderCalendar();
-    
-            const url = `/WebNav/public/includes/fetch_schedules.php?date=${encodeURIComponent(selectedDate)}`;
+
+            const selectedStatus = document.getElementById('stat').value;
+            const url = `/WebNav/public/includes/fetch_schedules_gca.php?date=${encodeURIComponent(selectedDate)}&stat=${encodeURIComponent(selectedStatus)}`;
             console.log(`Request URL: ${url}`);
-    
+
             const xhr = new XMLHttpRequest();
             xhr.open('GET', url, true);
             xhr.onload = function () {
                 if (xhr.status >= 200 && xhr.status < 300) {
                     scheduleContainer.innerHTML = xhr.responseText;
+                    if (xhr.responseText.trim() === "<p>No schedules available for this date.</p>") {
+                        console.log("No schedules available or all schedules have expired.");
+                    }
+                    if (isPastDate(selectedDate)) {
+                        console.log("Selected date is in the past. Actions are disabled.");
+                    }
                 } else {
                     console.error(`Failed to load schedule: ${xhr.statusText} (Status: ${xhr.status})`);
                 }
@@ -94,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedDateInput.value = selectedDate;
         renderCalendar();
 
-        const url = `/WebNav/public/includes/fetch_schedules.php?date=${encodeURIComponent(selectedDate)}`;
+        const url = `/WebNav/public/includes/fetch_schedules_gca.php?date=${encodeURIComponent(selectedDate)}`;
         console.log(`Request URL on load: ${url}`);
 
         const xhr = new XMLHttpRequest();
@@ -113,23 +127,23 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         renderCalendar();
     }
+
+    // This part seems to be duplicating the AJAX call, you might want to remove it or adjust as needed
     const xhr = new XMLHttpRequest();
-    const url = '/WebNav/public/includes/fetch_schedules.php'; // Replace with your target PHP script
+    const url = '/WebNav/public/includes/fetch_schedules_gca.php';
 
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 
     xhr.onload = function() {
-    if (xhr.status === 200) {
-        console.log('Building name sent successfully');
-        // Handle response from the PHP script (optional)
-    } else {
-        console.error('Error sending building name');
-        console.error('Status:', xhr.status);
-        console.error('Response:', xhr.responseText);
-    }
+        if (xhr.status === 200) {
+            console.log('Building name sent successfully');
+        } else {
+            console.error('Error sending building name');
+            console.error('Status:', xhr.status);
+            console.error('Response:', xhr.responseText);
+        }
     };
 
     xhr.send('building_name=' + encodeURIComponent(buildingName));
-    
 });
