@@ -37,7 +37,7 @@ error_log("Selected Status: " . $selected_status);
 error_log("Day of Week: " . $dayOfWeek);
 
 try {
-    $sql = "SELECT schedules.*, users.full_name 
+    $sql = "SELECT schedules.*, users.full_name, users.profsubject
             FROM schedules 
             LEFT JOIN users ON schedules.user_id = users.user_id 
             WHERE schedules.room_id = :room_id 
@@ -69,8 +69,11 @@ try {
     } else {
         foreach ($schedules as $schedule) {
             error_log("Schedule status: " . $schedule['status']);
+            
+            $subject = !empty($schedule['profsubject']) ? $schedule['profsubject'] : $schedule['subject'];
+
             echo "<div class='schedule-item {$schedule['status']}'>";
-            echo "<h4>" . htmlspecialchars($schedule['subject']) . "</h4>";
+            echo "<h4>" . htmlspecialchars($subject) . "</h4>";
             echo "<p>{$schedule['start_time']} - {$schedule['end_time']}</p>";
             echo "<p>Status: ";
             switch ($schedule['status']) {
