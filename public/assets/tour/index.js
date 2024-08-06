@@ -611,7 +611,7 @@
     const scheduleElements = document.querySelectorAll('.info-hotspot-text');
     
     scheduleElements.forEach(scheduleElement => {
-      scheduleElement.innerHTML = ''; // Clear previous content
+      scheduleElement.innerHTML = '';
       
       if (data.length > 0) {
         const table = document.createElement('table');
@@ -636,55 +636,33 @@
         scheduleElement.textContent = 'No schedules available for the selected room.';
       }
     });
-  
-    // Add CSS styles
-    const style = document.createElement('style');
-    style.textContent = `
-      .schedule-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-        font-family: Arial, sans-serif;
-        color: #333; /* Ensure text is dark for better visibility */
-      }
-      .schedule-table th, .schedule-table td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-      }
-      .schedule-table th {
-        background-color: #f2f2f2;
-        font-weight: bold;
-      }
-      .schedule-table tr:nth-child(even) {
-        background-color: #f9f9f9;
-      }
-      .schedule-table tr:hover {
-        background-color: #f5f5f5;
-      }
-      @media screen and (max-width: 600px) {
-        .schedule-table {
-          font-size: 14px; /* Slightly smaller font for mobile */
-        }
-        .schedule-table th, .schedule-table td {
-          padding: 6px;
-        }
-        .schedule-table, .schedule-table th, .schedule-table td {
-          border: 1px solid #999; /* Darker border for better visibility */
-        }
-        .schedule-table th {
-          background-color: #e6e6e6; /* Slightly darker header background */
-        }
-        .schedule-table tr:nth-child(even) {
-          background-color: #f0f0f0; /* Slightly darker even row background */
-        }
-        .schedule-table tr:hover {
-          background-color: #e9e9e9; /* Slightly darker hover background */
-        }
-      }
-    `;
-    document.head.appendChild(style);
   }
+  
+  // Add this CSS to your stylesheet
+  const style = document.createElement('style');
+  style.textContent = `
+    .schedule-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: Arial, sans-serif;
+    }
+    .schedule-table th, .schedule-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    .schedule-table th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+    .schedule-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .schedule-table tr:hover {
+      background-color: #f5f5f5;
+    }
+  `;
+  document.head.appendChild(style);
 
 
 
