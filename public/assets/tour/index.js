@@ -607,61 +607,143 @@
     return dayOfWeek;
   }
   
-  function displaySchedule(data) {
+  function displaySchedule(roomData, buildingId) {
     const scheduleElements = document.querySelectorAll('.info-hotspot-text');
     
     scheduleElements.forEach(scheduleElement => {
       scheduleElement.innerHTML = '';
       
-      if (data.length > 0) {
-        const table = document.createElement('table');
-        table.classList.add('schedule-table');
-        
-        const headerRow = document.createElement('tr');
-        headerRow.innerHTML = '<th>Time</th><th>Subject</th><th>Status</th>';
-        table.appendChild(headerRow);
-        
-        data.forEach(schedule => {
-          const row = document.createElement('tr');
-          row.innerHTML = `
-            <td>${schedule.start_time} - ${schedule.end_time}</td>
-            <td>${schedule.subject}</td>
-            <td>${schedule.status}</td>
-          `;
-          table.appendChild(row);
-        });
-        
+      if (roomData.length > 0) {
+        const table = createTable(roomData, ['Time', 'Subject', 'Status']);
         scheduleElement.appendChild(table);
       } else {
         scheduleElement.textContent = 'No schedules available for the selected room.';
       }
+      
+      // Add a button to view building events
+      const eventButton = document.createElement('button');
+      eventButton.textContent = 'View Building Events';
+      eventButton.classList.add('event-button');
+      eventButton.onclick = () => {
+        window.location.href = `../../events.php?buildingId=${buildingId}`;
+      };
+      scheduleElement.appendChild(eventButton);
     });
+  }
+  
+  function createTable(data, headers) {
+    const table = document.createElement('table');
+    table.classList.add('schedule-table');
+    
+    const headerRow = document.createElement('tr');
+    headers.forEach(header => {
+      const th = document.createElement('th');
+      th.textContent = header;
+      headerRow.appendChild(th);
+    });
+    table.appendChild(headerRow);
+    
+    data.forEach(item => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${item.start_time} - ${item.end_time}</td>
+        <td>${item.subject}</td>
+        <td>${item.status}</td>
+      `;
+      table.appendChild(row);
+    });
+    
+    return table;
+  }
+  
+  function fetchAndDisplayEvents(buildingId) {
+    // Assume you have an API endpoint to fetch events for a specific building
+    fetch(`/api/events?buildingId=${buildingId}`)
+      .then(response => response.json())
+      .then(eventData => {
+        const eventModal = document.createElement('div');
+        eventModal.classList.add('event-modal');
+        
+        const eventTable = createEventTable(eventData);
+        eventModal.appendChild(eventTable);
+        
+        const closeButton = document.createElement('button');
+        closeButton.textContent = 'Close';
+        closeButton.onclick = () => eventModal.remove();
+        eventModal.appendChild(closeButton);
+        
+        document.body.appendChild(eventModal);
+      })
+      .catch(error => console.error('Error fetching events:', error));
+  }
+  
+  function createEventTable(eventData) {
+    const table = document.createElement('table');
+    table.classList.add('event-table');
+    
+    const headers = ['Event Name', 'Time', 'Day', 'Room Number'];
+    const headerRow = document.createElement('tr');
+    headers.forEach(header => {
+      const th = document.createElement('th');
+      th.textContent = header;
+      headerRow.appendChild(th);
+    });
+    table.appendChild(headerRow);
+    
+    eventData.forEach(event => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${event.event_name}</td>
+        <td>${event.time}</td>
+        <td>${event.day}</td>
+        <td>${event.room_number}</td>
+      `;
+      table.appendChild(row);
+    });
+    
+    return table;
   }
   
   // Add this CSS to your stylesheet
   const style = document.createElement('style');
   style.textContent = `
-    .schedule-table {
+    .schedule-table, .event-table {
       width: 100%;
       border-collapse: separate;
       border-spacing: 0 10px;
       font-family: Arial, sans-serif;
       color: #FFFFFF;
     }
-    .schedule-table th, .schedule-table td {
+    .schedule-table th, .schedule-table td,
+    .event-table th, .event-table td {
       padding: 12px;
       text-align: left;
       border-bottom: 1px solid #ddd;
     }
-    .schedule-table th {
+    .schedule-table th, .event-table th {
       font-weight: bold;
       border-bottom: 2px solid #ddd;
     }
+    .event-button {
+      margin-top: 10px;
+      padding: 5px 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .event-modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      border-radius: 5px;
+      z-index: 1000;
+    }
   `;
   document.head.appendChild(style);
-
-
-
 
 
 
