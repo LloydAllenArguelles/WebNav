@@ -14,7 +14,7 @@ $building_name = 'Gusaling Villegas';
 
 $selected_room_id = null;
 $selected_date = null;
-$selected_status = null;
+$selected_status = isset($_GET['stat']) ? $_GET['stat'] : null;
 
 if (isset($_POST['room'])) {
     $selected_room_id = $_POST['room'];
@@ -74,21 +74,30 @@ if (isset($_GET['date'])) {
     $timestamp = strtotime($selectedDate);
     $dayOfWeek = date('l', $timestamp);
 
-    // Debugging output
-
     // Include the database connection file
     include 'dbh.inc.php';
 
     try {
         // Prepare the SQL statement to fetch schedules for the selected day of the week
         $sql = "SELECT schedules.*, users.full_name FROM schedules LEFT JOIN users ON schedules.user_id = users.user_id WHERE schedules.room_id = :room_id AND schedules.day_of_week = :day_of_week";
+        $params = [
+            ':room_id' => $selected_room_id,
+            ':day_of_week' => $dayOfWeek
+        ];
+
+        if ($selected_status && $selected_status !== '') {
+            $sql .= " AND schedules.status = :stat";
+            $params[':stat'] = $selected_status;
+        }
+
+        $sql .= " ORDER BY schedules.start_time";
+
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':room_id', $selected_room_id, PDO::PARAM_INT); // Assuming room_id is an integer
-        $stmt->bindParam(':day_of_week', $dayOfWeek, PDO::PARAM_STR);
-        $stmt->execute();
+        $stmt->execute($params);
 
         // Fetch all schedules for the selected date
         $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
         // Debugging output
         foreach ($schedules as $schedule) {
@@ -134,4 +143,3 @@ if (isset($_GET['date'])) {
     echo "Date not specified.";
 }
 ?>
-

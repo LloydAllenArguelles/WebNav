@@ -291,27 +291,27 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
                 <?php
                 if ($selected_room_id) {
                     $room_id = $selected_room_id;
-
+                
                     // Fetch the room number
                     $sql = "SELECT room_number FROM rooms WHERE room_id = :room_id";
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute([':room_id' => $room_id]);
                     $room_number = $stmt->fetchColumn();
-
+                
                     // Fetch schedules with optional status filter
                     $sql = "SELECT schedules.*, users.full_name FROM schedules LEFT JOIN users ON schedules.user_id = users.user_id WHERE schedules.room_id = :room_id AND schedules.day_of_week = :day_of_week";
                     $params = [
                         ':room_id' => $room_id,
                         ':day_of_week' => date('l', strtotime($selected_date))
                     ];
-
-                    if ($selected_status) {
+                
+                    if ($selected_status && $selected_status !== '') {
                         $sql .= " AND schedules.status = :stat";
                         $params[':stat'] = $selected_status;
                     }
-
+                
                     $sql .= " ORDER BY schedules.start_time";
-
+                
                     $stmt = $pdo->prepare($sql);
                     $stmt->execute($params);
                     $schedules = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -527,5 +527,10 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
             console.log('building_name=' + encodeURIComponent(buildingName));
         };
     </script>
+    <script>
+document.getElementById('stat').addEventListener('change', function() {
+    document.getElementById('filterForm').submit();
+});
+</script>
 </body>
 </html>

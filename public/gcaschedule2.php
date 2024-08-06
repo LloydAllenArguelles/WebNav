@@ -526,5 +526,10 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
             console.log('building_name=' + encodeURIComponent(buildingName));
         };
     </script>
+        <script>
+document.getElementById('stat').addEventListener('change', function() {
+    document.getElementById('filterForm').submit();
+});
+</script>
 </body>
 </html>

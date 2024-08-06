@@ -70,22 +70,23 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('selectedDate', selectedDate); // Save selected date to local storage
             renderCalendar();
     
-            const url = `/WebNav/public/includes/fetch_schedules_gca.php?date=${encodeURIComponent(selectedDate)}`;
-            console.log(`Request URL: ${url}`);
-    
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', url, true);
-            xhr.onload = function () {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    scheduleContainer.innerHTML = xhr.responseText;
-                } else {
-                    console.error(`Failed to load schedule: ${xhr.statusText} (Status: ${xhr.status})`);
-                }
-            };
-            xhr.onerror = function () {
-                console.error('Request error');
-            };
-            xhr.send();
+            const selectedStatus = document.getElementById('stat').value;
+const url = `/WebNav/public/includes/fetch_schedules_gca.php?date=${encodeURIComponent(selectedDate)}&stat=${encodeURIComponent(selectedStatus)}`;
+console.log(`Request URL: ${url}`);
+
+const xhr = new XMLHttpRequest();
+xhr.open('GET', url, true);
+xhr.onload = function () {
+    if (xhr.status >= 200 && xhr.status < 300) {
+        scheduleContainer.innerHTML = xhr.responseText;
+    } else {
+        console.error(`Failed to load schedule: ${xhr.statusText} (Status: ${xhr.status})`);
+    }
+};
+xhr.onerror = function () {
+    console.error('Request error');
+};
+xhr.send();
         }
     });
 
