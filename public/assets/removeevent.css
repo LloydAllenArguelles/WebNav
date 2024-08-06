@@ -1,19 +1,21 @@
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;
+    background-color: #f7f7f7;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
 
 .container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
+    max-width: 600px;
+    margin: 50px auto;
     padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 h2 {
+    text-align: center;
     color: #333;
 }
 
@@ -38,9 +40,10 @@ button {
     background-color: #f44336;
     color: white;
     border: none;
-    padding: 8px 12px;
+    padding: 10px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
 button:hover {
@@ -49,21 +52,45 @@ button:hover {
 
 .success {
     color: green;
+    text-align: center;
     font-weight: bold;
 }
 
 .error {
     color: red;
+    text-align: center;
     font-weight: bold;
 }
 
 a {
-    display: inline-block;
+    display: block;
     margin-top: 20px;
-    color: #333;
+    text-align: center;
+    color: #007bff;
     text-decoration: none;
 }
 
 a:hover {
     text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: 90%;
+        margin: 20px auto;
+        padding: 10px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+
+    button {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    a {
+        margin-top: 10px;
+    }
 }
