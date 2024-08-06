@@ -97,15 +97,23 @@ try {
                 echo "<form method='POST'>";
                 echo "<input type='hidden' name='schedule_id' value='{$schedule['schedule_id']}'>";        
             
-                if ($is_professor) {
+                if ($is_professor || $is_admin) {
                     if ($schedule['status'] == 'Available') {
-                        echo "<button type='submit' name='occupy_schedule'>Request</button>";
-                    } elseif ($schedule['status'] == 'Occupied' && $schedule['user_id'] == $_SESSION['user_id']) {
-                        echo "<button type='submit' name='unoccupy_schedule'>Unoccupy</button>";
+                        if ($is_admin) {
+                            echo "<button type='submit' name='admin_occupy_schedule'>Occupy</button>";
+                        } else {
+                            echo "<button type='submit' name='occupy_schedule'>Request</button>";
+                        }
+                    } elseif ($schedule['status'] == 'Occupied') {
+                        if ($is_admin || $schedule['user_id'] == $_SESSION['user_id']) {
+                            echo "<button type='submit' name='unoccupy_schedule'>Unoccupy</button>";
+                        }
                     }
-                } elseif ($is_admin && $schedule['status'] == 'Pending') {
-                    echo "<button type='submit' name='approve_schedule'>Approve</button>";
-                    echo "<button type='submit' name='deny_schedule'>Deny</button>";
+                    
+                    if ($is_admin && $schedule['status'] == 'Pending') {
+                        echo "<button type='submit' name='approve_schedule'>Approve</button>";
+                        echo "<button type='submit' name='deny_schedule'>Deny</button>";
+                    }
                 }
                 
                 echo "</form>";
