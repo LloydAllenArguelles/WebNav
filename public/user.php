@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profile_image'])) {
 }
 
 try {
-    $stmt = $pdo->prepare("SELECT username, email, department, student_num, program, year_level, student_status, status, role, profile_image, subject FROM users WHERE user_id = :user_id");
+    $stmt = $pdo->prepare("SELECT username, email, department, student_num, program, year_level, student_status, status, role, profile_image, profsubject FROM users WHERE user_id = :user_id");
     $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
     $stmt->execute();
     
@@ -146,7 +146,7 @@ try {
             'student_status' => 'N/A',
             'status' => 'N/A',
             'profile_image' => 'assets/front/pic.jpg',
-            'subject' => 'N/A'
+            'profsubject' => 'N/A'
         ];
     } else if (empty($user['profile_image'])) {
         $user['profile_image'] = 'assets/front/pic.jpg';
@@ -323,8 +323,8 @@ try {
                                         <td>{$user['status']}</td>
                                     </tr>
                                     <tr>
-                                        <th>Subject</th>
-                                        <td>{$user['subject']}</td>
+                                        <th>Subject Handled</th>
+                                        <td>{$user['profsubject']}</td>
                                     </tr>
                                 </tbody>
                             </table>
