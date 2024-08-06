@@ -645,6 +645,7 @@
         border-collapse: collapse;
         margin-top: 10px;
         font-family: Arial, sans-serif;
+        color: #333; /* Ensure text is dark for better visibility */
       }
       .schedule-table th, .schedule-table td {
         border: 1px solid #ddd;
@@ -661,9 +662,32 @@
       .schedule-table tr:hover {
         background-color: #f5f5f5;
       }
+      @media screen and (max-width: 600px) {
+        .schedule-table {
+          font-size: 14px; /* Slightly smaller font for mobile */
+        }
+        .schedule-table th, .schedule-table td {
+          padding: 6px;
+        }
+        .schedule-table, .schedule-table th, .schedule-table td {
+          border: 1px solid #999; /* Darker border for better visibility */
+        }
+        .schedule-table th {
+          background-color: #e6e6e6; /* Slightly darker header background */
+        }
+        .schedule-table tr:nth-child(even) {
+          background-color: #f0f0f0; /* Slightly darker even row background */
+        }
+        .schedule-table tr:hover {
+          background-color: #e9e9e9; /* Slightly darker hover background */
+        }
+      }
     `;
     document.head.appendChild(style);
   }
+
+
+
 
   // Prevent touch and scroll events from reaching the parent element.
   function stopTouchAndScrollEventPropagation(element, eventList) {
