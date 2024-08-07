@@ -544,7 +544,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
             console.log("THIS IS " + buildingName);
             
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/WebNav/public/includes/fetch_schedules.php', true);
+            xhr.open('POST', '/../public/includes/fetch_schedules.php', true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             
             xhr.onload = function() {
