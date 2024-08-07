@@ -322,7 +322,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
                     echo "<h4>{$schedule['subject']}</h4>";
                     echo "<p>{$schedule['start_time']} - {$schedule['end_time']}</p>";
                     echo "<p>Status: ";
-                    if ($schedule['status'] == 'Available' || $schedule['status'] == 'Denied') {
+                    if ($schedule['status'] == 'Available') {
                         echo "<span class=\"available\">{$schedule['status']}</span>";
                     } elseif ($schedule['status'] == 'Occupied' && $schedule['user_id'] == $_SESSION['user_id']) {
                         echo "<span class=\"occupied-own\">Approved</span>";
@@ -337,7 +337,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
                         echo "<form method='POST'>";
                         echo "<input type='hidden' name='schedule_id' value='{$schedule['schedule_id']}'>";
 
-                        if ($schedule['status'] == 'Available' || $schedule['status'] == 'Denied') {
+                        if ($schedule['status'] == 'Available') {
                             if ($is_admin) {
                                 echo "<button type='submit' name='admin_occupy_schedule'>Occupy</button>";
                             } else {
@@ -442,17 +442,11 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
             if (isset($_POST['deny_schedule'])) {
                 if ($is_admin) {
                     $schedule_id = $_POST['schedule_id'];
-            
-                    // Fetch the current user_id of the schedule to set as prevuser_id
-                    $sql_fetch_user = "SELECT user_id FROM schedules WHERE schedule_id = :schedule_id";
-                    $stmt_fetch_user = $pdo->prepare($sql_fetch_user);
-                    $stmt_fetch_user->execute([':schedule_id' => $schedule_id]);
-                    $user_id = $stmt_fetch_user->fetchColumn();
-            
-                    $sql_update = "UPDATE schedules SET status = 'Available', prevuser_id = :prevuser_id WHERE schedule_id = :schedule_id";
+
+                    $sql_update = "UPDATE schedules SET status = 'Available', user_id = NULL, subject = 'none' WHERE schedule_id = :schedule_id";
                     $stmt_update = $pdo->prepare($sql_update);
-                    $stmt_update->execute([':prevuser_id' => $user_id, ':schedule_id' => $schedule_id]);
-            
+                    $stmt_update->execute([':schedule_id' => $schedule_id]);
+
                     if ($stmt_update->rowCount() > 0) {
                         echo "<script>alert('Schedule denied successfully!'); window.location.reload();</script>";
                     } else {
@@ -467,7 +461,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
 
     <script> const selectedDate = "<?php echo $selected_date; ?>"; </script>
     <script src="assets/js/buttons.js"></script>
-    <script src="assets/js/calendar.js"></script>
+    <script src="assets/js/calendargee.js"></script>
 
     <script>
     document.getElementById('show-occupied-schedules').addEventListener('click', function() {
@@ -519,7 +513,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
             console.log("THIS IS " + buildingName);
             
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/WebNav/public/includes/fetch_schedules_gca.php', true);
+            xhr.open('POST', '/WebNav/public/includes/fetch_schedules_gee.php', true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             
             xhr.onload = function() {
