@@ -91,12 +91,25 @@ try {
                 case 'Pending':
                     echo "<span class=\"pending\">Pending</span>";
                     break;
+                case 'Denied':
+                    if ($schedule['user_id'] == $_SESSION['user_id']) {
+                        echo "<span class=\"denied\">DENIED</span>";
+                    } else {
+                        echo "<span class=\"denied\">Denied</span>";
+                    }
+                    break;
                 default:
                     echo "<span>" . htmlspecialchars($schedule['status']) . "</span>";
             }
             echo "</p>";
-            echo "<p>Requestor: " . ($schedule['full_name'] ? htmlspecialchars($schedule['full_name']) : 'N/A') . "</p>";
+            if (!$is_admin && $schedule['status'] != 'Available' && $schedule['user_id'] != $_SESSION['user_id']) {
+                echo "<p>Requestor: " . ($schedule['full_name'] ? htmlspecialchars($schedule['full_name']) : 'N/A') . "</p>";
+            }
             
+            if ($schedule['user_id'] == $_SESSION['user_id'] && $schedule['status'] == 'Available') {
+                echo "<p>Status: DENIED</p>";
+            }
+
             if (strtotime($selected_date) >= strtotime($today)) {
                 echo "<form method='POST'>";
                 echo "<input type='hidden' name='schedule_id' value='{$schedule['schedule_id']}'>";        
@@ -128,7 +141,7 @@ try {
             echo "<div>";
             echo "<h4>Reason of Denial</h4>";
             echo "</div>";
-        echo "</div>";        
+            echo "</div>";        
         }
     }
 } catch (PDOException $e) {

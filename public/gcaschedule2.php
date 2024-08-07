@@ -443,7 +443,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
                 if ($is_admin) {
                     $schedule_id = $_POST['schedule_id'];
 
-                    $sql_update = "UPDATE schedules SET status = 'Available', user_id = NULL, subject = 'none' WHERE schedule_id = :schedule_id";
+                    $sql_update = "UPDATE schedules SET status = 'Available', subject = 'none' WHERE schedule_id = :schedule_id";
                     $stmt_update = $pdo->prepare($sql_update);
                     $stmt_update->execute([':schedule_id' => $schedule_id]);
 
