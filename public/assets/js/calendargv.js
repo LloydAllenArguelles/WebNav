@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function fetchSchedules(date) {
         const selectedStatus = document.getElementById('stat').value;
-        const url = `https://plm.kamikaze.host/PLM/public/includes/fetch_schedules.php?date=${encodeURIComponent(date)}&stat=${encodeURIComponent(selectedStatus)}`;
+        const url = `https://plm.kamikaze.host/home/kamiqduw/PLM/public/includes/fetch_schedules.php?date=${encodeURIComponent(date)}&stat=${encodeURIComponent(selectedStatus)}`;
         console.log(`Request URL: ${url}`);
     
         const xhr = new XMLHttpRequest();
@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fetchSchedules(selectedDate);
 
             const selectedStatus = document.getElementById('stat').value;
-            const url = `https://plm.kamikaze.host/PLM/public/includes/fetch_schedules.php?date=${encodeURIComponent(selectedDate)}&stat=${encodeURIComponent(selectedStatus)}`;
+            const url = `https://plm.kamikaze.host/home/kamiqduw/PLM/public/includes/fetch_schedules.php?date=${encodeURIComponent(selectedDate)}&stat=${encodeURIComponent(selectedStatus)}`;
             console.log(`Request URL: ${url}`);
 
             const xhr = new XMLHttpRequest();
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedDateInput.value = selectedDate;
         renderCalendar();
 
-        const url = `https://plm.kamikaze.host/PLM/public/includes/fetch_schedules.php?date=${encodeURIComponent(selectedDate)}`;
+        const url = `https://plm.kamikaze.host/home/kamiqduw/PLM/public/includes/fetch_schedules.php?date=${encodeURIComponent(selectedDate)}`;
         console.log(`Request URL on load: ${url}`);
 
         const xhr = new XMLHttpRequest();
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // This part seems to be duplicating the AJAX call, you might want to remove it or adjust as needed
     const xhr = new XMLHttpRequest();
-    const url = 'https://plm.kamikaze.host/PLM/public/includes/fetch_schedules.php';
+    const url = 'https://plm.kamikaze.host/home/kamiqduw/PLM/public/includes/fetch_schedules.php';
 
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
