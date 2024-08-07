@@ -78,9 +78,6 @@ $is_admin = isset($user['role']) && $user['role'] === 'Admin';
             <a href="privacypolicy.php" class="settings-button button"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
             <a href="usermanual.php" class="settings-button button"><i class="fas fa-book"></i> How it Works?</a>
             <a href="includes/logout.php" class="settings-button button"><i class="fas fa-sign-out-alt"></i> LOG OUT</a>
-            <?php if ($is_admin) {
-                echo "<a href='uploadcsv.php' class='settings-button button'><i class='fas fa-upload'></i> Upload .csv file</a>";
-            }?>
         </div>
         <a href="home.php" class="back-button"><i class="fas fa-arrow-left"></i> Back to Home</a>
     </div>
