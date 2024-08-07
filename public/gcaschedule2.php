@@ -235,6 +235,9 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
     </div>
 </header>
     <div class="building-schedule-container">
+    <?php if ($is_admin || $is_professor): ?>
+    <a href="denial_reasons.php" class="ribbon-button"><i class="fas fa-ban"></i> View Denial Reasons</a>
+<?php endif; ?>
         <h2><?php echo htmlspecialchars($building_name); ?> Schedule</h2>
         
         <div class="filters">
@@ -282,7 +285,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
 
         <div id="schedule-details">
             <h3>Schedule for <span id="selected-date-display"></span></h3>
-            <div id="schedule-container">
+            <div id="schedule-container">   
             <?php
             // Fetch the user's profsubject when the user logs in or as needed
             $sql = "SELECT profsubject FROM users WHERE user_id = :user_id";
@@ -442,11 +445,36 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
             if (isset($_POST['deny_schedule'])) {
                 if ($is_admin) {
                     $schedule_id = $_POST['schedule_id'];
-
-                    $sql_update = "UPDATE schedules SET status = 'Available', subject = 'none' WHERE schedule_id = :schedule_id";
+                    echo "<script>
+                        var reason = prompt('Please enter a reason for denying this schedule:');
+                        if (reason !== null && reason !== '') {
+                            var form = document.createElement('form');
+                            form.method = 'POST';
+                            form.innerHTML = '<input type=\"hidden\" name=\"schedule_id\" value=\"$schedule_id\">' +
+                                             '<input type=\"hidden\" name=\"deny_reason\" value=\"' + reason + '\">' +
+                                             '<input type=\"hidden\" name=\"confirm_deny_schedule\" value=\"1\">';
+                            document.body.appendChild(form);
+                            form.submit();
+                        }
+                    </script>";
+                } else {
+                    echo "<script>alert('You do not have permission to deny this schedule!');</script>";
+                }
+            }
+            
+            if (isset($_POST['confirm_deny_schedule'])) {
+                if ($is_admin) {
+                    $schedule_id = $_POST['schedule_id'];
+                    $reason = $_POST['deny_reason'];
+            
+                    $sql_update = "UPDATE schedules SET status = 'Available', user_id = NULL, subject = 'none', reason = :reason, denied_by = :denied_by WHERE schedule_id = :schedule_id";
                     $stmt_update = $pdo->prepare($sql_update);
-                    $stmt_update->execute([':schedule_id' => $schedule_id]);
-
+                    $stmt_update->execute([
+                        ':schedule_id' => $schedule_id, 
+                        ':reason' => $reason,
+                        ':denied_by' => $_SESSION['user_id']
+                    ]);
+            
                     if ($stmt_update->rowCount() > 0) {
                         echo "<script>alert('Schedule denied successfully!'); window.location.reload();</script>";
                     } else {
@@ -461,7 +489,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
 
     <script> const selectedDate = "<?php echo $selected_date; ?>"; </script>
     <script src="assets/js/buttons.js"></script>
-    <script src="assets/js/calendar.js"></script>
+    <script src="assets/js/calendargca.js"></script>
 
     <script>
     document.getElementById('show-occupied-schedules').addEventListener('click', function() {
@@ -513,7 +541,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
             console.log("THIS IS " + buildingName);
             
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/WebNav/public/includes/fetch_schedules_gca.php', true);
+            xhr.open('POST', '/PLM/public/includes/fetch_schedules.php', true);
             xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
             
             xhr.onload = function() {
