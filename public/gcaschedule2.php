@@ -492,7 +492,7 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
 
     <script> const selectedDate = "<?php echo $selected_date; ?>"; </script>
     <script src="assets/js/buttons.js"></script>
-    <script src="assets/js/calendargca.js"></script>
+    <script src="assets/js/calendar.js"></script>
 
     <script>
     document.getElementById('show-occupied-schedules').addEventListener('click', function() {
