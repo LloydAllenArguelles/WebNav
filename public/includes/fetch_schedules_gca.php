@@ -69,9 +69,9 @@ try {
     } else {
         foreach ($schedules as $schedule) {
             error_log("Schedule status: " . $schedule['status']);
-            
+    
             $subject = !empty($schedule['profsubject']) ? $schedule['profsubject'] : $schedule['subject'];
-
+    
             echo "<div class='schedule-item {$schedule['status']}'>";
             echo "<div>";
             echo "<h4>" . htmlspecialchars($subject) . "</h4>";
@@ -93,27 +93,31 @@ try {
                     break;
                 case 'Denied':
                     if ($schedule['user_id'] == $_SESSION['user_id']) {
-                        echo "<span class=\"denied\">DENIED</span>";
+                        echo "<span class=\"denied\">Denied</span>";
+                        echo "<span class=\"denied\">WAGHAWDAS</span>";
                     } else {
                         echo "<span class=\"denied\">Denied</span>";
+                        echo "<span class=\"denied\">EWRTQWREQW</span>";
                     }
                     break;
                 default:
                     echo "<span>" . htmlspecialchars($schedule['status']) . "</span>";
             }
             echo "</p>";
+            
+            // Check if the logged-in user was previously denied
+            if ($schedule['prevuser_id'] == $_SESSION['user_id']) {
+                echo "<p>Previously: Denied</p>";
+            }
+    
             if (!$is_admin && $schedule['status'] != 'Available' && $schedule['user_id'] != $_SESSION['user_id']) {
                 echo "<p>Requestor: " . ($schedule['full_name'] ? htmlspecialchars($schedule['full_name']) : 'N/A') . "</p>";
             }
-            
-            if ($schedule['user_id'] == $_SESSION['user_id'] && $schedule['status'] == 'Available') {
-                echo "<p>Status: DENIED</p>";
-            }
-
+    
             if (strtotime($selected_date) >= strtotime($today)) {
                 echo "<form method='POST'>";
                 echo "<input type='hidden' name='schedule_id' value='{$schedule['schedule_id']}'>";        
-            
+    
                 if ($is_professor || $is_admin) {
                     if ($schedule['status'] == 'Available') {
                         if ($is_admin) {
@@ -132,7 +136,7 @@ try {
                         echo "<button type='submit' name='deny_schedule'>Deny</button>";
                     }
                 }
-                
+    
                 echo "</form>";
             } else {
                 echo "<p>Actions not available for past dates</p>";
@@ -141,9 +145,10 @@ try {
             echo "<div>";
             echo "<h4>Reason of Denial</h4>";
             echo "</div>";
-            echo "</div>";        
+            echo "</div>";
         }
     }
+    
 } catch (PDOException $e) {
     error_log("Database Error: " . $e->getMessage());
     echo "<p>An error occurred while fetching schedules. Please try again later.</p>";
