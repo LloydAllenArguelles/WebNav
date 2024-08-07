@@ -239,6 +239,9 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
     <a href="denial_reasons.php" class="ribbon-button"><i class="fas fa-ban"></i> View Denial Reasons</a>
 <?php endif; ?>
         <h2><?php echo htmlspecialchars($building_name); ?> Schedule</h2>
+        <?php if ($is_professor): ?>
+    <a href="my_schedules.php" class="edit-button">View My Schedules</a>
+    <?php endif; ?>
         
         <div class="filters">
             <form method="POST" id="filterForm">

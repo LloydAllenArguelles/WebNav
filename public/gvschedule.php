@@ -237,7 +237,10 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
     <div class="building-schedule-container">
     <?php if ($is_admin || $is_professor): ?>
     <a href="denial_reasons.php" class="ribbon-button"><i class="fas fa-ban"></i> View Denial Reasons</a>
-<?php endif; ?>
+    <?php endif; ?>
+    <?php if ($is_professor): ?>
+    <a href="my_schedules.php" class="edit-button">View My Schedules</a>
+    <?php endif; ?>
         <h2><?php echo htmlspecialchars($building_name); ?> Schedule</h2>
         
         <div class="filters">
